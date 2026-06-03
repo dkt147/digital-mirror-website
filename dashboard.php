@@ -470,32 +470,7 @@
 <body>
 
   <!-- NAVBAR -->
-  <nav class="navbar fade-1">
-    <div class="navbar-left">
-      <!-- Profile avatar: replace src with your user photo URL -->
-      <div class="nav-avatar">
-        <img src="assets/profile.png" alt="Profile"
-          onerror="this.outerHTML='<div class=\'nav-avatar-fallback\'>M</div>'" />
-      </div>
-    </div>
-
-    <!-- Centered nav links -->
-    <ul class="navbar-nav">
-      <li><a href="dashboard.php" class="active">Home</a></li>
-      <li><a href="arch-session.php">Try-On</a></li>
-      <li><a href="#" onclick="showToast('Shop coming soon'); return false;">Shop</a></li>
-      <li><a href="profile.php">Profile</a></li>
-    </ul>
-
-    <div style="display:flex;align-items:center;gap:1rem;">
-      <button class="btn-book" onclick="showToast('Booking coming soon')">Book Appointment</button>
-      <!-- Brand emblem / logo: replace src with your logo URL -->
-      <div class="nav-emblem">
-        <img src="assets/logo.png" alt="Arch"
-          onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'font-family:var(--font-display);font-style:italic;font-size:1.3rem;color:var(--gold);\'>G</span>'" />
-      </div>
-    </div>
-  </nav>
+  <?php include 'includes/navbar.php'; ?>
 
   <!-- Gold rule -->
   <div class="nav-gold-rule"></div>

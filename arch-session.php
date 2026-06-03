@@ -257,29 +257,7 @@
 <body>
 
   <!-- NAVBAR (Same as Dashboard) -->
-  <nav class="navbar fade-1">
-    <div class="navbar-left">
-      <div class="nav-avatar">
-        <img src="assets/profile.png" alt="Profile"
-          onerror="this.outerHTML='<div class=\'nav-avatar-fallback\' style=\'background:linear-gradient(135deg, #2a2010, #3a2e14);width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:1.1rem;color:var(--gold);\'>M</div>'" />
-      </div>
-    </div>
-
-    <ul class="navbar-nav">
-      <li><a href="dashboard.php">Home</a></li>
-      <li><a href="arch-session.php" class="active">Try-On</a></li>
-      <li><a href="#" onclick="showToast('Shop coming soon'); return false;">Shop</a></li>
-      <li><a href="profile.php">Profile</a></li>
-    </ul>
-
-    <div style="display:flex;align-items:center;gap:1rem;">
-      <button class="btn-book" onclick="showToast('Booking coming soon')">Book Appointment</button>
-      <div class="nav-emblem">
-        <img src="assets/logo.png" alt="Arch"
-          onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'font-family:var(--font-display);font-style:italic;font-size:1.3rem;color:var(--gold);\'>G</span>'" />
-      </div>
-    </div>
-  </nav>
+  <?php include 'includes/navbar.php'; ?>
 
   <div class="nav-gold-rule"></div>
 

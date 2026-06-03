@@ -183,6 +183,39 @@
       gap: 1rem;
     }
 
+    /* navbar avatar/emblem sizing to match shared include */
+    .nav-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 1.5px solid var(--gold-light);
+      background: rgba(255,255,255,0.03);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .nav-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .nav-emblem {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1.5px solid var(--gold-light);
+      background: radial-gradient(circle at 35% 35%, #2a2010, #1a1408);
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
     .btn-nav {
       padding: 0.5rem 1.25rem;
       font-size: 0.7rem;
@@ -1359,28 +1392,27 @@
       padding: 0.5rem 1rem;
       margin-top: 1rem;
     }
+
+    /* ====== ANIMATIONS ====== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-1 { animation: fadeUp 0.55s ease 0.05s both; }
+    .fade-2 { animation: fadeUp 0.55s ease 0.15s both; }
+    .fade-3 { animation: fadeUp 0.55s ease 0.25s both; }
+    .fade-4 { animation: fadeUp 0.55s ease 0.35s both; }
+    .fade-5 { animation: fadeUp 0.55s ease 0.45s both; }
   </style>
 </head>
 
 <body>
   <div class="toast" id="toast"></div>
-  <div class="page active" style="min-height:100vh;display:flex;flex-direction:column;">
-    <nav class="navbar">
-      <div class="navbar-logo">
-        <img src="assets/logo.png" alt="Arch logo" class="logo-image" />
-      </div>
-      <ul class="navbar-nav">
-        <li><a href="dashboard.php">Home</a></li>
-        <li><a href="arch-session.php">Try-On</a></li>
-        <li><a href="#" onclick="showToast('Shop coming soon','info');return false;">Shop</a></li>
-        <li><a href="profile.php" class="active">Profile</a></li>
-      </ul>
-      <div class="navbar-actions">
-        <button class="btn-nav btn-nav-outline" onclick="goBack('index.php')">Sign Out</button>
-      </div>
-    </nav>
-    <div class="dash-content" style="max-width:600px;margin:0 auto;width:100%;padding:2rem;">
+  <div class="page active fade-2" style="min-height:100vh;display:flex;flex-direction:column;">
+    <?php include 'includes/navbar.php'; ?>
+    <div class="dash-content fade-3" style="max-width:600px;margin:0 auto;width:100%;padding:2rem;">
       <div
+        class="fade-4"
         style="display:flex;align-items:center;gap:1.5rem;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border);">
         <img src="assets/profile.png" alt="Profile Avatar" class="profile-avatar" />
         <div>
@@ -1390,7 +1422,7 @@
         </div>
       </div>
       <div class="section-label" style="margin-bottom:1rem;">Brow Profile</div>
-      <div class="profile-tags" style="margin-bottom:2rem;">
+      <div class="profile-tags fade-4" style="margin-bottom:2rem;">
         <div class="profile-tag-row"><span class="profile-tag-key">Skin Tone</span><span class="profile-tag-val"
             id="profile-skin-tone">Medium Warm</span></div>
         <div class="profile-tag-row"><span class="profile-tag-key">Brow Goal</span><span class="profile-tag-val"
@@ -1399,13 +1431,13 @@
             id="profile-style">Refined & Natural</span></div>
       </div>
       <div class="section-label" style="margin-bottom:1rem;">Upcoming Appointment</div>
-      <div class="next-appt" style="margin-bottom:2rem;">
+      <div class="next-appt fade-4" style="margin-bottom:2rem;">
         <div>
           <div class="next-appt-label">Confirmed</div>
           <div class="next-appt-date">April 5, 2026 · 3:30 PM</div>
         </div><button class="re-apply-btn" onclick="showToast('Manage appointment →','info')">Manage</button>
       </div>
-      <button class="btn btn-secondary" onclick="goBack('onboarding-profile.php')">Edit Brow Profile</button>
+      <button class="btn btn-secondary fade-5" onclick="goBack('onboarding-profile.php')">Edit Brow Profile</button>
       <button class="btn btn-secondary" style="margin-top:0.75rem;"
         onclick="showToast('Privacy settings coming soon','info')">Privacy Settings</button>
       <button class="btn"
