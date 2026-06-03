@@ -3,51 +3,41 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Considered — Royals Arch Brow</title>
+  <title>Understated — Royals Arch Brow</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
       --black: #0a0a0a;
       --white: #f5f0e8;
-      --white-dim: rgba(245,240,232,0.65);
       --gold: #c9a84c;
-      --gold-light: #d4b96a;
       --dark-grey: #2b2b2b;
       --font-display: 'Cormorant Garamond', serif;
       --font-body: 'Montserrat', sans-serif;
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { min-height: 100%; }
     body {
       background: var(--black);
-      color: var(--white);
-      font-family: var(--font-body);
-      line-height: 1.5;
       display: flex;
       align-items: center;
       justify-content: center;
+      min-height: 100vh;
       padding: 20px;
     }
-
     .screen {
       width: 100%;
       max-width: 700px;
       background: var(--black);
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 36px;
-      overflow: hidden;
+      padding: 24px 24px 28px;
       box-shadow: 0 24px 90px rgba(0,0,0,0.7);
     }
-
     .top-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 20px 24px 16px;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
+      margin-bottom: 24px;
     }
-
     .top-bar a {
       width: 44px;
       height: 44px;
@@ -59,12 +49,8 @@
       color: var(--gold);
       border: 1px solid var(--gold);
       font-size: 1.2rem;
-      transition: background 0.25s;
     }
-
-    .top-bar a:hover { background: rgba(201,168,76,0.12); }
-
-    .top-bar .title {
+    .top-title {
       flex: 1;
       text-align: center;
       font-family: var(--font-body);
@@ -74,105 +60,73 @@
       color: var(--gold);
       font-weight: 600;
     }
-
     .logo-mark {
+      width: 44px;
+      height: 44px;
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 44px;
-      height: 44px;
       color: var(--gold);
       font-family: var(--font-display);
       font-weight: 700;
       font-size: 1.3rem;
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 50%;
     }
-
     .logo-mark img {
       width: 100%;
       height: 100%;
       object-fit: contain;
     }
-
-    .preview-area {
-      margin: 20px 24px 16px;
-      border-radius: 32px;
-      background: #111;
-      min-height: 340px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid rgba(255,255,255,0.06);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .face-illustration {
-      width: 180px;
-      height: 240px;
-      border: 1px solid rgba(201,168,76,0.4);
+    .face-large {
+      width: 160px;
+      height: 220px;
+      border: 1px solid rgba(201,168,76,0.3);
       border-radius: 50% 50% 40% 40%;
+      margin: 10px auto 30px;
       position: relative;
     }
-
-    .face-illustration::before {
+    .face-large::before {
       content: '';
       position: absolute;
       top: 22%;
       left: 50%;
       transform: translateX(-50%);
-      width: 48px;
-      height: 22px;
-      border: 1px solid rgba(201,168,76,0.6);
+      width: 50px;
+      height: 18px;
+      border: 1px solid var(--gold);
       border-radius: 999px 999px 40px 40px;
       border-bottom: none;
     }
-
-    .face-illustration::after {
-      content: '';
-      position: absolute;
-      top: 40%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 30px;
-      height: 20px;
-      border: 1px solid rgba(201,168,76,0.4);
-      border-radius: 40px 40px 999px 999px;
-      border-top: none;
-    }
-
-    .content {
-      padding: 0 24px 28px;
-      text-align: center;
-    }
-
+    .content { text-align: center; }
     .headline {
       font-family: var(--font-display);
       font-style: italic;
-      font-size: clamp(2.4rem, 4.5vw, 2.8rem);
-      line-height: 1.1;
+      font-size: 2.6rem;
       color: var(--white);
-      margin-bottom: 4px;
+      margin-bottom: 0.25rem;
     }
-
     .subtext {
-      color: var(--gold);
       font-family: var(--font-display);
+      font-style: italic;
+      color: var(--gold);
       font-size: 1.1rem;
-      margin-bottom: 14px;
+      margin-bottom: 0.8rem;
     }
-
     .description {
-      color: var(--white-dim);
-      font-size: 0.95rem;
-      line-height: 1.7;
-      margin-bottom: 28px;
-      max-width: 80%;
-      margin-left: auto;
-      margin-right: auto;
+      font-family: var(--font-display);
+      font-style: italic;
+      color: rgba(255,255,255,0.7);
+      font-size: 1rem;
+      line-height: 1.6;
+      max-width: 85%;
+      margin: 0 auto 28px;
     }
-
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      margin: 0 auto 28px;
+      opacity: 0.6;
+    }
     .btn-primary {
       display: flex;
       width: 100%;
@@ -186,39 +140,35 @@
       letter-spacing: 0.16em;
       justify-content: center;
       text-decoration: none;
-      transition: background 0.25s, transform 0.25s;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
     }
-
-    .btn-primary:hover {
-      background: #3a3a3a;
-      transform: translateY(-1px);
-    }
-
-    @media (max-width: 480px) {
-      .preview-area { min-height: 260px; }
-      .face-illustration { width: 140px; height: 180px; }
-      .description { max-width: 100%; }
+    .bottom-link {
+      display: block;
+      text-align: center;
+      color: var(--gold);
+      font-size: 0.75rem;
+      text-decoration: none;
+      margin-top: 12px;
     }
   </style>
 </head>
 <body>
   <div class="screen">
     <div class="top-bar">
-      <a href="define-style.php" aria-label="Back">&#8592;</a>
-      <div class="title">CONSIDERED</div>
+      <a href="two-looks-one-choice.php">&#8592;</a>
+      <div class="top-title">UNDERSTATED</div>
       <div class="logo-mark"><img src="assets/logo.png" alt="CG logo" /></div>
     </div>
 
-    <div class="preview-area">
-      <div class="face-illustration"></div>
-    </div>
+    <div class="face-large"></div>
 
     <div class="content">
-      <h1 class="headline">Considered</h1>
-      <div class="subtext">Refined. Balanced. Effortlessly exact.</div>
-      <p class="description">A brow that has clear thought about. Never overdone.</p>
-      <a class="btn-primary" href="two-looks-one-choice.php">THIS IS THE ONE</a>
+      <h1 class="headline">Understated</h1>
+      <p class="subtext">Present, not pronounced.</p>
+      <p class="description">The brow your face was wearing all along—simply made cleaner.</p>
+      <div class="divider"></div>
+      <a class="btn-primary" href="deliberate.php">THIS IS THE ONE</a>
+      <a class="bottom-link" href="two-looks-one-choice.php">Try Considered instead</a>
     </div>
   </div>
 </body>

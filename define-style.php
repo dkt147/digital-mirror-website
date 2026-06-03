@@ -8,269 +8,311 @@
   <style>
     :root {
       --black: #0a0a0a;
+      --dark-card: #111111;
       --white: #f5f0e8;
       --white-dim: rgba(245,240,232,0.65);
       --gold: #c9a84c;
-      --gold-light: #d4b96a;
-      --gold-muted: rgba(201,168,76,0.12);
+      --gold-muted: rgba(201,168,76,0.08);
       --border: rgba(201,168,76,0.25);
-      --dark-card: #111111;
-      --radius: 28px;
-      --radius-sm: 18px;
       --transition: 0.25s ease;
       --font-display: 'Cormorant Garamond', serif;
       --font-body: 'Montserrat', sans-serif;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { min-height: 100%; }
     body {
       background: var(--black);
       color: var(--white);
       font-family: var(--font-body);
-      line-height: 1.5;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 24px 16px;
+      min-height: 100vh;
+      padding: 16px;
     }
 
-    .screen {
+    .page-shell {
       width: 100%;
-      max-width: 1100px;
-      border-radius: 38px;
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 24px 80px rgba(0,0,0,0.7);
-      backdrop-filter: blur(18px);
-      overflow: hidden;
+      max-width: 750px;
+      background: rgba(0,0,0,0.9);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 36px;
+      padding: 22px 24px 30px;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
     }
 
+    /* TOP BAR */
     .top-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 24px 24px 18px;
+      margin-bottom: 28px;
     }
 
-    .top-bar a,
-    .top-bar .logo {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      display: inline-flex;
+    .back-btn {
+      display: flex;
       align-items: center;
       justify-content: center;
-      text-decoration: none;
-      color: var(--gold);
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
       border: 1px solid var(--gold);
-      transition: transform var(--transition), background var(--transition);
+      color: var(--gold);
+      text-decoration: none;
+      font-size: 1.3rem;
+      transition: background 0.2s;
     }
 
-    .top-bar a:hover { background: rgba(201,168,76,0.12); transform: scale(1.05); }
+    .back-btn:hover {
+      background: rgba(201,168,76,0.1);
+    }
 
-    .top-bar .title {
-      flex: 1;
-      text-align: center;
-      font-family: var(--font-display);
-      font-size: 0.82rem;
-      letter-spacing: 0.26em;
+    .top-title {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--gold);
+      font-weight: 600;
     }
 
-    .panel {
-      padding: 0 24px 24px;
+    .logo-mark {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      color: var(--gold);
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.4rem;
+      background: radial-gradient(circle at top left, rgba(201,168,76,0.1), transparent 40%);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 50%;
     }
 
+    .logo-mark img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    /* HERO TEXT */
     .hero-title {
       font-family: var(--font-display);
       font-style: italic;
-      font-size: clamp(2.2rem, 5vw, 3rem);
-      line-height: 1.02;
-      margin-bottom: 0.75rem;
-      color: var(--white);
+      font-size: clamp(2rem, 4.5vw, 2.8rem);
+      line-height: 1.05;
+      margin-bottom: 0.2rem;
     }
 
     .hero-sub {
+      font-size: 0.9rem;
       color: var(--white-dim);
-      font-size: 0.95rem;
-      letter-spacing: 0.01em;
+      font-style: italic;
       margin-bottom: 2rem;
+      letter-spacing: 0.02em;
     }
 
-    .option-list {
-      display: grid;
-      gap: 16px;
-      margin-bottom: 24px;
+    /* OPTION CARDS */
+    .option-group {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 32px;
     }
 
     .option-card {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 16px;
-      padding: 22px 20px;
-      border-radius: 26px;
-      border: 1px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 18px 20px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.08);
       background: rgba(255,255,255,0.02);
-      transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
+      cursor: pointer;
+      transition: border-color 0.25s, background 0.25s, box-shadow 0.25s;
     }
 
     .option-card.selected {
-      background: rgba(201,168,76,0.08);
       border-color: var(--gold);
-      box-shadow: 0 18px 30px rgba(201,168,76,0.16);
+      background: var(--gold-muted);
+      box-shadow: 0 12px 28px rgba(201,168,76,0.12);
     }
 
-    .option-top {
+    .option-content {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
+      flex-direction: column;
+      gap: 6px;
+      max-width: 80%;
     }
 
     .option-title {
       font-family: var(--font-display);
       font-size: 1.4rem;
-      line-height: 1.05;
       color: var(--white);
+      line-height: 1.1;
     }
 
-    .option-note {
+    .option-desc {
+      font-size: 0.85rem;
       color: var(--white-dim);
-      font-size: 0.9rem;
-      margin-top: 0.65rem;
-      letter-spacing: 0.01em;
-      max-width: 68%;
+      line-height: 1.4;
     }
 
-    /* .option-icon {
-      width: 60px;
-      height: 44px;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.08);
-      position: relative;
-      overflow: hidden;
+    .option-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
     }
 
-    .option-icon::before {
-      content: '';
-      position: absolute;
-      left: 12px;
-      right: 12px;
-      top: 50%;
-      height: 6px;
-      border-radius: 999px;
-      background: var(--white);
-      transform: translateY(-50%);
-      opacity: 0.9;
+    /* BROW SHAPE ICON */
+    .brow-icon svg {
+      width: 70px;
+      height: 30px;
+      fill: none;
+      stroke: var(--white-dim);
+      stroke-width: 3;
+      stroke-linecap: round;
     }
 
-    .option-icon.variant::before { width: 54%; }
-    .option-icon.large::before { width: 80%; }
-    .option-icon.small::before { width: 40%; } */
+    .option-card.selected .brow-icon svg {
+      stroke: var(--white);
+    }
 
-    .radio {
+    /* RADIO BUTTON */
+    .radio-circle {
       width: 22px;
       height: 22px;
       border-radius: 50%;
       border: 1px solid var(--white-dim);
-      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       flex-shrink: 0;
-      align-self: center;
     }
 
-    .option-card.selected .radio { border-color: var(--gold); }
+    .option-card.selected .radio-circle {
+      border-color: var(--gold);
+    }
 
-    .radio::after {
+    .radio-circle::after {
       content: '';
-      position: absolute;
-      inset: 5px;
+      width: 12px;
+      height: 12px;
       border-radius: 50%;
       background: var(--gold);
       opacity: 0;
-      transition: opacity var(--transition);
+      transition: opacity 0.25s;
     }
 
-    .option-card.selected .radio::after { opacity: 1; }
+    .option-card.selected .radio-circle::after {
+      opacity: 1;
+    }
 
-    .bottom-button {
-      display: inline-flex;
+    /* BOTTOM BUTTON */
+    .btn-primary {
+      display: block;
       width: 100%;
-      padding: 1rem 1.2rem;
-      border-radius: 999px;
+      padding: 1rem;
+      background: #222; /* Dark Grey */
+      color: var(--white);
       border: none;
-      background: var(--gold);
-      color: #0a0a0a;
+      border-radius: 999px;
+      font-size: 0.85rem;
       font-weight: 700;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       text-align: center;
-      transition: transform var(--transition), background var(--transition);
       text-decoration: none;
+      transition: background 0.2s;
     }
 
-    .bottom-button:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .btn-primary:hover {
+      background: #333;
+    }
 
-    @media (max-width: 520px) {
-      .screen { border-radius: 30px; }
-      .top-bar { padding: 20px 20px 16px; }
-      .panel { padding: 0 20px 20px; }
-      .option-card { padding: 18px 16px; }
-      .option-title { font-size: 1.25rem; }
-      .option-icon { width: 52px; }
+    @media (max-width: 480px) {
+      .page-shell { padding: 16px 14px 22px; }
+      .option-card { padding: 14px 16px; }
+      .option-title { font-size: 1.2rem; }
+      .brow-icon svg { width: 60px; height: 24px; }
     }
   </style>
 </head>
 <body>
-  <section class="screen">
-    <div class="top-bar">
-      <a href="choose-style.php" aria-label="Back">&#8592;</a>
-      <div class="title">Choose your expression</div>
-      <div class="logo"><img src="assets/logo.png" alt="CG logo" /></div>
-    </div>
+  <div class="page-shell">
+    <header class="top-bar">
+      <a class="back-btn" href="choose-style.php" aria-label="Back">&#8592;</a>
+      <span class="top-title">CHOOSE YOUR STYLE</span>
+      <div class="logo-mark"><img src="assets/logo.png" alt="CG logo" /></div>
+    </header>
 
-    <div class="panel">
+    <main>
       <h1 class="hero-title">How defined would you like it?</h1>
       <p class="hero-sub">The same shape, three expressions.</p>
 
-      <div class="option-list">
-        <div class="option-card selected">
-          <div>
-            <div class="option-top">
-              <div class="option-title">Understated</div>
-              <div class="radio"></div>
-            </div>
-            <p class="option-note">It should be soft, barely-there. Natural confidence.</p>
+      <div class="option-group" id="optionsContainer">
+        <!-- Understated -->
+        <div class="option-card selected" data-value="understated">
+          <div class="option-content">
+            <div class="option-title">Understated</div>
+            <div class="option-desc">It should be Soft, barely-there. Natural confidence.</div>
           </div>
-          <div class="option-icon small"></div>
+          <div class="option-right">
+            <div class="brow-icon">
+              <svg viewBox="0 0 120 30"><path d="M20,22 Q40,10 60,22 Q80,34 100,22" /></svg>
+            </div>
+            <div class="radio-circle"></div>
+          </div>
         </div>
 
-        <div class="option-card">
-          <div>
-            <div class="option-top">
-              <div class="option-title">Considered</div>
-              <div class="radio"></div>
-            </div>
-            <p class="option-note">Polished and present. Your everyday at its best.</p>
+        <!-- Considered -->
+        <div class="option-card" data-value="considered">
+          <div class="option-content">
+            <div class="option-title">Considered</div>
+            <div class="option-desc">Polished and present. Your everyday at its best.</div>
           </div>
-          <div class="option-icon variant"></div>
+          <div class="option-right">
+            <div class="brow-icon">
+              <svg viewBox="0 0 120 30"><path d="M10,18 Q40,10 60,18 Q80,26 110,18" /></svg>
+            </div>
+            <div class="radio-circle"></div>
+          </div>
         </div>
 
-        <div class="option-card">
-          <div>
-            <div class="option-top">
-              <div class="option-title">Deliberate</div>
-              <div class="radio"></div>
-            </div>
-            <p class="option-note">Precise. Structured. A brow with a point of view.</p>
+        <!-- Deliberate -->
+        <div class="option-card" data-value="deliberate">
+          <div class="option-content">
+            <div class="option-title">Deliberate</div>
+            <div class="option-desc">Precise. Structured. A brow with a point of view.</div>
           </div>
-          <div class="option-icon large"></div>
+          <div class="option-right">
+            <div class="brow-icon">
+              <svg viewBox="0 0 120 30"><path d="M10,15 L40,4 L60,15 L80,26 L110,15" /></svg>
+            </div>
+            <div class="radio-circle"></div>
+          </div>
         </div>
       </div>
 
-      <a class="bottom-button" href="preview-look.php">See this look</a>
-    </div>
-  </section>
+      <a class="btn-primary" href="preview-look.php">SEE THIS LOOK</a>
+    </main>
+  </div>
+
+  <script>
+    const cards = document.querySelectorAll('.option-card');
+    const container = document.getElementById('optionsContainer');
+
+    cards.forEach(card => {
+      card.addEventListener('click', function() {
+        // Remove selected from all
+        cards.forEach(c => c.classList.remove('selected'));
+        // Add to clicked
+        this.classList.add('selected');
+      });
+    });
+  </script>
 </body>
 </html>

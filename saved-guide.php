@@ -3,17 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Guide Complete — Royals Arch Brow</title>
+  <title>Saved — Royals Arch Brow</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
       --black: #0a0a0a;
       --white: #f5f0e8;
-      --white-dim: rgba(245,240,232,0.6);
+      --white-dim: rgba(245,240,232,0.7);
       --gold: #c9a84c;
       --gold-light: #d4b96a;
       --dark-grey: #2b2b2b;
-      --border-light: rgba(255,255,255,0.05);
       --font-display: 'Cormorant Garamond', serif;
       --font-body: 'Montserrat', sans-serif;
     }
@@ -38,17 +37,17 @@
       border-radius: 36px;
       padding: 24px 24px 30px;
       box-shadow: 0 24px 60px rgba(0,0,0,0.7);
+      position: relative;
     }
 
     .topbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
-    .topbar a,
-    .topbar .brand {
+    .topbar a {
       width: 44px;
       height: 44px;
       border-radius: 50%;
@@ -58,129 +57,124 @@
       color: var(--gold);
       border: 1px solid var(--gold);
       text-decoration: none;
+      font-size: 1.2rem;
       transition: background 0.2s;
     }
 
     .topbar a:hover { background: rgba(201,168,76,0.1); }
 
     .topbar .brand {
-      padding: 0;
-      border: none;
-      background: transparent;
-    }
-
-    .topbar .brand img {
       width: 44px;
       height: 44px;
       border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--gold);
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .topbar .brand img {
+      width: 100%;
+      height: 100%;
       object-fit: contain;
     }
 
-    .topbar .title {
-      flex: 1;
-      text-align: center;
-      font-size: 0.75rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-weight: 600;
-    }
-
-    .portrait-wrapper {
-      position: relative;
-      width: 100%;
-      max-width: 300px;
-      margin: 0 auto 24px;
-      border-radius: 24px;
-      border: 2px solid var(--gold);
-      aspect-ratio: 1 / 1;
-      background: rgba(255,255,255,0.02);
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .portrait-wrapper img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.9;  /* Thoda clear image */
-    }
-
-    .check-badge {
-      position: absolute;
-      bottom: 5px;  /* Image ke andar bottom se distance */
-      left: 50%;
-      transform: translateX(-50%);
-      width: 36px;
-      height: 36px;
+    .check-icon {
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
-      background: var(--black);
+      border: 1px solid var(--gold);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1rem;
-      color: var(--gold);
-      font-weight: 700;
-      border: 2px solid var(--black);  /* Black border for the badge */
-      box-shadow: 0 4px 15px rgba(0,0,0,0.6);
-      z-index: 10;  /* Ensures it stays on top of the image */
+      margin: 20px auto 24px;
+      background: rgba(201,168,76,0.05);
+    }
+
+    .check-icon svg {
+      width: 40px;
+      height: 40px;
+      stroke: var(--gold);
+      stroke-width: 2;
+      fill: none;
     }
 
     .headline {
       font-family: var(--font-display);
       font-style: italic;
-      font-size: 2.4rem;
+      font-size: 2.8rem;
       text-align: center;
       color: var(--white);
-      margin-bottom: 12px;
+      margin-bottom: 16px;
     }
 
-    .subtitle {
+    .subtext {
       color: var(--white-dim);
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       text-align: center;
       line-height: 1.6;
-      margin-bottom: 24px;
+      max-width: 90%;
+      margin: 0 auto 20px;
+    }
+
+    .subtext-alt {
+      color: var(--white-dim);
+      font-size: 0.95rem;
+      text-align: center;
+      line-height: 1.6;
+      margin-bottom: 40px;
     }
 
     .actions {
       display: flex;
       flex-direction: column;
       gap: 12px;
-      margin-bottom: 20px;
+      margin-bottom: 12px;
     }
 
-    .btn {
+    .btn-primary {
       display: flex;
       align-items: center;
       justify-content: center;
       width: 100%;
       padding: 1rem;
       border-radius: 999px;
-      font-size: 0.85rem;
+      border: none;
+      background: var(--dark-grey);
+      color: var(--gold);
+      font-size: 0.8rem;
       font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       text-decoration: none;
-      transition: background 0.2s, border-color 0.2s;
+      transition: background 0.2s;
     }
 
-    .btn-primary {
-      background: var(--dark-grey);
-      color: var(--white);
-      border: none;
-    }
+    .btn-primary:hover { background: #3a3a3a; }
 
-    .btn-primary:hover {
-      background: #3a3a3a;
+    .row-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
     }
 
     .btn-secondary {
-      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 0.9rem;
+      border-radius: 999px;
       border: 1px solid rgba(255,255,255,0.12);
+      background: transparent;
       color: var(--white);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
     }
 
     .btn-secondary:hover {
@@ -188,59 +182,38 @@
       color: var(--gold);
     }
 
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      font-size: 0.8rem;
-    }
-
-    .footer-links a {
-      color: var(--gold);
-      text-decoration: none;
-      transition: opacity 0.2s;
-    }
-
-    .footer-links a:hover {
-      opacity: 0.7;
-    }
-
     @media (max-width: 480px) {
       .page { padding: 16px; }
-      .headline { font-size: 2rem; }
-      .portrait-wrapper { max-width: 240px; }
+      .headline { font-size: 2.2rem; }
+      .row-actions { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
   <div class="page">
     <div class="topbar">
-      <a href="tracing-guide.php">&#8592;</a>
-      <div class="title">GUIDE COMPLETE</div>
+      <a href="guide-complete.php">&#8592;</a>
       <div class="brand">
         <img src="assets/logo.png" alt="CG logo" />
       </div>
     </div>
 
-    <div class="portrait-wrapper">
-      <img src="assets/profile.png" alt="Face preview" />
-      <div class="check-badge">✓</div>
+    <div class="check-icon">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
     </div>
 
-    <h1 class="headline">Guide complete.</h1>
-    <p class="subtitle">
-      Your tracing guide is drawn. Share this with your brow artist — they'll work within your line.<br><br>
-      Saved guides live in my looks - ready to open at your appointment.
-    </p>
+    <h1 class="headline">Saved.</h1>
+    <p class="subtext">Bring this to your next appointment. Your artist has exactly what they need.</p>
+    <p class="subtext-alt">Every detail of your ideal shape, preserved.</p>
 
     <div class="actions">
-      <a class="btn btn-primary" href="saved-guide.php">SAVE MY GUIDE</a>
-      <a class="btn btn-secondary" href="#">SHARE WITH MY ARTIST</a>
+      <a class="btn-primary" href="appointment-brief.php">VIEW IN MY LOOKS</a>
     </div>
-
-    <div class="footer-links">
-      <a href="#">Share with someone</a>
-      <a href="#">Refine more</a>
+    <div class="row-actions">
+      <a class="btn-secondary" href="#">Share now</a>
+      <a class="btn-secondary" href="index.php">Return home</a>
     </div>
   </div>
 </body>

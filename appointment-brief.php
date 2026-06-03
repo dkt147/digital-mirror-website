@@ -12,11 +12,7 @@
       --white-dim: rgba(245,240,232,0.65);
       --gold: #c9a84c;
       --gold-light: #d4b96a;
-      --border: rgba(201,168,76,0.25);
-      --card: rgba(255,255,255,0.03);
-      --radius: 28px;
-      --radius-sm: 16px;
-      --transition: 0.25s ease;
+      --dark-grey: #2b2b2b;
       --font-display: 'Cormorant Garamond', serif;
       --font-body: 'Montserrat', sans-serif;
     }
@@ -35,20 +31,19 @@
 
     .page {
       width: 100%;
-      max-width: 1100px;
+      max-width: 650px;
+      background: var(--black);
+      border: 1px solid rgba(255,255,255,0.06);
       border-radius: 36px;
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 24px 90px rgba(0,0,0,0.7);
-      backdrop-filter: blur(16px);
-      overflow: hidden;
+      padding: 24px 24px 30px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.7);
     }
 
     .topbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 24px 24px 18px;
+      margin-bottom: 24px;
     }
 
     .topbar a,
@@ -56,215 +51,247 @@
       width: 44px;
       height: 44px;
       border-radius: 50%;
-      display: inline-flex;
+      display: flex;
       align-items: center;
       justify-content: center;
       color: var(--gold);
       border: 1px solid var(--gold);
       text-decoration: none;
-      transition: transform var(--transition), background var(--transition);
+      transition: background 0.2s;
     }
 
-    .topbar a:hover { background: rgba(201,168,76,0.12); transform: scale(1.05); }
+    .topbar a:hover { background: rgba(201,168,76,0.1); }
+
+    .topbar .brand {
+      overflow: hidden;
+      padding: 0;
+    }
+
+    .topbar .brand img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
 
     .topbar .title {
       flex: 1;
       text-align: center;
-      font-family: var(--font-display);
-      font-size: 0.82rem;
-      letter-spacing: 0.28em;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--gold);
-    }
-
-    .content {
-      padding: 0 24px 24px;
+      font-weight: 600;
     }
 
     .main-title {
       font-family: var(--font-display);
-      font-size: 1.75rem;
       font-style: italic;
+      font-size: 1.9rem;
       line-height: 1.05;
       color: var(--white);
-      margin-bottom: 0.75rem;
+      margin-bottom: 1.2rem;
       text-align: center;
-    }
-
-    .subtitle {
-      color: var(--white-dim);
-      font-size: 0.95rem;
-      text-align: center;
-      margin-bottom: 24px;
-      letter-spacing: 0.01em;
     }
 
     .brief-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 28px;
+      position: relative;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--gold);
+      border-radius: 24px;
       padding: 22px 20px;
       margin-bottom: 24px;
     }
 
     .brief-heading {
-      display: inline-flex;
+      display: flex;
       align-items: center;
       justify-content: space-between;
-      width: 100%;
-      gap: 12px;
-      margin-bottom: 18px;
       color: var(--gold);
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-    }
-
-    .brief-heading span {
-      font-weight: 700;
-      color: var(--white);
-      letter-spacing: 0.09em;
-      text-transform: none;
+      margin-bottom: 16px;
     }
 
     .field-list {
       display: grid;
-      gap: 18px;
+      gap: 14px;
     }
 
     .field {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 12px;
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
       padding-bottom: 10px;
     }
 
-    .field:last-child { border-bottom: none; padding-bottom: 0; }
+    .field:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+    }
 
     .field-label {
       color: var(--gold);
       font-size: 0.75rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+      letter-spacing: 0.08em;
     }
 
     .field-value {
       color: var(--white);
-      text-align: right;
-      font-size: 1rem;
-      line-height: 1.3;
+      font-size: 0.95rem;
     }
 
     .field-value.note {
       color: var(--white-dim);
-      text-align: left;
-      font-size: 0.92rem;
-      grid-column: 1 / -1;
+      font-size: 0.85rem;
     }
 
-    .button-block {
-      display: grid;
-      gap: 14px;
-      margin-bottom: 16px;
+    /* C/M Badge Floating */
+    .badge-container {
+      position: absolute;
+      top: -15px;
+      right: 15px;
+      display: flex;
+      align-items: center;
     }
 
-    .btn-primary,
-    .btn-secondary {
-      width: 100%;
-      text-align: center;
-      display: inline-flex;
+    .cm-badge {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(30,30,30,0.7);
+      backdrop-filter: blur(4px);
+      padding: 4px 6px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .cm-badge span {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 999px;
-      padding: 1rem 1.2rem;
-      font-size: 0.9rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
+      font-size: 11px;
       font-weight: 700;
-      text-decoration: none;
-      transition: transform var(--transition), background var(--transition), border-color var(--transition);
+      color: white;
     }
 
-    .btn-primary {
-      background: var(--gold);
-      color: #0a0a0a;
+    .c-badge { background: #e86c3e; }
+    .m-badge { background: #5e7da6; }
+
+    /* Buttons */
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .btn-primary-dark {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding: 1rem;
+      border-radius: 999px;
       border: none;
+      background: var(--dark-grey);
+      color: var(--gold);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s;
     }
 
-    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .btn-primary-dark:hover { background: #3a3a3a; }
 
     .row-actions {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
     }
 
     .btn-secondary {
-      background: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding: 0.9rem;
+      border-radius: 999px;
       border: 1px solid rgba(255,255,255,0.12);
+      background: transparent;
       color: var(--white);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
     }
 
     .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
 
-    @media (max-width: 520px) {
-      .page { border-radius: 30px; }
-      .topbar { padding: 20px 20px 16px; }
-      .content { padding: 0 20px 20px; }
+    @media (max-width: 480px) {
+      .page { padding: 16px; }
+      .main-title { font-size: 1.6rem; }
       .row-actions { grid-template-columns: 1fr; }
-      .brief-heading { font-size: 0.75rem; }
-      .field { grid-template-columns: 1fr; text-align: left; }
+      .field { flex-direction: column; align-items: flex-start; gap: 4px; }
       .field-value { text-align: left; }
-      .field-value.note { text-align: left; }
     }
   </style>
 </head>
 <body>
-  <main class="page">
+  <div class="page">
     <div class="topbar">
-      <a href="saved-look.php" aria-label="Back">&#8592;</a>
-      <div class="title">Your appointment brief</div>
-      <div class="brand"><img src="assets/logo.png" alt="CG logo" /></div>
+      <a href="saved-guide.php">&#8592;</a>
+      <div class="title">YOUR APPOINTMENT BRIEF</div>
+      <div class="brand">
+        <img src="assets/logo.png" alt="CG logo" />
+      </div>
     </div>
 
-    <div class="content">
-      <h1 class="main-title">Share this with your brow artist before you arrive.</h1>
-      <p class="subtitle">Your appointment brief contains the key details they need to recreate your ideal brow.</p>
+    <h1 class="main-title">Share this with your brow artist before you arrive.</h1>
 
-      <section class="brief-card">
-        <div class="brief-heading">ARCH · BROW BRIEF <span>Shape</span></div>
-        <div class="field">
-          <div class="field-label">Shape</div>
-          <div class="field-value">Soft Arch</div>
-        </div>
-        <div class="field">
-          <div class="field-label">Colour</div>
-          <div class="field-value">Ash Brown</div>
-        </div>
-        <div class="field">
-          <div class="field-label">Intensity</div>
-          <div class="field-value">Considered</div>
-        </div>
-        <div class="field">
-          <div class="field-label">Face shape</div>
-          <div class="field-value">Oval</div>
-        </div>
-        <div class="field">
-          <div class="field-label">Notes for artist</div>
-          <div class="field-value note">Tap to add notes...</div>
-        </div>
-      </section>
+    <div class="brief-card">
+      <div class="brief-heading">ARCH · BROW BRIEF</div>
 
-      <div class="button-block">
-        <a class="btn-primary" href="#">Save as image</a>
+      <div class="field-list">
+        <div class="field">
+          <span class="field-label">Shape</span>
+          <span class="field-value">Soft Arch</span>
+        </div>
+        <div class="field">
+          <span class="field-label">Colour</span>
+          <span class="field-value">Ash Brown</span>
+        </div>
+        <div class="field">
+          <span class="field-label">Intensity</span>
+          <span class="field-value">Considered</span>
+        </div>
+        <div class="field">
+          <span class="field-label">Face shape</span>
+          <span class="field-value">Oval</span>
+        </div>
+        <div class="field">
+          <span class="field-label">Notes for artist</span>
+          <span class="field-value note">Tap to add notes...</span>
+        </div>
       </div>
+    </div>
+
+    <div class="actions">
+      <a class="btn-primary-dark" href="recommendation.php">SAVE AS IMAGE</a>
       <div class="row-actions">
         <a class="btn-secondary" href="#">Via message</a>
         <a class="btn-secondary" href="#">Via email</a>
       </div>
     </div>
-  </main>
+  </div>
 </body>
 </html>
