@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Soft arch — Royals Arch Brow</title>
+  <title>Membership — Royals Arch Brow</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     * {
@@ -186,123 +186,167 @@
       line-height: 1.05;
     }
 
-    /* ====== PREVIEW CARD ====== */
-    .preview-card {
+    /* ====== MEMBERSHIP CARD ====== */
+    .membership-card {
+      background: #161610;
+      border: 1px solid var(--gold);
       border-radius: var(--radius);
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      min-height: 200px;
-      display: grid;
-      place-items: center;
-      position: relative;
-      overflow: hidden;
-      margin-bottom: 28px;
-      padding: 24px 16px;
-    }
-
-    .preview-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at center, rgba(201,168,76,0.08), transparent 50%);
-      pointer-events: none;
-    }
-
-    .preview-placeholder {
-      color: var(--white-dim);
-      font-size: 1rem;
-      letter-spacing: 0.04em;
+      padding: 2rem 1.5rem;
       text-align: center;
-      z-index: 1;
     }
 
-    .preview-placeholder strong {
-      color: var(--gold);
-      font-weight: 400;
+    .crown-icon {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 12px;
+    }
+
+    .crown-icon img {
+      width: 60px;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .headline {
       font-family: var(--font-display);
       font-style: italic;
+      font-size: 2.2rem;
+      color: var(--white);
+      margin-bottom: 4px;
+      line-height: 1.1;
     }
 
-    /* ====== FEATURE LIST ====== */
-    .feature-list {
+    .subhead {
+      color: var(--white-dim);
+      font-size: 0.9rem;
+      margin-bottom: 24px;
+    }
+
+    .divider {
+      width: 40px;
+      height: 2px;
+      background: var(--gold);
+      margin: 0 auto 20px;
+      opacity: 0.5;
+    }
+
+    .features {
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
-      margin-bottom: 2rem;
-      padding: 0 8px;
+      gap: 12px;
+      margin-bottom: 28px;
+      text-align: left;
+      max-width: 320px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .feature-item {
       display: flex;
-      align-items: flex-start;
-      gap: 0.85rem;
+      align-items: center;
+      gap: 12px;
       color: var(--white-dim);
-      font-size: 0.95rem;
-      line-height: 1.7;
+      font-size: 0.85rem;
     }
 
-    .feature-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--gold);
-      margin-top: 0.45rem;
+    .feature-item svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--gold);
+      stroke-width: 2.5;
+      fill: none;
       flex-shrink: 0;
+    }
+
+    .pricing {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .pricing-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 16px 12px;
+      text-align: center;
+      background: rgba(255,255,255,0.02);
+      position: relative;
+    }
+
+    .pricing-card.gold {
+      border-color: var(--gold);
+      background: var(--gold-muted);
+    }
+
+    .pricing-card .label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+
+    .pricing-card .price {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      color: var(--gold);
+    }
+
+    .pricing-card .price span {
+      font-size: 0.8rem;
+      color: var(--gold);
+      font-family: var(--font-body);
+    }
+
+    .best-badge {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold);
+      color: var(--black);
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
     }
 
     /* ====== BUTTONS ====== */
     .actions {
       display: grid;
       gap: 0.75rem;
-      width: 100%;
-      max-width: 460px;
-      margin-left: auto;
-      margin-right: auto;
     }
 
-    .btn {
-      display: inline-flex;
+    .btn-primary {
+      display: flex;
       align-items: center;
       justify-content: center;
       width: 100%;
       padding: 0.85rem 1.2rem;
       border-radius: 999px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--white);
       font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
       font-weight: 600;
+      letter-spacing: 0.08em;
       text-decoration: none;
       transition: all var(--transition);
-      cursor: pointer;
-      border: none;
-      font-family: var(--font-body);
     }
 
-    .btn-secondary {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--white);
-    }
-
-    .btn-secondary:hover {
+    .btn-primary:hover {
       border-color: var(--gold);
       color: var(--gold);
     }
 
-    .link-gold {
+    .footer-note {
       text-align: center;
+      font-size: 0.65rem;
       color: var(--gold);
-      font-size: 0.9rem;
-      letter-spacing: 0.04em;
-      padding: 6px 0 4px;
-      cursor: pointer;
-      transition: color var(--transition);
-      font-weight: 400;
-    }
-
-    .link-gold:hover {
-      color: var(--gold-light);
-      text-decoration: underline;
+      margin-top: 12px;
     }
 
     /* ====== ANIMATIONS ====== */
@@ -322,7 +366,9 @@
       .navbar { padding: 0.875rem 1.25rem; }
       .navbar-nav { display: none; }
       .page-title { font-size: 1.6rem; }
-      .preview-card { min-height: 160px; }
+      .headline { font-size: 1.8rem; }
+      .membership-card { padding: 1.5rem; }
+      .pricing-card .price { font-size: 1.2rem; }
       .back-btn { width: 38px; height: 38px; }
       .page-logo { width: 38px; height: 38px; }
     }
@@ -347,7 +393,7 @@
           <polyline points="12 19 5 12 12 5"></polyline>
         </svg>
       </a>
-      <div class="page-title-center">Soft arch</div>
+      <div class="page-title-center">Membership</div>
       <div class="page-logo">
         <img src="assets/logo.png" alt="CG" />
       </div>
@@ -355,63 +401,63 @@
 
     <!-- CONTENT HEADER -->
     <div class="fade-2">
-      <div class="page-label">Style Match</div>
-      <div class="page-title">Soft arch</div>
+      <div class="page-label">Membership</div>
+      <div class="page-title">Unlock the full ARCH experience.</div>
     </div>
 
-    <!-- PREVIEW CARD -->
-    <div class="preview-card fade-3">
-      <div class="preview-placeholder">
-        <strong>Soft arch preview</strong><br />
-        <span style="font-size:0.85rem; color:var(--white-dim);">Stencil overlay appears here</span>
+    <!-- MEMBERSHIP CARD -->
+    <div class="membership-card fade-3">
+      <div class="crown-icon">
+        <img src="assets/crown.png" alt="Crown" />
       </div>
-    </div>
 
-    <!-- FEATURE LIST -->
-    <div class="fade-4">
-      <div class="feature-list">
+      <h1 class="headline">Unlock the full ARCH experience.</h1>
+      <p class="subhead">Everything, without limit.</p>
+
+      <div class="divider"></div>
+
+      <div class="features">
         <div class="feature-item">
-          <div class="feature-dot"></div>
-          <div>It lifts your face along the natural line of your brow bone.</div>
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          Unlimited AR try-on sessions
         </div>
         <div class="feature-item">
-          <div class="feature-dot"></div>
-          <div>The graduated arch creates elegance without effort.</div>
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          Digital stencil use — no physical kit needed
         </div>
         <div class="feature-item">
-          <div class="feature-dot"></div>
-          <div>Oval faces carry this shape beautifully — it works with your proportions, not against them.</div>
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          Consultation PDF export
+        </div>
+        <div class="feature-item">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          Unlimited My Looks saves
+        </div>
+        <div class="feature-item">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          Access to private workshops
         </div>
       </div>
-    </div>
 
-    <!-- ACTIONS -->
-    <div class="actions fade-5">
-      <button class="btn btn-secondary" onclick="tryThisOn()">Try this on</button>
-      <div class="link-gold" onclick="saveRec()">Save recommendation</div>
-      <div class="link-gold" onclick="tryAnother()">Try another style</div>
+      <div class="pricing">
+        <div class="pricing-card">
+          <div class="label">Monthly</div>
+          <div class="price">$9.99 <span>/ PER MONTH</span></div>
+        </div>
+        <div class="pricing-card gold">
+          <div class="best-badge">Best Value</div>
+          <div class="label">Yearly</div>
+          <div class="price">$79.99 <span>/ PER YEAR</span></div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <a class="btn-primary" href="face-frame-warning.php">Begin your membership</a>
+      </div>
+      <div class="footer-note">Cancel anytime, no commitment.</div>
     </div>
 
   </main>
-
-  <script>
-    function goBack() { history.back(); }
-
-    function tryThisOn() {
-      alert('Try this on — opening preview');
-      // window.location.href = 'stencil-preview.php?kit=soft-arch';
-    }
-
-    function saveRec() {
-      alert('Recommendation saved! ✨');
-      // window.location.href = 'saved.php';
-    }
-
-    function tryAnother() {
-      alert('Loading different recommendation');
-      // window.location.href = 'recommendations.php';
-    }
-  </script>
 
 </body>
 </html>

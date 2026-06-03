@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Soft arch — Royals Arch Brow</title>
+  <title>Between Connections — Royals Arch Brow</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     * {
@@ -186,123 +186,103 @@
       line-height: 1.05;
     }
 
-    /* ====== PREVIEW CARD ====== */
-    .preview-card {
+    /* ====== STATUS CARD ====== */
+    .status-card {
+      background: #161610;
+      border: 1px solid var(--gold);
       border-radius: var(--radius);
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      min-height: 200px;
-      display: grid;
-      place-items: center;
-      position: relative;
-      overflow: hidden;
-      margin-bottom: 28px;
-      padding: 24px 16px;
+      padding: 1.75rem 1.5rem;
     }
 
-    .preview-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at center, rgba(201,168,76,0.08), transparent 50%);
-      pointer-events: none;
-    }
-
-    .preview-placeholder {
-      color: var(--white-dim);
-      font-size: 1rem;
-      letter-spacing: 0.04em;
-      text-align: center;
-      z-index: 1;
-    }
-
-    .preview-placeholder strong {
-      color: var(--gold);
-      font-weight: 400;
+    .headline {
       font-family: var(--font-display);
       font-style: italic;
+      font-size: 2.2rem;
+      text-align: center;
+      color: var(--white);
+      margin-bottom: 6px;
+      line-height: 1.1;
     }
 
-    /* ====== FEATURE LIST ====== */
-    .feature-list {
+    .subhead {
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--white-dim);
+      margin-bottom: 24px;
+    }
+
+    .status-list {
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
-      margin-bottom: 2rem;
-      padding: 0 8px;
+      gap: 12px;
+      margin-bottom: 20px;
     }
 
-    .feature-item {
+    .status-item {
       display: flex;
-      align-items: flex-start;
-      gap: 0.85rem;
-      color: var(--white-dim);
-      font-size: 0.95rem;
-      line-height: 1.7;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.02);
     }
 
-    .feature-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--gold);
-      margin-top: 0.45rem;
-      flex-shrink: 0;
+    .status-item.available {
+      border-color: var(--gold);
+      background: rgba(201,168,76,0.08);
+    }
+
+    .status-item .label {
+      font-size: 0.9rem;
+      color: var(--white);
+    }
+
+    .status-item .status {
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--white-dim);
+    }
+
+    .status-item.available .status {
+      color: var(--gold);
+    }
+
+    .note {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--white-dim);
+      margin-bottom: 24px;
     }
 
     /* ====== BUTTONS ====== */
     .actions {
       display: grid;
       gap: 0.75rem;
-      width: 100%;
-      max-width: 460px;
-      margin-left: auto;
-      margin-right: auto;
     }
 
-    .btn {
-      display: inline-flex;
+    .btn-primary {
+      display: flex;
       align-items: center;
       justify-content: center;
       width: 100%;
       padding: 0.85rem 1.2rem;
       border-radius: 999px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--white);
       font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
       font-weight: 600;
+      letter-spacing: 0.08em;
       text-decoration: none;
       transition: all var(--transition);
-      cursor: pointer;
-      border: none;
-      font-family: var(--font-body);
     }
 
-    .btn-secondary {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--white);
-    }
-
-    .btn-secondary:hover {
+    .btn-primary:hover {
       border-color: var(--gold);
       color: var(--gold);
-    }
-
-    .link-gold {
-      text-align: center;
-      color: var(--gold);
-      font-size: 0.9rem;
-      letter-spacing: 0.04em;
-      padding: 6px 0 4px;
-      cursor: pointer;
-      transition: color var(--transition);
-      font-weight: 400;
-    }
-
-    .link-gold:hover {
-      color: var(--gold-light);
-      text-decoration: underline;
     }
 
     /* ====== ANIMATIONS ====== */
@@ -322,7 +302,9 @@
       .navbar { padding: 0.875rem 1.25rem; }
       .navbar-nav { display: none; }
       .page-title { font-size: 1.6rem; }
-      .preview-card { min-height: 160px; }
+      .headline { font-size: 1.8rem; }
+      .status-card { padding: 1.25rem; }
+      .status-item { padding: 12px 14px; }
       .back-btn { width: 38px; height: 38px; }
       .page-logo { width: 38px; height: 38px; }
     }
@@ -347,7 +329,7 @@
           <polyline points="12 19 5 12 12 5"></polyline>
         </svg>
       </a>
-      <div class="page-title-center">Soft arch</div>
+      <div class="page-title-center">Between Connections</div>
       <div class="page-logo">
         <img src="assets/logo.png" alt="CG" />
       </div>
@@ -355,63 +337,42 @@
 
     <!-- CONTENT HEADER -->
     <div class="fade-2">
-      <div class="page-label">Style Match</div>
-      <div class="page-title">Soft arch</div>
+      <div class="page-label">Offline Status</div>
+      <div class="page-title">You're between connections.</div>
     </div>
 
-    <!-- PREVIEW CARD -->
-    <div class="preview-card fade-3">
-      <div class="preview-placeholder">
-        <strong>Soft arch preview</strong><br />
-        <span style="font-size:0.85rem; color:var(--white-dim);">Stencil overlay appears here</span>
+    <!-- STATUS CARD -->
+    <div class="status-card fade-3">
+      <h1 class="headline">You're between connections.</h1>
+      <p class="subhead">Some of ARCH is with you offline.</p>
+
+      <div class="status-list">
+        <div class="status-item available">
+          <span class="label">My Looks</span>
+          <span class="status">Available</span>
+        </div>
+        <div class="status-item available">
+          <span class="label">Saved Guides</span>
+          <span class="status">Available</span>
+        </div>
+        <div class="status-item available">
+          <span class="label">Tracing Guide</span>
+          <span class="status">Available</span>
+        </div>
+        <div class="status-item">
+          <span class="label">Face scan</span>
+          <span class="status">When you reconnect</span>
+        </div>
       </div>
-    </div>
 
-    <!-- FEATURE LIST -->
-    <div class="fade-4">
-      <div class="feature-list">
-        <div class="feature-item">
-          <div class="feature-dot"></div>
-          <div>It lifts your face along the natural line of your brow bone.</div>
-        </div>
-        <div class="feature-item">
-          <div class="feature-dot"></div>
-          <div>The graduated arch creates elegance without effort.</div>
-        </div>
-        <div class="feature-item">
-          <div class="feature-dot"></div>
-          <div>Oval faces carry this shape beautifully — it works with your proportions, not against them.</div>
-        </div>
+      <p class="note">Your saved looks are always with you.</p>
+
+      <div class="actions">
+        <a class="btn-primary" href="saved.php">Open my looks</a>
       </div>
-    </div>
-
-    <!-- ACTIONS -->
-    <div class="actions fade-5">
-      <button class="btn btn-secondary" onclick="tryThisOn()">Try this on</button>
-      <div class="link-gold" onclick="saveRec()">Save recommendation</div>
-      <div class="link-gold" onclick="tryAnother()">Try another style</div>
     </div>
 
   </main>
-
-  <script>
-    function goBack() { history.back(); }
-
-    function tryThisOn() {
-      alert('Try this on — opening preview');
-      // window.location.href = 'stencil-preview.php?kit=soft-arch';
-    }
-
-    function saveRec() {
-      alert('Recommendation saved! ✨');
-      // window.location.href = 'saved.php';
-    }
-
-    function tryAnother() {
-      alert('Loading different recommendation');
-      // window.location.href = 'recommendations.php';
-    }
-  </script>
 
 </body>
 </html>

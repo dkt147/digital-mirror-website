@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Two Looks — Royals Arch Brow</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <title>My Looks — Royals Arch Brow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
     :root {
       --black: #0a0a08;
       --dark: #111111;
@@ -33,7 +31,7 @@
       --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { font-size: 16px; scroll-behavior: smooth; }
     body {
       background: var(--black);
@@ -170,6 +168,7 @@
       display: flex;
       flex-direction: column;
       gap: 1.75rem;
+      padding-bottom: 8rem; /* Space for bottom nav */
     }
 
     /* ====== HEADER ====== */
@@ -186,147 +185,203 @@
       line-height: 1.05;
     }
 
-    /* ====== HERO ====== */
-    .hero-title {
-      text-align: center;
-      font-family: var(--font-display);
-      font-style: italic;
-      font-size: 2.6rem;
-      line-height: 1.05;
-      color: var(--white);
-      margin-bottom: 0.25rem;
-    }
-
-    .hero-sub {
-      text-align: center;
-      font-family: var(--font-display);
-      font-style: italic;
-      color: var(--gold);
-      font-size: 1.1rem;
-      margin-bottom: 2rem;
-    }
-
-    /* ====== CARDS ====== */
-    .cards-wrapper {
+    /* ====== FILTER TABS ====== */
+    .filter-tabs {
       display: flex;
-      gap: 16px;
-      margin-bottom: 28px;
+      gap: 1.2rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.6rem;
+      margin-bottom: 0.5rem;
     }
 
-    .card {
-      flex: 1;
-      border-radius: var(--radius-sm);
-      padding: 20px 16px;
+    .filter-tab {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--white-dim);
+      padding: 0.25rem 0;
+      position: relative;
+      transition: color var(--transition);
+      cursor: pointer;
+    }
+
+    .filter-tab.active {
+      color: var(--white);
+    }
+
+    .filter-tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: -0.7rem;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--gold);
+    }
+
+    .filter-tab:hover {
+      color: var(--white);
+    }
+
+    /* ====== LOOK CARDS ====== */
+    .looks-list {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 12px;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .look-card {
+      background: linear-gradient(135deg, #1c1a0d 0%, #221f0f 60%, #1a1808 100%);
       border: 1px solid var(--border);
-      background: #161610;
+      border-radius: var(--radius);
+      padding: 1.2rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
       cursor: pointer;
+      transition: all var(--transition);
+      position: relative;
+      text-align: left;
+      width: 100%;
+    }
+
+    .look-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-2px);
+      background: linear-gradient(135deg, #1f1c10 0%, #241f0f 60%, #1c1908 100%);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+    }
+
+    .look-brow-icon {
+      width: 70px;
+      height: 35px;
+      flex-shrink: 0;
+    }
+
+    .look-brow-icon svg {
+      width: 100%;
+      height: 100%;
+      fill: none;
+      stroke: var(--gold);
+      stroke-width: 1.8;
+      stroke-linecap: round;
+    }
+
+    .look-info {
+      flex: 1;
+    }
+
+    .look-title {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 0.1rem;
+    }
+
+    .look-meta {
+      font-size: 0.65rem;
+      color: var(--white-dim);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .look-arrow {
+      color: var(--white-faint);
+      flex-shrink: 0;
       transition: all var(--transition);
     }
 
-    .card:hover {
-      border-color: var(--gold-dark);
-    }
-
-    .card.selected {
-      border-color: var(--gold);
-      background: rgba(201,168,76,0.06);
-      box-shadow: 0 0 0 1px rgba(201,168,76,0.1);
-    }
-
-    .face-mini {
-      width: 70px;
-      height: 90px;
-      border: 1px solid rgba(201,168,76,0.3);
-      border-radius: 50% 50% 40% 40%;
-      position: relative;
-    }
-
-    .face-mini::before {
-      content: '';
-      position: absolute;
-      top: 22%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 28px;
-      height: 12px;
-      border: 1px solid var(--gold);
-      border-radius: 999px 999px 40px 40px;
-      border-bottom: none;
-    }
-
-    .card-title {
-      font-family: var(--font-display);
-      font-size: 1.1rem;
-      color: var(--white);
-    }
-
-    .card-sub {
-      font-size: 0.7rem;
-      color: var(--white-faint);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-
-    .check-circle {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.7rem;
+    .look-card:hover .look-arrow {
       color: var(--gold);
+      transform: translateX(4px);
     }
 
-    .card.selected .check-circle {
-      background: var(--gold);
-      border-color: var(--gold);
-      color: var(--black);
-    }
-
-    /* ====== BUTTONS ====== */
-    .actions {
-      display: grid;
-      gap: 0.75rem;
-    }
-
-    .btn-primary {
+    /* ====== CREATE NEW BUTTON ====== */
+    .create-new-btn {
       display: flex;
       align-items: center;
       justify-content: center;
       width: 100%;
-      padding: 0.85rem 1.2rem;
-      border-radius: 999px;
+      padding: 1rem;
+      border-radius: 50px;
       border: 1px solid var(--border);
-      background: transparent;
+      background: rgba(255,255,255,0.02);
       color: var(--white);
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       font-weight: 600;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
       text-decoration: none;
       transition: all var(--transition);
     }
 
-    .btn-primary:hover {
+    .create-new-btn:hover {
       border-color: var(--gold);
       color: var(--gold);
+      background: var(--gold-muted);
+      transform: translateY(-1px);
     }
 
-    .bottom-link {
-      display: block;
-      text-align: center;
-      color: var(--gold);
-      font-size: 0.75rem;
+    /* ====== BOTTOM NAV ====== */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(10, 10, 8, 0.96);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-around;
+      padding: 0.6rem 0 1rem;
+      z-index: 100;
+    }
+
+    .bottom-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
       text-decoration: none;
-      transition: opacity var(--transition);
+      color: var(--white-dim);
+      font-size: 0.55rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color var(--transition);
+      position: relative;
     }
 
-    .bottom-link:hover { opacity: 0.7; }
+    .bottom-nav-item svg {
+      width: 22px;
+      height: 22px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .bottom-nav-item.active {
+      color: var(--white);
+    }
+
+    .bottom-nav-item.active::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    .bottom-nav-item:hover {
+      color: var(--white);
+    }
 
     /* ====== ANIMATIONS ====== */
     @keyframes fadeUp {
@@ -341,17 +396,19 @@
 
     /* ====== RESPONSIVE ====== */
     @media (max-width: 900px) {
-      .main { padding: 0 1.25rem 1.5rem; }
+      .main { padding: 0 1.25rem 1.5rem 1.25rem; padding-bottom: 7rem; }
       .navbar { padding: 0.875rem 1.25rem; }
       .navbar-nav { display: none; }
       .page-title { font-size: 1.6rem; }
-      .hero-title { font-size: 2rem; }
-      .cards-wrapper { flex-direction: column; }
+      .filter-tabs { gap: 1rem; overflow-x: auto; white-space: nowrap; padding-bottom: 0.4rem; }
+      .look-brow-icon { width: 50px; height: 25px; }
+      .look-title { font-size: 1.1rem; }
       .back-btn { width: 38px; height: 38px; }
       .page-logo { width: 38px; height: 38px; }
     }
   </style>
 </head>
+
 <body>
 
   <!-- NAVBAR -->
@@ -371,47 +428,94 @@
           <polyline points="12 19 5 12 12 5"></polyline>
         </svg>
       </a>
-      <div class="page-title-center">Two Looks</div>
+      <div class="page-title-center">My Looks</div>
       <div class="page-logo">
         <img src="assets/logo.png" alt="CG" />
       </div>
     </div>
 
-    <!-- HERO -->
-    <div class="fade-2">
-      <h1 class="hero-title">Two looks. One choice.</h1>
-      <p class="hero-sub">Take your time with this.</p>
+    <!-- FILTER TABS -->
+    <div class="filter-tabs fade-2">
+      <span class="filter-tab active">ALL</span>
+      <span class="filter-tab">STYLE</span>
+      <span class="filter-tab">TRACING</span>
+      <span class="filter-tab">STENCIL</span>
+      <span class="filter-tab">REFR</span>
     </div>
 
-    <!-- CARDS -->
-    <div class="cards-wrapper fade-3">
-      <div class="card selected">
-        <div class="face-mini"></div>
-        <div class="card-title">Considered</div>
-        <div class="card-sub">Ash Brown</div>
-        <div class="check-circle">&#10003;</div>
+    <!-- LOOKS LIST -->
+    <div class="looks-list">
+
+      <!-- Look 1 -->
+      <div class="look-card fade-3" onclick="window.location.href='look-detail.php?id=1'">
+        <div class="look-brow-icon">
+          <svg viewBox="0 0 70 35">
+            <path d="M15 22 Q25 6 35 18 Q45 30 55 14" />
+          </svg>
+        </div>
+        <div class="look-info">
+          <div class="look-title">My everyday arch</div>
+          <div class="look-meta">MAY 15 - Arch / Dark Brows</div>
+        </div>
+        <div class="look-arrow">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <line x1="5" y1="12" x2="19" y2="12" />
+            <polyline points="12 5 19 12 12 19" />
+          </svg>
+        </div>
       </div>
-      <div class="card">
-        <div class="face-mini"></div>
-        <div class="card-title">Deliberate</div>
-        <div class="card-sub"> </div>
-        <div class="check-circle"></div>
+
+      <!-- Look 2 -->
+      <div class="look-card fade-4" onclick="window.location.href='look-detail.php?id=2'">
+        <div class="look-brow-icon">
+          <svg viewBox="0 0 70 35">
+            <path d="M15 22 Q25 6 35 18 Q45 30 55 14" />
+          </svg>
+        </div>
+        <div class="look-info">
+          <div class="look-title">My everyday arch</div>
+          <div class="look-meta">MAY 15 - Arch / Dark Brows</div>
+        </div>
+        <div class="look-arrow">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <line x1="5" y1="12" x2="19" y2="12" />
+            <polyline points="12 5 19 12 12 19" />
+          </svg>
+        </div>
       </div>
+
+      <!-- Look 3 -->
+      <div class="look-card fade-4" onclick="window.location.href='look-detail.php?id=3'">
+        <div class="look-brow-icon">
+          <svg viewBox="0 0 70 35">
+            <path d="M15 22 Q25 6 35 18 Q45 30 55 14" />
+          </svg>
+        </div>
+        <div class="look-info">
+          <div class="look-title">My everyday arch</div>
+          <div class="look-meta">MAY 15 - Arch / Dark Brows</div>
+        </div>
+        <div class="look-arrow">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <line x1="5" y1="12" x2="19" y2="12" />
+            <polyline points="12 5 19 12 12 19" />
+          </svg>
+        </div>
+      </div>
+
     </div>
 
-    <!-- ACTIONS -->
-    <div class="actions fade-4">
-      <a class="btn-primary" href="understated.php">I choose considered</a>
-      <a class="bottom-link" href="two-looks-one-choice.php">Go back to all styles</a>
-    </div>
+    <!-- CREATE NEW BUTTON -->
+    <a href="create-look.php" class="create-new-btn fade-5">CREATE A NEW LOOK +</a>
 
   </main>
 
   <script>
-    document.querySelectorAll('.card').forEach(card => {
-      card.addEventListener('click', function() {
-        document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
-        this.classList.add('selected');
+    // Filter tab interaction
+    document.querySelectorAll('.filter-tab').forEach(tab => {
+      tab.addEventListener('click', function() {
+        document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
       });
     });
   </script>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Soft arch — Royals Arch Brow</title>
+  <title>Stay Informed — Royals Arch Brow</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     * {
@@ -186,67 +186,74 @@
       line-height: 1.05;
     }
 
-    /* ====== PREVIEW CARD ====== */
-    .preview-card {
-      border-radius: var(--radius);
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      min-height: 200px;
-      display: grid;
-      place-items: center;
-      position: relative;
-      overflow: hidden;
-      margin-bottom: 28px;
-      padding: 24px 16px;
+    /* ====== ICON ====== */
+    .icon-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 8px;
     }
 
-    .preview-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at center, rgba(201,168,76,0.08), transparent 50%);
-      pointer-events: none;
+    .icon-wrapper svg {
+      width: 48px;
+      height: 48px;
+      stroke: var(--gold);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
-    .preview-placeholder {
-      color: var(--white-dim);
-      font-size: 1rem;
-      letter-spacing: 0.04em;
-      text-align: center;
-      z-index: 1;
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 auto 20px;
+      opacity: 0.5;
     }
 
-    .preview-placeholder strong {
-      color: var(--gold);
-      font-weight: 400;
+    /* ====== CONTENT ====== */
+    .headline {
       font-family: var(--font-display);
       font-style: italic;
+      font-size: 2.1rem;
+      text-align: center;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 10px;
     }
 
-    /* ====== FEATURE LIST ====== */
-    .feature-list {
+    .subtext {
+      font-size: 0.9rem;
+      text-align: center;
+      color: var(--white-dim);
+      line-height: 1.6;
+      margin-bottom: 24px;
+      padding: 0 4px;
+    }
+
+    .features {
+      list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
-      margin-bottom: 2rem;
+      gap: 10px;
+      margin-bottom: 32px;
       padding: 0 8px;
     }
 
-    .feature-item {
+    .features li {
       display: flex;
-      align-items: flex-start;
-      gap: 0.85rem;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.85rem;
       color: var(--white-dim);
-      font-size: 0.95rem;
-      line-height: 1.7;
     }
 
-    .feature-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--gold);
-      margin-top: 0.45rem;
+    .features li svg {
+      width: 14px;
+      height: 14px;
+      stroke: var(--gold);
+      fill: none;
+      stroke-width: 2.5;
       flex-shrink: 0;
     }
 
@@ -254,56 +261,40 @@
     .actions {
       display: grid;
       gap: 0.75rem;
-      width: 100%;
-      max-width: 460px;
-      margin-left: auto;
-      margin-right: auto;
     }
 
-    .btn {
-      display: inline-flex;
+    .btn-primary {
+      display: flex;
       align-items: center;
       justify-content: center;
       width: 100%;
       padding: 0.85rem 1.2rem;
       border-radius: 999px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--white);
       font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
       font-weight: 600;
+      letter-spacing: 0.08em;
       text-decoration: none;
       transition: all var(--transition);
-      cursor: pointer;
-      border: none;
-      font-family: var(--font-body);
     }
 
-    .btn-secondary {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--white);
-    }
-
-    .btn-secondary:hover {
+    .btn-primary:hover {
       border-color: var(--gold);
       color: var(--gold);
     }
 
-    .link-gold {
+    .btn-link {
+      display: block;
       text-align: center;
       color: var(--gold);
-      font-size: 0.9rem;
-      letter-spacing: 0.04em;
-      padding: 6px 0 4px;
-      cursor: pointer;
-      transition: color var(--transition);
-      font-weight: 400;
+      font-size: 0.8rem;
+      text-decoration: none;
+      transition: opacity var(--transition);
     }
 
-    .link-gold:hover {
-      color: var(--gold-light);
-      text-decoration: underline;
-    }
+    .btn-link:hover { opacity: 0.7; }
 
     /* ====== ANIMATIONS ====== */
     @keyframes fadeUp {
@@ -322,7 +313,7 @@
       .navbar { padding: 0.875rem 1.25rem; }
       .navbar-nav { display: none; }
       .page-title { font-size: 1.6rem; }
-      .preview-card { min-height: 160px; }
+      .headline { font-size: 1.8rem; }
       .back-btn { width: 38px; height: 38px; }
       .page-logo { width: 38px; height: 38px; }
     }
@@ -347,7 +338,7 @@
           <polyline points="12 19 5 12 12 5"></polyline>
         </svg>
       </a>
-      <div class="page-title-center">Soft arch</div>
+      <div class="page-title-center">Stay Informed</div>
       <div class="page-logo">
         <img src="assets/logo.png" alt="CG" />
       </div>
@@ -355,63 +346,48 @@
 
     <!-- CONTENT HEADER -->
     <div class="fade-2">
-      <div class="page-label">Style Match</div>
-      <div class="page-title">Soft arch</div>
+      <div class="page-label">Notifications</div>
+      <div class="page-title">Stay close to your brows.</div>
     </div>
 
-    <!-- PREVIEW CARD -->
-    <div class="preview-card fade-3">
-      <div class="preview-placeholder">
-        <strong>Soft arch preview</strong><br />
-        <span style="font-size:0.85rem; color:var(--white-dim);">Stencil overlay appears here</span>
-      </div>
+    <!-- ICON & DIVIDER -->
+    <div class="icon-wrapper fade-3">
+      <svg viewBox="0 0 24 24">
+        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+        <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+      </svg>
     </div>
 
-    <!-- FEATURE LIST -->
+    <div class="divider"></div>
+
+    <!-- CONTENT -->
     <div class="fade-4">
-      <div class="feature-list">
-        <div class="feature-item">
-          <div class="feature-dot"></div>
-          <div>It lifts your face along the natural line of your brow bone.</div>
-        </div>
-        <div class="feature-item">
-          <div class="feature-dot"></div>
-          <div>The graduated arch creates elegance without effort.</div>
-        </div>
-        <div class="feature-item">
-          <div class="feature-dot"></div>
-          <div>Oval faces carry this shape beautifully — it works with your proportions, not against them.</div>
-        </div>
-      </div>
+      <h1 class="headline">Stay close to your brows.</h1>
+      <p class="subtext">We'll let you know about new styles, upcoming sessions, and when it's time for your next looks.</p>
+
+      <ul class="features">
+        <li>
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          New style recommendations
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          Saved look reminders
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          Upcoming sessions & events
+        </li>
+      </ul>
     </div>
 
     <!-- ACTIONS -->
     <div class="actions fade-5">
-      <button class="btn btn-secondary" onclick="tryThisOn()">Try this on</button>
-      <div class="link-gold" onclick="saveRec()">Save recommendation</div>
-      <div class="link-gold" onclick="tryAnother()">Try another style</div>
+      <a class="btn-primary" href="#">Yes, keep me informed</a>
+      <a class="btn-link" href="#">Not right now</a>
     </div>
 
   </main>
-
-  <script>
-    function goBack() { history.back(); }
-
-    function tryThisOn() {
-      alert('Try this on — opening preview');
-      // window.location.href = 'stencil-preview.php?kit=soft-arch';
-    }
-
-    function saveRec() {
-      alert('Recommendation saved! ✨');
-      // window.location.href = 'saved.php';
-    }
-
-    function tryAnother() {
-      alert('Loading different recommendation');
-      // window.location.href = 'recommendations.php';
-    }
-  </script>
 
 </body>
 </html>
