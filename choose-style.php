@@ -11,281 +11,288 @@
       --white: #f5f0e8;
       --white-dim: rgba(245,240,232,0.65);
       --gold: #c9a84c;
-      --gold-light: #d4b96a;
-      --border: rgba(255,255,255,0.08);
+      --dark-grey: #2b2b2b;
       --transition: 0.25s ease;
       --font-display: 'Cormorant Garamond', serif;
       --font-body: 'Montserrat', sans-serif;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { min-height: 100%; }
     body {
-      background: radial-gradient(circle at top, rgba(201,168,76,0.08), transparent 25%), var(--black);
+      background: var(--black);
       color: var(--white);
       font-family: var(--font-body);
-      line-height: 1.5;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 28px 18px;
+      padding: 20px;
+      min-height: 100vh;
     }
 
     .page-shell {
       width: 100%;
-      max-width: 980px;
-      background: rgba(10,10,10,0.96);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 32px;
-      box-shadow: 0 30px 90px rgba(0,0,0,0.55);
+      max-width: 750px;
+      background: var(--black);
+      border-radius: 28px;
       overflow: hidden;
+      padding: 0 20px 20px 20px;
     }
 
+    /* --- TOP HEADER --- */
     .page-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      padding: 22px 24px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      background: rgba(255,255,255,0.02);
+      padding: 18px 0 16px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
     }
 
     .back-link {
-      display: inline-flex;
+      display: flex;
       align-items: center;
       justify-content: center;
-      width: 48px;
-      height: 48px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.12);
+      border: 1px solid var(--gold); /* GOLD BORDER */
       color: var(--gold);
       text-decoration: none;
-      font-size: 1.2rem;
-      transition: transform var(--transition), background var(--transition);
+      font-size: 1.1rem;
+      transition: background var(--transition);
     }
 
-    .back-link:hover {
-      transform: scale(1.05);
-      background: rgba(255,255,255,0.06);
-    }
+    .back-link:hover { background: rgba(201,168,76,0.1); }
 
     .page-header-title {
       flex: 1;
       text-align: center;
-      font-family: var(--font-display);
-      font-size: 0.92rem;
-      letter-spacing: 0.28em;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--white);
     }
 
     .logo-mark {
-      display: inline-flex;
+      display: flex;
       align-items: center;
       justify-content: center;
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: radial-gradient(circle at top left, rgba(201,168,76,0.2), transparent 42%);
-      border: 1px solid rgba(255,255,255,0.12);
       color: var(--gold);
       font-weight: 700;
-      letter-spacing: 0.08em;
-      font-size: 0.95rem;
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      letter-spacing: 0.05em;
+      background: transparent;
+      border: none;
     }
 
+    .logo-mark img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    /* --- CONTENT GRID --- */
     .content {
-      padding: 26px 26px 28px;
+      padding: 20px 0 10px 0;
       display: grid;
       gap: 24px;
     }
 
     .section-label {
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--white-dim);
-      margin-bottom: 1rem;
+      margin-bottom: 0.6rem;
     }
 
+    /* --- STYLE GRID --- */
     .style-grid {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 1rem;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.7rem;
     }
 
     .style-card {
-      background: rgba(255,255,255,0.03);
+      background: rgba(255,255,255,0.02);
       border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 24px;
-      padding: 18px 14px;
+      border-radius: 14px;
+      padding: 12px 6px;
       text-align: center;
-      display: grid;
-      gap: 0.75rem;
-      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition), background var(--transition);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
       cursor: pointer;
+      transition: border-color var(--transition), background var(--transition);
     }
 
-    .style-card:hover {
-      border-color: rgba(255,255,255,0.18);
-    }
+    .style-card:hover { border-color: rgba(255,255,255,0.2); }
 
     .style-card.selected {
       border-color: var(--gold);
-      background: rgba(201,168,76,0.1);
-      box-shadow: 0 18px 30px rgba(201,168,76,0.18);
-      transform: translateY(-1px);
+      background: rgba(201,168,76,0.12);
+      box-shadow: 0 4px 12px rgba(201,168,76,0.15);
     }
 
-    .style-icon {
-      width: 100%;
-      height: 44px;
-      border-radius: 18px;
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.04));
+    .style-icon svg {
+      width: 55px;
+      height: 28px;
+      fill: none;
+      stroke: var(--white-dim);
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
-    .style-icon::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at center, rgba(255,255,255,0.35), transparent 44%);
+    .style-card.selected .style-icon svg {
+      stroke: var(--white);
     }
 
     .style-label {
-      font-size: 0.72rem;
-      color: var(--white);
+      font-size: 0.6rem;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.06em;
+      color: var(--white-dim);
     }
 
-    .style-label.selected {
-      color: var(--gold);
+    .style-card.selected .style-label {
+      color: var(--white);
     }
 
+    /* --- COLOUR ROW --- */
     .color-row {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.6rem;
       flex-wrap: wrap;
-      margin-bottom: 0.5rem;
     }
 
     .color-swatch {
-      width: 44px;
-      height: 44px;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.05);
       cursor: pointer;
-      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+      position: relative;
+      transition: border-color var(--transition), transform var(--transition);
     }
 
     .color-swatch.selected {
       border-color: var(--gold);
       transform: scale(1.05);
-      box-shadow: 0 12px 24px rgba(201,168,76,0.18);
+      box-shadow: 0 0 0 1px var(--gold) inset;
     }
 
-    .color-swatch[data-color="#efd8bb"] { background: #efd8bb; }
-    .color-swatch[data-color="#b27f50"] { background: #b27f50; }
-    .color-swatch[data-color="#89603f"] { background: #89603f; }
-    .color-swatch[data-color="#4f2a18"] { background: #4f2a18; }
-    .color-swatch[data-color="#6e3d24"] { background: #6e3d24; }
-    .color-swatch[data-color="#caa87d"] { background: #caa87d; }
+    /* CHECKMARK FOR SELECTED COLOUR */
+    .color-swatch.selected::after {
+      content: '✔';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: var(--gold);
+      font-weight: bold;
+      font-size: 0.9rem;
+      text-shadow: 0 0 4px rgba(0,0,0,0.8);
+    }
 
+    /* --- PREVIEW CARD --- */
     .preview-card {
       position: relative;
-      border-radius: 32px;
+      border-radius: 28px;
       overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
-      min-height: 320px;
-      display: grid;
-      place-items: center;
-    }
-
-    .preview-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top right, rgba(201,168,76,0.16), transparent 42%);
-      pointer-events: none;
+      border: 1px solid var(--gold); /* GOLD BORDER */
+      background: #000;
+      min-height: 260px;
+      aspect-ratio: 1/1;
     }
 
     .preview-image {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.18;
-      filter: blur(2px);
+      opacity: 0.8;
+    }
+
+    /* "PRIVIEW" TEXT INSIDE IMAGE */
+    .preview-label {
+      position: absolute;
+      top: 14px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      pointer-events: none;
     }
 
     .preview-copy {
       position: absolute;
-      left: 1.4rem;
-      right: 1.4rem;
-      bottom: 1.4rem;
-      color: var(--white);
+      bottom: 1rem;
+      left: 0;
+      right: 0;
+      text-align: center;
       font-family: var(--font-display);
-      font-size: 1rem;
-      letter-spacing: 0.04em;
-      line-height: 1.2;
+      font-size: 1.1rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
     }
 
     .preview-copy strong {
-      color: var(--gold);
       font-weight: 600;
+      color: var(--white);
+    }
+    
+    .preview-copy span {
+      color: var(--white);
     }
 
     .preview-note {
+      font-size: 0.75rem;
       color: var(--white-dim);
-      font-size: 0.82rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
+      margin-top: 0.2rem;
     }
 
+    /* --- BOTTOM BUTTON --- */
     .actions {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 0.8rem;
+      margin-top: 0.2rem;
     }
 
     .btn-primary {
-      display: inline-flex;
+      display: flex;
       align-items: center;
       justify-content: center;
       width: 100%;
-      padding: 1rem 1.2rem;
-      background: var(--gold);
-      color: var(--black);
+      padding: 1rem;
+      background: var(--dark-grey);
+      color: var(--white);
       border-radius: 999px;
       text-transform: uppercase;
-      letter-spacing: 0.16em;
-      font-weight: 700;
+      letter-spacing: 0.12em;
+      font-weight: 600;
+      font-size: 0.8rem;
       border: none;
-      transition: background var(--transition), transform var(--transition);
+      cursor: pointer;
       text-decoration: none;
+      transition: background var(--transition);
     }
 
     .btn-primary:hover {
-      background: var(--gold-light);
-      transform: translateY(-1px);
+      background: #3a3a3a;
     }
 
-    @media (max-width: 840px) {
-      .style-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    }
-
-    @media (max-width: 560px) {
-      body { padding: 16px; }
-      .page-shell { max-width: 100%; }
-      .page-header { padding: 18px 16px; }
-      .page-header-title { font-size: 0.8rem; }
-      .content { padding: 20px 18px 22px; }
-      .style-grid { grid-template-columns: 1fr; }
-      .preview-card { min-height: 260px; }
+    @media (max-width: 600px) {
+      .style-grid { grid-template-columns: repeat(2, 1fr); }
+      .preview-card { min-height: 200px; }
     }
   </style>
 </head>
@@ -294,42 +301,42 @@
     <header class="page-header">
       <a class="back-link" href="feature-summary.php" aria-label="Back">&#8592;</a>
       <div class="page-header-title">CHOOSE YOUR STYLE</div>
-      <div class="logo-mark">CG</div>
+      <div class="logo-mark"><img src="assets/logo.png" alt="CG logo" /></div>
     </header>
     <div class="content">
       <div>
         <div class="section-label">Style</div>
         <div class="style-grid">
           <button class="style-card selected" type="button" data-style="Considered">
-            <div class="style-icon"></div>
-            <div class="style-label selected">Considered</div>
+            <div class="style-icon"><svg viewBox="0 0 100 40"><path d="M20,24 L45,10 L80,24" /></svg></div>
+            <div class="style-label">Considered</div>
           </button>
           <button class="style-card" type="button" data-style="Arch">
-            <div class="style-icon"></div>
+            <div class="style-icon"><svg viewBox="0 0 100 40"><path d="M20,28 Q50,2 80,28" /></svg></div>
             <div class="style-label">Arch</div>
           </button>
           <button class="style-card" type="button" data-style="Straight">
-            <div class="style-icon"></div>
+            <div class="style-icon"><svg viewBox="0 0 100 40"><path d="M20,18 L80,18" /></svg></div>
             <div class="style-label">Straight</div>
           </button>
           <button class="style-card" type="button" data-style="Sharp">
-            <div class="style-icon"></div>
+            <div class="style-icon"><svg viewBox="0 0 100 40"><path d="M20,34 L50,4 L80,34" /></svg></div>
             <div class="style-label">Sharp</div>
           </button>
           <button class="style-card" type="button" data-style="Feathered">
-            <div class="style-icon"></div>
+            <div class="style-icon"><svg viewBox="0 0 100 40"><path d="M20,24 L45,14 L55,28 L80,20" /></svg></div>
             <div class="style-label">Feathered</div>
           </button>
           <button class="style-card" type="button" data-style="Bold">
-            <div class="style-icon"></div>
+            <div class="style-icon"><svg viewBox="0 0 100 40"><path d="M20,22 L80,22" stroke-width="8" /></svg></div>
             <div class="style-label">Bold</div>
           </button>
           <button class="style-card" type="button" data-style="Natural">
-            <div class="style-icon"></div>
+            <div class="style-icon"><svg viewBox="0 0 100 40"><path d="M20,24 Q35,14 50,24 Q65,34 80,24" /></svg></div>
             <div class="style-label">Natural</div>
           </button>
           <button class="style-card" type="button" data-style="Sculpted">
-            <div class="style-icon"></div>
+            <div class="style-icon"><svg viewBox="0 0 100 40"><path d="M20,22 Q50,0 80,22" /></svg></div>
             <div class="style-label">Sculpted</div>
           </button>
         </div>
@@ -338,24 +345,26 @@
       <div>
         <div class="section-label">Colour</div>
         <div class="color-row">
-          <span class="color-swatch" data-color="#efd8bb"></span>
-          <span class="color-swatch" data-color="#b27f50"></span>
-          <span class="color-swatch selected" data-color="#89603f"></span>
-          <span class="color-swatch" data-color="#4f2a18"></span>
-          <span class="color-swatch" data-color="#6e3d24"></span>
-          <span class="color-swatch" data-color="#caa87d"></span>
+          <span class="color-swatch" data-color="#efd8bb" style="background:#efd8bb;"></span>
+          <span class="color-swatch" data-color="#b27f50" style="background:#b27f50;"></span>
+          <span class="color-swatch selected" data-color="#89603f" style="background:#89603f;"></span>
+          <span class="color-swatch" data-color="#4f2a18" style="background:#4f2a18;"></span>
+          <span class="color-swatch" data-color="#6e3d24" style="background:#6e3d24;"></span>
+          <span class="color-swatch" data-color="#caa87d" style="background:#caa87d;"></span>
         </div>
       </div>
 
-      <div class="preview-card">
-        <img class="preview-image" src="https://via.placeholder.com/900x800?text=Preview" alt="Preview image" />
-        <div class="preview-copy"><strong>Considered</strong> · Black</div>
+      <div>
+        <div class="preview-card">
+          <div class="preview-label">PRIVIEW</div>
+          <img class="preview-image" src="assets/profile.png" alt="Preview" />
+          <div class="preview-copy"><strong>Considered</strong> <span>.</span> Black</div>
+        </div>
+        <div class="preview-note">Black - selected</div>
       </div>
 
-      <div class="preview-note">Black - selected</div>
-
       <div class="actions">
-        <a class="btn-primary" href="define-style.php">Preview this look</a>
+        <a class="btn-primary" href="saved-look.php">PREVIEW THIS LOOK</a>
       </div>
     </div>
   </div>
@@ -368,19 +377,20 @@
 
     const colorMap = {
       '#efd8bb': 'Blonde',
-      '#b27f50': 'Brown',
+      '#b27f50': 'Light Brown',
       '#89603f': 'Black',
-      '#4f2a18': 'Dark',
+      '#4f2a18': 'Darkest Brown',
       '#6e3d24': 'Espresso',
-      '#caa87d': 'Warm'
+      '#caa87d': 'Warm Ash'
     };
 
     function updatePreview() {
       const activeStyle = document.querySelector('.style-card.selected')?.dataset.style || 'Considered';
-      const activeColor = document.querySelector('.color-swatch.selected')?.dataset.color || '#89603f';
+      const activeSwatch = document.querySelector('.color-swatch.selected');
+      const activeColor = activeSwatch?.dataset.color || '#89603f';
       const colorLabel = colorMap[activeColor] || 'Black';
 
-      previewCopy.innerHTML = `<strong>${activeStyle}</strong> · ${colorLabel}`;
+      previewCopy.innerHTML = `<strong>${activeStyle}</strong> <span>.</span> ${colorLabel}`;
       previewNote.textContent = `${colorLabel} - selected`;
     }
 
@@ -388,11 +398,8 @@
       card.addEventListener('click', () => {
         styleCards.forEach(item => {
           item.classList.remove('selected');
-          item.querySelector('.style-label').classList.remove('selected');
         });
-
         card.classList.add('selected');
-        card.querySelector('.style-label').classList.add('selected');
         updatePreview();
       });
     });

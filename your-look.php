@@ -10,46 +10,42 @@
       --black: #0a0a0a;
       --white: #f5f0e8;
       --white-dim: rgba(245,240,232,0.6);
-      --white-faint: rgba(245,240,232,0.2);
       --gold: #c9a84c;
       --gold-light: #d4b96a;
-      --border: rgba(201,168,76,0.22);
-      --card: rgba(255,255,255,0.03);
-      --radius: 30px;
-      --transition: 0.25s ease;
+      --dark-grey: #2b2b2b;
+      --card-bg: #1a1a1a;
       --font-display: 'Cormorant Garamond', serif;
       --font-body: 'Montserrat', sans-serif;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { min-height: 100%; }
     body {
       background: var(--black);
       color: var(--white);
       font-family: var(--font-body);
-      line-height: 1.5;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 24px 16px;
+      min-height: 100vh;
+      padding: 20px;
     }
 
     .page {
       width: 100%;
-      max-width: 1100px;
+      max-width: 650px;
+      background: var(--black);
+      border: 1px solid rgba(255,255,255,0.06);
       border-radius: 36px;
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 24px 90px rgba(0,0,0,0.7);
-      backdrop-filter: blur(16px);
-      overflow: hidden;
+      padding: 24px 24px 30px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.7);
     }
 
+    /* Top Bar */
     .topbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 24px 24px 18px;
+      margin-bottom: 30px;
     }
 
     .topbar a,
@@ -57,168 +53,167 @@
       width: 44px;
       height: 44px;
       border-radius: 50%;
-      display: inline-flex;
+      display: flex;
       align-items: center;
       justify-content: center;
       color: var(--gold);
       border: 1px solid var(--gold);
       text-decoration: none;
-      transition: transform var(--transition), background var(--transition);
+      transition: background 0.2s, transform 0.2s;
     }
 
-    .topbar a:hover { background: rgba(201,168,76,0.12); transform: scale(1.05); }
+    .topbar a:hover { background: rgba(201,168,76,0.1); transform: scale(1.05); }
 
-    .topbar .title {
-      flex: 1;
-      text-align: center;
+    .topbar .brand {
       font-family: var(--font-display);
-      font-size: 0.95rem;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--gold);
+      font-weight: 700;
+      font-size: 1.2rem;
     }
 
-    .content {
-      padding: 0 24px 24px;
-    }
-
-    .hero {
+    /* Centered Content */
+    .hero-title {
       font-family: var(--font-display);
       font-style: italic;
-      font-size: clamp(2.2rem, 5vw, 3rem);
-      line-height: 1.05;
-      color: var(--white);
-      margin-bottom: 12px;
+      font-size: 2.6rem;
       text-align: center;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 auto 18px;
+      opacity: 0.5;
     }
 
     .hero-sub {
-      color: var(--gold);
       text-align: center;
-      font-size: 0.95rem;
-      margin-bottom: 22px;
+      color: var(--gold);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      margin-bottom: 24px;
     }
 
-    .placeholder {
-      border-radius: 32px;
-      background: var(--card);
-      border: 1px solid rgba(255,255,255,0.08);
-      min-height: 210px;
-      display: grid;
-      place-items: center;
-      color: var(--white-dim);
-      font-size: 0.95rem;
+    .placeholder-card {
+      background: var(--card-bg);
+      border-radius: 28px;
+      padding: 40px 20px;
+      text-align: center;
+      color: var(--white);
+      font-size: 0.9rem;
       margin-bottom: 18px;
-      position: relative;
-      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.03);
     }
 
-    .placeholder::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top, rgba(201,168,76,0.12), transparent 40%);
-      pointer-events: none;
-    }
-
-    .note {
+    .info-note {
+      text-align: center;
       color: var(--white-dim);
       font-size: 0.9rem;
-      line-height: 1.7;
-      text-align: center;
-      margin-bottom: 28px;
-      padding: 0 14px;
+      line-height: 1.6;
+      margin-bottom: 30px;
     }
 
+    /* Buttons */
     .actions {
-      display: grid;
-      gap: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 24px;
     }
 
     .btn {
-      display: inline-flex;
+      display: flex;
       align-items: center;
       justify-content: center;
       width: 100%;
-      padding: 1rem 1.2rem;
+      padding: 1rem;
       border-radius: 999px;
       font-size: 0.85rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
       font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
       text-decoration: none;
-      transition: transform var(--transition), background var(--transition), border-color var(--transition);
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
     }
 
     .btn-primary {
-      background: var(--gold);
-      color: #0a0a0a;
+      background: var(--dark-grey);
+      color: var(--white);
       border: none;
     }
 
-    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .btn-primary:hover {
+      background: #3a3a3a;
+      transform: translateY(-1px);
+    }
 
-    .btn-secondary {
+    .btn-outline {
       background: transparent;
       border: 1px solid rgba(255,255,255,0.12);
       color: var(--white);
     }
 
-    .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+    .btn-outline:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
 
-    .footer {
+    /* Bottom Links */
+    .bottom-links {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      margin-top: 18px;
-      padding: 0 4px;
+      padding: 0 6px;
       font-size: 0.8rem;
       color: var(--gold);
-      letter-spacing: 0.08em;
+      font-weight: 400;
     }
 
-    .footer a {
+    .bottom-links a {
       color: inherit;
       text-decoration: none;
-      transition: color var(--transition);
+      transition: opacity 0.2s;
     }
 
-    .footer a:hover { color: var(--white); }
+    .bottom-links a:hover {
+      opacity: 0.7;
+    }
 
-    @media (max-width: 520px) {
-      .page { border-radius: 30px; }
-      .topbar { padding: 20px 20px 16px; }
-      .content { padding: 0 20px 20px; }
-      .hero { font-size: 2.2rem; }
+    @media (max-width: 480px) {
+      .page { padding: 18px 16px 24px; }
+      .hero-title { font-size: 2rem; }
+      .placeholder-card { padding: 30px 16px; }
     }
   </style>
 </head>
 <body>
-  <section class="page">
+  <div class="page">
     <div class="topbar">
       <a href="compare-looks.php" aria-label="Back">&#8592;</a>
-      <div class="title">Your look</div>
       <div class="brand"><img src="assets/logo.png" alt="CG logo" /></div>
     </div>
 
-    <div class="content">
-      <h1 class="hero">This is your look.</h1>
-      <div class="hero-sub">Arch brow · Considered · Black</div>
+    <div>
+      <h1 class="hero-title">This is your look.</h1>
+      <div class="divider"></div>
+      <p class="hero-sub">Arch brow · Considered · Black</p>
 
-      <div class="placeholder">Leave As Placeholder.</div>
+      <div class="placeholder-card">Leave As Placeholder.</div>
 
-      <p class="note">Saved looks can be shared with your artist anytime.</p>
+      <p class="info-note">Saved looks can be shared with your artist anytime.</p>
 
       <div class="actions">
-        <a class="btn btn-primary" href="#">Save to my looks</a>
-        <a class="btn btn-secondary" href="#">Shop matching products</a>
+        <a class="btn btn-primary" href="saved-look.php">SAVE TO MY LOOKS</a>
+        <a class="btn btn-outline" href="tracing-guide.php">Shop matching products</a>
       </div>
 
-      <div class="footer">
-        <a href="#">Shop matching products</a>
+      <div class="bottom-links">
+        <a href="tracing-guide.php">Shop matching products</a>
         <a href="index.php">Return to home</a>
       </div>
     </div>
-  </section>
+  </div>
 </body>
 </html>

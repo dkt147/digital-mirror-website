@@ -9,46 +9,44 @@
     :root {
       --black: #0a0a0a;
       --white: #f5f0e8;
-      --white-dim: rgba(245,240,232,0.6);
+      --white-dim: rgba(245,240,232,0.65);
       --gold: #c9a84c;
       --gold-light: #d4b96a;
-      --border: rgba(201,168,76,0.22);
-      --card: rgba(255,255,255,0.03);
-      --radius: 28px;
+      --dark-grey: #2b2b2b;
+      --border: rgba(201,168,76,0.25);
       --transition: 0.25s ease;
       --font-display: 'Cormorant Garamond', serif;
       --font-body: 'Montserrat', sans-serif;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { min-height: 100%; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       background: var(--black);
       color: var(--white);
       font-family: var(--font-body);
-      line-height: 1.5;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 24px 16px;
+      min-height: 100vh;
+      padding: 20px;
     }
 
     .page {
       width: 100%;
       max-width: 520px;
+      background: var(--black);
+      border: 1px solid rgba(255,255,255,0.06);
       border-radius: 36px;
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 24px 90px rgba(0,0,0,0.7);
-      backdrop-filter: blur(16px);
-      overflow: hidden;
+      padding: 24px 24px 30px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.7);
     }
 
+    /* TOP BAR */
     .topbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 24px 24px 18px;
+      margin-bottom: 24px;
     }
 
     .topbar a,
@@ -56,168 +54,189 @@
       width: 44px;
       height: 44px;
       border-radius: 50%;
-      display: inline-flex;
+      display: flex;
       align-items: center;
       justify-content: center;
       color: var(--gold);
       border: 1px solid var(--gold);
       text-decoration: none;
-      transition: transform var(--transition), background var(--transition);
+      transition: background 0.2s;
     }
 
-    .topbar a:hover { background: rgba(201,168,76,0.12); transform: scale(1.05); }
+    .topbar a:hover { background: rgba(201,168,76,0.1); }
+
+    .topbar .brand {
+      border: none;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .topbar .brand img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
 
     .topbar .title {
       flex: 1;
       text-align: center;
-      font-family: var(--font-display);
-      font-size: 0.95rem;
-      letter-spacing: 0.28em;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--gold);
+      font-weight: 600;
     }
 
-    .content {
-      padding: 0 24px 24px;
-    }
-
-    .hero {
-      font-family: var(--font-display);
-      font-style: italic;
-      font-size: clamp(2rem, 4vw, 2.6rem);
-      line-height: 1.1;
-      margin-bottom: 0.75rem;
-      color: var(--white);
-      text-align: center;
-    }
-
-    .hero-sub {
-      color: var(--gold);
-      font-size: 0.95rem;
-      text-align: center;
-      margin-bottom: 1.75rem;
-    }
-
-    .hero-copy {
-      color: var(--white-dim);
-      font-size: 0.95rem;
-      text-align: center;
-      line-height: 1.7;
-      margin-bottom: 2.5rem;
-      padding: 0 4px;
-    }
-
-    .icon-card {
-      margin: 0 24px 28px;
-      border-radius: 32px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      min-height: 260px;
-      display: grid;
-      place-items: center;
+    /* FACE ILLUSTRATION */
+    .illustration-wrapper {
       position: relative;
-      overflow: hidden;
-    }
-
-    .icon-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 50% 10%, rgba(201,168,76,0.12), transparent 40%);
-      pointer-events: none;
-    }
-
-    .face-art {
-      position: relative;
-      width: 138px;
-      height: 220px;
-      border-radius: 68px 68px 84px 84px;
-      border: 1px solid rgba(201,168,76,0.45);
-      display: grid;
-      place-items: center;
-    }
-
-    .face-art::before {
-      content: '';
-      position: absolute;
-      top: 24px;
-      width: 88px;
-      height: 20px;
-      border-radius: 999px;
-      border: 1px solid rgba(201,168,76,0.85);
-    }
-
-    .face-art::after {
-      content: '';
-      position: absolute;
-      bottom: 24px;
-      width: 14px;
-      height: 14px;
-      background: var(--gold);
-      border-radius: 50%;
-      box-shadow: 0 0 18px rgba(201,168,76,0.25);
-    }
-
-    .btn-primary,
-    .btn-link {
-      display: inline-flex;
       width: 100%;
+      margin-bottom: 24px;
+      display: flex;
       justify-content: center;
       align-items: center;
-      padding: 1rem 1.2rem;
-      border-radius: 999px;
-      font-size: 0.92rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
+    }
+
+    .face-svg {
+      width: 150px;
+      height: 240px;
+    }
+
+    /* TEXT CONTENT */
+    .hero-title {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 2.2rem;
+      line-height: 1.05;
+      color: var(--white);
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .hero-desc {
+      color: var(--gold-light);
+      font-size: 0.9rem;
+      text-align: center;
+      line-height: 1.6;
+      margin-bottom: 24px;
+      padding: 0 10px;
+    }
+
+    /* C/M BADGE */
+    .badge-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .cm-badge {
+      display: flex;
+      align-items: center;
+      background: rgba(30,30,30,0.6);
+      backdrop-filter: blur(4px);
+      border-radius: 99px;
+      padding: 4px 6px;
+      gap: 6px;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .cm-badge span {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
       font-weight: 700;
-      text-decoration: none;
-      transition: transform var(--transition), background var(--transition), border-color var(--transition);
+      color: white;
+    }
+
+    .c-badge { background: #e86c3e; }
+    .m-badge { background: #5e7da6; }
+
+    /* BUTTONS */
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 4px;
     }
 
     .btn-primary {
-      background: var(--gold);
-      color: #0a0a0a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding: 1rem;
+      border-radius: 999px;
       border: none;
-      margin-bottom: 16px;
+      background: var(--dark-grey);
+      color: var(--gold);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s;
     }
 
-    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .btn-primary:hover { background: #3a3a3a; }
 
     .btn-link {
+      display: block;
+      text-align: center;
       color: var(--gold);
-      background: transparent;
-      border: none;
-      opacity: 0.9;
+      font-size: 0.8rem;
+      text-decoration: none;
+      transition: opacity 0.2s;
     }
 
-    .btn-link:hover { opacity: 1; }
+    .btn-link:hover { opacity: 0.7; }
 
-    @media (max-width: 520px) {
-      .page { border-radius: 30px; }
-      .topbar { padding: 20px 20px 16px; }
-      .content { padding: 0 20px 20px; }
-      .icon-card { margin: 0 20px 24px; }
+    @media (max-width: 400px) {
+      .page { padding: 16px; }
+      .hero-title { font-size: 1.8rem; }
+      .face-svg { width: 120px; height: 200px; }
     }
   </style>
 </head>
 <body>
-  <section class="page">
+  <div class="page">
     <div class="topbar">
-      <a href="index.php" aria-label="Back">&#8592;</a>
-      <div class="title">Recommendation</div>
-      <div class="brand"><img src="assets/logo.png" alt="CG logo" /></div>
+      <a href="appointment-brief.php">&#8592;</a>
+      <div class="title">RECOMMENDATION</div>
+      <div class="brand">
+        <img src="assets/logo.png" alt="CG logo" />
+      </div>
     </div>
 
-    <div class="icon-card">
-      <div class="face-art"></div>
+    <div class="illustration-wrapper">
+      <svg class="face-svg" viewBox="0 0 150 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Face Outline -->
+        <path d="M75 4C110 4 130 30 130 80C130 130 110 220 75 236C40 220 20 130 20 80C20 30 40 4 75 4Z" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/>
+        <!-- Brow Arches -->
+        <path d="M35 55 Q55 30 75 55" stroke="#c9a84c" stroke-width="1.2" fill="none"/>
+        <path d="M75 55 Q95 30 115 55" stroke="#c9a84c" stroke-width="1.2" fill="none"/>
+        <!-- Eye Dots -->
+        <circle cx="50" cy="75" r="4" stroke="#c9a84c" stroke-width="0.8" fill="none" opacity="0.4"/>
+        <circle cx="100" cy="75" r="4" stroke="#c9a84c" stroke-width="0.8" fill="none" opacity="0.4"/>
+        <!-- Chin Dot -->
+        <circle cx="75" cy="215" r="3" fill="#c9a84c" opacity="0.8"/>
+        <!-- Dashed vertical center line -->
+        <line x1="75" y1="90" x2="75" y2="190" stroke="#c9a84c" stroke-width="0.5" stroke-dasharray="4 4" opacity="0.3"/>
+        <!-- Dashed horizontal line -->
+        <line x1="50" y1="130" x2="100" y2="130" stroke="#c9a84c" stroke-width="0.5" stroke-dasharray="4 4" opacity="0.3"/>
+      </svg>
     </div>
 
-    <div class="content">
-      <h1 class="hero">Let your features guide the choice.</h1>
-      <p class="hero-copy">We’ll read your face shape and identify the styles built for it. The result is specific to you.</p>
-      <a class="btn-primary" href="tone-recommendation.php">Analyse my face</a>
-      <a class="btn-link" href="choose-style.php">Browse all styles instead</a>
+    <h1 class="hero-title">Let your features guide the choice.</h1>
+    <p class="hero-desc">We'll read your face shape and identify the styles built for it. The result is specific to you.</p>
+
+    <div class="actions">
+      <a class="btn-primary" href="#">ANALYSE MY FACE</a>
+      <a class="btn-link" href="#">Browse all styles instead</a>
     </div>
-  </section>
+  </div>
 </body>
 </html>

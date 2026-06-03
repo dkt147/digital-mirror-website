@@ -3,182 +3,249 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Saved — Royals Arch Brow</title>
+  <title>Considered Style — Royals Arch Brow</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
       --black: #0a0a0a;
+      --dark-grey-btn: #2b2b2b;
       --white: #f5f0e8;
       --white-dim: rgba(245,240,232,0.65);
       --gold: #c9a84c;
-      --gold-light: #d4b96a;
-      --border: rgba(201,168,76,0.2);
-      --card: rgba(255,255,255,0.03);
-      --radius: 30px;
-      --transition: 0.25s ease;
+      --border-light: rgba(255,255,255,0.08);
       --font-display: 'Cormorant Garamond', serif;
       --font-body: 'Montserrat', sans-serif;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { min-height: 100%; }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       background: var(--black);
       color: var(--white);
       font-family: var(--font-body);
-      line-height: 1.5;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 24px 16px;
+      min-height: 100vh;
+      padding: 20px;
     }
-    .page {
+
+    .page-container {
       width: 100%;
-      max-width: 1100px;
-      border-radius: 36px;
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 24px 90px rgba(0,0,0,0.7);
-      backdrop-filter: blur(16px);
+      max-width: 760px;
+      background: rgba(0,0,0,0.8);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 40px;
       overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+      backdrop-filter: blur(4px);
+      padding: 24px 28px 30px;
     }
-    .topbar {
+
+    /* TOP BAR */
+    .top-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 24px 24px 18px;
+      margin-bottom: 24px;
     }
-    .topbar a,
-    .topbar .brand {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
+
+    .back-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      color: var(--gold);
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
       border: 1px solid var(--gold);
+      color: var(--gold);
       text-decoration: none;
-      transition: transform var(--transition), background var(--transition);
+      font-size: 1.2rem;
+      transition: background 0.2s;
     }
-    .topbar a:hover { background: rgba(201,168,76,0.12); transform: scale(1.05); }
-    .topbar .title {
-      flex: 1;
-      text-align: center;
-      font-family: var(--font-display);
-      font-size: 0.95rem;
-      letter-spacing: 0.28em;
+
+    .back-btn:hover {
+      background: rgba(201,168,76,0.1);
+    }
+
+    .top-title {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--gold);
+      font-weight: 600;
     }
-    .content { padding: 0 24px 24px; }
-    .icon-card {
-      margin: 0 24px 18px;
-      border-radius: 28px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      min-height: 260px;
-      display: grid;
-      place-items: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .icon-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at center, rgba(201,168,76,0.1), transparent 45%);
-      pointer-events: none;
-    }
-    .checkmark {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      background: rgba(201,168,76,0.15);
-      border: 1px solid rgba(201,168,76,0.35);
-      display: grid;
-      place-items: center;
-      position: relative;
-    }
-    .checkmark::after {
-      content: '\2713';
+
+    .brand-logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
       color: var(--gold);
-      font-size: 2rem;
+      font-family: var(--font-display);
       font-weight: 700;
+      font-size: 1.4rem;
+      letter-spacing: 0.02em;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 50%;
+      background: radial-gradient(circle at top left, rgba(201,168,76,0.1), transparent 40%);
     }
-    .headline {
+
+    /* HERO CARD */
+    .hero-card {
+      width: 100%;
+      background: rgba(255,255,255,0.02);
+      border-radius: 34px;
+      min-height: 240px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border-light);
+      margin-bottom: 26px;
+      position: relative;
+    }
+
+    .placeholder-text {
+      color: var(--white);
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 0.9rem;
+      opacity: 0.6;
+    }
+
+    /* TYPOGRAPHY */
+    .headline-large {
       font-family: var(--font-display);
       font-style: italic;
-      font-size: clamp(2rem, 4vw, 2.6rem);
+      font-size: clamp(2rem, 5vw, 2.8rem);
       line-height: 1.05;
-      color: var(--white);
-      text-align: center;
       margin-bottom: 10px;
+      color: var(--white);
     }
-    .subtitle {
+
+    .style-meta {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--gold);
+      font-weight: 400;
+      margin-bottom: 12px;
+    }
+
+    .style-desc {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
       color: var(--white-dim);
-      font-size: 0.95rem;
-      text-align: center;
-      line-height: 1.7;
-      margin-bottom: 28px;
-      padding: 0 16px;
+      line-height: 1.6;
+      max-width: 90%;
+      margin-bottom: 20px;
     }
-    .actions { display: grid; gap: 12px; }
-    .btn {
-      display: inline-flex;
+
+    .try-note {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      color: var(--white-dim);
+      font-style: italic;
+      margin-bottom: 30px;
+    }
+
+    /* BUTTONS */
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .btn-primary {
+      display: flex;
       align-items: center;
       justify-content: center;
       width: 100%;
-      padding: 1rem 1.2rem;
-      border-radius: 999px;
-      font-size: 0.85rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      font-weight: 700;
-      text-decoration: none;
-      transition: transform var(--transition), background var(--transition), border-color var(--transition);
-    }
-    .btn-primary {
-      background: var(--gold);
-      color: #0a0a0a;
-      border: none;
-    }
-    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
-    .btn-secondary {
-      background: transparent;
-      border: 1px solid rgba(255,255,255,0.12);
+      padding: 1rem;
+      background: var(--dark-grey-btn);
       color: var(--white);
+      border: none;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s;
     }
-    .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
-    .row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 12px; }
-    @media (max-width: 520px) {
-      .page { border-radius: 30px; }
-      .topbar { padding: 20px 20px 16px; }
-      .content { padding: 0 20px 20px; }
+
+    .btn-primary:hover {
+      background: #3a3a3a;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .btn-secondary {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 1rem;
+      background: transparent;
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .logo-mark img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    @media (max-width: 480px) {
+      .page-container { padding: 20px 16px 22px; }
       .row { grid-template-columns: 1fr; }
+      .style-desc { max-width: 100%; }
     }
   </style>
 </head>
 <body>
-  <section class="page">
-    <div class="topbar">
-      <a href="guide-complete.php" aria-label="Back">&#8592;</a>
-      <div class="title">Saved</div>
-      <div class="brand"><img src="assets/logo.png" alt="CG logo" /></div>
+  <div class="page-container">
+    <header class="top-bar">
+      <a class="back-btn" href="choose-style.php" aria-label="Back">&#8592;</a>
+      <span class="top-title">CONSIDERED STYLE</span>
+      <div class="logo-mark"><img src="assets/logo.png" alt="CG logo" /></div>
+    </header>
+
+    <div class="hero-card">
+      <span class="placeholder-text">Leave As Placeholder.</span>
     </div>
-    <div class="icon-card">
-      <div class="checkmark"></div>
-    </div>
-    <div class="content">
-      <h1 class="headline">Saved.</h1>
-      <p class="subtitle">Bring this to your next appointment. Your artist has exactly what they need. Every detail of your ideal shape, preserved.</p>
+
+    <main>
+      <h1 class="headline-large">Notice what the arch does to your eyes.</h1>
+      <div class="style-meta">Considered brow · Black</div>
+      <p class="style-desc">The arch creates elegant lift and frames the upper face with precision.</p>
+      <p class="try-note">Try As Many Styles As You Like.</p>
+
       <div class="actions">
-        <a class="btn btn-primary" href="appointment-brief.php">View in my looks</a>
+        <a class="btn-primary" href="define-style.php">SAVE THIS LOOK</a>
         <div class="row">
-          <a class="btn btn-secondary" href="#">Share now</a>
-          <a class="btn btn-secondary" href="index.php">Return home</a>
+          <a class="btn-secondary" href="choose-style.php">TRY ANOTHER</a>
+          <a class="btn-secondary" href="manual-edit.php">EDIT MANUALLY</a>
         </div>
       </div>
-    </div>
-  </section>
+    </main>
+  </div>
 </body>
 </html>

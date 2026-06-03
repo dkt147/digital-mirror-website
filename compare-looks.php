@@ -1,282 +1,310 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Compare Looks — Royals Arch Brow</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --black: #050505;
-      --white: #f5f0e8;
-      --white-dim: rgba(245,240,232,0.62);
-      --gold: #c9a84c;
-      --gold-light: #d4b96a;
-      --border: rgba(255,255,255,0.12);
-      --card-bg: rgba(255,255,255,0.03);
-      --radius: 28px;
-      --transition: 0.25s ease;
-      --font-display: 'Cormorant Garamond', serif;
-      --font-body: 'Montserrat', sans-serif;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { min-height: 100%; }
-    body {
-      background: radial-gradient(circle at top, rgba(201,168,76,0.08), transparent 20%), var(--black);
-      color: var(--white);
-      font-family: var(--font-body);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px 16px;
-    }
-
-    .page {
-      width: 100%;
-      max-width: 1100px;
-      border-radius: 34px;
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 24px 90px rgba(0,0,0,0.65);
-      overflow: hidden;
-    }
-
-    .header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 22px 22px 12px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.02);
-    }
-
-    .back-btn,
-    .brand {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--gold);
-      border: 1px solid var(--gold);
-      text-decoration: none;
-      transition: transform var(--transition), background var(--transition);
-    }
-
-    .back-btn:hover { transform: scale(1.05); background: rgba(201,168,76,0.12); }
-
-    .heading {
-      flex: 1;
-      font-family: var(--font-display);
-      font-size: 1.6rem;
-      line-height: 1.1;
-      color: var(--white);
-      text-align: center;
-      letter-spacing: 0.01em;
-    }
-
-    .content {
-      padding: 0 22px 26px;
-    }
-
-    .subheading {
-      color: var(--white-dim);
-      font-size: 0.95rem;
-      line-height: 1.7;
-      margin: 24px 0 18px;
-      text-align: left;
-    }
-
-    .option-list {
-      display: grid;
-      gap: 14px;
-      margin-bottom: 22px;
-    }
-
-    .option {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 16px;
-      padding: 20px 18px;
-      border-radius: 24px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: var(--card-bg);
-      transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
-      cursor: pointer;
-    }
-
-    .option.selected {
-      border-color: var(--gold);
-      background: rgba(201,168,76,0.12);
-      box-shadow: 0 18px 30px rgba(201,168,76,0.16);
-    }
-
-    .option-label {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .option-title {
-      font-family: var(--font-display);
-      font-size: 1.35rem;
-      line-height: 1.05;
-      color: var(--white);
-    }
-
-    .option-copy {
-      color: var(--white-dim);
-      font-size: 0.94rem;
-      line-height: 1.6;
-    }
-
-    .radio {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.3);
-      position: relative;
-      align-self: center;
-      flex-shrink: 0;
-    }
-
-    .radio::after {
-      content: '';
-      position: absolute;
-      inset: 5px;
-      border-radius: 50%;
-      background: var(--gold);
-      opacity: 0;
-      transition: opacity var(--transition);
-    }
-
-    .option.selected .radio::after { opacity: 1; }
-
-    .status {
-      color: var(--gold);
-      font-size: 0.85rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 18px;
-    }
-
-    .btn {
-      display: inline-flex;
-      width: 100%;
-      padding: 1rem 1.2rem;
-      border-radius: 999px;
-      border: none;
-      background: rgba(255,255,255,0.08);
-      color: var(--white);
-      font-size: 0.85rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      font-weight: 700;
-      justify-content: center;
-      text-decoration: none;
-      transition: transform var(--transition), background var(--transition), opacity var(--transition);
-    }
-
-    .btn:hover:not(.disabled) { background: rgba(255,255,255,0.15); transform: translateY(-1px); }
-    .btn.disabled { opacity: 0.65; cursor: not-allowed; }
-
-    @media (max-width: 520px) {
-      .page { max-width: 100%; }
-      .header { padding: 18px 18px 10px; }
-      .heading { font-size: 1.35rem; }
-      .content { padding: 0 18px 22px; }
-      .option { padding: 18px 16px; }
-      .option-title { font-size: 1.2rem; }
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Compare Looks — Royals Arch Brow</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --white: #f5f0e8;
+            --gold: #c9a84c;
+            --dark-grey: #2b2b2b;
+            --font-display: 'Cormorant Garamond', serif;
+            --font-body: 'Montserrat', sans-serif;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--black);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .screen {
+            width: 100%;
+            max-width: 700px;
+            background: var(--black);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 36px;
+            padding: 24px 24px 28px;
+            box-shadow: 0 24px 90px rgba(0,0,0,0.7);
+        }
+        .top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+        .top-bar a {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            font-size: 1.2rem;
+            transition: background 0.2s;
+        }
+        .top-bar a:hover { background: rgba(201,168,76,0.1); }
+        .top-title {
+            flex: 1;
+            text-align: center;
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            font-weight: 600;
+        }
+        .logo-mark {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+        .logo-mark img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .content { padding: 0 0 0 0; } /* Adjusted to match the container padding */
+        
+        .main-title {
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: 2.6rem;
+            color: var(--white);
+            margin-bottom: 0.25rem;
+        }
+        .sub-title {
+            font-size: 0.95rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 24px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+        .option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 20px;
+            border-radius: 16px;
+            background-color: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .option.selected {
+            background-color: rgba(201,168,76,0.12);
+            border-color: var(--gold);
+            box-shadow: 0 0 0 1px var(--gold);
+        }
+        .option-left {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+        .brow-icon {
+            width: 60px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .brow-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: none;
+            stroke: var(--white);
+            stroke-width: 2.5;
+            stroke-linecap: round;
+        }
+        .option.selected .brow-icon svg {
+            stroke: var(--white);
+        }
+        .option-title {
+            font-family: var(--font-display);
+            font-size: 20px;
+            color: var(--white);
+        }
+        .option.selected .option-title {
+            color: var(--white);
+        }
+        .radio {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .option.selected .radio {
+            border-color: var(--gold);
+        }
+        .radio::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--gold);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .option.selected .radio::after {
+            opacity: 1;
+        }
+        .status-text {
+            color: var(--gold);
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 18px;
+        }
+        .btn-action {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            border-radius: 999px;
+            border: none;
+            background: var(--dark-grey);
+            color: var(--white);
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            text-align: center;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-decoration: none;
+        }
+        .btn-action:hover:not(.disabled) {
+            background: #3a3a3a;
+        }
+        .btn-action.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+        @media (max-width: 400px) {
+            .screen { padding: 16px; }
+            .main-title { font-size: 2rem; }
+            .option { padding: 14px 16px; }
+            .brow-icon { width: 48px; height: 24px; }
+            .option-title { font-size: 18px; }
+        }
+    </style>
 </head>
 <body>
-  <article class="page">
-    <header class="header">
-      <a class="back-btn" href="preview-look.php" aria-label="Back">&#8592;</a>
-      <div class="heading">Two looks worth comparing.</div>
-      <div class="brand"><img src="assets/logo.png" alt="CG logo" /></div>
-    </header>
+    <div class="screen">
+        <div class="top-bar">
+            <a href="deliberate.php">&#8592;</a>
+            <div class="top-title">COMPARE</div>
+            <div class="logo-mark"><img src="assets/logo.png" alt="CG logo" /></div>
+        </div>
 
-    <div class="content">
-      <p class="subheading">Select the two you’d like side by side.</p>
+        <div class="content">
+            <h1 class="main-title">Two looks worth comparing.</h1>
+            <p class="sub-title">Select the two you'd like side by side.</p>
 
-      <div class="option-list">
-        <section class="option" data-name="Considered">
-          <div class="option-label">
-            <div class="option-title">Considered</div>
-            <div class="option-copy">A refined everyday shape with quiet polish.</div>
-          </div>
-          <div class="radio"></div>
-        </section>
+            <div class="options">
+                <!-- Considered -->
+                <div class="option" data-name="Considered">
+                    <div class="option-left">
+                        <div class="brow-icon">
+                            <svg viewBox="0 0 80 30">
+                                <path d="M8,20 Q20,4 40,15 Q60,26 72,20" />
+                            </svg>
+                        </div>
+                        <div class="option-title">Considered</div>
+                    </div>
+                    <div class="radio"></div>
+                </div>
 
-        <section class="option selected" data-name="Arch">
-          <div class="option-label">
-            <div class="option-title">Arch</div>
-            <div class="option-copy">A lifted structure with bright, crisp definition.</div>
-          </div>
-          <div class="radio"></div>
-        </section>
+                <!-- Arch (Selected) -->
+                <div class="option selected" data-name="Arch">
+                    <div class="option-left">
+                        <div class="brow-icon">
+                            <svg viewBox="0 0 80 30">
+                                <path d="M8,24 Q20,0 40,12 Q60,24 72,12" />
+                            </svg>
+                        </div>
+                        <div class="option-title">Arch</div>
+                    </div>
+                    <div class="radio"></div>
+                </div>
 
-        <section class="option" data-name="Understated">
-          <div class="option-label">
-            <div class="option-title">Understated</div>
-            <div class="option-copy">Soft, subtle shape with natural ease.</div>
-          </div>
-          <div class="radio"></div>
-        </section>
-      </div>
+                <!-- Understated -->
+                <div class="option" data-name="Understated">
+                    <div class="option-left">
+                        <div class="brow-icon">
+                            <svg viewBox="0 0 80 30">
+                                <path d="M8,16 Q20,8 40,16 Q60,24 72,16" />
+                            </svg>
+                        </div>
+                        <div class="option-title">Understated</div>
+                    </div>
+                    <div class="radio"></div>
+                </div>
+            </div>
 
-      <div class="status">1 of 2 chosen</div>
-      <a class="btn disabled" href="#">Select one more to compare</a>
+            <div class="status-text">1 of 2 Chosen</div>
+
+            <a class="btn-action disabled" href="your-look.php">SELECT ONE MORE TO COMPARE</a>
+        </div>
     </div>
-  </article>
 
-  <script>
-    const options = document.querySelectorAll('.option');
-    const status = document.querySelector('.status');
-    const actionButton = document.querySelector('.btn');
-    const maxSelected = 2;
+    <script>
+        const options = document.querySelectorAll('.option');
+        const statusText = document.querySelector('.status-text');
+        const btnAction = document.querySelector('.btn-action');
+        const maxSelected = 2;
 
-    function updateState() {
-      const selected = document.querySelectorAll('.option.selected');
-      const count = selected.length;
-      status.textContent = `${count} of ${maxSelected} chosen`;
+        function updateUI() {
+            const selected = document.querySelectorAll('.option.selected');
+            const count = selected.length;
+            statusText.textContent = `${count} of ${maxSelected} Chosen`;
 
-      if (count < maxSelected) {
-        actionButton.classList.add('disabled');
-        actionButton.setAttribute('aria-disabled', 'true');
-        actionButton.textContent = `Select ${maxSelected - count} more to compare`;
-        actionButton.href = '#';
-      } else {
-        actionButton.classList.remove('disabled');
-        actionButton.removeAttribute('aria-disabled');
-        actionButton.textContent = 'Compare these looks';
-        actionButton.href = 'your-look.php';
-      }
-    }
-
-    options.forEach(option => {
-      option.addEventListener('click', () => {
-        if (option.classList.contains('selected')) {
-          option.classList.remove('selected');
-        } else if (document.querySelectorAll('.option.selected').length < maxSelected) {
-          option.classList.add('selected');
+            if (count < maxSelected) {
+                btnAction.classList.add('disabled');
+                btnAction.textContent = `SELECT ${maxSelected - count} MORE TO COMPARE`;
+                btnAction.href = '#';
+            } else {
+                btnAction.classList.remove('disabled');
+                btnAction.textContent = 'COMPARE THESE LOOKS';
+                btnAction.href = 'your-look.php';
+            }
         }
-        updateState();
-      });
-    });
 
-    actionButton.addEventListener('click', (event) => {
-      if (actionButton.classList.contains('disabled')) {
-        event.preventDefault();
-      }
-    });
+        options.forEach(opt => {
+            opt.addEventListener('click', function() {
+                if (this.classList.contains('selected')) {
+                    this.classList.remove('selected');
+                } else if (document.querySelectorAll('.option.selected').length < maxSelected) {
+                    this.classList.add('selected');
+                }
+                updateUI();
+            });
+        });
 
-    updateState();
-  </script>
+        updateUI();
+    </script>
 </body>
 </html>
