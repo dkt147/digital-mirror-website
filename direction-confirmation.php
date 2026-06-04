@@ -3,115 +3,194 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Direction — Arch</title>
+  <title>Direction — Royals Arch Brow</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
 
     :root {
+      --black: #0a0a08;
+      --dark: #111111;
+      --dark-card: #1a1a0f;
+      --dark-input: #1c1c15;
       --gold: #c9a84c;
       --gold-light: #d4b96a;
       --gold-dark: #8a6f2e;
-      --black: #0a0a0a;
+      --gold-muted: rgba(201, 168, 76, 0.12);
       --white: #f5f0e8;
-      --white-dim: rgba(245, 240, 232, 0.65);
-      --border: rgba(201, 168, 76, 0.25);
-      --btn-dark: #232323;
-      --radius-pill: 50px;
-      --transition: 0.25s ease;
+      --white-dim: rgba(245, 240, 232, 0.55);
+      --white-faint: rgba(245, 240, 232, 0.15);
+      --border: rgba(201, 168, 76, 0.18);
+      --border-hover: rgba(201, 168, 76, 0.45);
       --font-display: 'Cormorant Garamond', serif;
       --font-body: 'Montserrat', sans-serif;
+      --radius: 14px;
+      --radius-sm: 10px;
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
     body {
       background: var(--black);
       color: var(--white);
       font-family: var(--font-body);
       font-weight: 300;
+      line-height: 1.6;
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px 16px;
-      background-image: radial-gradient(ellipse at 50% 20%, rgba(201, 168, 76, 0.03) 0%, transparent 70%);
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    button {
+      cursor: pointer;
+      border: none;
+      outline: none;
+      font-family: var(--font-body);
+      background: none;
     }
 
-    .page {
-      width: 100%;
-      max-width: 560px;
-      background: rgba(255, 255, 255, 0.015);
-      border: 1px solid var(--border);
-      border-radius: 48px;
-      padding: 32px 28px 36px;
-      backdrop-filter: blur(4px);
-      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.8);
-      position: relative;
-    }
-
-    /* ── Top bar ── */
-    .top-bar {
+    /* ====== NAVBAR ====== */
+    .navbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 4px;
-      padding: 0 4px;
+      padding: 1rem 2.5rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(10, 10, 8, 0.97);
+      backdrop-filter: blur(20px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .navbar-left { display: flex; align-items: center; gap: 1rem; }
+    .nav-avatar {
+      width: 42px; height: 42px; border-radius: 50%; overflow: hidden;
+      border: 1.5px solid var(--gold-dark); flex-shrink: 0;
+    }
+    .nav-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .navbar-nav {
+      display: flex; align-items: center; gap: 2.5rem; list-style: none;
+      position: absolute; left: 50%; transform: translateX(-50%);
+    }
+    .navbar-nav a {
+      font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--white-dim); transition: color var(--transition); font-weight: 400;
+    }
+    .navbar-nav a:hover, .navbar-nav a.active { color: var(--gold); }
+
+    .btn-book {
+      padding: 0.55rem 1.5rem; font-size: 0.65rem; letter-spacing: 0.12em;
+      text-transform: uppercase; border-radius: 50px; border: 1px solid var(--border);
+      color: var(--white-dim); transition: all var(--transition);
+    }
+    .btn-book:hover { border-color: var(--gold); color: var(--gold); }
+
+    .nav-emblem {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #2a2010, #1a1408);
+      border: 1.5px solid var(--gold-dark); display: flex; align-items: center;
+      justify-content: center; flex-shrink: 0; overflow: hidden;
+    }
+    .nav-emblem img { width: 26px; height: 26px; object-fit: contain; }
+
+    .nav-gold-rule {
+      height: 1px; background: linear-gradient(to right, transparent 0%, var(--gold-dark) 30%, var(--gold-dark) 70%, transparent 100%);
+      opacity: 0.5;
+    }
+
+    /* ====== PAGE TOPBAR (Back Arrow + Title + Logo) ====== */
+    .page-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      margin-bottom: 1.5rem;
     }
 
     .back-btn {
-      width: 48px;
-      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       border: 1px solid var(--gold);
-      background: transparent;
       color: var(--gold);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
+      text-decoration: none;
       transition: all var(--transition);
+      background: transparent;
       flex-shrink: 0;
     }
+
     .back-btn:hover {
-      background: rgba(201, 168, 76, 0.08);
-      transform: scale(1.02);
-    }
-    .back-btn svg {
-      width: 22px;
-      height: 22px;
-      stroke: currentColor;
-      stroke-width: 2;
-      fill: none;
+      background: rgba(201,168,76,0.12);
+      transform: scale(1.05);
     }
 
-    .logo-center {
+    .page-title-center {
+      flex: 1;
+      text-align: center;
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      padding: 0 1rem;
+    }
+
+    .page-logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--gold);
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
       flex-shrink: 0;
     }
-    .logo-center img {
-      width: 48px;
-      height: 48px;
+
+    .page-logo img {
+      width: 24px;
+      height: 24px;
       object-fit: contain;
-      display: block;
     }
 
-    .placeholder {
-      width: 48px;
-      height: 48px;
-      visibility: hidden;
-      flex-shrink: 0;
+    /* ====== LAYOUT ====== */
+    .main {
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 0 3rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
     }
 
-    /* ── Graphic: Arch with C badge ── */
+    /* ====== HEADER ====== */
+    .page-label {
+      font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gold); font-weight: 500; margin-bottom: 0.2rem;
+    }
+    .page-title {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 2rem;
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.05;
+    }
+
+    /* ====== GRAPHIC ====== */
     .graphic-wrap {
       display: flex;
       justify-content: center;
-      margin: 12px 0 20px;
+      margin: 0.5rem 0 1rem;
       position: relative;
     }
 
@@ -142,7 +221,7 @@
       dominant-baseline: central;
     }
 
-    /* ── Gold divider ── */
+    /* ====== DIVIDER ====== */
     .gold-divider {
       width: 80px;
       height: 1px;
@@ -150,7 +229,7 @@
       margin: 0 auto 18px;
     }
 
-    /* ── Heading & Sub ── */
+    /* ====== CONTENT ====== */
     .heading {
       font-family: var(--font-display);
       font-style: italic;
@@ -174,7 +253,7 @@
       max-width: 280px;
     }
 
-    /* ── Bullet list ── */
+    /* ====== BULLET LIST ====== */
     .list-group {
       display: flex;
       flex-direction: column;
@@ -205,7 +284,7 @@
       font-weight: 300;
     }
 
-    /* ── Small gold divider near button ── */
+    /* ====== SMALL DIVIDER ====== */
     .divider-small {
       width: 60px;
       height: 1px;
@@ -213,32 +292,32 @@
       margin: 0 auto 32px;
     }
 
-    /* ── Buttons ── */
-    .btn-confirm {
-      display: block;
-      width: 100%;
-      padding: 1.1rem;
-      border-radius: var(--radius-pill);
-      border: 1px solid var(--border);
-      background: var(--btn-dark);
-      color: var(--white);
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all var(--transition);
-      font-family: var(--font-body);
-      text-decoration: none;
-      text-align: center;
-      margin-bottom: 16px;
+    /* ====== BUTTONS ====== */
+    .actions {
+      display: grid;
+      gap: 0.75rem;
     }
-    .btn-confirm:hover {
+
+    .btn-primary {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 0.85rem 1.2rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--white);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      transition: all var(--transition);
+    }
+
+    .btn-primary:hover {
       border-color: var(--gold);
-      color: var(--gold-light);
-      background: rgba(35, 35, 35, 0.9);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(201, 168, 76, 0.15);
+      color: var(--gold);
     }
 
     .btn-link {
@@ -250,101 +329,111 @@
       transition: opacity var(--transition);
       font-weight: 300;
     }
+
     .btn-link:hover {
       opacity: 0.7;
     }
 
-    /* ── Responsive ── */
-    @media (max-width: 540px) {
-      .page { padding: 24px 20px 28px; border-radius: 36px; }
-      .heading { font-size: 1.8rem; }
-      .logo-center img { width: 40px; height: 40px; }
-      .back-btn, .placeholder { width: 40px; height: 40px; }
-      .arch-svg { width: 130px; height: 110px; }
-      .badge-text { font-size: 26px; }
+    /* ====== ANIMATIONS ====== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
     }
+    .fade-1 { animation: fadeUp 0.55s ease 0.05s both; }
+    .fade-2 { animation: fadeUp 0.55s ease 0.15s both; }
+    .fade-3 { animation: fadeUp 0.55s ease 0.25s both; }
+    .fade-4 { animation: fadeUp 0.55s ease 0.35s both; }
+    .fade-5 { animation: fadeUp 0.55s ease 0.45s both; }
 
-    @media (max-width: 420px) {
-      .page { padding: 20px 14px 24px; border-radius: 28px; }
-      .heading { font-size: 1.5rem; }
-      .arch-svg { width: 110px; height: 90px; }
-      .badge-text { font-size: 22px; }
-      .logo-center img { width: 36px; height: 36px; }
-      .back-btn, .placeholder { width: 36px; height: 36px; }
-      .list-text { font-size: 0.8rem; }
+    /* ====== RESPONSIVE ====== */
+    @media (max-width: 900px) {
+      .main { padding: 0 1.25rem 1.5rem; }
+      .navbar { padding: 0.875rem 1.25rem; }
+      .navbar-nav { display: none; }
+      .page-title { font-size: 1.6rem; }
+      .heading { font-size: 1.8rem; }
+      .arch-svg { width: 130px; height: 110px; }
+      .back-btn { width: 38px; height: 38px; }
+      .page-logo { width: 38px; height: 38px; }
     }
   </style>
 </head>
 <body>
 
-  <div class="page">
+  <!-- NAVBAR -->
+  <?php include 'includes/navbar.php'; ?>
 
-    <!-- TOP BAR -->
-    <div class="top-bar">
-      <!-- Back Button (Left) -->
-      <button class="back-btn" onclick="window.location.href='tone-recommendation.php'">
-        <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
-      
-      <!-- Logo (Center) -->
-      <div class="logo-center">
-        <img src="assets/logo.png" alt="Arch Logo" />
+  <!-- Gold rule -->
+  <div class="nav-gold-rule"></div>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <!-- PAGE TOPBAR (Back Arrow + Title + Logo) -->
+    <div class="page-topbar fade-1">
+      <a href="javascript:history.back()" class="back-btn" aria-label="Go back">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+      </a>
+      <div class="page-title-center">Direction</div>
+      <div class="page-logo">
+        <img src="assets/logo.png" alt="CG" />
       </div>
-
-      <!-- Placeholder for symmetry (Right) -->
-      <div class="placeholder"></div>
     </div>
 
-    <!-- GRAPHIC: Arch + Badge -->
-    <div class="graphic-wrap">
+    <!-- CONTENT HEADER -->
+    <div class="fade-2">
+      <div class="page-label">Style Direction</div>
+      <div class="page-title">Refined & natural</div>
+    </div>
+
+    <!-- GRAPHIC -->
+    <div class="graphic-wrap fade-3">
       <svg class="arch-svg" viewBox="0 0 160 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-        
-        <!-- Left Arch -->
         <path d="M15 60 Q40 30, 75 40" class="arch-path" />
-        <!-- Right Arch -->
         <path d="M85 40 Q130 30, 145 60" class="arch-path" />
       </svg>
     </div>
 
-    <!-- GOLD DIVIDER -->
+    <!-- DIVIDER -->
     <div class="gold-divider"></div>
 
-    <!-- HEADING & SUB -->
-    <h1 class="heading">Refined & natural</h1>
-    <p class="sub-heading">
-      This shapes your recommendations<br />
-      from the start.
-    </p>
+    <!-- CONTENT -->
+    <div class="fade-4">
+      <h1 class="heading">Refined & natural</h1>
+      <p class="sub-heading">
+        This shapes your recommendations<br />
+        from the start.
+      </p>
 
-    <!-- BULLET LIST -->
-    <div class="list-group">
-      <div class="list-item">
-        <div class="bullet"></div>
-        <span class="list-text">Soft arch styles presented first</span>
-      </div>
-      <div class="list-item">
-        <div class="bullet"></div>
-        <span class="list-text">Colours that enhance rather than define</span>
-      </div>
-      <div class="list-item">
-        <div class="bullet"></div>
-        <span class="list-text">Understated intensity recommended by default</span>
+      <div class="list-group">
+        <div class="list-item">
+          <div class="bullet"></div>
+          <span class="list-text">Soft arch styles presented first</span>
+        </div>
+        <div class="list-item">
+          <div class="bullet"></div>
+          <span class="list-text">Colours that enhance rather than define</span>
+        </div>
+        <div class="list-item">
+          <div class="bullet"></div>
+          <span class="list-text">Understated intensity recommended by default</span>
+        </div>
       </div>
     </div>
 
-    <!-- SMALL DIVIDER -->
+    <!-- DIVIDER -->
     <div class="divider-small"></div>
 
-    <!-- BUTTONS -->
-    <a href="direction-confirmation.php" class="btn-confirm">
-      This is my direction →
-    </a>
-    
-    <a href="tone-recommendation.php" class="btn-link">
-      Choose a different direction
-    </a>
+    <!-- ACTIONS -->
+    <div class="actions fade-5">
+      <a href="direction-confirmation.php" class="btn-primary">This is my direction →</a>
+      <a href="tone-recommendation.php" class="btn-link">Choose a different direction</a>
+    </div>
 
-  </div>
+  </main>
 
 </body>
 </html>

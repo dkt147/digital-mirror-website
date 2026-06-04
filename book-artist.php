@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Appointment Brief — Royals Arch Brow</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Book with an artist — Royals Arch Brow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     :root {
       --black: #0a0a08;
       --dark: #111111;
@@ -180,98 +187,175 @@
       line-height: 1.05;
     }
 
-    /* ====== BRIEF CARD ====== */
-    .brief-card {
-      position: relative;
-      background: #161610;
-      border: 1px solid var(--gold);
+    /* ====== STUDIO CARDS ====== */
+    .studio-card {
+      padding: 16px 18px;
       border-radius: var(--radius);
-      padding: 1.75rem 1.5rem;
-    }
-
-    .brief-heading {
+      background: #161610;
+      border: 1px solid var(--border);
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      color: var(--gold);
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-      font-weight: 500;
+      align-items: center;
+      gap: 16px;
+      cursor: pointer;
+      transition: all var(--transition);
+      margin-bottom: 12px;
     }
 
-    .field-list {
+    .studio-card:hover {
+      border-color: var(--gold-dark);
+      transform: translateY(-1px);
+    }
+
+    .studio-card.selected {
+      border-color: var(--gold);
+      background: rgba(201,168,76,0.06);
+      box-shadow: 0 0 0 1px rgba(201,168,76,0.1);
+    }
+
+    .studio-left {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .studio-badge {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
       display: grid;
-      gap: 0.75rem;
+      place-items: center;
+      background: rgba(201,168,76,0.06);
+      color: var(--gold);
+      font-weight: 600;
+      font-size: 0.9rem;
+      flex-shrink: 0;
     }
 
-    .field {
+    .studio-info {
+      min-width: 0;
+    }
+
+    .studio-name {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .studio-meta {
+      font-size: 0.85rem;
+      color: var(--white-dim);
+    }
+
+    .studio-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+    }
+
+    .nearest {
+      padding: 4px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      font-size: 0.7rem;
+      color: var(--gold);
+      background: rgba(201,168,76,0.04);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    /* ====== SERVICES ====== */
+    .services {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .service-btn {
+      padding: 14px 16px;
+      border-radius: var(--radius-sm);
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--white);
+      text-align: left;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 0.75rem;
+      cursor: pointer;
+      transition: all var(--transition);
+      font-family: var(--font-body);
     }
 
-    .field:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.5rem;
+    .service-btn:hover {
+      border-color: var(--gold-dark);
     }
 
-    .field-label {
+    .service-btn.selected {
+      background: rgba(201,168,76,0.06);
+      border-color: var(--gold);
       color: var(--gold);
-      font-size: 0.7rem;
-      letter-spacing: 0.08em;
     }
 
-    .field-value {
-      color: var(--white);
-      font-size: 0.9rem;
+    /* ====== TOGGLE ====== */
+    .toggle-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 18px;
+      border-radius: var(--radius-sm);
+      background: #161610;
+      border: 1px solid var(--border);
+      margin-bottom: 24px;
     }
 
-    .field-value.note {
+    .toggle-info {
+      display: grid;
+      gap: 2px;
+    }
+
+    .toggle-info .label {
+      font-weight: 600;
+    }
+
+    .toggle-info .small {
+      font-size: 0.8rem;
       color: var(--white-dim);
-      font-size: 0.85rem;
     }
 
-    /* ====== C/M BADGE ====== */
-    .badge-container {
-      position: absolute;
-      top: -12px;
-      right: 12px;
-      display: flex;
-      align-items: center;
-    }
-
-    .cm-badge {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      background: rgba(30,30,30,0.8);
-      backdrop-filter: blur(4px);
-      padding: 4px 6px;
-      border-radius: 20px;
-      border: 1px solid rgba(255,255,255,0.05);
-    }
-
-    .cm-badge span {
-      width: 28px;
+    .switch {
+      position: relative;
+      width: 50px;
       height: 28px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
-      font-weight: 700;
-      color: white;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
+      flex-shrink: 0;
     }
 
-    .c-badge { background: #e86c3e; }
-    .m-badge { background: #5e7da6; }
+    .switch input {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      z-index: 1;
+    }
+
+    .slider {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--white);
+      transition: transform var(--transition);
+    }
+
+    .switch input:checked + .slider {
+      transform: translateX(22px);
+      background: var(--gold);
+    }
 
     /* ====== BUTTONS ====== */
     .actions {
@@ -302,34 +386,6 @@
       transform: translateY(-1px);
     }
 
-    .btn-secondary {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      padding: 0.85rem 1.2rem;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: transparent;
-      color: var(--white);
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-decoration: none;
-      transition: all var(--transition);
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--gold);
-      color: var(--gold);
-    }
-
-    .row-actions {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.75rem;
-    }
-
     /* ====== ANIMATIONS ====== */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(16px); }
@@ -347,9 +403,8 @@
       .navbar { padding: 0.875rem 1.25rem; }
       .navbar-nav { display: none; }
       .page-title { font-size: 1.6rem; }
-      .brief-card { padding: 1.25rem; }
-      .field { flex-direction: column; align-items: flex-start; gap: 0.25rem; }
-      .row-actions { grid-template-columns: 1fr; }
+      .studio-card { padding: 14px 16px; }
+      .studio-badge { width: 44px; height: 44px; }
       .back-btn { width: 38px; height: 38px; }
       .page-logo { width: 38px; height: 38px; }
     }
@@ -374,7 +429,7 @@
           <polyline points="12 19 5 12 12 5"></polyline>
         </svg>
       </a>
-      <div class="page-title-center">Appointment Brief</div>
+      <div class="page-title-center">Book with an artist</div>
       <div class="page-logo">
         <img src="assets/logo.png" alt="CG" />
       </div>
@@ -382,55 +437,100 @@
 
     <!-- CONTENT HEADER -->
     <div class="fade-2">
-      <div class="page-label">Your Brief</div>
-      <div class="page-title">Share this with your brow artist before you arrive.</div>
+      <div class="page-label">Booking</div>
+      <div class="page-title">Your look. Your artist. Your time.</div>
     </div>
 
-    <!-- BRIEF CARD -->
-    <div class="brief-card fade-3">
-      <!-- <div class="badge-container">
-        <div class="cm-badge">
-          <span class="c-badge">C</span>
-          <span class="m-badge">M</span>
+    <!-- STUDIOS -->
+    <div class="fade-3">
+      <div class="section-label">Studios near you</div>
+      <div class="studio-card selected" id="studio1" onclick="selectStudio('studio1')">
+        <div class="studio-left">
+          <div class="studio-badge">SR</div>
+          <div class="studio-info">
+            <div class="studio-name">Studio Royale</div>
+            <div class="studio-meta">0.4 mi · Today 3:30pm · 60 min</div>
+          </div>
         </div>
-      </div> -->
+        <div class="studio-right">
+          <div class="nearest">Nearest</div>
+        </div>
+      </div>
 
-      <div class="brief-heading">ARCH · BROW BRIEF</div>
+      <div class="studio-card" id="studio2" onclick="selectStudio('studio2')">
+        <div class="studio-left">
+          <div class="studio-badge">AA</div>
+          <div class="studio-info">
+            <div class="studio-name">Arch Atelier</div>
+            <div class="studio-meta">1.2 mi · Tomorrow 11:00am · 60 min</div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-      <div class="field-list">
-        <div class="field">
-          <span class="field-label">Shape</span>
-          <span class="field-value">Soft Arch</span>
+    <!-- SERVICES -->
+    <div class="fade-4">
+      <div class="section-label">Select your service</div>
+      <div class="services">
+        <button class="service-btn selected" onclick="selectService(event, 'Shape + Define')">
+          <span>Shape + Define</span>
+          <span style="color:var(--white-dim);">60 min</span>
+        </button>
+        <button class="service-btn" onclick="selectService(event, 'Tint + Shape')">
+          <span>Tint + Shape</span>
+          <span style="color:var(--white-dim);">75 min</span>
+        </button>
+        <button class="service-btn" onclick="selectService(event, 'Consultation')">
+          <span>Consultation</span>
+          <span style="color:var(--white-dim);">30 min</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- TOGGLE -->
+    <div class="fade-4">
+      <div class="toggle-row">
+        <div class="toggle-info">
+          <div class="label">Send my brow brief to the artist</div>
+          <div class="small">Your brief will be shared automatically.</div>
         </div>
-        <div class="field">
-          <span class="field-label">Colour</span>
-          <span class="field-value">Ash Brown</span>
-        </div>
-        <div class="field">
-          <span class="field-label">Intensity</span>
-          <span class="field-value">Considered</span>
-        </div>
-        <div class="field">
-          <span class="field-label">Face shape</span>
-          <span class="field-value">Oval</span>
-        </div>
-        <div class="field">
-          <span class="field-label">Notes for artist</span>
-          <span class="field-value note">Tap to add notes...</span>
-        </div>
+        <label class="switch">
+          <input type="checkbox" checked />
+          <span class="slider"></span>
+        </label>
       </div>
     </div>
 
     <!-- ACTIONS -->
-    <div class="actions fade-4">
-      <a class="btn-primary" href="recommendation.php">Save as image</a>
-      <div class="row-actions">
-        <a class="btn-secondary" href="#">Via message</a>
-        <a class="btn-secondary" href="#">Via email</a>
-      </div>
+    <div class="actions fade-5">
+      <button class="btn-primary" onclick="selectTime()">Select a time</button>
     </div>
 
   </main>
+
+  <script>
+    let selectedStudio = 'studio1';
+    let selectedService = 'Shape + Define';
+
+    function selectStudio(id) {
+      document.querySelectorAll('.studio-card').forEach(el => el.classList.remove('selected'));
+      const el = document.getElementById(id);
+      if (el) el.classList.add('selected');
+      selectedStudio = id;
+    }
+
+    function selectService(e, name) {
+      document.querySelectorAll('.service-btn').forEach(el => el.classList.remove('selected'));
+      const btn = e.currentTarget || e.target;
+      btn.classList.add('selected');
+      selectedService = name;
+    }
+
+    function selectTime() {
+      alert('Proceed to pick a time for ' + selectedService + ' at ' + selectedStudio + '.');
+      // TODO: navigate to booking flow or calendar picker
+    }
+  </script>
 
 </body>
 </html>

@@ -3,80 +3,207 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Privacy — Arch</title>
+  <title>Privacy — Royals Arch Brow</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
 
     :root {
+      --black: #0a0a08;
+      --dark: #111111;
+      --dark-card: #1a1a0f;
+      --dark-input: #1c1c15;
       --gold: #c9a84c;
       --gold-light: #d4b96a;
       --gold-dark: #8a6f2e;
-      --gold-muted: rgba(201, 168, 76, 0.10);
-      --gold-bg-hover: rgba(201, 168, 76, 0.08);
-      --black: #0a0a0a;
-      --btn-dark: #232323;
+      --gold-muted: rgba(201, 168, 76, 0.12);
       --white: #f5f0e8;
-      --white-dim: rgba(245, 240, 232, 0.6);
+      --white-dim: rgba(245, 240, 232, 0.55);
       --white-faint: rgba(245, 240, 232, 0.15);
-      --border: rgba(201, 168, 76, 0.2);
-      --radius: 24px;
-      --radius-pill: 50px;
-      --transition: 0.25s ease;
+      --border: rgba(201, 168, 76, 0.18);
+      --border-hover: rgba(201, 168, 76, 0.45);
       --font-display: 'Cormorant Garamond', serif;
       --font-body: 'Montserrat', sans-serif;
+      --radius: 14px;
+      --radius-sm: 10px;
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
     body {
       background: var(--black);
       color: var(--white);
       font-family: var(--font-body);
       font-weight: 300;
+      line-height: 1.6;
       min-height: 100vh;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    button {
+      cursor: pointer;
+      border: none;
+      outline: none;
+      font-family: var(--font-body);
+      background: none;
+    }
+
+    /* ====== NAVBAR ====== */
+    .navbar {
       display: flex;
       align-items: center;
-      justify-content: center;
-      padding: 40px 20px;
+      justify-content: space-between;
+      padding: 1rem 2.5rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(10, 10, 8, 0.97);
+      backdrop-filter: blur(20px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
-    .privacy-card {
-      width: 100%;
-      max-width: 600px;
-      background: rgba(255, 255, 255, 0.01);
-      border: 1px solid var(--border);
-      border-radius: 48px;
-      padding: 48px 48px 40px;
-      backdrop-filter: blur(4px);
-      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.8);
-      text-align: center;
+    .navbar-left { display: flex; align-items: center; gap: 1rem; }
+    .nav-avatar {
+      width: 42px; height: 42px; border-radius: 50%; overflow: hidden;
+      border: 1.5px solid var(--gold-dark); flex-shrink: 0;
+    }
+    .nav-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .navbar-nav {
+      display: flex; align-items: center; gap: 2.5rem; list-style: none;
+      position: absolute; left: 50%; transform: translateX(-50%);
+    }
+    .navbar-nav a {
+      font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--white-dim); transition: color var(--transition); font-weight: 400;
+    }
+    .navbar-nav a:hover, .navbar-nav a.active { color: var(--gold); }
+
+    .btn-book {
+      padding: 0.55rem 1.5rem; font-size: 0.65rem; letter-spacing: 0.12em;
+      text-transform: uppercase; border-radius: 50px; border: 1px solid var(--border);
+      color: var(--white-dim); transition: all var(--transition);
+    }
+    .btn-book:hover { border-color: var(--gold); color: var(--gold); }
+
+    .nav-emblem {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #2a2010, #1a1408);
+      border: 1.5px solid var(--gold-dark); display: flex; align-items: center;
+      justify-content: center; flex-shrink: 0; overflow: hidden;
+    }
+    .nav-emblem img { width: 26px; height: 26px; object-fit: contain; }
+
+    .nav-gold-rule {
+      height: 1px; background: linear-gradient(to right, transparent 0%, var(--gold-dark) 30%, var(--gold-dark) 70%, transparent 100%);
+      opacity: 0.5;
     }
 
-    /* --- LOGO --- */
-    .logo-wrap {
-      text-align: center;
+    /* ====== PAGE TOPBAR (Back Arrow + Title + Logo) ====== */
+    .page-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 0;
       margin-bottom: 1.5rem;
     }
 
-    .logo-wrap img {
-      width: 56px;
-      height: 56px;
+    .back-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      text-decoration: none;
+      transition: all var(--transition);
+      background: transparent;
+      flex-shrink: 0;
+    }
+
+    .back-btn:hover {
+      background: rgba(201,168,76,0.12);
+      transform: scale(1.05);
+    }
+
+    .page-title-center {
+      flex: 1;
+      text-align: center;
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      padding: 0 1rem;
+    }
+
+    .page-logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .page-logo img {
+      width: 24px;
+      height: 24px;
       object-fit: contain;
     }
 
-    /* --- ICON (hexagon with !) - GOLDEN --- */
+    /* ====== LAYOUT ====== */
+    .main {
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 0 3rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+    }
+
+    /* ====== HEADER ====== */
+    .page-label {
+      font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gold); font-weight: 500; margin-bottom: 0.2rem;
+    }
+    .page-title {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 2rem;
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.05;
+    }
+
+    /* ====== PRIVACY CARD ====== */
+    .privacy-card {
+      background: #161610;
+      border: 1px solid var(--gold);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      text-align: center;
+    }
+
     .icon-wrap {
       display: flex;
       justify-content: center;
-      margin-bottom: 1.25rem;
+      margin-bottom: 0.75rem;
     }
 
     .icon-wrap svg {
-      width: 56px;
-      height: 56px;
+      width: 48px;
+      height: 48px;
       stroke: var(--gold);
       stroke-width: 1.5;
       fill: none;
@@ -92,7 +219,6 @@
       stroke: none;
     }
 
-    /* --- HEADING --- */
     .heading {
       font-family: var(--font-display);
       font-style: italic;
@@ -103,20 +229,18 @@
       margin-bottom: 1.5rem;
     }
 
-    /* --- GOLD DIVIDER LINE (exactly as screenshot) --- */
     .gold-divider {
       width: 80px;
       height: 1px;
       background: var(--gold);
-      margin: 0 auto 2.5rem auto;
+      margin: 0 auto 1.5rem auto;
     }
 
-    /* --- BULLET LIST --- */
     .privacy-list {
       list-style: none;
       text-align: left;
       max-width: 300px;
-      margin: 0 auto 2.5rem;
+      margin: 0 auto 1.5rem;
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
@@ -139,7 +263,6 @@
       flex-shrink: 0;
     }
 
-    /* --- GOLD TEXT --- */
     .gold-text {
       color: var(--gold);
       font-size: 0.95rem;
@@ -161,38 +284,40 @@
       margin-bottom: 1.5rem;
     }
 
-    /* --- BUTTON --- */
+    .actions {
+      display: grid;
+      gap: 0.75rem;
+    }
+
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
-      padding: 1rem 1.75rem;
-      border-radius: var(--radius-pill);
-      font-size: 0.7rem;
+      width: 100%;
+      padding: 0.85rem 1.2rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       font-weight: 600;
+      text-decoration: none;
       transition: all var(--transition);
-      width: 100%;
-      min-height: 56px;
-      border: 1px solid var(--border);
+      cursor: pointer;
+      border: none;
+      font-family: var(--font-body);
     }
 
-    .btn-dark {
-      background: var(--btn-dark);
+    .btn-primary {
+      background: transparent;
+      border: 1px solid var(--border);
       color: var(--white);
     }
 
-    .btn-dark:hover {
+    .btn-primary:hover {
       border-color: var(--gold);
-      color: var(--gold-light);
-      background: rgba(35, 35, 35, 0.9);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(201, 168, 76, 0.15);
+      color: var(--gold);
     }
 
-    /* --- PRIVACY TERMS LINK --- */
     .terms-link {
       display: inline-block;
       margin-top: 1rem;
@@ -217,117 +342,117 @@
       stroke-width: 1.8;
     }
 
-    /* --- FOOTER --- */
     .bottom-note {
       text-align: center;
       font-size: 0.7rem;
       color: var(--gold);
-      margin-top: 2.5rem;
+      margin-top: 1.5rem;
     }
 
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 700px) {
-      .privacy-card {
-        padding: 32px 28px;
-        border-radius: 36px;
-      }
-      .heading {
-        font-size: 2rem;
-      }
-      .privacy-list {
-        max-width: 100%;
-      }
+    /* ====== ANIMATIONS ====== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
     }
+    .fade-1 { animation: fadeUp 0.55s ease 0.05s both; }
+    .fade-2 { animation: fadeUp 0.55s ease 0.15s both; }
+    .fade-3 { animation: fadeUp 0.55s ease 0.25s both; }
+    .fade-4 { animation: fadeUp 0.55s ease 0.35s both; }
+    .fade-5 { animation: fadeUp 0.55s ease 0.45s both; }
 
-    @media (max-width: 480px) {
-      .privacy-card {
-        padding: 24px 16px;
-        border-radius: 28px;
-      }
-      .heading {
-        font-size: 1.6rem;
-      }
-      .icon-wrap svg {
-        width: 44px;
-        height: 44px;
-      }
-      .logo-wrap img {
-        width: 48px;
-        height: 48px;
-      }
+    /* ====== RESPONSIVE ====== */
+    @media (max-width: 900px) {
+      .main { padding: 0 1.25rem 1.5rem; }
+      .navbar { padding: 0.875rem 1.25rem; }
+      .navbar-nav { display: none; }
+      .page-title { font-size: 1.6rem; }
+      .privacy-card { padding: 1.25rem 1rem; }
+      .heading { font-size: 2rem; }
+      .privacy-list { max-width: 100%; }
+      .back-btn { width: 38px; height: 38px; }
+      .page-logo { width: 38px; height: 38px; }
     }
   </style>
 </head>
 <body>
 
-  <div class="privacy-card">
+  <!-- NAVBAR -->
+  <?php include 'includes/navbar.php'; ?>
 
-    <!-- Logo -->
-    <div class="logo-wrap">
-      <img src="assets/logo.png" alt="Arch" />
+  <!-- Gold rule -->
+  <div class="nav-gold-rule"></div>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <!-- PAGE TOPBAR (Back Arrow + Title + Logo) -->
+    <div class="page-topbar fade-1">
+      <a href="javascript:history.back()" class="back-btn" aria-label="Go back">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+      </a>
+      <div class="page-title-center">Privacy</div>
+      <div class="page-logo">
+        <img src="assets/logo.png" alt="CG" />
+      </div>
     </div>
 
-    <!-- Golden Hexagon Icon with ! -->
-    <div class="icon-wrap">
-      <svg viewBox="0 0 64 64">
-        <!-- Hexagon outline -->
-        <polygon points="32,4 58,18 58,46 32,60 6,46 6,18" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
-        <!-- Exclamation mark line -->
-        <line x1="32" y1="22" x2="32" y2="36" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
-        <!-- Dot -->
-        <circle cx="32" cy="46" r="3" fill="currentColor" stroke="none" />
-      </svg>
+    <!-- CONTENT HEADER -->
+    <div class="fade-2">
+      <div class="page-label">Privacy</div>
+      <div class="page-title">What this app sees stays with you.</div>
     </div>
 
-    <!-- Heading -->
-    <h1 class="heading">What this app sees<br />stays with you.</h1>
+    <!-- PRIVACY CARD -->
+    <div class="privacy-card fade-3">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 64 64">
+          <polygon points="32,4 58,18 58,46 32,60 6,46 6,18" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+          <line x1="32" y1="22" x2="32" y2="36" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
+          <circle cx="32" cy="46" r="3" fill="currentColor" stroke="none" />
+        </svg>
+      </div>
 
-    <!-- Gold Divider Line -->
-    <div class="gold-divider"></div>
+      <h1 class="heading">What this app sees<br />stays with you.</h1>
 
-    <!-- Bullet Points -->
-    <ul class="privacy-list">
-      <li><div class="privacy-bullet"></div><span>Your face.</span></li>
-      <li><div class="privacy-bullet"></div><span>Your brow profile.</span></li>
-      <li><div class="privacy-bullet"></div><span>Your looks.</span></li>
-    </ul>
+      <div class="gold-divider"></div>
 
-    <!-- Gold text (regular + italic) -->
-    <div class="gold-text">
-      None of it is shared, sold, or held<br />beyond your use of it.
+      <ul class="privacy-list">
+        <li><div class="privacy-bullet"></div><span>Your face.</span></li>
+        <li><div class="privacy-bullet"></div><span>Your brow profile.</span></li>
+        <li><div class="privacy-bullet"></div><span>Your looks.</span></li>
+      </ul>
+
+      <div class="gold-text">
+        None of it is shared, sold, or held<br />beyond your use of it.
+      </div>
+      <div class="gold-text italic">
+        You may delete your profile at any time.
+      </div>
+
+      <div class="gold-note">This is the only place we will say it.</div>
+
+      <div class="actions">
+        <button class="btn btn-primary" onclick="acceptPrivacy()">Understood. Continue.</button>
+        <a href="#" class="terms-link" onclick="showToast('Full privacy terms coming soon', 'info')">
+          Read our full privacy terms
+          <svg viewBox="0 0 24 24">
+            <line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" stroke-width="1.8" />
+            <polyline points="12 5 19 12 12 19" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="bottom-note">Your data. Yours alone.</div>
     </div>
-    <div class="gold-text italic">
-      You may delete your profile at any time.
-    </div>
 
-    <!-- Gold note above button -->
-    <div class="gold-note">This is the only place we will say it.</div>
+  </main>
 
-    <!-- Dark Button -->
-    <button class="btn btn-dark" onclick="acceptPrivacy()">Understood. Continue.</button>
-
-    <!-- Full privacy terms link -->
-    <a href="#" class="terms-link" onclick="showToast('Full privacy terms coming soon', 'info')">
-      Read our full privacy terms
-      <svg viewBox="0 0 24 24">
-        <line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" stroke-width="1.8" />
-        <polyline points="12 5 19 12 12 19" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </a>
-
-    <!-- Footer -->
-    <div class="bottom-note">Your data. Yours alone.</div>
-
-  </div>
-
-  <!-- ===== JAVASCRIPT ===== -->
   <script>
-    function goBack(target) {
-      window.location.href = target;
-    }
-
     function showToast(msg, type) {
-      alert(msg); // simple fallback
+      alert(msg);
     }
 
     function acceptPrivacy() {

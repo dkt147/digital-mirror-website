@@ -3,9 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Appointment Brief — Royals Arch Brow</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <title>Preferences — Royals Arch Brow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     :root {
       --black: #0a0a08;
       --dark: #111111;
@@ -180,154 +187,129 @@
       line-height: 1.05;
     }
 
-    /* ====== BRIEF CARD ====== */
-    .brief-card {
-      position: relative;
+    /* ====== PREFERENCES CARD ====== */
+    .preferences-card {
       background: #161610;
       border: 1px solid var(--gold);
       border-radius: var(--radius);
-      padding: 1.75rem 1.5rem;
+      padding: 1.5rem 1.25rem;
     }
 
-    .brief-heading {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      color: var(--gold);
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-      font-weight: 500;
-    }
-
-    .field-list {
+    .preferences-list {
       display: grid;
       gap: 0.75rem;
     }
 
-    .field {
+    .preference-card {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 0.75rem;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      transition: all var(--transition);
     }
 
-    .field:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.5rem;
+    .preference-card:hover {
+      border-color: var(--border-hover);
     }
 
-    .field-label {
-      color: var(--gold);
-      font-size: 0.7rem;
-      letter-spacing: 0.08em;
+    .preference-info {
+      display: grid;
+      gap: 2px;
     }
 
-    .field-value {
+    .preference-title {
+      font-size: 0.95rem;
+      font-weight: 500;
       color: var(--white);
-      font-size: 0.9rem;
     }
 
-    .field-value.note {
+    .preference-description {
       color: var(--white-dim);
       font-size: 0.85rem;
+      line-height: 1.5;
     }
 
-    /* ====== C/M BADGE ====== */
-    .badge-container {
-      position: absolute;
-      top: -12px;
-      right: 12px;
-      display: flex;
-      align-items: center;
+    .preference-value {
+      color: var(--gold);
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
     }
 
-    .cm-badge {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      background: rgba(30,30,30,0.8);
-      backdrop-filter: blur(4px);
-      padding: 4px 6px;
-      border-radius: 20px;
-      border: 1px solid rgba(255,255,255,0.05);
-    }
-
-    .cm-badge span {
-      width: 28px;
+    .switch {
+      position: relative;
+      display: inline-grid;
+      width: 50px;
       height: 28px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
-      font-weight: 700;
-      color: white;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: all var(--transition);
+      flex-shrink: 0;
     }
 
-    .c-badge { background: #e86c3e; }
-    .m-badge { background: #5e7da6; }
+    .switch input {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      z-index: 1;
+    }
 
-    /* ====== BUTTONS ====== */
+    .slider {
+      pointer-events: none;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--white);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: transform var(--transition), background var(--transition);
+    }
+
+    .switch input:checked + .slider {
+      transform: translateX(22px);
+      background: var(--gold);
+    }
+
     .actions {
       display: grid;
       gap: 0.75rem;
     }
 
-    .btn-primary {
-      display: flex;
-      justify-content: center;
+    .btn {
+      display: inline-flex;
       align-items: center;
+      justify-content: center;
       width: 100%;
       padding: 0.85rem 1.2rem;
       border-radius: 999px;
-      border: none;
-      background: var(--gold);
-      color: var(--black);
       font-size: 0.75rem;
-      font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
+      font-weight: 600;
       text-decoration: none;
       transition: all var(--transition);
+      cursor: pointer;
+      border: none;
+      font-family: var(--font-body);
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--black);
     }
 
     .btn-primary:hover {
       background: var(--gold-light);
       transform: translateY(-1px);
-    }
-
-    .btn-secondary {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      padding: 0.85rem 1.2rem;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: transparent;
-      color: var(--white);
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-decoration: none;
-      transition: all var(--transition);
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--gold);
-      color: var(--gold);
-    }
-
-    .row-actions {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.75rem;
     }
 
     /* ====== ANIMATIONS ====== */
@@ -347,9 +329,8 @@
       .navbar { padding: 0.875rem 1.25rem; }
       .navbar-nav { display: none; }
       .page-title { font-size: 1.6rem; }
-      .brief-card { padding: 1.25rem; }
-      .field { flex-direction: column; align-items: flex-start; gap: 0.25rem; }
-      .row-actions { grid-template-columns: 1fr; }
+      .preferences-card { padding: 1.25rem 1rem; }
+      .preference-card { padding: 12px 14px; }
       .back-btn { width: 38px; height: 38px; }
       .page-logo { width: 38px; height: 38px; }
     }
@@ -374,7 +355,7 @@
           <polyline points="12 19 5 12 12 5"></polyline>
         </svg>
       </a>
-      <div class="page-title-center">Appointment Brief</div>
+      <div class="page-title-center">Preferences</div>
       <div class="page-logo">
         <img src="assets/logo.png" alt="CG" />
       </div>
@@ -382,55 +363,80 @@
 
     <!-- CONTENT HEADER -->
     <div class="fade-2">
-      <div class="page-label">Your Brief</div>
-      <div class="page-title">Share this with your brow artist before you arrive.</div>
+      <div class="page-label">Settings</div>
+      <div class="page-title">Manage your settings</div>
+      <p style="color:var(--white-dim); font-size:0.9rem; margin-top:0.25rem;">Update your experience preferences, enable notifications, and choose language options.</p>
     </div>
 
-    <!-- BRIEF CARD -->
-    <div class="brief-card fade-3">
-      <!-- <div class="badge-container">
-        <div class="cm-badge">
-          <span class="c-badge">C</span>
-          <span class="m-badge">M</span>
+    <!-- PREFERENCES CARD -->
+    <div class="preferences-card fade-3">
+      <div class="preferences-list">
+        <div class="preference-card">
+          <div class="preference-info">
+            <div class="preference-title">Notifications</div>
+            <div class="preference-description">Get alerts about new looks, offers, and progress updates.</div>
+          </div>
+          <label class="switch">
+            <input type="checkbox" checked />
+            <span class="slider"></span>
+          </label>
         </div>
-      </div> -->
 
-      <div class="brief-heading">ARCH · BROW BRIEF</div>
+        <div class="preference-card">
+          <div class="preference-info">
+            <div class="preference-title">Auto-save looks</div>
+            <div class="preference-description">Save your favorite styles automatically as you browse.</div>
+          </div>
+          <label class="switch">
+            <input type="checkbox" checked />
+            <span class="slider"></span>
+          </label>
+        </div>
 
-      <div class="field-list">
-        <div class="field">
-          <span class="field-label">Shape</span>
-          <span class="field-value">Soft Arch</span>
+        <div class="preference-card">
+          <div class="preference-info">
+            <div class="preference-title">Camera auto-detect</div>
+            <div class="preference-description">Allow the app to automatically detect your camera when scanning.</div>
+          </div>
+          <label class="switch">
+            <input type="checkbox" />
+            <span class="slider"></span>
+          </label>
         </div>
-        <div class="field">
-          <span class="field-label">Colour</span>
-          <span class="field-value">Ash Brown</span>
+
+        <div class="preference-card">
+          <div class="preference-info">
+            <div class="preference-title">Dark mode</div>
+            <div class="preference-description">Use a low-light interface for a premium experience.</div>
+          </div>
+          <label class="switch">
+            <input type="checkbox" checked />
+            <span class="slider"></span>
+          </label>
         </div>
-        <div class="field">
-          <span class="field-label">Intensity</span>
-          <span class="field-value">Considered</span>
-        </div>
-        <div class="field">
-          <span class="field-label">Face shape</span>
-          <span class="field-value">Oval</span>
-        </div>
-        <div class="field">
-          <span class="field-label">Notes for artist</span>
-          <span class="field-value note">Tap to add notes...</span>
+
+        <div class="preference-card">
+          <div class="preference-info">
+            <div class="preference-title">Language</div>
+            <div class="preference-description">App language used for labels and interface text.</div>
+          </div>
+          <div class="preference-value">English</div>
         </div>
       </div>
-    </div>
+      <br>
 
-    <!-- ACTIONS -->
-    <div class="actions fade-4">
-      <a class="btn-primary" href="recommendation.php">Save as image</a>
-      <div class="row-actions">
-        <a class="btn-secondary" href="#">Via message</a>
-        <a class="btn-secondary" href="#">Via email</a>
+      <div class="actions">
+        <button class="btn btn-primary" onclick="savePreferences()">Save Changes</button>
       </div>
     </div>
 
   </main>
+
+  <script>
+    function savePreferences() {
+      alert('Your preferences have been saved.');
+    }
+  </script>
 
 </body>
 </html>

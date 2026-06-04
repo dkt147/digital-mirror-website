@@ -3,9 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Appointment Brief — Royals Arch Brow</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <title>Your Brow Profile — Royals Arch Brow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     :root {
       --black: #0a0a08;
       --dark: #111111;
@@ -180,98 +187,79 @@
       line-height: 1.05;
     }
 
-    /* ====== BRIEF CARD ====== */
-    .brief-card {
-      position: relative;
+    /* ====== PROFILE CARD ====== */
+    .profile-card {
       background: #161610;
       border: 1px solid var(--gold);
       border-radius: var(--radius);
       padding: 1.75rem 1.5rem;
     }
 
-    .brief-heading {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      color: var(--gold);
-      font-size: 0.65rem;
+    .brow-art {
+      display: grid;
+      gap: 16px;
+      place-items: center;
+      margin-bottom: 24px;
+    }
+
+    .brow-line {
+      width: 80%;
+      height: 4px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brow-line::before,
+    .brow-line::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      width: 35%;
+      height: 100%;
+      border-radius: 999px;
+      background: var(--gold);
+      filter: blur(2px);
+    }
+
+    .brow-line::before { left: 0; transform: translateX(-10%); }
+    .brow-line::after { right: 0; transform: translateX(10%); }
+
+    .brow-label {
+      font-size: 0.7rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      margin-bottom: 1rem;
+      color: var(--white-dim);
       font-weight: 500;
     }
 
-    .field-list {
+    .info-grid {
       display: grid;
-      gap: 0.75rem;
+      gap: 12px;
+      margin-bottom: 28px;
     }
 
-    .field {
+    .info-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 0.75rem;
+      padding: 14px 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
     }
 
-    .field:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.5rem;
-    }
-
-    .field-label {
-      color: var(--gold);
-      font-size: 0.7rem;
-      letter-spacing: 0.08em;
-    }
-
-    .field-value {
-      color: var(--white);
+    .info-key {
+      color: var(--white-dim);
       font-size: 0.9rem;
     }
 
-    .field-value.note {
-      color: var(--white-dim);
-      font-size: 0.85rem;
+    .info-value {
+      color: var(--gold);
+      font-size: 0.95rem;
+      font-weight: 500;
     }
-
-    /* ====== C/M BADGE ====== */
-    .badge-container {
-      position: absolute;
-      top: -12px;
-      right: 12px;
-      display: flex;
-      align-items: center;
-    }
-
-    .cm-badge {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      background: rgba(30,30,30,0.8);
-      backdrop-filter: blur(4px);
-      padding: 4px 6px;
-      border-radius: 20px;
-      border: 1px solid rgba(255,255,255,0.05);
-    }
-
-    .cm-badge span {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
-      font-weight: 700;
-      color: white;
-    }
-
-    .c-badge { background: #e86c3e; }
-    .m-badge { background: #5e7da6; }
 
     /* ====== BUTTONS ====== */
     .actions {
@@ -324,12 +312,6 @@
       color: var(--gold);
     }
 
-    .row-actions {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.75rem;
-    }
-
     /* ====== ANIMATIONS ====== */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(16px); }
@@ -347,9 +329,8 @@
       .navbar { padding: 0.875rem 1.25rem; }
       .navbar-nav { display: none; }
       .page-title { font-size: 1.6rem; }
-      .brief-card { padding: 1.25rem; }
-      .field { flex-direction: column; align-items: flex-start; gap: 0.25rem; }
-      .row-actions { grid-template-columns: 1fr; }
+      .profile-card { padding: 1.25rem; }
+      .info-row { padding: 12px 14px; }
       .back-btn { width: 38px; height: 38px; }
       .page-logo { width: 38px; height: 38px; }
     }
@@ -374,7 +355,7 @@
           <polyline points="12 19 5 12 12 5"></polyline>
         </svg>
       </a>
-      <div class="page-title-center">Appointment Brief</div>
+      <div class="page-title-center">Your Brow Profile</div>
       <div class="page-logo">
         <img src="assets/logo.png" alt="CG" />
       </div>
@@ -382,55 +363,53 @@
 
     <!-- CONTENT HEADER -->
     <div class="fade-2">
-      <div class="page-label">Your Brief</div>
-      <div class="page-title">Share this with your brow artist before you arrive.</div>
+      <div class="page-label">Brow Profile</div>
+      <div class="page-title">Your unique brow profile.</div>
     </div>
 
-    <!-- BRIEF CARD -->
-    <div class="brief-card fade-3">
-      <!-- <div class="badge-container">
-        <div class="cm-badge">
-          <span class="c-badge">C</span>
-          <span class="m-badge">M</span>
-        </div>
-      </div> -->
+    <!-- PROFILE CARD -->
+    <div class="profile-card fade-3">
+      <div class="brow-art">
+        <!-- <div class="brow-line"></div> -->
+        <div class="brow-label">Current profile</div>
+      </div>
 
-      <div class="brief-heading">ARCH · BROW BRIEF</div>
-
-      <div class="field-list">
-        <div class="field">
-          <span class="field-label">Shape</span>
-          <span class="field-value">Soft Arch</span>
+      <div class="info-grid">
+        <div class="info-row">
+          <span class="info-key">Face shape</span>
+          <span class="info-value">Oval</span>
         </div>
-        <div class="field">
-          <span class="field-label">Colour</span>
-          <span class="field-value">Ash Brown</span>
+        <div class="info-row">
+          <span class="info-key">Preferred style</span>
+          <span class="info-value">Ash</span>
         </div>
-        <div class="field">
-          <span class="field-label">Intensity</span>
-          <span class="field-value">Considered</span>
+        <div class="info-row">
+          <span class="info-key">Preferred colour</span>
+          <span class="info-value">Dark Brown</span>
         </div>
-        <div class="field">
-          <span class="field-label">Face shape</span>
-          <span class="field-value">Oval</span>
-        </div>
-        <div class="field">
-          <span class="field-label">Notes for artist</span>
-          <span class="field-value note">Tap to add notes...</span>
+        <div class="info-row">
+          <span class="info-key">Last scan</span>
+          <span class="info-value">March 15, 2026</span>
         </div>
       </div>
-    </div>
 
-    <!-- ACTIONS -->
-    <div class="actions fade-4">
-      <a class="btn-primary" href="recommendation.php">Save as image</a>
-      <div class="row-actions">
-        <a class="btn-secondary" href="#">Via message</a>
-        <a class="btn-secondary" href="#">Via email</a>
+      <div class="actions">
+        <button class="btn-primary" onclick="handleUpdate()">Update</button>
+        <button class="btn-secondary" onclick="handleScanAgain()">Scan Again</button>
       </div>
     </div>
 
   </main>
+
+  <script>
+    function handleUpdate() {
+      window.location.href = 'profile.php';
+    }
+
+    function handleScanAgain() {
+      window.location.href = 'face-scan-ui.php';
+    }
+  </script>
 
 </body>
 </html>

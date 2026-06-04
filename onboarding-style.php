@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Style — Arch</title>
+  <title>Style — Royals Arch Brow</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     * {
@@ -13,97 +13,187 @@
     }
 
     :root {
+      --black: #0a0a08;
+      --dark: #111111;
+      --dark-card: #1a1a0f;
+      --dark-input: #1c1c15;
       --gold: #c9a84c;
       --gold-light: #d4b96a;
       --gold-dark: #8a6f2e;
-      --gold-muted: rgba(201, 168, 76, 0.08);
-      --black: #0a0a0a;
-      --btn-dark: #232323;
+      --gold-muted: rgba(201, 168, 76, 0.12);
       --white: #f5f0e8;
-      --white-dim: rgba(245, 240, 232, 0.6);
+      --white-dim: rgba(245, 240, 232, 0.55);
       --white-faint: rgba(245, 240, 232, 0.15);
-      --border: rgba(201, 168, 76, 0.2);
-      --border-hover: rgba(201, 168, 76, 0.4);
-      --radius: 24px;
-      --radius-pill: 50px;
-      --transition: 0.25s ease;
+      --border: rgba(201, 168, 76, 0.18);
+      --border-hover: rgba(201, 168, 76, 0.45);
       --font-display: 'Cormorant Garamond', serif;
       --font-body: 'Montserrat', sans-serif;
+      --radius: 14px;
+      --radius-pill: 50px;
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
     body {
       background: var(--black);
       color: var(--white);
       font-family: var(--font-body);
       font-weight: 300;
+      line-height: 1.6;
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 20px;
-      background-image: radial-gradient(ellipse at 50% 20%, rgba(201, 168, 76, 0.03) 0%, transparent 70%);
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    button {
+      cursor: pointer;
+      border: none;
+      outline: none;
+      font-family: var(--font-body);
+      background: none;
     }
 
-    .style-card {
-      width: 100%;
-      max-width: 620px;
-      background: rgba(255, 255, 255, 0.015);
-      border: 1px solid var(--border);
-      border-radius: 48px;
-      padding: 44px 44px 40px;
-      backdrop-filter: blur(4px);
-      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.8);
-    }
-
-    /* --- TOP ROW: BACK + LOGO --- */
-    .top-row {
+    /* ====== NAVBAR ====== */
+    .navbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 0.75rem;
+      padding: 1rem 2.5rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(10, 10, 8, 0.97);
+      backdrop-filter: blur(20px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
-    .back-btn-circle {
-      display: inline-flex;
+    .navbar-left { display: flex; align-items: center; gap: 1rem; }
+    .nav-avatar {
+      width: 42px; height: 42px; border-radius: 50%; overflow: hidden;
+      border: 1.5px solid var(--gold-dark); flex-shrink: 0;
+    }
+    .nav-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .navbar-nav {
+      display: flex; align-items: center; gap: 2.5rem; list-style: none;
+      position: absolute; left: 50%; transform: translateX(-50%);
+    }
+    .navbar-nav a {
+      font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--white-dim); transition: color var(--transition); font-weight: 400;
+    }
+    .navbar-nav a:hover, .navbar-nav a.active { color: var(--gold); }
+
+    .btn-book {
+      padding: 0.55rem 1.5rem; font-size: 0.65rem; letter-spacing: 0.12em;
+      text-transform: uppercase; border-radius: 50px; border: 1px solid var(--border);
+      color: var(--white-dim); transition: all var(--transition);
+    }
+    .btn-book:hover { border-color: var(--gold); color: var(--gold); }
+
+    .nav-emblem {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #2a2010, #1a1408);
+      border: 1.5px solid var(--gold-dark); display: flex; align-items: center;
+      justify-content: center; flex-shrink: 0; overflow: hidden;
+    }
+    .nav-emblem img { width: 26px; height: 26px; object-fit: contain; }
+
+    .nav-gold-rule {
+      height: 1px; background: linear-gradient(to right, transparent 0%, var(--gold-dark) 30%, var(--gold-dark) 70%, transparent 100%);
+      opacity: 0.5;
+    }
+
+    /* ====== PAGE TOPBAR (Back Arrow + Title + Logo) ====== */
+    .page-topbar {
+      display: flex;
       align-items: center;
-      justify-content: center;
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      border: 1px solid var(--gold);
-      background: transparent;
-      color: var(--gold);
-      cursor: pointer;
-      transition: all var(--transition);
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      margin-bottom: 1.5rem;
     }
 
-    .back-btn-circle:hover {
-      background: var(--gold-muted);
-      border-color: var(--gold-light);
-      transform: scale(1.02);
-    }
-
-    .back-btn-circle svg {
-      width: 22px;
-      height: 22px;
-      stroke: currentColor;
-      stroke-width: 1.8;
-      fill: none;
-    }
-
-    .logo-wrap {
+    .back-btn {
       display: flex;
       align-items: center;
       justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      text-decoration: none;
+      transition: all var(--transition);
+      background: transparent;
+      flex-shrink: 0;
     }
 
-    .logo-wrap img {
-      width: 48px;
-      height: 48px;
+    .back-btn:hover {
+      background: rgba(201,168,76,0.12);
+      transform: scale(1.05);
+    }
+
+    .page-title-center {
+      flex: 1;
+      text-align: center;
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      padding: 0 1rem;
+    }
+
+    .page-logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .page-logo img {
+      width: 24px;
+      height: 24px;
       object-fit: contain;
     }
 
-    /* --- STEP INDICATOR --- */
+    /* ====== LAYOUT ====== */
+    .main {
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 0 3rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+    }
+
+    /* ====== HEADER ====== */
+    .page-label {
+      font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gold); font-weight: 500; margin-bottom: 0.2rem;
+    }
+    .page-title {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 2rem;
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.05;
+    }
+
+    /* ====== STYLE CARD ====== */
+    .style-card {
+      background: #161610;
+      border: 1px solid var(--gold);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+    }
+
     .step-indicator {
       display: flex;
       align-items: center;
@@ -134,7 +224,6 @@
       border-radius: 2px;
     }
 
-    /* --- HEADING --- */
     .heading {
       font-family: var(--font-display);
       font-style: italic;
@@ -146,7 +235,6 @@
       margin-bottom: 1.25rem;
     }
 
-    /* --- GOLD DIVIDER --- */
     .gold-divider {
       width: 80px;
       height: 1px;
@@ -154,7 +242,6 @@
       margin: 0 auto 2rem auto;
     }
 
-    /* --- STYLE OPTIONS --- */
     .style-options {
       display: flex;
       flex-direction: column;
@@ -181,7 +268,6 @@
       border-color: var(--border-hover);
     }
 
-    /* --- SELECTED STATE (GOLD CARD) --- */
     .style-option.selected {
       border-color: var(--gold);
       background: rgba(201, 168, 76, 0.08);
@@ -206,7 +292,6 @@
       color: var(--white-dim);
     }
 
-    /* --- RADIO BUTTON --- */
     .style-option-radio {
       width: 24px;
       height: 24px;
@@ -233,33 +318,40 @@
       background: var(--black);
     }
 
-    /* --- BEGIN BUTTON --- */
-    .btn-begin {
-      display: block;
+    .actions {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       width: 100%;
-      padding: 1rem;
-      border-radius: var(--radius-pill);
-      border: 1px solid var(--border);
-      background: var(--btn-dark);
-      color: var(--white);
+      padding: 0.85rem 1.2rem;
+      border-radius: 999px;
       font-size: 0.75rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      font-weight: 700;
+      font-weight: 600;
+      text-decoration: none;
       transition: all var(--transition);
       cursor: pointer;
-      min-height: 56px;
+      border: none;
+      font-family: var(--font-body);
     }
 
-    .btn-begin:hover {
+    .btn-primary {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
       border-color: var(--gold);
-      color: var(--gold-light);
-      background: rgba(35, 35, 35, 0.9);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(201, 168, 76, 0.15);
+      color: var(--gold);
     }
 
-    /* --- SKIP LINK --- */
     .skip-link {
       display: block;
       text-align: center;
@@ -276,91 +368,110 @@
       opacity: 0.7;
     }
 
-    /* --- RESPONSIVE --- */
-    @media (max-width: 700px) {
-      .style-card { padding: 32px 28px; border-radius: 36px; }
+    /* ====== ANIMATIONS ====== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-1 { animation: fadeUp 0.55s ease 0.05s both; }
+    .fade-2 { animation: fadeUp 0.55s ease 0.15s both; }
+    .fade-3 { animation: fadeUp 0.55s ease 0.25s both; }
+    .fade-4 { animation: fadeUp 0.55s ease 0.35s both; }
+    .fade-5 { animation: fadeUp 0.55s ease 0.45s both; }
+
+    /* ====== RESPONSIVE ====== */
+    @media (max-width: 900px) {
+      .main { padding: 0 1.25rem 1.5rem; }
+      .navbar { padding: 0.875rem 1.25rem; }
+      .navbar-nav { display: none; }
+      .page-title { font-size: 1.6rem; }
+      .style-card { padding: 1.25rem 1rem; }
       .heading { font-size: 2.2rem; }
       .style-option-title { font-size: 1.1rem; }
-      .logo-wrap img { width: 40px; height: 40px; }
-      .back-btn-circle { width: 40px; height: 40px; }
-    }
-
-    @media (max-width: 480px) {
-      .style-card { padding: 24px 16px; border-radius: 28px; }
-      .heading { font-size: 1.8rem; }
-      .style-option-title { font-size: 1rem; }
       .style-option { padding: 1rem 1rem; }
+      .back-btn { width: 38px; height: 38px; }
+      .page-logo { width: 38px; height: 38px; }
     }
   </style>
 </head>
 <body>
 
-  <div class="style-card">
+  <!-- NAVBAR -->
+  <?php include 'includes/navbar.php'; ?>
 
-    <!-- TOP ROW -->
-    <div class="top-row">
-      <button class="back-btn-circle" onclick="goBack('onboarding-profile.php')">
-        <svg viewBox="0 0 24 24">
-          <path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Gold rule -->
+  <div class="nav-gold-rule"></div>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <!-- PAGE TOPBAR (Back Arrow + Title + Logo) -->
+    <div class="page-topbar fade-1">
+      <a href="javascript:history.back()" class="back-btn" aria-label="Go back">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
         </svg>
-      </button>
-      <div class="logo-wrap">
-        <img src="assets/logo.png" alt="Arch Logo" />
+      </a>
+      <div class="page-title-center">Style</div>
+      <div class="page-logo">
+        <img src="assets/logo.png" alt="CG" />
       </div>
     </div>
 
-    <!-- STEP INDICATOR -->
-    <div class="step-indicator">
-      <span class="step-text">Step 2 of 2</span>
-      <div class="step-bar">
-        <div class="step-bar-fill"></div>
+    <!-- CONTENT HEADER -->
+    <div class="fade-2">
+      <div class="page-label">Style Direction</div>
+      <div class="page-title">Where would you like to begin?</div>
+    </div>
+
+    <!-- STYLE CARD -->
+    <div class="style-card fade-3">
+      <div class="step-indicator">
+        <span class="step-text">Step 2 of 2</span>
+        <div class="step-bar">
+          <div class="step-bar-fill"></div>
+        </div>
+      </div>
+
+      <h1 class="heading">Where would you<br />like to begin?</h1>
+
+      <div class="gold-divider"></div>
+
+      <div class="style-options">
+        <button class="style-option selected" data-style="refined" onclick="selectStyle('refined')">
+          <div>
+            <div class="style-option-title">Refined & natural</div>
+            <div class="style-option-desc">Soft definition that works with your features, not over them.</div>
+          </div>
+          <div class="style-option-radio"></div>
+        </button>
+
+        <button class="style-option" data-style="precise" onclick="selectStyle('precise')">
+          <div>
+            <div class="style-option-title">Precise & considered</div>
+            <div class="style-option-desc">A brow with intention. Structured, deliberate, assured.</div>
+          </div>
+          <div class="style-option-radio"></div>
+        </button>
+
+        <button class="style-option" data-style="discover" onclick="selectStyle('discover')">
+          <div>
+            <div class="style-option-title">Show me what suits me</div>
+            <div class="style-option-desc">A brief discovery to find the shape that's meant for you.</div>
+          </div>
+          <div class="style-option-radio"></div>
+        </button>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-primary" onclick="completeOnboarding()">Begin</button>
+        <a class="skip-link" onclick="goBack('onboarding-complete.php')">I'll add this later</a>
       </div>
     </div>
 
-    <!-- HEADING -->
-    <h1 class="heading">Where would you<br />like to begin?</h1>
+  </main>
 
-    <!-- GOLD DIVIDER -->
-    <div class="gold-divider"></div>
-
-    <!-- STYLE OPTIONS -->
-    <div class="style-options">
-      
-      <button class="style-option selected" data-style="refined" onclick="selectStyle('refined')">
-        <div>
-          <div class="style-option-title">Refined & natural</div>
-          <div class="style-option-desc">Soft definition that works with your features, not over them.</div>
-        </div>
-        <div class="style-option-radio"></div>
-      </button>
-
-      <button class="style-option" data-style="precise" onclick="selectStyle('precise')">
-        <div>
-          <div class="style-option-title">Precise & considered</div>
-          <div class="style-option-desc">A brow with intention. Structured, deliberate, assured.</div>
-        </div>
-        <div class="style-option-radio"></div>
-      </button>
-
-      <button class="style-option" data-style="discover" onclick="selectStyle('discover')">
-        <div>
-          <div class="style-option-title">Show me what suits me</div>
-          <div class="style-option-desc">A brief discovery to find the shape that's meant for you.</div>
-        </div>
-        <div class="style-option-radio"></div>
-      </button>
-
-    </div>
-
-    <!-- BEGIN BUTTON -->
-    <button class="btn-begin" onclick="completeOnboarding()">Begin</button>
-
-    <!-- SKIP LINK -->
-    <a class="skip-link" onclick="goBack('onboarding-complete.php')">I'll add this later</a>
-
-  </div>
-
-  <!-- ===== JAVASCRIPT ===== -->
   <script>
     function goBack(target) {
       window.location.href = target;

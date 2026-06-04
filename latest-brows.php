@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Appointment Brief — Royals Arch Brow</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Latest on brows — Royals Arch Brow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     :root {
       --black: #0a0a08;
       --dark: #111111;
@@ -180,154 +187,94 @@
       line-height: 1.05;
     }
 
-    /* ====== BRIEF CARD ====== */
-    .brief-card {
-      position: relative;
+    /* ====== ARTICLES ====== */
+    .article-card {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      padding: 16px 18px;
+      border-radius: var(--radius-sm);
       background: #161610;
-      border: 1px solid var(--gold);
-      border-radius: var(--radius);
-      padding: 1.75rem 1.5rem;
-    }
-
-    .brief-heading {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      color: var(--gold);
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-      font-weight: 500;
-    }
-
-    .field-list {
-      display: grid;
-      gap: 0.75rem;
-    }
-
-    .field {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 0.75rem;
-    }
-
-    .field:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.5rem;
-    }
-
-    .field-label {
-      color: var(--gold);
-      font-size: 0.7rem;
-      letter-spacing: 0.08em;
-    }
-
-    .field-value {
-      color: var(--white);
-      font-size: 0.9rem;
-    }
-
-    .field-value.note {
-      color: var(--white-dim);
-      font-size: 0.85rem;
-    }
-
-    /* ====== C/M BADGE ====== */
-    .badge-container {
-      position: absolute;
-      top: -12px;
-      right: 12px;
-      display: flex;
-      align-items: center;
-    }
-
-    .cm-badge {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      background: rgba(30,30,30,0.8);
-      backdrop-filter: blur(4px);
-      padding: 4px 6px;
-      border-radius: 20px;
-      border: 1px solid rgba(255,255,255,0.05);
-    }
-
-    .cm-badge span {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
-      font-weight: 700;
-      color: white;
-    }
-
-    .c-badge { background: #e86c3e; }
-    .m-badge { background: #5e7da6; }
-
-    /* ====== BUTTONS ====== */
-    .actions {
-      display: grid;
-      gap: 0.75rem;
-    }
-
-    .btn-primary {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      padding: 0.85rem 1.2rem;
-      border-radius: 999px;
-      border: none;
-      background: var(--gold);
-      color: var(--black);
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      text-decoration: none;
+      border: 1px solid var(--border);
+      cursor: pointer;
       transition: all var(--transition);
+      margin-bottom: 12px;
     }
 
-    .btn-primary:hover {
-      background: var(--gold-light);
+    .article-card:hover {
+      border-color: var(--gold-dark);
       transform: translateY(-1px);
     }
 
-    .btn-secondary {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      padding: 0.85rem 1.2rem;
-      border-radius: 999px;
+    .article-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-sm);
       border: 1px solid var(--border);
-      background: transparent;
-      color: var(--white);
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-decoration: none;
-      transition: all var(--transition);
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--gold);
-      color: var(--gold);
-    }
-
-    .row-actions {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.75rem;
+      place-items: center;
+      background: rgba(201,168,76,0.06);
+      color: var(--gold);
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .article-body {
+      flex: 1;
+    }
+
+    .article-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+      color: var(--white);
+    }
+
+    .article-meta {
+      font-size: 0.8rem;
+      color: var(--white-dim);
+    }
+
+    /* ====== UPCOMING ====== */
+    .upcoming-card {
+      border-radius: var(--radius-sm);
+      padding: 20px 18px;
+      background: rgba(201,168,76,0.06);
+      border: 1px solid rgba(201,168,76,0.2);
+      margin-top: 8px;
+    }
+
+    .up-title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .up-sub {
+      color: var(--white-dim);
+      font-size: 0.85rem;
+      margin-bottom: 14px;
+    }
+
+    .btn-reserve {
+      display: inline-block;
+      padding: 0.7rem 1.4rem;
+      border-radius: 999px;
+      background: var(--gold);
+      color: var(--black);
+      border: none;
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: all var(--transition);
+      font-family: var(--font-body);
+    }
+
+    .btn-reserve:hover {
+      background: var(--gold-light);
+      transform: translateY(-1px);
     }
 
     /* ====== ANIMATIONS ====== */
@@ -347,9 +294,7 @@
       .navbar { padding: 0.875rem 1.25rem; }
       .navbar-nav { display: none; }
       .page-title { font-size: 1.6rem; }
-      .brief-card { padding: 1.25rem; }
-      .field { flex-direction: column; align-items: flex-start; gap: 0.25rem; }
-      .row-actions { grid-template-columns: 1fr; }
+      .article-icon { width: 48px; height: 48px; }
       .back-btn { width: 38px; height: 38px; }
       .page-logo { width: 38px; height: 38px; }
     }
@@ -374,7 +319,7 @@
           <polyline points="12 19 5 12 12 5"></polyline>
         </svg>
       </a>
-      <div class="page-title-center">Appointment Brief</div>
+      <div class="page-title-center">Latest on brows</div>
       <div class="page-logo">
         <img src="assets/logo.png" alt="CG" />
       </div>
@@ -382,55 +327,52 @@
 
     <!-- CONTENT HEADER -->
     <div class="fade-2">
-      <div class="page-label">Your Brief</div>
-      <div class="page-title">Share this with your brow artist before you arrive.</div>
+      <div class="page-label">Articles & Updates</div>
+      <div class="page-title">Expertise, technique, and what's worth knowing.</div>
+      <p style="color:var(--white-dim); font-size:0.9rem; margin-top:0.25rem;">Stay informed with the latest in brow artistry and design.</p>
     </div>
 
-    <!-- BRIEF CARD -->
-    <div class="brief-card fade-3">
-      <!-- <div class="badge-container">
-        <div class="cm-badge">
-          <span class="c-badge">C</span>
-          <span class="m-badge">M</span>
+    <!-- ARTICLES -->
+    <div class="fade-3">
+      <div class="section-label">Articles</div>
+      <article class="article-card" onclick="openArticle(1)">
+        <div class="article-icon">—</div>
+        <div class="article-body">
+          <div class="article-title">The art of the considered brow</div>
+          <div class="article-meta">3 min read</div>
         </div>
-      </div> -->
+      </article>
 
-      <div class="brief-heading">ARCH · BROW BRIEF</div>
-
-      <div class="field-list">
-        <div class="field">
-          <span class="field-label">Shape</span>
-          <span class="field-value">Soft Arch</span>
+      <article class="article-card" onclick="openArticle(2)">
+        <div class="article-icon">◉</div>
+        <div class="article-body">
+          <div class="article-title">Colour theory for every skin tone</div>
+          <div class="article-meta">4 min read</div>
         </div>
-        <div class="field">
-          <span class="field-label">Colour</span>
-          <span class="field-value">Ash Brown</span>
-        </div>
-        <div class="field">
-          <span class="field-label">Intensity</span>
-          <span class="field-value">Considered</span>
-        </div>
-        <div class="field">
-          <span class="field-label">Face shape</span>
-          <span class="field-value">Oval</span>
-        </div>
-        <div class="field">
-          <span class="field-label">Notes for artist</span>
-          <span class="field-value note">Tap to add notes...</span>
-        </div>
-      </div>
+      </article>
     </div>
 
-    <!-- ACTIONS -->
-    <div class="actions fade-4">
-      <a class="btn-primary" href="recommendation.php">Save as image</a>
-      <div class="row-actions">
-        <a class="btn-secondary" href="#">Via message</a>
-        <a class="btn-secondary" href="#">Via email</a>
+    <!-- UPCOMING -->
+    <div class="fade-4">
+      <div class="section-label">Upcoming sessions</div>
+      <div class="upcoming-card">
+        <div class="up-title">Brow mapping masterclass</div>
+        <div class="up-sub">5 April 2026 · Virtual</div>
+        <button class="btn-reserve" onclick="reserve()">Reserve your place</button>
       </div>
     </div>
 
   </main>
+
+  <script>
+    function openArticle(id) {
+      alert('Open article ' + id + ' — replace with real link.');
+    }
+
+    function reserve() {
+      alert('Reservation requested — integration pending.');
+    }
+  </script>
 
 </body>
 </html>

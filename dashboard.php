@@ -87,7 +87,6 @@
       gap: 1rem;
     }
 
-    /* Profile avatar — top left */
     .nav-avatar {
       width: 42px;
       height: 42px;
@@ -116,7 +115,6 @@
       color: var(--gold);
     }
 
-    /* Brand emblem — top right area */
     .nav-emblem {
       width: 44px;
       height: 44px;
@@ -198,7 +196,7 @@
 
     /* ====== MAIN CONTENT ====== */
     .main {
-      max-width: 900px;
+      max-width: 100%;
       margin: 0 auto;
       padding: 2.5rem 3rem;
       display: flex;
@@ -237,7 +235,6 @@
       gap: 1.5rem;
       position: relative;
       overflow: hidden;
-      max-width: 680px;
     }
 
     .last-look-card::before {
@@ -311,7 +308,6 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1rem;
-      max-width: 680px;
     }
 
     .quick-action {
@@ -359,7 +355,6 @@
       justify-content: space-between;
       cursor: pointer;
       transition: all var(--transition);
-      max-width: 680px;
     }
 
     .next-appt-card:hover {
@@ -453,15 +448,6 @@
 
       .navbar-nav {
         display: none;
-      }
-
-      .quick-actions {
-        max-width: 100%;
-      }
-
-      .last-look-card,
-      .next-appt-card {
-        max-width: 100%;
       }
     }
   </style>

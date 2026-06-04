@@ -2,276 +2,526 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Feature Summary — Royals Arch Brow</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet" />
-  <style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feature Summary — Royals Arch Brow</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
     :root {
-      --black: #0a0a0a;
-      --dark: #111111;
-      --gold: #c9a84c;
-      --gold-light: #d4b96a;
-      --white: #f5f0e8;
-      --white-dim: rgba(245, 240, 232, 0.65);
-      --border: rgba(201, 168, 76, 0.25);
-      --radius: 24px;
-      --transition: 0.25s ease;
-      --font-display: 'Cormorant Garamond', serif;
-      --font-body: 'Montserrat', sans-serif;
+        --black: #0a0a08;
+        --dark: #111111;
+        --dark-card: #1a1a0f;
+        --dark-input: #1c1c15;
+        --gold: #c9a84c;
+        --gold-light: #d4b96a;
+        --gold-dark: #8a6f2e;
+        --gold-muted: rgba(201, 168, 76, 0.12);
+        --white: #f5f0e8;
+        --white-dim: rgba(245, 240, 232, 0.55);
+        --white-faint: rgba(245, 240, 232, 0.15);
+        --border: rgba(201, 168, 76, 0.18);
+        --border-hover: rgba(201, 168, 76, 0.45);
+        --font-display: 'Cormorant Garamond', serif;
+        --font-body: 'Montserrat', sans-serif;
+        --radius: 14px;
+        --radius-sm: 10px;
+        --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
     }
 
-    html,
+    html {
+        font-size: 16px;
+        scroll-behavior: smooth;
+    }
+
     body {
-      min-height: 100%;
+        background: var(--black);
+        color: var(--white);
+        font-family: var(--font-body);
+        font-weight: 300;
+        line-height: 1.6;
+        min-height: 100vh;
+        overflow-x: hidden;
     }
 
-    body {
-      background: var(--black);
-      color: var(--white);
-      font-family: var(--font-body);
-      line-height: 1.5;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
+    a {
+        color: inherit;
+        text-decoration: none;
     }
 
-    .page-wrap {
-      width: 100%;
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 28px 24px;
+    button {
+        cursor: pointer;
+        border: none;
+        outline: none;
+        font-family: var(--font-body);
+        background: none;
     }
 
-    /* Top Bar */
-    .top-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 2.5rem;
+    /* ====== NAVBAR ====== */
+    .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 2.5rem;
+        border-bottom: 1px solid var(--border);
+        background: rgba(10, 10, 8, 0.97);
+        backdrop-filter: blur(20px);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    .navbar-left {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .nav-avatar {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 1.5px solid var(--gold-dark);
+        flex-shrink: 0;
+    }
+
+    .nav-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .navbar-nav {
+        display: flex;
+        align-items: center;
+        gap: 2.5rem;
+        list-style: none;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .navbar-nav a {
+        font-size: 0.65rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--white-dim);
+        transition: color var(--transition);
+        font-weight: 400;
+    }
+
+    .navbar-nav a:hover,
+    .navbar-nav a.active {
+        color: var(--gold);
+    }
+
+    .btn-book {
+        padding: 0.55rem 1.5rem;
+        font-size: 0.65rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        border-radius: 50px;
+        border: 1px solid var(--border);
+        color: var(--white-dim);
+        transition: all var(--transition);
+    }
+
+    .btn-book:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+    }
+
+    .nav-emblem {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 35% 35%, #2a2010, #1a1408);
+        border: 1.5px solid var(--gold-dark);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        overflow: hidden;
+    }
+
+    .nav-emblem img {
+        width: 26px;
+        height: 26px;
+        object-fit: contain;
+    }
+
+    .nav-gold-rule {
+        height: 1px;
+        background: linear-gradient(to right, transparent 0%, var(--gold-dark) 30%, var(--gold-dark) 70%, transparent 100%);
+        opacity: 0.5;
+    }
+
+    /* ====== PAGE TOPBAR (Back Arrow + Title + Logo) ====== */
+    .page-topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.5rem 0;
+        margin-bottom: 1.5rem;
     }
 
     .back-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
-      border: 1px solid var(--gold);
-      color: var(--gold);
-      text-decoration: none;
-      font-size: 1.5rem;
-      transition: transform var(--transition), background var(--transition);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 1px solid var(--gold);
+        color: var(--gold);
+        text-decoration: none;
+        transition: all var(--transition);
+        background: transparent;
+        flex-shrink: 0;
     }
 
     .back-btn:hover {
-      background: rgba(201, 168, 76, 0.15);
-      transform: scale(1.05);
+        background: rgba(201, 168, 76, 0.12);
+        transform: scale(1.05);
     }
 
-    .brand-mark {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 50px;
-      height: 50px;
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 1.6rem;
-      letter-spacing: 0.03em;
-      color: var(--gold);
+    .page-title-center {
+        flex: 1;
+        text-align: center;
+        font-family: var(--font-display);
+        font-size: 0.9rem;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--gold);
+        padding: 0 1rem;
     }
 
-    /* Header Text */
+    .page-logo {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 1px solid var(--gold);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        flex-shrink: 0;
+    }
+
+    .page-logo img {
+        width: 24px;
+        height: 24px;
+        object-fit: contain;
+    }
+
+    /* ====== LAYOUT ====== */
+    .main {
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 0 3rem 2.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.75rem;
+    }
+
+    /* ====== HEADER ====== */
+    .page-label {
+        font-size: 0.6rem;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--gold);
+        font-weight: 500;
+        margin-bottom: 0.2rem;
+    }
+
+    .page-title {
+        font-family: var(--font-display);
+        font-style: italic;
+        font-size: 2rem;
+        font-weight: 400;
+        color: var(--white);
+        line-height: 1.05;
+    }
+
+    /* ====== CONTENT ====== */
     .headline-container {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1.6rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
     }
 
     .headline-text {
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--white-dim);
-      font-size: 0.7rem;
-      font-weight: 500;
-      white-space: nowrap;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--white-dim);
+        font-size: 0.7rem;
+        font-weight: 500;
+        white-space: nowrap;
     }
 
     .headline-rule {
-      flex-grow: 1;
-      height: 1px;
-      background: var(--gold);
-      opacity: 0.6;
+        flex-grow: 1;
+        height: 1px;
+        background: var(--gold);
+        opacity: 0.6;
     }
 
-    /* Feature Copy */
     .feature-copy {
-      font-family: var(--font-display);
-      font-style: italic;
-      font-size: clamp(2rem, 5vw, 2.8rem);
-      line-height: 1.05;
-      margin-bottom: 0.3rem;
-      font-weight: 400;
-      color: var(--white);
+        font-family: var(--font-display);
+        font-style: italic;
+        font-size: clamp(2rem, 5vw, 2.8rem);
+        line-height: 1.05;
+        margin-bottom: 0.3rem;
+        font-weight: 400;
+        color: var(--white);
     }
 
     .feature-copy.faint {
-      font-style: normal;
-      font-family: var(--font-body);
-      font-size: 0.85rem;
-      font-weight: 400;
-      color: var(--white-dim);
-      margin-top: 1.8rem;
-      margin-bottom: 0.2rem;
+        font-style: normal;
+        font-family: var(--font-body);
+        font-size: 0.85rem;
+        font-weight: 400;
+        color: var(--white-dim);
+        margin-top: 1.8rem;
+        margin-bottom: 0.2rem;
     }
 
-    /* Tags Chips */
+    /* ====== TAGS ====== */
     .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.7rem;
-      margin-top: 2rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.7rem;
+        margin-top: 2rem;
     }
 
     .tag {
-      padding: 0.7rem 1.6rem;
-      border-radius: 999px;
-      border: 1px solid var(--gold);
-      color: var(--gold);
-      text-align: center;
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      font-weight: 500;
-      background: rgba(201, 168, 76, 0.06);
-      transition: transform var(--transition), box-shadow var(--transition);
-      cursor: default;
-      white-space: nowrap;
+        padding: 0.7rem 1.6rem;
+        border-radius: 999px;
+        border: 1px solid var(--gold);
+        color: var(--gold);
+        text-align: center;
+        font-size: 0.65rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        font-weight: 500;
+        background: rgba(201, 168, 76, 0.06);
+        transition: all var(--transition);
+        cursor: default;
+        white-space: nowrap;
     }
 
     .tag:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 8px 30px rgba(201, 168, 76, 0.08);
+        transform: translateY(-1px);
+        box-shadow: 0 8px 30px rgba(201, 168, 76, 0.08);
     }
 
-    /* CTA Buttons */
-    .cta-wrap {
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-      margin-top: 1.2rem;
+    /* ====== BUTTONS ====== */
+    .actions {
+        display: grid;
+        gap: 0.75rem;
+        width: 100%;
+        max-width: 460px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 0.85rem 1.2rem;
+        border-radius: 999px;
+        font-size: 0.75rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all var(--transition);
+        cursor: pointer;
+        border: none;
+        font-family: var(--font-body);
     }
 
     .btn-primary {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      gap: 0.5rem;
-      width: 100%;
-      padding: 1rem 1.25rem;
-      border-radius: 999px;
-      border: none;
-      background: #222;
-      /* Dark Grey Pill */
-      color: var(--white);
-      text-transform: uppercase;
-      font-size: 0.85rem;
-      letter-spacing: 0.14em;
-      font-weight: 600;
-      text-decoration: none;
-      transition: transform var(--transition), background var(--transition);
+        background: transparent;
+        border: 1px solid var(--border);
+        color: var(--white);
+        border-radius: 27px;
+        padding: 10px;
+        text-align: center;
     }
 
     .btn-primary:hover {
-      background: #333;
-      transform: translateY(-1px);
+        border-color: var(--gold);
+        color: var(--gold);
     }
 
     .link-secondary {
-      display: inline-flex;
-      justify-content: center;
-      color: var(--gold);
-      /* Gold Link */
-      text-decoration: none;
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      font-weight: 500;
-      transition: opacity var(--transition);
+        text-align: center;
+        color: var(--gold);
+        font-size: 0.75rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        font-weight: 500;
+        text-decoration: none;
+        transition: opacity var(--transition);
     }
 
     .link-secondary:hover {
-      opacity: 0.75;
+        opacity: 0.75;
     }
 
-    .logo-mark img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
+    /* ====== ANIMATIONS ====== */
+    @keyframes fadeUp {
+        from {
+            opacity: 0;
+            transform: translateY(16px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
-    @media (max-width: 480px) {
-      .headline-container {
-        gap: 0.6rem;
-      }
-
-      .headline-text {
-        font-size: 0.65rem;
-      }
-
-      .feature-copy {
-        font-size: 2rem;
-      }
-
-      .tag {
-        padding: 0.6rem 1.2rem;
-        font-size: 0.6rem;
-      }
+    .fade-1 {
+        animation: fadeUp 0.55s ease 0.05s both;
     }
-  </style>
+
+    .fade-2 {
+        animation: fadeUp 0.55s ease 0.15s both;
+    }
+
+    .fade-3 {
+        animation: fadeUp 0.55s ease 0.25s both;
+    }
+
+    .fade-4 {
+        animation: fadeUp 0.55s ease 0.35s both;
+    }
+
+    .fade-5 {
+        animation: fadeUp 0.55s ease 0.45s both;
+    }
+
+    /* ====== RESPONSIVE ====== */
+    @media (max-width: 900px) {
+        .main {
+            padding: 0 1.25rem 1.5rem;
+        }
+
+        .navbar {
+            padding: 0.875rem 1.25rem;
+        }
+
+        .navbar-nav {
+            display: none;
+        }
+
+        .page-title {
+            font-size: 1.6rem;
+        }
+
+        .feature-copy {
+            font-size: 2rem;
+        }
+
+        .tag {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.6rem;
+        }
+
+        .back-btn {
+            width: 38px;
+            height: 38px;
+        }
+
+        .page-logo {
+            width: 38px;
+            height: 38px;
+        }
+    }
+    </style>
 </head>
 
 <body>
-  <main class="page-wrap">
-    <div class="top-bar">
-      <a class="back-btn" href="onboarding-style.php" aria-label="Back">&#8592;</a>
-      <div class="logo-mark"><img src="assets/logo.png" alt="CG logo" /></div>
-    </div>
 
-    <div class="headline-container">
-      <span class="headline-text">What your features tell us</span>
-      <span class="headline-rule"></span>
-    </div>
+    <!-- NAVBAR -->
+    <?php include 'includes/navbar.php'; ?>
 
-    <div class="feature-copy">A naturally elevated arch.</div>
-    <div class="feature-copy">Strong symmetry.</div>
-    <div class="feature-copy">The kind of face that carries a considered shape with ease.</div>
+    <!-- Gold rule -->
+    <div class="nav-gold-rule"></div>
 
-    <div class="tags">
-      <div class="tag">Oval face</div>
-      <div class="tag">High arch</div>
-      <div class="tag">Strong brow bone</div>
-    </div>
+    <!-- MAIN CONTENT -->
+    <main class="main">
 
-    <div class="feature-copy faint">Your recommendations are ready.</div>
+        <!-- PAGE TOPBAR (Back Arrow + Title + Logo) -->
+        <div class="page-topbar fade-1">
+            <a href="javascript:history.back()" class="back-btn" aria-label="Go back">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+            </a>
+            <div class="page-title-center">Feature Summary</div>
+            <div class="page-logo">
+                <img src="assets/logo.png" alt="CG" />
+            </div>
+        </div>
 
-    <div class="cta-wrap">
-      <a class="btn-primary" href="choose-style.php">See what suits your features</a>
-      <a class="link-secondary" href="browse-styles.php">Browse all styles instead</a>
-    </div>
-  </main>
+        <!-- CONTENT HEADER -->
+        <div class="fade-2">
+            <div class="page-label">Feature Summary</div>
+            <div class="page-title">What your features tell us</div>
+        </div>
+
+        <!-- HEADLINE CONTAINER -->
+        <div class="headline-container fade-3">
+            <span class="headline-text">What your features tell us</span>
+            <span class="headline-rule"></span>
+        </div>
+
+        <!-- FEATURE COPY -->
+        <div class="fade-4">
+            <div class="feature-copy">A naturally elevated arch.</div>
+            <div class="feature-copy">Strong symmetry.</div>
+            <div class="feature-copy">The kind of face that carries a considered shape with ease.</div>
+        </div>
+
+        <!-- TAGS -->
+        <div class="tags fade-4">
+            <div class="tag">Oval face</div>
+            <div class="tag">High arch</div>
+            <div class="tag">Strong brow bone</div>
+        </div>
+
+        <div class="feature-copy faint">Your recommendations are ready.</div>
+
+        <!-- ACTIONS -->
+        <div class="actions fade-5">
+            <a class="btn-primary" href="choose-style.php">See what suits your features</a>
+            <a class="link-secondary" href="browse-styles.php">Browse all styles instead</a>
+        </div>
+
+    </main>
+
 </body>
 
 </html>

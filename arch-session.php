@@ -51,7 +51,7 @@
       background: none;
     }
 
-    /* ====== NAVBAR (Same as Dashboard) ====== */
+    /* ====== NAVBAR ====== */
     .navbar {
       display: flex;
       align-items: center;
@@ -64,12 +64,14 @@
       top: 0;
       z-index: 100;
     }
+
     .navbar-left { display: flex; align-items: center; gap: 1rem; }
     .nav-avatar {
       width: 42px; height: 42px; border-radius: 50%; overflow: hidden;
       border: 1.5px solid var(--gold-dark); flex-shrink: 0;
     }
     .nav-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
     .navbar-nav {
       display: flex; align-items: center; gap: 2.5rem; list-style: none;
       position: absolute; left: 50%; transform: translateX(-50%);
@@ -79,12 +81,14 @@
       color: var(--white-dim); transition: color var(--transition); font-weight: 400;
     }
     .navbar-nav a:hover, .navbar-nav a.active { color: var(--gold); }
+
     .btn-book {
       padding: 0.55rem 1.5rem; font-size: 0.65rem; letter-spacing: 0.12em;
       text-transform: uppercase; border-radius: 50px; border: 1px solid var(--border);
       color: var(--white-dim); transition: all var(--transition);
     }
     .btn-book:hover { border-color: var(--gold); color: var(--gold); }
+
     .nav-emblem {
       width: 44px; height: 44px; border-radius: 50%;
       background: radial-gradient(circle at 35% 35%, #2a2010, #1a1408);
@@ -92,6 +96,7 @@
       justify-content: center; flex-shrink: 0; overflow: hidden;
     }
     .nav-emblem img { width: 26px; height: 26px; object-fit: contain; }
+
     .nav-gold-rule {
       height: 1px; background: linear-gradient(to right, transparent 0%, var(--gold-dark) 30%, var(--gold-dark) 70%, transparent 100%);
       opacity: 0.5;
@@ -99,7 +104,7 @@
 
     /* ====== LAYOUT ====== */
     .main {
-      max-width: 900px;
+      max-width: 100%;
       margin: 0 auto;
       padding: 2.5rem 3rem;
       display: flex;
@@ -126,7 +131,6 @@
       display: flex;
       flex-direction: column;
       gap: 1.25rem;
-      max-width: 680px;
     }
 
     .session-card {
@@ -248,7 +252,7 @@
       .main { padding: 1.5rem 1.25rem; }
       .navbar { padding: 0.875rem 1.25rem; }
       .navbar-nav { display: none; }
-      .session-options { max-width: 100%; }
+      .session-card { padding: 1.25rem 1.5rem; gap: 1rem; }
       .session-title { font-size: 1.2rem; }
     }
   </style>
@@ -256,7 +260,7 @@
 
 <body>
 
-  <!-- NAVBAR (Same as Dashboard) -->
+  <!-- NAVBAR -->
   <?php include 'includes/navbar.php'; ?>
 
   <div class="nav-gold-rule"></div>

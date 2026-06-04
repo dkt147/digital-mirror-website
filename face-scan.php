@@ -51,12 +51,12 @@
       background: none;
     }
 
-    /* ====== NAVBAR (Compact for this page) ====== */
-    .navbar-compact {
+    /* ====== NAVBAR ====== */
+    .navbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1.25rem 2.5rem;
+      padding: 1rem 2.5rem;
       border-bottom: 1px solid var(--border);
       background: rgba(10, 10, 8, 0.97);
       backdrop-filter: blur(20px);
@@ -65,27 +65,29 @@
       z-index: 100;
     }
 
-    .nav-back-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: 1px solid var(--border);
-      color: var(--gold);
-      transition: all var(--transition);
-      background: var(--dark-input);
+    .navbar-left { display: flex; align-items: center; gap: 1rem; }
+    .nav-avatar {
+      width: 42px; height: 42px; border-radius: 50%; overflow: hidden;
+      border: 1.5px solid var(--gold-dark); flex-shrink: 0;
     }
-    .nav-back-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .nav-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-    .nav-center-title {
-      font-size: 0.65rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-weight: 400;
+    .navbar-nav {
+      display: flex; align-items: center; gap: 2.5rem; list-style: none;
+      position: absolute; left: 50%; transform: translateX(-50%);
     }
+    .navbar-nav a {
+      font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--white-dim); transition: color var(--transition); font-weight: 400;
+    }
+    .navbar-nav a:hover, .navbar-nav a.active { color: var(--gold); }
+
+    .btn-book {
+      padding: 0.55rem 1.5rem; font-size: 0.65rem; letter-spacing: 0.12em;
+      text-transform: uppercase; border-radius: 50px; border: 1px solid var(--border);
+      color: var(--white-dim); transition: all var(--transition);
+    }
+    .btn-book:hover { border-color: var(--gold); color: var(--gold); }
 
     .nav-emblem {
       width: 44px; height: 44px; border-radius: 50%;
@@ -94,29 +96,95 @@
       justify-content: center; flex-shrink: 0; overflow: hidden;
     }
     .nav-emblem img { width: 26px; height: 26px; object-fit: contain; }
-    .nav-emblem-fallback {
-      font-family: var(--font-display); font-style: italic; font-size: 1.3rem; color: var(--gold);
-    }
 
     .nav-gold-rule {
       height: 1px; background: linear-gradient(to right, transparent 0%, var(--gold-dark) 30%, var(--gold-dark) 70%, transparent 100%);
       opacity: 0.5;
     }
 
-    /* ====== MAIN CONTENT ====== */
-    .main {
-      max-width: 480px;
-      margin: 0 auto;
-      padding: 2.5rem 2rem;
+    /* ====== PAGE TOPBAR (Back Arrow + Title + Logo) ====== */
+    .page-topbar {
       display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
       align-items: center;
-      min-height: calc(100vh - 100px);
-      text-align: center;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      margin-bottom: 1.5rem;
     }
 
-    /* ====== FACE SCAN GRAPHIC ====== */
+    .back-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      text-decoration: none;
+      transition: all var(--transition);
+      background: transparent;
+      flex-shrink: 0;
+    }
+
+    .back-btn:hover {
+      background: rgba(201,168,76,0.12);
+      transform: scale(1.05);
+    }
+
+    .page-title-center {
+      flex: 1;
+      text-align: center;
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      padding: 0 1rem;
+    }
+
+    .page-logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .page-logo img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+    }
+
+    /* ====== LAYOUT ====== */
+    .main {
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 0 3rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+    }
+
+    /* ====== HEADER ====== */
+    .page-label {
+      font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gold); font-weight: 500; margin-bottom: 0.2rem;
+    }
+    .page-title {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 2rem;
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.05;
+    }
+
+    /* ====== SCAN GRAPHIC ====== */
     .scan-graphic-wrapper {
       position: relative;
       width: 200px;
@@ -182,11 +250,7 @@
       border-right: 2px solid var(--gold);
     }
 
-    /* ====== TEXT CONTENT ====== */
-    .headline-wrapper {
-      max-width: 90%;
-    }
-
+    /* ====== CONTENT ====== */
     .headline-text {
       font-family: var(--font-display);
       font-style: italic;
@@ -224,49 +288,84 @@
     }
 
     /* ====== BUTTONS ====== */
-    .action-btn {
+    .actions {
+      display: grid;
+      gap: 0.75rem;
       width: 100%;
-      max-width: 320px;
-      padding: 1.1rem 1.5rem;
-      border-radius: 50px;
-      background: var(--dark-input);
-      border: 1px solid var(--border);
-      color: var(--white);
-      font-weight: 500;
-      font-size: 0.7rem;
+      max-width: 460px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 0.85rem 1.2rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
+      font-weight: 600;
+      text-decoration: none;
       transition: all var(--transition);
-      margin-top: 0.5rem;
+      cursor: pointer;
+      border: none;
+      font-family: var(--font-body);
     }
 
-    .action-btn:hover {
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--white);
+    }
+
+    .btn-secondary:hover {
       border-color: var(--gold);
-      background: var(--gold-muted);
-      box-shadow: 0 4px 20px rgba(201, 168, 76, 0.1);
+      color: var(--gold);
     }
 
-    .action-btn-primary {
-      background: #282828;
-      border-color: #333;
+    .btn-primary {
+      background: var(--gold);
+      color: var(--black);
     }
 
-    .action-btn-primary:hover {
-      background: #333;
-      border-color: var(--gold);
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-1px);
     }
 
     .text-link {
-      margin-top: 1rem;
-      font-size: 0.7rem;
+      text-align: center;
       color: var(--gold);
+      font-size: 0.8rem;
       cursor: pointer;
-      transition: all var(--transition);
+      transition: opacity var(--transition);
       font-weight: 400;
-      letter-spacing: 0.05em;
     }
 
-    .text-link:hover { opacity: 0.7; }
+    .text-link:hover {
+      opacity: 0.7;
+    }
+
+    /* ====== TOAST ====== */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #1c1c12;
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 0.7rem 1.5rem;
+      font-size: 0.75rem;
+      color: var(--white);
+      z-index: 9999;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: all 0.35s ease;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
 
     /* ====== ANIMATIONS ====== */
     @keyframes pulseBorder {
@@ -289,94 +388,70 @@
     .fade-4 { animation: fadeUp 0.55s ease 0.35s both; }
     .fade-5 { animation: fadeUp 0.55s ease 0.45s both; }
 
-    /* ====== TOAST ====== */
-    .toast {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      background: #1c1c12;
-      border: 1px solid var(--border);
-      border-radius: 50px;
-      padding: 0.7rem 1.5rem;
-      font-size: 0.75rem;
-      color: var(--white);
-      z-index: 9999;
-      transform: translateY(20px);
-      opacity: 0;
-      transition: all 0.35s ease;
-    }
-    .toast.show { transform: translateY(0); opacity: 1; }
-
     /* ====== RESPONSIVE ====== */
-    @media (max-width: 600px) {
-      .main { padding: 1.5rem 1rem; }
+    @media (max-width: 900px) {
+      .main { padding: 0 1.25rem 1.5rem; }
+      .navbar { padding: 0.875rem 1.25rem; }
+      .navbar-nav { display: none; }
+      .scan-graphic-wrapper { width: 160px; height: 210px; }
       .headline-text { font-size: 1.8rem; }
-      .navbar-compact { padding: 0.75rem 1.25rem; }
-      .action-btn { max-width: 100%; }
+      .back-btn { width: 38px; height: 38px; }
+      .page-logo { width: 38px; height: 38px; }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- COMPACT NAVBAR -->
-  <nav class="navbar-compact fade-1">
-    <button class="nav-back-btn" onclick="goBack()">
-      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <line x1="19" y1="12" x2="5" y2="12" />
-        <polyline points="12 19 5 12 12 5" />
-      </svg>
-    </button>
+  <!-- NAVBAR -->
+  <?php include 'includes/navbar.php'; ?>
 
-    <div class="nav-center-title">Face Scan</div>
-
-    <div class="nav-emblem">
-      <img src="assets/logo.png" alt="Arch"
-        onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'nav-emblem-fallback\'>G</span>'" />
-    </div>
-  </nav>
-
+  <!-- Gold rule -->
   <div class="nav-gold-rule"></div>
 
   <!-- MAIN CONTENT -->
   <main class="main">
 
-    <!-- GRAPHIC -->
-    <div class="scan-graphic-wrapper fade-2">
+    <!-- PAGE TOPBAR (Back Arrow + Title + Logo) -->
+    <div class="page-topbar fade-1">
+      <a href="javascript:history.back()" class="back-btn" aria-label="Go back">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+      </a>
+      <div class="page-title-center">Face Scan</div>
+      <div class="page-logo">
+        <img src="assets/logo.png" alt="CG" />
+      </div>
+    </div>
+
+    <!-- CONTENT HEADER -->
+    <div class="fade-2">
+      <div class="page-label">Face Scan</div>
+      <div class="page-title">First, we scan your features.</div>
+      <p style="color:var(--white-dim); font-size:0.9rem; margin-top:0.25rem;">A lot of your face shape. Everything that follows is built around what we find.</p>
+    </div>
+
+    <!-- SCAN GRAPHIC -->
+    <div class="scan-graphic-wrapper fade-3">
       <div class="scan-frame"></div>
       <div class="scan-dashed"></div>
       <div class="scan-face">
-        <!-- Eyebrow shape SVG -->
         <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Left eyebrow -->
           <path d="M10 30 C 25 15, 45 20, 45 35" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" />
-          <!-- Right eyebrow -->
           <path d="M90 30 C 75 15, 55 20, 55 35" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" />
-          <!-- Center dot -->
           <circle cx="50" cy="55" r="1" fill="var(--gold)" stroke="none" />
         </svg>
       </div>
-      <!-- Corner Brackets -->
       <div class="scan-corner-tl"></div>
       <div class="scan-corner-tr"></div>
       <div class="scan-corner-bl"></div>
       <div class="scan-corner-br"></div>
     </div>
 
-    <!-- HEADLINE TEXT -->
-    <div class="headline-wrapper fade-3">
-      <div class="headline-text">
-        First, <span>we scan</span><br />your features.
-      </div>
-    </div>
-
-    <!-- SUBTEXT -->
-    <div class="fade-4" style="width: 100%;">
-      <div class="sub-line">
-        A lot of your face shape.<br />
-        Everything that follows is built around what we find.
-      </div>
-
+    <!-- CONTENT -->
+    <div class="fade-4">
       <div class="privacy-line">
         <svg class="privacy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
@@ -385,15 +460,11 @@
       </div>
     </div>
 
-    <!-- BEGIN SCAN BUTTON -->
-    <button class="action-btn action-btn-primary fade-5" onclick="startScan()">
-      Begin Scan
-    </button>
-
-    <!-- BROWSE STYLES DIRECTLY -->
-    <a href="arch-session.php" class="text-link fade-5">
-      Browse styles directly
-    </a>
+    <!-- ACTIONS -->
+    <div class="actions fade-5">
+      <button class="btn btn-primary" onclick="startScan()">Begin Scan</button>
+      <a href="arch-session.php" class="text-link">Browse styles directly</a>
+    </div>
 
   </main>
 
@@ -401,21 +472,13 @@
 
   <script>
     function startScan() {
-      // Actual scanning logic would go here
       showToast('Scanning your face...');
-      
-      // Simulate a scan process
       setTimeout(() => {
         showToast('Scan complete!');
-        // Redirect to results page after a moment
         setTimeout(() => {
           window.location.href = 'scan-results.php';
         }, 1000);
       }, 2000);
-    }
-
-    function goBack() {
-      window.history.back();
     }
 
     function showToast(msg) {

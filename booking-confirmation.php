@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Appointment Brief — Royals Arch Brow</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Confirmed — Royals Arch Brow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     :root {
       --black: #0a0a08;
       --dark: #111111;
@@ -180,103 +187,71 @@
       line-height: 1.05;
     }
 
-    /* ====== BRIEF CARD ====== */
-    .brief-card {
-      position: relative;
+    /* ====== CONFIRMATION CARD ====== */
+    .confirmation-card {
       background: #161610;
       border: 1px solid var(--gold);
       border-radius: var(--radius);
-      padding: 1.75rem 1.5rem;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      position: relative;
     }
 
-    .brief-heading {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      color: var(--gold);
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-      font-weight: 500;
-    }
-
-    .field-list {
-      display: grid;
-      gap: 0.75rem;
-    }
-
-    .field {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 0.75rem;
-    }
-
-    .field:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.5rem;
-    }
-
-    .field-label {
-      color: var(--gold);
-      font-size: 0.7rem;
-      letter-spacing: 0.08em;
-    }
-
-    .field-value {
-      color: var(--white);
-      font-size: 0.9rem;
-    }
-
-    .field-value.note {
-      color: var(--white-dim);
-      font-size: 0.85rem;
-    }
-
-    /* ====== C/M BADGE ====== */
-    .badge-container {
-      position: absolute;
-      top: -12px;
-      right: 12px;
-      display: flex;
-      align-items: center;
-    }
-
-    .cm-badge {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      background: rgba(30,30,30,0.8);
-      backdrop-filter: blur(4px);
-      padding: 4px 6px;
-      border-radius: 20px;
-      border: 1px solid rgba(255,255,255,0.05);
-    }
-
-    .cm-badge span {
-      width: 28px;
-      height: 28px;
+    .checkmark {
+      width: 72px;
+      height: 72px;
       border-radius: 50%;
+      background: rgba(201,168,76,0.12);
+      border: 1px solid rgba(201,168,76,0.3);
+      display: grid;
+      place-items: center;
+      margin: 0 auto 16px;
+      color: var(--gold);
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--gold);
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .venue {
+      color: var(--white-dim);
+      margin-bottom: 16px;
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      opacity: 0.3;
+      margin: 16px auto;
+      max-width: 120px;
+    }
+
+    .note {
       display: flex;
+      gap: 12px;
       align-items: center;
       justify-content: center;
-      font-size: 10px;
-      font-weight: 700;
-      color: white;
+      color: var(--white-dim);
+      text-align: center;
+      padding: 8px 0;
+      margin-bottom: 20px;
     }
 
-    .c-badge { background: #e86c3e; }
-    .m-badge { background: #5e7da6; }
+    .note .check {
+      color: var(--gold);
+      font-weight: 700;
+    }
 
     /* ====== BUTTONS ====== */
     .actions {
       display: grid;
       gap: 0.75rem;
+      max-width: 320px;
+      margin: 0 auto;
     }
 
     .btn-primary {
@@ -302,32 +277,20 @@
       transform: translateY(-1px);
     }
 
-    .btn-secondary {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      padding: 0.85rem 1.2rem;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: transparent;
-      color: var(--white);
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-decoration: none;
-      transition: all var(--transition);
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--gold);
+    .link-gold {
+      text-align: center;
       color: var(--gold);
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      padding: 6px 0 4px;
+      cursor: pointer;
+      transition: color var(--transition);
+      font-weight: 400;
     }
 
-    .row-actions {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.75rem;
+    .link-gold:hover {
+      color: var(--gold-light);
+      text-decoration: underline;
     }
 
     /* ====== ANIMATIONS ====== */
@@ -347,9 +310,8 @@
       .navbar { padding: 0.875rem 1.25rem; }
       .navbar-nav { display: none; }
       .page-title { font-size: 1.6rem; }
-      .brief-card { padding: 1.25rem; }
-      .field { flex-direction: column; align-items: flex-start; gap: 0.25rem; }
-      .row-actions { grid-template-columns: 1fr; }
+      .confirmation-card { padding: 1.5rem; }
+      .checkmark { width: 64px; height: 64px; }
       .back-btn { width: 38px; height: 38px; }
       .page-logo { width: 38px; height: 38px; }
     }
@@ -374,7 +336,7 @@
           <polyline points="12 19 5 12 12 5"></polyline>
         </svg>
       </a>
-      <div class="page-title-center">Appointment Brief</div>
+      <div class="page-title-center">Confirmed</div>
       <div class="page-logo">
         <img src="assets/logo.png" alt="CG" />
       </div>
@@ -382,55 +344,33 @@
 
     <!-- CONTENT HEADER -->
     <div class="fade-2">
-      <div class="page-label">Your Brief</div>
-      <div class="page-title">Share this with your brow artist before you arrive.</div>
+      <div class="page-label">Booking Confirmed</div>
+      <div class="page-title">Your appointment is confirmed.</div>
     </div>
 
-    <!-- BRIEF CARD -->
-    <div class="brief-card fade-3">
-      <!-- <div class="badge-container">
-        <div class="cm-badge">
-          <span class="c-badge">C</span>
-          <span class="m-badge">M</span>
-        </div>
-      </div> -->
-
-      <div class="brief-heading">ARCH · BROW BRIEF</div>
-
-      <div class="field-list">
-        <div class="field">
-          <span class="field-label">Shape</span>
-          <span class="field-value">Soft Arch</span>
-        </div>
-        <div class="field">
-          <span class="field-label">Colour</span>
-          <span class="field-value">Ash Brown</span>
-        </div>
-        <div class="field">
-          <span class="field-label">Intensity</span>
-          <span class="field-value">Considered</span>
-        </div>
-        <div class="field">
-          <span class="field-label">Face shape</span>
-          <span class="field-value">Oval</span>
-        </div>
-        <div class="field">
-          <span class="field-label">Notes for artist</span>
-          <span class="field-value note">Tap to add notes...</span>
-        </div>
+    <!-- CONFIRMATION CARD -->
+    <div class="confirmation-card fade-3">
+      <div class="checkmark">✓</div>
+      <div class="meta">5 April 2026 · 3:30pm</div>
+      <div class="venue">Studio Royale</div>
+      <div class="divider"></div>
+      <div class="note">
+        <span class="check">✓</span>
+        <span>Your brow brief has been sent to your artist.</span>
       </div>
-    </div>
-
-    <!-- ACTIONS -->
-    <div class="actions fade-4">
-      <a class="btn-primary" href="recommendation.php">Save as image</a>
-      <div class="row-actions">
-        <a class="btn-secondary" href="#">Via message</a>
-        <a class="btn-secondary" href="#">Via email</a>
+      <div class="actions">
+        <button class="btn-primary" onclick="addToCalendar()">Add to calendar</button>
+        <div class="link-gold" onclick="location.href='index.php'">Return to home</div>
       </div>
     </div>
 
   </main>
+
+  <script>
+    function addToCalendar() {
+      alert('Add to calendar — implement ICS or calendar API integration here.');
+    }
+  </script>
 
 </body>
 </html>

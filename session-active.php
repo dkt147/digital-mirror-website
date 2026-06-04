@@ -52,12 +52,12 @@
       background: none;
     }
 
-    /* ====== COMPACT NAVBAR (MATCHING SCAN COMPLETE) ====== */
-    .navbar-compact {
+    /* ====== NAVBAR ====== */
+    .navbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1.25rem 2.5rem;
+      padding: 1rem 2.5rem;
       border-bottom: 1px solid var(--border);
       background: rgba(10, 10, 8, 0.97);
       backdrop-filter: blur(20px);
@@ -66,61 +66,121 @@
       z-index: 100;
     }
 
-    .nav-back-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: 1px solid var(--border);
-      color: var(--gold);
-      transition: all var(--transition);
-      background: var(--dark-input);
+    .navbar-left { display: flex; align-items: center; gap: 1rem; }
+    .nav-avatar {
+      width: 42px; height: 42px; border-radius: 50%; overflow: hidden;
+      border: 1.5px solid var(--gold-dark); flex-shrink: 0;
     }
-    .nav-back-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .nav-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-    .nav-center-title {
-      font-size: 0.65rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-weight: 400;
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
+    .navbar-nav {
+      display: flex; align-items: center; gap: 2.5rem; list-style: none;
+      position: absolute; left: 50%; transform: translateX(-50%);
     }
+    .navbar-nav a {
+      font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--white-dim); transition: color var(--transition); font-weight: 400;
+    }
+    .navbar-nav a:hover, .navbar-nav a.active { color: var(--gold); }
+
+    .btn-book {
+      padding: 0.55rem 1.5rem; font-size: 0.65rem; letter-spacing: 0.12em;
+      text-transform: uppercase; border-radius: 50px; border: 1px solid var(--border);
+      color: var(--white-dim); transition: all var(--transition);
+    }
+    .btn-book:hover { border-color: var(--gold); color: var(--gold); }
 
     .nav-emblem {
       width: 44px; height: 44px; border-radius: 50%;
       background: radial-gradient(circle at 35% 35%, #2a2010, #1a1408);
       border: 1.5px solid var(--gold-dark); display: flex; align-items: center;
       justify-content: center; flex-shrink: 0; overflow: hidden;
-      margin-left: auto;
     }
     .nav-emblem img { width: 26px; height: 26px; object-fit: contain; }
-    .nav-emblem-fallback {
-      font-family: var(--font-display); font-style: italic; font-size: 1.3rem; color: var(--gold);
-    }
 
     .nav-gold-rule {
       height: 1px; background: linear-gradient(to right, transparent 0%, var(--gold-dark) 30%, var(--gold-dark) 70%, transparent 100%);
       opacity: 0.5;
     }
 
-    /* ====== MAIN CONTENT (MATCHING SCAN COMPLETE) ====== */
+    /* ====== PAGE TOPBAR (Back Arrow + Title + Logo) ====== */
+    .page-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      margin-bottom: 1.5rem;
+    }
+
+    .back-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      text-decoration: none;
+      transition: all var(--transition);
+      background: transparent;
+      flex-shrink: 0;
+    }
+
+    .back-btn:hover {
+      background: rgba(201,168,76,0.12);
+      transform: scale(1.05);
+    }
+
+    .page-title-center {
+      flex: 1;
+      text-align: center;
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      padding: 0 1rem;
+    }
+
+    .page-logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .page-logo img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+    }
+
+    /* ====== LAYOUT ====== */
     .main {
-      max-width: 480px;
+      max-width: 100%;
       margin: 0 auto;
-      padding: 2.5rem 2rem;
+      padding: 0 3rem 2.5rem;
       display: flex;
       flex-direction: column;
-      gap: 2rem;
+      gap: 1.75rem;
       align-items: center;
-      flex: 1;
       text-align: center;
     }
 
+    /* ====== ICON ====== */
+    .action-icon {
+      width: 64px; height: 64px;
+      color: var(--gold);
+      opacity: 0.6;
+    }
+
+    /* ====== STATUS ====== */
     .status-title {
       font-family: var(--font-display);
       font-style: italic;
@@ -137,19 +197,21 @@
       max-width: 320px;
     }
 
-    .action-icon {
-      width: 64px; height: 64px;
-      color: var(--gold);
-      opacity: 0.6;
+    /* ====== BUTTONS ====== */
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      width: 100%;
+      max-width: 320px;
     }
 
-    /* ====== BUTTONS (MATCHING) ====== */
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
-      padding: 0.875rem 1.75rem;
+      padding: 0.85rem 1.2rem;
       border-radius: 50px;
       font-size: 0.7rem;
       letter-spacing: 0.15em;
@@ -157,6 +219,9 @@
       font-weight: 500;
       transition: all var(--transition);
       width: 100%;
+      cursor: pointer;
+      border: none;
+      font-family: var(--font-body);
     }
 
     .btn-primary {
@@ -181,14 +246,6 @@
       color: var(--gold);
     }
 
-    .btn-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      width: 100%;
-      max-width: 320px;
-    }
-
     /* ====== TOAST ====== */
     .toast {
       position: fixed;
@@ -207,38 +264,62 @@
     }
     .toast.show { transform: translateY(0); opacity: 1; }
 
+    /* ====== ANIMATIONS ====== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-1 { animation: fadeUp 0.55s ease 0.05s both; }
+    .fade-2 { animation: fadeUp 0.55s ease 0.15s both; }
+    .fade-3 { animation: fadeUp 0.55s ease 0.25s both; }
+    .fade-4 { animation: fadeUp 0.55s ease 0.35s both; }
+    .fade-5 { animation: fadeUp 0.55s ease 0.45s both; }
+
     /* ====== RESPONSIVE ====== */
-    @media (max-width: 600px) {
-      .main { padding: 1.5rem 1rem; }
-      .navbar-compact { padding: 0.75rem 1.25rem; }
+    @media (max-width: 900px) {
+      .main { padding: 0 1.25rem 1.5rem; }
+      .navbar { padding: 0.875rem 1.25rem; }
+      .navbar-nav { display: none; }
+      .page-title { font-size: 1.6rem; }
       .status-title { font-size: 1.6rem; }
+      .back-btn { width: 38px; height: 38px; }
+      .page-logo { width: 38px; height: 38px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- COMPACT NAVBAR (MATCHING SCAN COMPLETE) -->
-  <nav class="navbar-compact">
-    <button class="nav-back-btn" onclick="goBack('arch-session.php')">
-      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <line x1="19" y1="12" x2="5" y2="12" />
-        <polyline points="12 19 5 12 12 5" />
-      </svg>
-    </button>
-    <div class="nav-center-title">Active Session</div>
-    <div class="nav-emblem">
-      <img src="assets/logo.png" alt="Arch"
-        onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'nav-emblem-fallback\'>G</span>'" />
-    </div>
-  </nav>
+  <!-- NAVBAR -->
+  <?php include 'includes/navbar.php'; ?>
 
+  <!-- Gold rule -->
   <div class="nav-gold-rule"></div>
 
-  <!-- MAIN CONTENT (MATCHING SCAN COMPLETE) -->
+  <!-- MAIN CONTENT -->
   <main class="main">
-    
-    <!-- Icon -->
-    <div class="action-icon">
+
+    <!-- PAGE TOPBAR (Back Arrow + Title + Logo) -->
+    <div class="page-topbar fade-1">
+      <a href="javascript:history.back()" class="back-btn" aria-label="Go back">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+      </a>
+      <div class="page-title-center">Session</div>
+      <div class="page-logo">
+        <img src="assets/logo.png" alt="CG" />
+      </div>
+    </div>
+
+    <!-- CONTENT HEADER -->
+    <div class="fade-2">
+      <div class="page-label">Active Session</div>
+      <div class="page-title">Try a Brow Style</div>
+    </div>
+
+    <!-- ICON -->
+    <div class="action-icon fade-3">
       <svg width="64" height="64" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
         <circle cx="12" cy="12" r="10"/>
         <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
@@ -247,14 +328,14 @@
       </svg>
     </div>
 
-    <!-- Heading -->
-    <h1 id="session-mode" class="status-title">Try a Brow Style</h1>
+    <!-- STATUS -->
+    <div class="fade-4">
+      <h1 id="session-mode" class="status-title">Try a Brow Style</h1>
+      <p class="status-sub">This feature would activate your camera or photo upload. Full camera integration is available in the mobile app.</p>
+    </div>
 
-    <!-- Subtext -->
-    <p class="status-sub">This feature would activate your camera or photo upload. Full camera integration is available in the mobile app.</p>
-
-    <!-- Action Buttons -->
-    <div class="btn-group">
+    <!-- BUTTONS -->
+    <div class="btn-group fade-5">
       <button class="btn btn-primary" onclick="showToast('Camera feature available in mobile app','info')">Open Camera</button>
       <button class="btn btn-secondary" onclick="showToast('Upload coming soon','info')">Upload a Photo</button>
     </div>
@@ -264,10 +345,6 @@
   <div class="toast" id="toast"></div>
 
   <script>
-    function goBack(target) {
-      window.location.href = target;
-    }
-
     function showToast(msg, type = 'info') {
       const toast = document.getElementById('toast');
       if (!toast) return;
