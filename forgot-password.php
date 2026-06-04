@@ -1,225 +1,133 @@
-﻿<!DOCTYPE html>
+﻿<?php include 'config.php'; ?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Forgot Password — Royals Arch Brow</title>
+  <title>Forgot Password — Arch</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    /* … your existing CSS – unchanged … */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --black: #0a0a08;
-      --dark: #111111;
-      --dark-card: #1a1a0f;
-      --dark-input: #1c1c15;
       --gold: #c9a84c;
       --gold-light: #d4b96a;
       --gold-dark: #8a6f2e;
       --gold-muted: rgba(201, 168, 76, 0.12);
+      --gold-bg-hover: rgba(201, 168, 76, 0.08);
+      --black: #0a0a0a;
       --white: #f5f0e8;
-      --white-dim: rgba(245, 240, 232, 0.55);
+      --white-dim: rgba(245, 240, 232, 0.6);
       --white-faint: rgba(245, 240, 232, 0.15);
-      --border: rgba(201, 168, 76, 0.18);
-      --border-hover: rgba(201, 168, 76, 0.45);
+      --border: rgba(201, 168, 76, 0.2);
+      --border-focus: rgba(201, 168, 76, 0.5);
+      --red-bg: rgba(139, 32, 32, 0.2);
+      --red-border: #8b2020;
+      --btn-dark: #232323;
+      --radius: 24px;
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       --font-display: 'Cormorant Garamond', serif;
       --font-body: 'Montserrat', sans-serif;
-      --radius: 14px;
-      --radius-sm: 10px;
-      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { font-size: 16px; scroll-behavior: smooth; }
     body {
       background: var(--black);
       color: var(--white);
       font-family: var(--font-body);
       font-weight: 300;
-      line-height: 1.6;
       min-height: 100vh;
-      overflow-x: hidden;
-    }
-    a { color: inherit; text-decoration: none; }
-    button {
-      cursor: pointer;
-      border: none;
-      outline: none;
-      font-family: var(--font-body);
-      background: none;
-    }
-
-    /* ====== NAVBAR ====== */
-    .navbar {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 1rem 2.5rem;
-      border-bottom: 1px solid var(--border);
-      background: rgba(10, 10, 8, 0.97);
-      backdrop-filter: blur(20px);
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      justify-content: center;
+      padding: 40px 20px;
     }
 
-    .navbar-left { display: flex; align-items: center; gap: 1rem; }
-    .nav-avatar {
-      width: 42px; height: 42px; border-radius: 50%; overflow: hidden;
-      border: 1.5px solid var(--gold-dark); flex-shrink: 0;
-    }
-    .nav-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-    .navbar-nav {
-      display: flex; align-items: center; gap: 2.5rem; list-style: none;
-      position: absolute; left: 50%; transform: translateX(-50%);
-    }
-    .navbar-nav a {
-      font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--white-dim); transition: color var(--transition); font-weight: 400;
-    }
-    .navbar-nav a:hover, .navbar-nav a.active { color: var(--gold); }
-
-    .btn-book {
-      padding: 0.55rem 1.5rem; font-size: 0.65rem; letter-spacing: 0.12em;
-      text-transform: uppercase; border-radius: 50px; border: 1px solid var(--border);
-      color: var(--white-dim); transition: all var(--transition);
-    }
-    .btn-book:hover { border-color: var(--gold); color: var(--gold); }
-
-    .nav-emblem {
-      width: 44px; height: 44px; border-radius: 50%;
-      background: radial-gradient(circle at 35% 35%, #2a2010, #1a1408);
-      border: 1.5px solid var(--gold-dark); display: flex; align-items: center;
-      justify-content: center; flex-shrink: 0; overflow: hidden;
-    }
-    .nav-emblem img { width: 26px; height: 26px; object-fit: contain; }
-
-    .nav-gold-rule {
-      height: 1px; background: linear-gradient(to right, transparent 0%, var(--gold-dark) 30%, var(--gold-dark) 70%, transparent 100%);
-      opacity: 0.5;
+    .forgot-card {
+      width: 100%;
+      max-width: 680px;
+      background: rgba(255, 255, 255, 0.01);
+      border: 1px solid var(--border);
+      border-radius: 48px;
+      padding: 48px 56px 40px;
+      backdrop-filter: blur(2px);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.7);
     }
 
-    /* ====== PAGE TOPBAR (Back Arrow + Title + Logo) ====== */
-    .page-topbar {
+    /* Back Button */
+    .back-btn-container {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 0.5rem 0;
+      justify-content: flex-start;
       margin-bottom: 1.5rem;
     }
 
-    .back-btn {
+    .back-btn-circle {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 44px;
-      height: 44px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
       border: 1px solid var(--gold);
-      color: var(--gold);
-      text-decoration: none;
-      transition: all var(--transition);
       background: transparent;
-      flex-shrink: 0;
-    }
-
-    .back-btn:hover {
-      background: rgba(201,168,76,0.12);
-      transform: scale(1.05);
-    }
-
-    .page-title-center {
-      flex: 1;
-      text-align: center;
-      font-family: var(--font-display);
-      font-size: 0.9rem;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
+      cursor: pointer;
+      transition: all var(--transition);
       color: var(--gold);
-      padding: 0 1rem;
     }
 
-    .page-logo {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      border: 1px solid var(--gold);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      flex-shrink: 0;
+    .back-btn-circle:hover {
+      background: var(--gold-muted);
+      border-color: var(--gold-light);
+      transform: scale(1.02);
     }
 
-    .page-logo img {
-      width: 24px;
-      height: 24px;
+    .back-btn-circle svg {
+      width: 22px;
+      height: 22px;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      fill: none;
+    }
+
+    /* Logo */
+    .logo-wrap {
+      text-align: center;
+      margin-bottom: 0.25rem;
+    }
+
+    .logo-wrap img {
+      width: 56px;
+      height: 56px;
       object-fit: contain;
     }
 
-    /* ====== LAYOUT ====== */
-    .main {
-      max-width: 100%;
-      margin: 0 auto;
-      padding: 0 3rem 2.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1.75rem;
-    }
-
-    /* ====== HEADER ====== */
-    .page-label {
-      font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase;
-      color: var(--gold); font-weight: 500; margin-bottom: 0.2rem;
-    }
-    .page-title {
-      font-family: var(--font-display);
-      font-style: italic;
-      font-size: 2rem;
-      font-weight: 400;
-      color: var(--white);
-      line-height: 1.05;
-    }
-
-    /* ====== FORGOT CARD ====== */
-    .forgot-card {
-      background: #161610;
-      border: 1px solid var(--gold);
-      border-radius: var(--radius);
-      padding: 2rem 1.5rem;
-    }
-
+    /* Heading */
     .form-heading {
       text-align: center;
-      margin-bottom: 1.5rem;
+      margin-bottom: 2.25rem;
     }
 
     .form-heading h1 {
       font-family: var(--font-display);
       font-style: italic;
       font-weight: 400;
-      font-size: 2.2rem;
+      font-size: 3rem;
       color: var(--white);
       line-height: 1.05;
     }
 
     .form-heading p {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       color: var(--gold);
       margin-top: 0.2rem;
-      font-weight: 300;
     }
 
-    /* ====== FORM ====== */
+    /* Form */
     .forgot-form {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 1.5rem;
     }
 
     .form-group {
@@ -234,7 +142,7 @@
 
     .form-label {
       position: absolute;
-      top: 0.5rem;
+      top: 0.55rem;
       left: 1.25rem;
       font-size: 0.55rem;
       letter-spacing: 0.18em;
@@ -249,14 +157,18 @@
     .form-input {
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
+      border-radius: var(--radius);
       padding: 1.6rem 1.25rem 0.7rem 1.25rem;
       color: var(--white);
       font-size: 1rem;
       font-weight: 300;
       transition: all var(--transition);
-      min-height: 68px;
+      min-height: 72px;
       width: 100%;
+    }
+
+    .form-input::placeholder {
+      color: transparent;
     }
 
     .form-input:focus {
@@ -267,7 +179,7 @@
 
     .form-input:hover {
       border-color: var(--gold);
-      background: var(--gold-muted);
+      background: var(--gold-bg-hover);
     }
 
     .form-input:hover + .form-label,
@@ -284,13 +196,31 @@
       color: var(--gold);
     }
 
+    .form-input.valid:hover {
+      border-color: var(--gold-light);
+      background: var(--gold-bg-hover);
+    }
+
+    .form-input.valid:hover + .form-label {
+      color: var(--gold-light);
+    }
+
     .form-input.error {
-      border-color: #e05c5c;
-      background: rgba(139, 32, 32, 0.1);
+      border-color: var(--red-border);
+      background: var(--red-bg);
     }
 
     .form-input.error + .form-label {
       color: #e05c5c;
+    }
+
+    .form-input.error:hover {
+      border-color: var(--gold);
+      background: var(--gold-bg-hover);
+    }
+
+    .form-input.error:hover + .form-label {
+      color: var(--gold-light);
     }
 
     .form-error {
@@ -301,58 +231,68 @@
       min-height: 1.3em;
     }
 
-    .spam-notice {
+    /* Server message */
+    .server-message {
       text-align: center;
-      font-size: 0.85rem;
-      color: var(--white-dim);
-      margin: 0.5rem 0 1rem;
-      line-height: 1.5;
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+      min-height: 1.2em;
+    }
+    .server-message.error {
+      color: #e05c5c;
+    }
+    .server-message.success {
+      color: var(--gold-light);
     }
 
-    /* ====== BUTTONS ====== */
-    .actions {
-      display: grid;
-      gap: 0.75rem;
-    }
-
+    /* Button */
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 100%;
-      padding: 0.85rem 1.2rem;
-      border-radius: 999px;
-      font-size: 0.75rem;
-      letter-spacing: 0.12em;
+      gap: 0.5rem;
+      padding: 1rem 1.75rem;
+      border-radius: var(--radius);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
       font-weight: 600;
-      text-decoration: none;
       transition: all var(--transition);
-      cursor: pointer;
-      border: none;
-      font-family: var(--font-body);
+      width: 100%;
+      min-height: 60px;
+      margin-top: 0.25rem;
     }
 
     .btn-primary {
-      background: transparent;
-      border: 1px solid var(--border);
+      background: var(--btn-dark);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       color: var(--white);
     }
 
     .btn-primary:hover {
       border-color: var(--gold);
-      color: var(--gold);
+      background: var(--gold-bg-hover);
+      color: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(201, 168, 76, 0.15);
     }
 
-    .back-link {
+    /* Bottom link */
+    .signin-copy {
       text-align: center;
+      font-size: 0.75rem;
+      color: var(--white-dim);
+      margin-top: 1.25rem;
+    }
+
+    .signin-copy a {
       color: var(--gold);
-      font-size: 0.8rem;
-      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 0.05em;
       transition: opacity var(--transition);
     }
 
-    .back-link:hover {
+    .signin-copy a:hover {
       opacity: 0.7;
     }
 
@@ -360,107 +300,108 @@
       text-align: center;
       font-size: 0.7rem;
       color: var(--gold);
-      margin-top: 1.5rem;
+      margin-top: 0.6rem;
     }
 
-    /* ====== ANIMATIONS ====== */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* Responsive */
+    @media (max-width: 850px) {
+      .forgot-card {
+        padding: 40px 36px;
+      }
+      .form-heading h1 { font-size: 2.6rem; }
     }
-    .fade-1 { animation: fadeUp 0.55s ease 0.05s both; }
-    .fade-2 { animation: fadeUp 0.55s ease 0.15s both; }
-    .fade-3 { animation: fadeUp 0.55s ease 0.25s both; }
-    .fade-4 { animation: fadeUp 0.55s ease 0.35s both; }
-    .fade-5 { animation: fadeUp 0.55s ease 0.45s both; }
 
-    /* ====== RESPONSIVE ====== */
-    @media (max-width: 900px) {
-      .main { padding: 0 1.25rem 1.5rem; }
-      .navbar { padding: 0.875rem 1.25rem; }
-      .navbar-nav { display: none; }
-      .page-title { font-size: 1.6rem; }
-      .forgot-card { padding: 1.5rem; }
-      .form-heading h1 { font-size: 1.8rem; }
-      .form-input { min-height: 60px; font-size: 0.9rem; padding: 1.4rem 1rem 0.6rem 1rem; }
+    @media (max-width: 600px) {
+      .forgot-card {
+        padding: 32px 24px;
+        border-radius: 32px;
+      }
+      .form-heading h1 { font-size: 2.2rem; }
+      .form-input { min-height: 64px; font-size: 0.95rem; padding: 1.4rem 1rem 0.6rem 1rem; }
       .form-label { font-size: 0.5rem; top: 0.45rem; left: 1rem; }
-      .back-btn { width: 38px; height: 38px; }
-      .page-logo { width: 38px; height: 38px; }
+      .btn { min-height: 54px; font-size: 0.65rem; }
+      .back-btn-circle { width: 42px; height: 42px; }
+    }
+
+    @media (max-width: 420px) {
+      .forgot-card {
+        padding: 20px 16px;
+        border-radius: 24px;
+      }
+      .form-heading h1 { font-size: 1.8rem; }
+      .form-input { min-height: 56px; font-size: 0.85rem; padding: 1.2rem 0.8rem 0.5rem 0.8rem; }
+      .form-label { font-size: 0.45rem; top: 0.4rem; left: 0.8rem; }
+      .btn { min-height: 48px; font-size: 0.6rem; }
+      .back-btn-circle { width: 36px; height: 36px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAVBAR -->
-  <?php include 'includes/navbar.php'; ?>
+  <div class="forgot-card">
 
-  <!-- Gold rule -->
-  <div class="nav-gold-rule"></div>
-
-  <!-- MAIN CONTENT -->
-  <main class="main">
-
-    <!-- PAGE TOPBAR (Back Arrow + Title + Logo) -->
-    <div class="page-topbar fade-1">
-      <a href="javascript:history.back()" class="back-btn" aria-label="Go back">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="19" y1="12" x2="5" y2="12"></line>
-          <polyline points="12 19 5 12 12 5"></polyline>
+    <!-- Back Button -->
+    <div class="back-btn-container">
+      <button class="back-btn-circle" onclick="goBack('login.php')">
+        <svg viewBox="0 0 24 24">
+          <path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-      </a>
-      <div class="page-title-center">Forgot Password</div>
-      <div class="page-logo">
-        <img src="assets/logo.png" alt="CG" />
-      </div>
+      </button>
     </div>
 
-    <!-- CONTENT HEADER -->
-    <div class="fade-2">
-      <div class="page-label">Reset Password</div>
-      <div class="page-title">We'll get you back in.</div>
+    <!-- Logo -->
+    <div class="logo-wrap">
+      <img src="assets/logo.png" alt="Arch" />
     </div>
 
-    <!-- FORGOT CARD -->
-    <div class="forgot-card fade-3">
-      <div class="form-heading">
-        <p>Enter your email and a reset link will follow.</p>
-      </div>
+    <!-- Heading -->
+    <div class="form-heading">
+      <h1>Forgot your<br />password?</h1>
+      <p>Enter your email and we'll send a verification code.</p>
+    </div>
 
-      <form class="forgot-form" id="forgot-form" onsubmit="handleForgotPassword(event)">
-        <div class="form-group">
-          <div class="input-wrapper">
-            <span class="form-label">Email Address</span>
-            <input
-              class="form-input valid"
-              id="forgot-email"
-              type="email"
-              placeholder=" "
-              autocomplete="email"
-              value=""
-              oninput="validateField('forgot-email', 'email')"
-              onblur="validateField('forgot-email', 'email')"
-            />
-          </div>
-          <span class="form-error" id="email-error"></span>
+    <!-- Forgot Password Form -->
+    <form class="forgot-form" id="forgot-form" onsubmit="handleForgotPassword(event)" novalidate>
+
+      <div class="form-group">
+        <div class="input-wrapper">
+          <span class="form-label">Email Address</span>
+          <input
+            class="form-input valid"
+            id="forgot-email"
+            type="email"
+            placeholder=" "
+            autocomplete="email"
+            oninput="validateField('forgot-email', 'email')"
+            onblur="validateField('forgot-email', 'email')"
+          />
         </div>
+        <span class="form-error" id="forgot-email-error"></span>
+      </div>
 
-        <p class="spam-notice">
-          Check your spam folder if it doesn't<br />
-          arrive within a minute
-        </p>
+      <!-- Server message (hidden by default) -->
+      <div id="server-message" class="server-message" style="display:none;"></div>
 
-        <div class="actions">
-          <button type="submit" class="btn btn-primary">Send Reset Link</button>
-          <a href="login.php" class="back-link">Back to Sign In</a>
-        </div>
-      </form>
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary" id="submit-btn">
+        <span id="btn-text">Send Reset Link</span>
+        <span id="btn-spinner" style="display:none;">⏳</span>
+      </button>
+    </form>
 
-      <p class="bottom-note">Your data. Yours alone.</p>
-    </div>
+    <!-- Footer -->
+    <p class="signin-copy">
+      Remember your password? <a href="login.php">Sign In</a>
+    </p>
+    <p class="bottom-note">Your data. Yours alone.</p>
 
-  </main>
+  </div>
 
   <script>
+    function goBack(target) {
+      window.location.href = target;
+    }
+
     function validateField(fieldId, type) {
       const field = document.getElementById(fieldId);
       const errorEl = document.getElementById(fieldId + '-error');
@@ -472,7 +413,6 @@
       if (value === '') return;
 
       let isValid = true;
-
       if (type === 'email') {
         if (!value.includes('@')) {
           isValid = false;
@@ -487,25 +427,81 @@
       }
     }
 
-    function handleForgotPassword(e) {
+    async function handleForgotPassword(e) {
       e.preventDefault();
+
+      const serverMsg = document.getElementById('server-message');
+      serverMsg.style.display = 'none';
+      serverMsg.className = 'server-message';
 
       validateField('forgot-email', 'email');
 
       const email = document.getElementById('forgot-email').value.trim();
-
       let hasError = false;
 
       if (!email) {
         document.getElementById('forgot-email').classList.add('error');
-        document.getElementById('email-error').textContent = 'Email is required.';
+        document.getElementById('forgot-email-error').textContent = 'Email is required.';
         hasError = true;
       }
 
       if (hasError) return;
 
-      localStorage.setItem('archForgotEmail', email);
-      alert('Reset link sent! Redirecting…');
+      const submitBtn = document.getElementById('submit-btn');
+      const btnText = document.getElementById('btn-text');
+      const btnSpinner = document.getElementById('btn-spinner');
+      submitBtn.disabled = true;
+      btnText.style.display = 'none';
+      btnSpinner.style.display = 'inline';
+
+      try {
+        const response = await fetch('<?php echo $API_URL; ?>/auth/forgot-password', {
+          method: 'POST',
+          headers: {
+            'accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email: email })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          let errorMsg = 'Something went wrong. Please try again.';
+          if (data && data.detail) {
+            errorMsg = typeof data.detail === 'string' ? data.detail : JSON.stringify(data.detail);
+          } else if (data && data.message) {
+            errorMsg = data.message;
+          }
+          serverMsg.textContent = errorMsg;
+          serverMsg.classList.add('error');
+          serverMsg.style.display = 'block';
+          return;
+        }
+
+        // Success — save email & redirect to OTP verification
+        localStorage.setItem('resetEmail', email);
+        serverMsg.textContent = 'Code sent! Redirecting…';
+        serverMsg.classList.add('success');
+        serverMsg.style.display = 'block';
+
+        setTimeout(() => {
+          window.location.href = 'verify-otp.php';
+        }, 1000);
+
+      } catch (err) {
+        console.error(err);
+        serverMsg.textContent = 'Network error. Please try again later.';
+        serverMsg.classList.add('error');
+        serverMsg.style.display = 'block';
+      } finally {
+        // Only re-enable if we haven't already redirected
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          btnText.style.display = 'inline';
+          btnSpinner.style.display = 'none';
+        }
+      }
     }
   </script>
 

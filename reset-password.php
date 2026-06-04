@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Verify OTP — Arch</title>
+  <title>Reset Password — Arch</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap"
     rel="stylesheet" />
@@ -44,7 +44,7 @@
       padding: 40px 20px;
     }
 
-    .verify-card {
+    .reset-card {
       width: 100%;
       max-width: 680px;
       background: rgba(255, 255, 255, 0.01);
@@ -125,7 +125,7 @@
     }
 
     /* Form */
-    .verify-form {
+    .reset-form {
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
@@ -222,6 +222,34 @@
       min-height: 1.3em;
     }
 
+    /* Password toggle */
+    .toggle-pass {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--white-dim);
+      cursor: pointer;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color var(--transition);
+      z-index: 3;
+    }
+
+    .toggle-pass:hover { color: var(--gold); }
+
+    .toggle-pass svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      fill: none;
+    }
+
     /* Server message */
     .server-message {
       text-align: center;
@@ -290,12 +318,12 @@
 
     /* Responsive */
     @media (max-width: 850px) {
-      .verify-card { padding: 40px 36px; }
+      .reset-card { padding: 40px 36px; }
       .form-heading h1 { font-size: 2.6rem; }
     }
 
     @media (max-width: 600px) {
-      .verify-card { padding: 32px 24px; border-radius: 32px; }
+      .reset-card { padding: 32px 24px; border-radius: 32px; }
       .form-heading h1 { font-size: 2.2rem; }
       .form-input { min-height: 64px; font-size: 0.95rem; padding: 1.4rem 1rem 0.6rem 1rem; }
       .form-label { font-size: 0.5rem; top: 0.45rem; left: 1rem; }
@@ -304,7 +332,7 @@
     }
 
     @media (max-width: 420px) {
-      .verify-card { padding: 20px 16px; border-radius: 24px; }
+      .reset-card { padding: 20px 16px; border-radius: 24px; }
       .form-heading h1 { font-size: 1.8rem; }
       .form-input { min-height: 56px; font-size: 0.85rem; padding: 1.2rem 0.8rem 0.5rem 0.8rem; }
       .form-label { font-size: 0.45rem; top: 0.4rem; left: 0.8rem; }
@@ -315,11 +343,11 @@
 </head>
 <body>
 
-  <div class="verify-card">
+  <div class="reset-card">
 
     <!-- Back Button -->
     <div class="back-btn-container">
-      <button class="back-btn-circle" onclick="goBack('forgot-password.php')">
+      <button class="back-btn-circle" onclick="goBack('verify-otp.php')">
         <svg viewBox="0 0 24 24">
           <path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -333,47 +361,59 @@
 
     <!-- Heading -->
     <div class="form-heading">
-      <h1>Verify your<br />code.</h1>
-      <p>Enter the OTP we sent to your email.</p>
+      <h1>Create a new<br />password.</h1>
+      <p>Make sure it's strong and memorable.</p>
     </div>
 
-    <!-- Verify OTP Form -->
-    <form class="verify-form" id="verify-form" onsubmit="handleVerifyOtp(event)" novalidate>
+    <!-- Reset Password Form -->
+    <form class="reset-form" id="reset-form" onsubmit="handleResetPassword(event)" novalidate>
 
-      <!-- Email (pre-filled from localStorage if available) -->
+      <!-- New Password -->
       <div class="form-group">
         <div class="input-wrapper">
-          <span class="form-label">Email Address</span>
+          <span class="form-label">New Password</span>
           <input
             class="form-input"
-            id="verify-email"
-            type="email"
+            id="new-pass"
+            type="password"
             placeholder=" "
-            autocomplete="email"
-            value=""
-            oninput="validateField('verify-email', 'email')"
-            onblur="validateField('verify-email', 'email')"
+            autocomplete="new-password"
+            style="padding-right:3.2rem;"
+            oninput="validateField('new-pass', 'password')"
+            onblur="validateField('new-pass', 'password')"
           />
+          <button type="button" class="toggle-pass" aria-label="Toggle password visibility">
+            <svg viewBox="0 0 24 24" class="eye-icon">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+          </button>
         </div>
-        <span class="form-error" id="verify-email-error"></span>
+        <span class="form-error" id="new-pass-error"></span>
       </div>
 
-      <!-- OTP Code -->
+      <!-- Confirm Password -->
       <div class="form-group">
         <div class="input-wrapper">
-          <span class="form-label">Verification Code</span>
+          <span class="form-label">Confirm Password</span>
           <input
             class="form-input"
-            id="verify-code"
-            type="text"
+            id="confirm-pass"
+            type="password"
             placeholder=" "
-            autocomplete="one-time-code"
-            maxlength="6"
-            oninput="validateField('verify-code', 'otp')"
-            onblur="validateField('verify-code', 'otp')"
+            autocomplete="new-password"
+            style="padding-right:3.2rem;"
+            oninput="validateField('confirm-pass', 'confirm')"
+            onblur="validateField('confirm-pass', 'confirm')"
           />
+          <button type="button" class="toggle-pass" aria-label="Toggle password visibility">
+            <svg viewBox="0 0 24 24" class="eye-icon">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+          </button>
         </div>
-        <span class="form-error" id="verify-code-error"></span>
+        <span class="form-error" id="confirm-pass-error"></span>
       </div>
 
       <!-- Server message -->
@@ -381,55 +421,61 @@
 
       <!-- Submit Button -->
       <button type="submit" class="btn btn-primary" id="submit-btn">
-        <span id="btn-text">Verify Code</span>
+        <span id="btn-text">Reset Password</span>
         <span id="btn-spinner" style="display:none;">⏳</span>
       </button>
     </form>
 
     <!-- Footer -->
     <p class="signin-copy">
-      Need a new code? <a href="forgot-password.php">Resend OTP</a>
+      Remember it? <a href="login.php">Sign In</a>
     </p>
-    <p class="bottom-note">Secure access, every step.</p>
+    <p class="bottom-note">Strong passwords keep your world safe.</p>
 
   </div>
 
   <script>
-    // Pre-fill email if stored from forgot-password step
-    (function() {
-      const storedEmail = localStorage.getItem('resetEmail');
-      if (storedEmail) {
-        const emailField = document.getElementById('verify-email');
-        emailField.value = storedEmail;
-        validateField('verify-email', 'email');
-      }
-    })();
+    // Get the reset token from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const resetToken = urlParams.get('token');
 
     function goBack(target) {
       window.location.href = target;
     }
 
+    // Toggle password visibility
+    document.querySelectorAll('.toggle-pass').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        const input = this.closest('.input-wrapper').querySelector('input');
+        if (!input) return;
+        const isPass = input.type === 'password';
+        input.type = isPass ? 'text' : 'password';
+        const eyeOpen = `<svg viewBox="0 0 24 24" class="eye-icon"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`;
+        const eyeClosed = `<svg viewBox="0 0 24 24" class="eye-icon"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>`;
+        this.innerHTML = isPass ? eyeClosed : eyeOpen;
+      });
+    });
+
     function validateField(fieldId, type) {
       const field = document.getElementById(fieldId);
       const errorEl = document.getElementById(fieldId + '-error');
       const value = field.value.trim();
-
       field.classList.remove('error', 'valid');
-      errorEl.textContent = '';
+      if (errorEl) errorEl.textContent = '';
 
       if (value === '') return;
 
       let isValid = true;
-
-      if (type === 'email') {
-        isValid = value.includes('@') && value.indexOf('@') > 0 && value.indexOf('@') < value.length - 1;
-        if (!isValid) {
-          errorEl.textContent = 'Please enter a valid email address.';
+      if (type === 'password') {
+        if (value.length < 6) {
+          isValid = false;
+          errorEl.textContent = 'Password must be at least 6 characters.';
         }
-      } else if (type === 'otp') {
-        isValid = /^[0-9]{4,6}$/.test(value);
-        if (!isValid) {
-          errorEl.textContent = 'Enter the 4-6 digit code from your email.';
+      } else if (type === 'confirm') {
+        const newPass = document.getElementById('new-pass').value;
+        if (value !== newPass) {
+          isValid = false;
+          errorEl.textContent = 'Passwords do not match.';
         }
       }
 
@@ -440,35 +486,45 @@
       }
     }
 
-    async function handleVerifyOtp(e) {
+    async function handleResetPassword(e) {
       e.preventDefault();
+
+      if (!resetToken) {
+        document.getElementById('server-message').textContent = 'Missing reset token. Please restart the reset process.';
+        document.getElementById('server-message').classList.add('error');
+        document.getElementById('server-message').style.display = 'block';
+        return;
+      }
 
       const serverMsg = document.getElementById('server-message');
       serverMsg.style.display = 'none';
       serverMsg.className = 'server-message';
 
-      // Validate fields
-      validateField('verify-email', 'email');
-      validateField('verify-code', 'otp');
+      validateField('new-pass', 'password');
+      validateField('confirm-pass', 'confirm');
 
-      const email = document.getElementById('verify-email').value.trim();
-      const code = document.getElementById('verify-code').value.trim();
+      const newPass = document.getElementById('new-pass').value;
+      const confirmPass = document.getElementById('confirm-pass').value;
       let hasError = false;
 
-      if (!email) {
-        document.getElementById('verify-email').classList.add('error');
-        document.getElementById('verify-email-error').textContent = 'Email is required.';
+      if (!newPass) {
+        document.getElementById('new-pass').classList.add('error');
+        document.getElementById('new-pass-error').textContent = 'New password is required.';
         hasError = true;
       }
-      if (!code) {
-        document.getElementById('verify-code').classList.add('error');
-        document.getElementById('verify-code-error').textContent = 'Verification code is required.';
+      if (!confirmPass) {
+        document.getElementById('confirm-pass').classList.add('error');
+        document.getElementById('confirm-pass-error').textContent = 'Please confirm your password.';
+        hasError = true;
+      }
+      if (newPass !== confirmPass) {
+        document.getElementById('confirm-pass').classList.add('error');
+        document.getElementById('confirm-pass-error').textContent = 'Passwords do not match.';
         hasError = true;
       }
 
       if (hasError) return;
 
-      // Loading state
       const submitBtn = document.getElementById('submit-btn');
       const btnText = document.getElementById('btn-text');
       const btnSpinner = document.getElementById('btn-spinner');
@@ -477,22 +533,23 @@
       btnSpinner.style.display = 'inline';
 
       try {
-        const response = await fetch('<?php echo $API_URL; ?>/auth/verify-otp', {
+        // ✅ Corrected field names: reset_token & new_password
+        const response = await fetch('<?php echo $API_URL; ?>/auth/reset-password', {
           method: 'POST',
           headers: {
             'accept': 'application/json',
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            email: email,
-            otp: code
+            reset_token: resetToken,
+            new_password: newPass
           })
         });
 
         const data = await response.json();
 
         if (!response.ok) {
-          let errorMsg = 'Verification failed. Please check your code.';
+          let errorMsg = 'Password reset failed. Please try again.';
           if (data && data.detail) {
             errorMsg = typeof data.detail === 'string' ? data.detail : JSON.stringify(data.detail);
           } else if (data && data.message) {
@@ -504,17 +561,15 @@
           return;
         }
 
-        // Success – store reset_token and redirect
-        if (data.reset_token) {
-          // Clear the stored email
-          localStorage.removeItem('resetEmail');
-          // Redirect to reset password page with token
-          window.location.href = `reset-password.php?token=${data.reset_token}`;
-        } else {
-          serverMsg.textContent = 'Unexpected response. No reset token received.';
-          serverMsg.classList.add('error');
-          serverMsg.style.display = 'block';
-        }
+        // Success
+        serverMsg.textContent = data.message || 'Password reset successfully! Redirecting to login…';
+        serverMsg.classList.add('success');
+        serverMsg.style.display = 'block';
+
+        // Redirect after a short delay
+        setTimeout(() => {
+          window.location.href = 'login.php';
+        }, 2000);
       } catch (err) {
         console.error(err);
         serverMsg.textContent = 'Network error. Please try again later.';

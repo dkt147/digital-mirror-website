@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿<?php
+include 'config.php';
+?>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -9,6 +12,7 @@
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap"
     rel="stylesheet" />
   <style>
+    /* … your existing CSS – unchanged … */
     * {
       margin: 0;
       padding: 0;
@@ -31,7 +35,6 @@
       --red-bg: rgba(139, 32, 32, 0.2);
       --red-border: #8b2020;
       --btn-dark: #232323;
-      /* New button color */
       --radius: 24px;
       --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       --font-display: 'Cormorant Garamond', serif;
@@ -61,7 +64,6 @@
       box-shadow: 0 24px 80px rgba(0, 0, 0, 0.7);
     }
 
-    /* ===== BACK BUTTON ===== */
     .back-btn-container {
       display: flex;
       align-items: center;
@@ -97,7 +99,6 @@
       fill: none;
     }
 
-    /* ===== LOGO ===== */
     .logo-wrap {
       text-align: center;
       margin-bottom: 0.25rem;
@@ -109,7 +110,6 @@
       object-fit: contain;
     }
 
-    /* ===== HEADING ===== */
     .form-heading {
       text-align: center;
       margin-bottom: 2.25rem;
@@ -130,7 +130,6 @@
       margin-top: 0.2rem;
     }
 
-    /* ===== FORM ===== */
     .signup-form {
       display: flex;
       flex-direction: column;
@@ -147,7 +146,6 @@
       position: relative;
     }
 
-    /* ===== LABEL INSIDE INPUT ===== */
     .form-label {
       position: absolute;
       top: 0.55rem;
@@ -185,7 +183,6 @@
       box-shadow: 0 0 0 1px rgba(201, 168, 76, 0.15);
     }
 
-    /* ===== HOVER ===== */
     .form-input:hover {
       border-color: var(--gold);
       background: var(--gold-bg-hover);
@@ -196,7 +193,6 @@
       color: var(--gold-light);
     }
 
-    /* ===== VALID (GOLD) ===== */
     .form-input.valid {
       border-color: var(--gold);
       background: rgba(255, 255, 255, 0.03);
@@ -215,7 +211,6 @@
       color: var(--gold-light);
     }
 
-    /* ===== ERROR (RED) ===== */
     .form-input.error {
       border-color: var(--red-border);
       background: var(--red-bg);
@@ -242,7 +237,6 @@
       min-height: 1.3em;
     }
 
-    /* ===== PASSWORD TOGGLE ===== */
     .toggle-pass {
       position: absolute;
       right: 1rem;
@@ -272,7 +266,6 @@
       fill: none;
     }
 
-    /* ===== CREATE ACCOUNT BUTTON (#232323) ===== */
     .btn {
       display: inline-flex;
       align-items: center;
@@ -304,7 +297,6 @@
       box-shadow: 0 8px 30px rgba(201, 168, 76, 0.15);
     }
 
-    /* ===== DIVIDER ===== */
     .divider {
       display: flex;
       align-items: center;
@@ -324,7 +316,6 @@
       background: var(--border);
     }
 
-    /* ===== SOCIAL BUTTONS (same radius as inputs) ===== */
     .social-btn {
       display: flex;
       align-items: center;
@@ -369,7 +360,6 @@
       margin-top: 0.5rem;
     }
 
-    /* ===== FOOTER ===== */
     .signin-copy {
       text-align: center;
       font-size: 0.75rem;
@@ -395,12 +385,10 @@
       margin-top: 0.6rem;
     }
 
-    /* ===== RESPONSIVE ===== */
     @media (max-width: 850px) {
       .signup-card {
         padding: 40px 36px;
       }
-
       .form-heading h1 {
         font-size: 2.6rem;
       }
@@ -411,33 +399,27 @@
         padding: 32px 24px;
         border-radius: 32px;
       }
-
       .form-heading h1 {
         font-size: 2.2rem;
       }
-
       .form-input {
         min-height: 64px;
         font-size: 0.95rem;
         padding: 1.4rem 1rem 0.6rem 1rem;
       }
-
       .form-label {
         font-size: 0.5rem;
         top: 0.45rem;
         left: 1rem;
       }
-
       .btn {
         min-height: 54px;
         font-size: 0.65rem;
       }
-
       .social-btn {
         min-height: 54px;
         font-size: 0.8rem;
       }
-
       .back-btn-circle {
         width: 42px;
         height: 42px;
@@ -449,33 +431,27 @@
         padding: 20px 16px;
         border-radius: 24px;
       }
-
       .form-heading h1 {
         font-size: 1.8rem;
       }
-
       .form-input {
         min-height: 56px;
         font-size: 0.85rem;
         padding: 1.2rem 0.8rem 0.5rem 0.8rem;
       }
-
       .form-label {
         font-size: 0.45rem;
         top: 0.4rem;
         left: 0.8rem;
       }
-
       .btn {
         min-height: 48px;
         font-size: 0.6rem;
       }
-
       .social-btn {
         min-height: 48px;
         font-size: 0.75rem;
       }
-
       .back-btn-circle {
         width: 36px;
         height: 36px;
@@ -510,16 +486,26 @@
     </div>
 
     <!-- Signup Form -->
-    <form class="signup-form" id="signup-form" onsubmit="handleSignup(event)">
+    <form class="signup-form" id="signup-form" onsubmit="handleSignup(event)" novalidate>
 
-      <!-- Name -->
+      <!-- First Name -->
       <div class="form-group">
         <div class="input-wrapper">
-          <span class="form-label">Your Name</span>
-          <input class="form-input valid" id="signup-name" type="text" placeholder=" " autocomplete="name" value=""
-            oninput="validateField('signup-name', 'name')" onblur="validateField('signup-name', 'name')" />
+          <span class="form-label">First Name</span>
+          <input class="form-input" id="signup-first-name" type="text" placeholder=" " autocomplete="given-name"
+            oninput="validateField('signup-first-name', 'firstName')" onblur="validateField('signup-first-name', 'firstName')" />
         </div>
-        <span class="form-error" id="name-error"></span>
+        <span class="form-error" id="signup-first-name-error"></span>
+      </div>
+
+      <!-- Last Name -->
+      <div class="form-group">
+        <div class="input-wrapper">
+          <span class="form-label">Last Name</span>
+          <input class="form-input" id="signup-last-name" type="text" placeholder=" " autocomplete="family-name"
+            oninput="validateField('signup-last-name', 'lastName')" onblur="validateField('signup-last-name', 'lastName')" />
+        </div>
+        <span class="form-error" id="signup-last-name-error"></span>
       </div>
 
       <!-- Email -->
@@ -529,7 +515,7 @@
           <input class="form-input" id="signup-email" type="email" placeholder=" " autocomplete="email"
             oninput="validateField('signup-email', 'email')" onblur="validateField('signup-email', 'email')" />
         </div>
-        <span class="form-error" id="email-error"></span>
+        <span class="form-error" id="signup-email-error"></span>
       </div>
 
       <!-- Password -->
@@ -546,7 +532,7 @@
             </svg>
           </button>
         </div>
-        <span class="form-error" id="pass-error"></span>
+        <span class="form-error" id="signup-pass-error"></span>
       </div>
 
       <!-- Confirm Password -->
@@ -563,11 +549,17 @@
             </svg>
           </button>
         </div>
-        <span class="form-error" id="confirm-error"></span>
+        <span class="form-error" id="signup-confirm-error"></span>
       </div>
 
+      <!-- Generic error message (server side) -->
+      <div id="server-error" class="form-error" style="text-align:center; margin-top:-0.5rem;"></div>
+
       <!-- Create Account Button (#232323) -->
-      <button type="submit" class="btn btn-primary">Create Account</button>
+      <button type="submit" class="btn btn-primary" id="submit-btn">
+        <span id="btn-text">Create Account</span>
+        <span id="btn-spinner" style="display:none;">⏳</span>
+      </button>
     </form>
 
     <!-- Divider -->
@@ -598,6 +590,7 @@
 
   <!-- ===== JAVASCRIPT ===== -->
   <script>
+    // ---- Navigation & Toasts (unchanged) ----
     function goBack(target) {
       window.location.href = target;
     }
@@ -605,6 +598,8 @@
     function showToast(msg, type) {
       alert(msg);
     }
+
+    // ---- Toggle password visibility ----
     document.querySelectorAll('.toggle-pass').forEach(function(btn) {
       btn.addEventListener('click', function() {
         const input = this.closest('.input-wrapper').querySelector('input');
@@ -619,28 +614,36 @@
       });
     });
 
+    // ---- Field validation (updated for first/last name) ----
     function validateField(fieldId, type) {
       const field = document.getElementById(fieldId);
       const errorEl = document.getElementById(fieldId + '-error');
       const value = field.value.trim();
       field.classList.remove('error', 'valid');
-      errorEl.textContent = '';
+      if (errorEl) errorEl.textContent = '';
+
       if (value === '') return;
+
       let isValid = true;
-      if (type === 'name') {
-        if (value.length < 2) {
+      if (type === 'firstName') {
+        if (value.length < 1) {
           isValid = false;
-          errorEl.textContent = 'Name must be at least 2 characters.';
+          errorEl.textContent = 'First name is required.';
+        }
+      } else if (type === 'lastName') {
+        if (value.length < 1) {
+          isValid = false;
+          errorEl.textContent = 'Last name is required.';
         }
       } else if (type === 'email') {
-        if (!value.includes('@')) {
+        if (!value.includes('@') || value.indexOf('@') === 0 || value.indexOf('@') === value.length - 1) {
           isValid = false;
           errorEl.textContent = 'Please enter a valid email address.';
         }
       } else if (type === 'password') {
-        if (value.length < 6) {
+        if (value.length < 4) {   // matching the backend password length you used (1234)
           isValid = false;
-          errorEl.textContent = 'Password must be at least 6 characters.';
+          errorEl.textContent = 'Password must be at least 4 characters.';
         }
       } else if (type === 'confirm') {
         const passField = document.getElementById('signup-pass');
@@ -649,6 +652,7 @@
           errorEl.textContent = 'Passwords do not match.';
         }
       }
+
       if (isValid) {
         field.classList.add('valid');
       } else {
@@ -656,45 +660,106 @@
       }
     }
 
-    function handleSignup(e) {
+    // ---- Submit handler with API call ----
+    async function handleSignup(e) {
       e.preventDefault();
-      validateField('signup-name', 'name');
+
+      const serverError = document.getElementById('server-error');
+      serverError.textContent = '';
+
+      // Validate all fields
+      validateField('signup-first-name', 'firstName');
+      validateField('signup-last-name', 'lastName');
       validateField('signup-email', 'email');
       validateField('signup-pass', 'password');
       validateField('signup-confirm', 'confirm');
-      const name = document.getElementById('signup-name').value.trim();
-      const email = document.getElementById('signup-email').value.trim();
-      const pass = document.getElementById('signup-pass').value;
-      const confirm = document.getElementById('signup-confirm').value;
+
+      const fields = ['signup-first-name', 'signup-last-name', 'signup-email', 'signup-pass', 'signup-confirm'];
       let hasError = false;
-      if (!name) {
-        document.getElementById('signup-name').classList.add('error');
-        document.getElementById('name-error').textContent = 'Name is required.';
-        hasError = true;
-      }
-      if (!email) {
-        document.getElementById('signup-email').classList.add('error');
-        document.getElementById('email-error').textContent = 'Email is required.';
-        hasError = true;
-      }
-      if (!pass) {
-        document.getElementById('signup-pass').classList.add('error');
-        document.getElementById('pass-error').textContent = 'Password is required.';
-        hasError = true;
-      }
-      if (!confirm) {
-        document.getElementById('signup-confirm').classList.add('error');
-        document.getElementById('confirm-error').textContent = 'Please confirm your password.';
-        hasError = true;
-      }
-      const errors = document.querySelectorAll('.form-error');
-      errors.forEach(el => {
-        if (el.textContent !== '') hasError = true;
+      fields.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el.value.trim()) {
+          el.classList.add('error');
+          const errId = id + '-error';
+          const errEl = document.getElementById(errId);
+          if (errEl && !errEl.textContent) {
+            if (id.includes('first')) errEl.textContent = 'First name is required.';
+            else if (id.includes('last')) errEl.textContent = 'Last name is required.';
+            else if (id.includes('email')) errEl.textContent = 'Email is required.';
+            else if (id.includes('pass')) errEl.textContent = 'Password is required.';
+            else if (id.includes('confirm')) errEl.textContent = 'Please confirm your password.';
+          }
+          hasError = true;
+        }
+        if (el.classList.contains('error')) hasError = true;
       });
+
+      document.querySelectorAll('.form-error').forEach(e => {
+        if (e.textContent && e.id !== 'server-error') hasError = true;
+      });
+
       if (hasError) return;
-      if (name) localStorage.setItem('archUserName', name);
-      if (email) localStorage.setItem('archUserEmail', email);
-      alert('Account created! Redirecting…');
+
+      const firstName = document.getElementById('signup-first-name').value.trim();
+      const lastName = document.getElementById('signup-last-name').value.trim();
+      const email = document.getElementById('signup-email').value.trim();
+      const password = document.getElementById('signup-pass').value;
+
+      // Compute full_name (not shown in form)
+      const fullName = `${firstName} ${lastName}`;
+
+      const submitBtn = document.getElementById('submit-btn');
+      const btnText = document.getElementById('btn-text');
+      const btnSpinner = document.getElementById('btn-spinner');
+      submitBtn.disabled = true;
+      btnText.style.display = 'none';
+      btnSpinner.style.display = 'inline';
+
+      try {
+        const response = await fetch('<?php echo $API_URL; ?>/auth/register', {
+          method: 'POST',
+          headers: {
+            'accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            email: email,
+            password: password,
+            first_name: firstName,
+            last_name: lastName,
+            full_name: fullName        // <-- added this
+          })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          let errorMsg = 'Registration failed. Please try again.';
+          if (data && data.detail) {
+            errorMsg = typeof data.detail === 'string' ? data.detail : JSON.stringify(data.detail);
+          } else if (data && data.message) {
+            errorMsg = data.message;
+          }
+          serverError.textContent = errorMsg;
+          return;
+        }
+
+        if (data.access_token) {
+          localStorage.setItem('archAccessToken', data.access_token);
+          localStorage.setItem('archUserEmail', email);
+          localStorage.setItem('archUserName', fullName);   // store full name if needed
+          window.location.href = 'login.php';
+        } else {
+          serverError.textContent = 'Unexpected response from server.';
+        }
+      } catch (err) {
+        console.error(err);
+        serverError.textContent = 'Network error or server unreachable. Please try again later.';
+      } finally {
+        submitBtn.disabled = false;
+        btnText.style.display = 'inline';
+        btnSpinner.style.display = 'none';
+      }
     }
   </script>
 
