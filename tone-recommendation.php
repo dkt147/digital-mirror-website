@@ -3,120 +3,198 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tone Recommendation — Arch</title>
+  <title>Tone Recommendation — Royals Arch Brow</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
 
     :root {
+      --black: #0a0a08;
+      --dark: #111111;
+      --dark-card: #1a1a0f;
+      --dark-input: #1c1c15;
       --gold: #c9a84c;
       --gold-light: #d4b96a;
       --gold-dark: #8a6f2e;
-      --black: #0a0a0a;
+      --gold-muted: rgba(201, 168, 76, 0.12);
       --white: #f5f0e8;
       --white-dim: rgba(245, 240, 232, 0.55);
-      --border: rgba(201, 168, 76, 0.20);
-      --btn-dark: #232323;
-      --radius-pill: 50px;
-      --transition: 0.25s ease;
+      --white-faint: rgba(245, 240, 232, 0.15);
+      --border: rgba(201, 168, 76, 0.18);
+      --border-hover: rgba(201, 168, 76, 0.45);
       --font-display: 'Cormorant Garamond', serif;
       --font-body: 'Montserrat', sans-serif;
+      --radius: 14px;
+      --radius-sm: 10px;
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
     body {
       background: var(--black);
       color: var(--white);
       font-family: var(--font-body);
       font-weight: 300;
+      line-height: 1.6;
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px 16px;
-      background-image: radial-gradient(ellipse at 50% 20%, rgba(201, 168, 76, 0.03) 0%, transparent 70%);
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    button {
+      cursor: pointer;
+      border: none;
+      outline: none;
+      font-family: var(--font-body);
+      background: none;
     }
 
-    .page {
-      width: 100%;
-      max-width: 560px;
-      background: rgba(255, 255, 255, 0.015);
-      border: 1px solid var(--border);
-      border-radius: 48px;
-      padding: 32px 28px 36px;
-      backdrop-filter: blur(4px);
-      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.8);
-      position: relative;
-    }
-
-    /* ── Top bar ── */
-    .top-bar {
+    /* ====== NAVBAR ====== */
+    .navbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 6px;
-      padding: 0 6px;
+      padding: 1rem 2.5rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(10, 10, 8, 0.97);
+      backdrop-filter: blur(20px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .navbar-left { display: flex; align-items: center; gap: 1rem; }
+    .nav-avatar {
+      width: 42px; height: 42px; border-radius: 50%; overflow: hidden;
+      border: 1.5px solid var(--gold-dark); flex-shrink: 0;
+    }
+    .nav-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .navbar-nav {
+      display: flex; align-items: center; gap: 2.5rem; list-style: none;
+      position: absolute; left: 50%; transform: translateX(-50%);
+    }
+    .navbar-nav a {
+      font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--white-dim); transition: color var(--transition); font-weight: 400;
+    }
+    .navbar-nav a:hover, .navbar-nav a.active { color: var(--gold); }
+
+    .btn-book {
+      padding: 0.55rem 1.5rem; font-size: 0.65rem; letter-spacing: 0.12em;
+      text-transform: uppercase; border-radius: 50px; border: 1px solid var(--border);
+      color: var(--white-dim); transition: all var(--transition);
+    }
+    .btn-book:hover { border-color: var(--gold); color: var(--gold); }
+
+    .nav-emblem {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #2a2010, #1a1408);
+      border: 1.5px solid var(--gold-dark); display: flex; align-items: center;
+      justify-content: center; flex-shrink: 0; overflow: hidden;
+    }
+    .nav-emblem img { width: 26px; height: 26px; object-fit: contain; }
+
+    .nav-gold-rule {
+      height: 1px; background: linear-gradient(to right, transparent 0%, var(--gold-dark) 30%, var(--gold-dark) 70%, transparent 100%);
+      opacity: 0.5;
+    }
+
+    /* ====== PAGE TOPBAR (Back Arrow + Title + Logo) ====== */
+    .page-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      margin-bottom: 1.5rem;
     }
 
     .back-btn {
-      width: 48px;
-      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       border: 1px solid var(--gold);
-      background: transparent;
       color: var(--gold);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
+      text-decoration: none;
       transition: all var(--transition);
+      background: transparent;
       flex-shrink: 0;
     }
+
     .back-btn:hover {
-      background: rgba(201, 168, 76, 0.08);
-      transform: scale(1.02);
-    }
-    .back-btn svg {
-      width: 22px;
-      height: 22px;
-      stroke: currentColor;
-      stroke-width: 2;
-      fill: none;
+      background: rgba(201,168,76,0.12);
+      transform: scale(1.05);
     }
 
-    /* ── Logo (replaces CG text) ── */
-    .logo-center {
+    .page-title-center {
+      flex: 1;
+      text-align: center;
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      padding: 0 1rem;
+    }
+
+    .page-logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--gold);
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
       flex-shrink: 0;
     }
-    .logo-center img {
-      width: 48px;
-      height: 48px;
+
+    .page-logo img {
+      width: 24px;
+      height: 24px;
       object-fit: contain;
-      display: block;
     }
 
-    .placeholder {
-      width: 48px;
-      height: 48px;
-      visibility: hidden;
-      flex-shrink: 0;
+    /* ====== LAYOUT ====== */
+    .main {
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 0 3rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
     }
 
-    /* ── Gold divider ── */
-    .gold-divider {
-      width: 80px;
-      height: 1px;
-      background: var(--gold);
-      margin: 8px auto 28px;
+    /* ====== HEADER ====== */
+    .page-label {
+      font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gold); font-weight: 500; margin-bottom: 0.2rem;
+    }
+    .page-title {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 2rem;
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.05;
     }
 
-    /* ── Main circle ── */
+    /* ====== TONE CARD ====== */
+    .tone-card {
+      background: #161610;
+      border: 1px solid var(--gold);
+      border-radius: var(--radius);
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+
     .circle-wrap {
       display: flex;
       justify-content: center;
@@ -154,13 +232,11 @@
       fill: none;
     }
 
-    /* ── Text ── */
     .tone-name {
       font-family: var(--font-display);
       font-style: italic;
       font-weight: 400;
       font-size: 2.0rem;
-      text-align: center;
       color: var(--white);
       margin-bottom: 6px;
     }
@@ -169,7 +245,6 @@
       font-family: var(--font-body);
       font-weight: 300;
       font-size: 0.85rem;
-      text-align: center;
       color: var(--gold);
       max-width: 320px;
       margin: 0 auto 28px;
@@ -177,7 +252,6 @@
       opacity: 0.75;
     }
 
-    /* ── Recommended section ── */
     .rec-title {
       font-size: 0.65rem;
       letter-spacing: 0.15em;
@@ -229,125 +303,134 @@
       font-weight: 400;
     }
 
-    /* ── Button ── */
-    .btn-confirm {
-      display: block;
-      width: 100%;
-      padding: 1.1rem;
-      border-radius: var(--radius-pill);
-      border: 1px solid var(--border);
-      background: var(--btn-dark);
-      color: var(--white);
-      font-size: 0.75rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all var(--transition);
-      font-family: var(--font-body);
-      text-decoration: none;
-      text-align: center;
-    }
-    .btn-confirm:hover {
-      border-color: var(--gold);
-      color: var(--gold-light);
-      background: rgba(35, 35, 35, 0.9);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(201, 168, 76, 0.15);
-    }
-    .btn-confirm span {
-      margin-right: 8px;
+    /* ====== BUTTONS ====== */
+    .actions {
+      display: grid;
+      gap: 0.75rem;
     }
 
-    /* ── Responsive ── */
-    @media (max-width: 540px) {
-      .page { padding: 24px 20px 28px; border-radius: 36px; }
+    .btn-primary {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 0.85rem 1.2rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--white);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      transition: all var(--transition);
+    }
+
+    .btn-primary:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* ====== ANIMATIONS ====== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-1 { animation: fadeUp 0.55s ease 0.05s both; }
+    .fade-2 { animation: fadeUp 0.55s ease 0.15s both; }
+    .fade-3 { animation: fadeUp 0.55s ease 0.25s both; }
+    .fade-4 { animation: fadeUp 0.55s ease 0.35s both; }
+    .fade-5 { animation: fadeUp 0.55s ease 0.45s both; }
+
+    /* ====== RESPONSIVE ====== */
+    @media (max-width: 900px) {
+      .main { padding: 0 1.25rem 1.5rem; }
+      .navbar { padding: 0.875rem 1.25rem; }
+      .navbar-nav { display: none; }
+      .page-title { font-size: 1.6rem; }
       .tone-circle { width: 120px; height: 120px; }
       .tone-name { font-size: 1.6rem; }
       .swatch { width: 38px; height: 38px; }
       .swatch-row { gap: 14px; }
-      .logo-center img { width: 40px; height: 40px; }
-      .back-btn, .placeholder { width: 40px; height: 40px; }
-    }
-
-    @media (max-width: 420px) {
-      .page { padding: 20px 14px 24px; border-radius: 28px; }
-      .tone-circle { width: 100px; height: 100px; }
-      .check-badge { width: 30px; height: 30px; bottom: -2px; right: -2px; }
-      .check-badge svg { width: 14px; height: 14px; }
-      .swatch { width: 32px; height: 32px; }
-      .swatch-row { gap: 10px; }
-      .tone-desc { font-size: 0.75rem; }
-      .logo-center img { width: 36px; height: 36px; }
-      .back-btn, .placeholder { width: 36px; height: 36px; }
+      .back-btn { width: 38px; height: 38px; }
+      .page-logo { width: 38px; height: 38px; }
     }
   </style>
 </head>
 <body>
 
-  <div class="page">
+  <!-- NAVBAR -->
+  <?php include 'includes/navbar.php'; ?>
 
-    <!-- TOP BAR -->
-    <div class="top-bar">
-      <button class="back-btn" onclick="window.location.href='onboarding-profile.php'">
-        <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
-      
-      <!-- LOGO (replaces "CG") -->
-      <div class="logo-center">
-        <img src="assets/logo.png" alt="Arch Logo" />
+  <!-- Gold rule -->
+  <div class="nav-gold-rule"></div>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <!-- PAGE TOPBAR (Back Arrow + Title + Logo) -->
+    <div class="page-topbar fade-1">
+      <a href="javascript:history.back()" class="back-btn" aria-label="Go back">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+      </a>
+      <div class="page-title-center">Tone Recommendation</div>
+      <div class="page-logo">
+        <img src="assets/logo.png" alt="CG" />
       </div>
-
-      <div class="placeholder"></div>
     </div>
 
-    <!-- GOLD DIVIDER -->
-    <div class="gold-divider"></div>
+    <!-- CONTENT HEADER -->
+    <div class="fade-2">
+      <div class="page-label">Tone Recommendation</div>
+      <div class="page-title">Your tone, matched.</div>
+    </div>
 
-    <!-- MAIN CIRCLE -->
-    <div class="circle-wrap">
-      <div class="tone-circle">
-        <div class="check-badge">
-          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <!-- TONE CARD -->
+    <div class="tone-card fade-3">
+      <div class="circle-wrap">
+        <div class="tone-circle">
+          <div class="check-badge">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="tone-name">Medium warm</div>
+      <div class="tone-desc">
+        Recommended brow colour update to match your tone —<br />
+        Montserrat 300 — gold 75%
+      </div>
+
+      <div class="rec-title">Recommended</div>
+      <div class="swatch-row">
+        <div class="swatch-item">
+          <div class="swatch best"></div>
+          <span class="swatch-label">Best</span>
+        </div>
+        <div class="swatch-item">
+          <div class="swatch close1"></div>
+          <span class="swatch-label">Close</span>
+        </div>
+        <div class="swatch-item">
+          <div class="swatch close2"></div>
+          <span class="swatch-label">Close</span>
+        </div>
+        <div class="swatch-item">
+          <div class="swatch avoid"></div>
+          <span class="swatch-label">Avoid</span>
         </div>
       </div>
     </div>
 
-    <!-- TONE NAME & DESCRIPTION -->
-    <div class="tone-name">Medium warm</div>
-    <div class="tone-desc">
-      Recommended brow color update to<br />
-      match to match your tone —<br />
-      Montserrat 300 — gold 75%
+    <!-- ACTIONS -->
+    <div class="actions fade-4">
+      <a href="direction-confirmation.php" class="btn-primary">Confirm this tone →</a>
     </div>
 
-    <!-- RECOMMENDED SWATCHES -->
-    <div class="rec-title">RECOMMENDED</div>
-    <div class="swatch-row">
-      <div class="swatch-item">
-        <div class="swatch best"></div>
-        <span class="swatch-label">Best</span>
-      </div>
-      <div class="swatch-item">
-        <div class="swatch close1"></div>
-        <span class="swatch-label">Close</span>
-      </div>
-      <div class="swatch-item">
-        <div class="swatch close2"></div>
-        <span class="swatch-label">Close</span>
-      </div>
-      <div class="swatch-item">
-        <div class="swatch avoid"></div>
-        <span class="swatch-label">Avoid</span>
-      </div>
-    </div>
-
-    <!-- CONFIRM BUTTON -->
-    <a href="direction-confirmation.php" class="btn-confirm">
-      <span>Confirm this tone</span> →
-    </a>
-
-  </div>
+  </main>
 
 </body>
 </html>

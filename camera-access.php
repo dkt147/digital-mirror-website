@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Soft arch — Royals Arch Brow</title>
+  <title>Camera Permission — Royals Arch Brow</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     * {
@@ -186,124 +186,111 @@
       line-height: 1.05;
     }
 
-    /* ====== PREVIEW CARD ====== */
-    .preview-card {
+    /* ====== CAMERA PERMISSION CARD ====== */
+    .permission-card {
+      background: #161610;
+      border: 1px solid var(--gold);
       border-radius: var(--radius);
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      min-height: 200px;
-      display: grid;
-      place-items: center;
-      position: relative;
-      overflow: hidden;
-      margin-bottom: 28px;
-      padding: 24px 16px;
-    }
-
-    .preview-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at center, rgba(201,168,76,0.08), transparent 50%);
-      pointer-events: none;
-    }
-
-    .preview-placeholder {
-      color: var(--white-dim);
-      font-size: 1rem;
-      letter-spacing: 0.04em;
+      padding: 2rem 1.5rem;
       text-align: center;
-      z-index: 1;
     }
 
-    .preview-placeholder strong {
-      color: var(--gold);
-      font-weight: 400;
+    .camera-icon {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .camera-icon svg {
+      width: 64px;
+      height: 64px;
+      stroke: var(--gold);
+      stroke-width: 1.5;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .headline {
       font-family: var(--font-display);
       font-style: italic;
+      font-size: 2.2rem;
+      text-align: center;
+      color: var(--white);
+      margin-bottom: 12px;
+      line-height: 1.1;
     }
 
-    /* ====== FEATURE LIST ====== */
-    .feature-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      margin-bottom: 2rem;
-      padding: 0 8px;
-    }
-
-    .feature-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.85rem;
+    .description {
       color: var(--white-dim);
-      font-size: 0.95rem;
-      line-height: 1.7;
+      font-size: 0.9rem;
+      text-align: center;
+      line-height: 1.6;
+      margin-bottom: 24px;
     }
 
-    .feature-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--gold);
-      margin-top: 0.45rem;
-      flex-shrink: 0;
+    .instruction-box {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+      margin-bottom: 28px;
+      text-align: left;
+    }
+
+    .instruction-box .label {
+      color: var(--gold);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .instruction-box .path {
+      color: var(--white-dim);
+      font-size: 0.85rem;
+      line-height: 1.5;
     }
 
     /* ====== BUTTONS ====== */
     .actions {
       display: grid;
       gap: 0.75rem;
-      width: 100%;
-      max-width: 460px;
-      margin-left: auto;
-      margin-right: auto;
     }
 
-    .btn {
-      display: inline-flex;
+    .btn-primary {
+      display: flex;
       align-items: center;
       justify-content: center;
       width: 100%;
       padding: 0.85rem 1.2rem;
       border-radius: 999px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--white);
       font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
       font-weight: 600;
+      letter-spacing: 0.08em;
       text-decoration: none;
       transition: all var(--transition);
-      cursor: pointer;
-      border: none;
-      font-family: var(--font-body);
     }
 
-    .btn-secondary {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--white);
-    }
-
-    .btn-secondary:hover {
+    .btn-primary:hover {
       border-color: var(--gold);
       color: var(--gold);
     }
 
-    .link-gold {
+    .btn-link {
+      display: block;
       text-align: center;
       color: var(--gold);
-      font-size: 0.9rem;
-      letter-spacing: 0.04em;
-      padding: 6px 0 4px;
-      cursor: pointer;
-      transition: color var(--transition);
-      font-weight: 400;
+      font-size: 0.8rem;
+      text-decoration: none;
+      transition: opacity var(--transition);
     }
 
-    .link-gold:hover {
-      color: var(--gold-light);
-      text-decoration: underline;
-    }
+    .btn-link:hover { opacity: 0.7; }
 
     /* ====== ANIMATIONS ====== */
     @keyframes fadeUp {
@@ -322,7 +309,9 @@
       .navbar { padding: 0.875rem 1.25rem; }
       .navbar-nav { display: none; }
       .page-title { font-size: 1.6rem; }
-      .preview-card { min-height: 160px; }
+      .headline { font-size: 1.8rem; }
+      .permission-card { padding: 1.5rem; }
+      .camera-icon svg { width: 48px; height: 48px; }
       .back-btn { width: 38px; height: 38px; }
       .page-logo { width: 38px; height: 38px; }
     }
@@ -347,7 +336,7 @@
           <polyline points="12 19 5 12 12 5"></polyline>
         </svg>
       </a>
-      <div class="page-title-center">Soft arch</div>
+      <div class="page-title-center">Camera Permission</div>
       <div class="page-logo">
         <img src="assets/logo.png" alt="CG" />
       </div>
@@ -355,63 +344,34 @@
 
     <!-- CONTENT HEADER -->
     <div class="fade-2">
-      <div class="page-label">Style Match</div>
-      <div class="page-title">Soft arch</div>
+      <div class="page-label">Camera Access</div>
+      <div class="page-title">Camera access is needed.</div>
     </div>
 
-    <!-- PREVIEW CARD -->
-    <div class="preview-card fade-3">
-      <div class="preview-placeholder">
-        <strong>Soft arch preview</strong><br />
-        <span style="font-size:0.85rem; color:var(--white-dim);">Stencil overlay appears here</span>
+    <!-- PERMISSION CARD -->
+    <div class="permission-card fade-3">
+      <div class="camera-icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+          <circle cx="12" cy="13" r="4" />
+        </svg>
       </div>
-    </div>
 
-    <!-- FEATURE LIST -->
-    <div class="fade-4">
-      <div class="feature-list">
-        <div class="feature-item">
-          <div class="feature-dot"></div>
-          <div>It lifts your face along the natural line of your brow bone.</div>
-        </div>
-        <div class="feature-item">
-          <div class="feature-dot"></div>
-          <div>The graduated arch creates elegance without effort.</div>
-        </div>
-        <div class="feature-item">
-          <div class="feature-dot"></div>
-          <div>Oval faces carry this shape beautifully — it works with your proportions, not against them.</div>
-        </div>
+      <h1 class="headline">Camera access is needed.</h1>
+      <p class="description">To scan your features and try on styles, ARCH needs access to your camera.</p>
+
+      <div class="instruction-box">
+        <div class="label">To enable</div>
+        <div class="path">Settings &gt; Privacy &gt; Camera &gt; ARCH &gt; Allow</div>
       </div>
-    </div>
 
-    <!-- ACTIONS -->
-    <div class="actions fade-5">
-      <button class="btn btn-secondary" onclick="tryThisOn()">Try this on</button>
-      <div class="link-gold" onclick="saveRec()">Save recommendation</div>
-      <div class="link-gold" onclick="tryAnother()">Try another style</div>
+      <div class="actions">
+        <a class="btn-primary" href="#">Open settings</a>
+        <a class="btn-link" href="unlock-arch.php">Use a photo instead</a>
+      </div>
     </div>
 
   </main>
-
-  <script>
-    function goBack() { history.back(); }
-
-    function tryThisOn() {
-      alert('Try this on — opening preview');
-      // window.location.href = 'stencil-preview.php?kit=soft-arch';
-    }
-
-    function saveRec() {
-      alert('Recommendation saved! ✨');
-      // window.location.href = 'saved.php';
-    }
-
-    function tryAnother() {
-      alert('Loading different recommendation');
-      // window.location.href = 'recommendations.php';
-    }
-  </script>
 
 </body>
 </html>
