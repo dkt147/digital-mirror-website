@@ -1,3 +1,4 @@
+<?php include 'config.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,7 +49,7 @@
       background: none;
     }
 
-    /* ====== NAVBAR ====== */
+    /* Navbar */
     .navbar {
       display: flex;
       align-items: center;
@@ -99,7 +100,7 @@
       opacity: 0.5;
     }
 
-    /* ====== LAYOUT ====== */
+    /* Main layout */
     .main {
       max-width: 100%;
       margin: 0 auto;
@@ -109,7 +110,6 @@
       gap: 1.75rem;
     }
 
-    /* ====== HERO CARD ====== */
     .hero-card {
       background: linear-gradient(135deg, #1c1a0d 0%, #221f0f 60%, #1a1808 100%);
       border: 1px solid rgba(201, 168, 76, 0.22);
@@ -150,17 +150,6 @@
       line-height: 1.6;
     }
 
-    .hero-action {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--gold);
-      font-size: 0.9rem;
-      text-decoration: none;
-      margin-top: 0.5rem;
-    }
-
-    /* ====== TILES ====== */
     .tiles {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -197,7 +186,6 @@
       line-height: 1.6;
     }
 
-    /* ====== FEATURED ====== */
     .featured {
       padding: 1.5rem 2rem;
       border-radius: var(--radius-sm);
@@ -233,7 +221,6 @@
       color: var(--gold);
     }
 
-    /* ====== SECTION LABEL ====== */
     .section-label {
       font-size: 0.62rem;
       letter-spacing: 0.18em;
@@ -243,7 +230,6 @@
       font-weight: 500;
     }
 
-    /* ====== GALLERY ====== */
     .gallery {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -291,6 +277,14 @@
       color: var(--white);
       font-size: 0.95rem;
       border: 1px solid rgba(255,255,255,0.12);
+      cursor: pointer;
+      transition: all var(--transition);
+      z-index: 2;
+    }
+
+    .card-heart.favourited {
+      color: #e05c5c;
+      border-color: rgba(224, 92, 92, 0.5);
     }
 
     .card-title {
@@ -306,7 +300,6 @@
       font-weight: 600;
     }
 
-    /* ====== ANIMATIONS ====== */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(16px); }
       to { opacity: 1; transform: translateY(0); }
@@ -317,7 +310,6 @@
     .fade-4 { animation: fadeUp 0.55s ease 0.35s both; }
     .fade-5 { animation: fadeUp 0.55s ease 0.45s both; }
 
-    /* ====== RESPONSIVE ====== */
     @media (max-width: 900px) {
       .main { padding: 1.5rem 1.25rem; }
       .navbar { padding: 0.875rem 1.25rem; }
@@ -331,16 +323,13 @@
 </head>
 <body>
 
-  <!-- NAVBAR -->
   <?php include 'includes/navbar.php'; ?>
 
-  <!-- Gold rule -->
   <div class="nav-gold-rule"></div>
 
-  <!-- MAIN CONTENT -->
   <main class="main">
 
-    <!-- HERO -->
+    <!-- Hero -->
     <div class="fade-2">
       <div class="hero-card fade-3">
         <div class="hero-label">New collection</div>
@@ -349,7 +338,7 @@
       </div>
     </div>
 
-    <!-- TILES -->
+    <!-- Tiles -->
     <div class="fade-4">
       <div class="tiles">
         <button class="tile" onclick="location.href='stencil-product.php'">
@@ -363,7 +352,7 @@
       </div>
     </div>
 
-    <!-- FEATURED -->
+    <!-- Featured -->
     <div class="fade-5">
       <button class="featured" onclick="location.href='stencil-product.php'">
         <div>
@@ -374,28 +363,162 @@
       </button>
     </div>
 
-    <!-- NEW ARRIVALS -->
+    <!-- New Arrivals (dynamic products) -->
     <div class="fade-5">
       <div class="section-label">New Arrivals</div>
-      <div class="gallery">
-        <article class="card">
-          <div class="card-image">
-            <div class="card-heart">♡</div>
-          </div>
-          <div class="card-title">Mocallure Eyebrow Kit</div>
-          <div class="card-price">$69.00</div>
-        </article>
-        <article class="card">
-          <div class="card-image">
-            <div class="card-heart">♡</div>
-          </div>
-          <div class="card-title">Kashée's Cosmetics</div>
-          <div class="card-price">$69.00</div>
-        </article>
+      <div class="gallery" id="products-container">
+        <div style="text-align:center; padding:2rem; color:var(--white-dim);">Loading products…</div>
       </div>
     </div>
 
   </main>
+
+  <script>
+    const API_BASE = '<?php echo $API_URL; ?>';
+    const token = localStorage.getItem('archAccessToken');
+    let favourites = [];
+
+    // ---------- FETCH FAVOURITES ----------
+    async function fetchFavourites() {
+      if (!token) return;
+      try {
+        const res = await fetch(`${API_BASE}/favourites`, {
+          headers: {
+            'accept': 'application/json',
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        if (!res.ok) throw new Error('Failed to fetch favourites');
+        const data = await res.json();
+        favourites = Array.isArray(data) ? data.map(item => item.id) : [];
+      } catch (err) {
+        console.warn('Could not load favourites:', err);
+      }
+    }
+
+    function isFavourite(productId) {
+      return favourites.includes(productId);
+    }
+
+    // ---------- TOGGLE FAVOURITE ----------
+    async function toggleFavourite(productId, heartEl) {
+      if (!token) {
+        alert('Please log in to save favourites.');
+        return;
+      }
+
+      heartEl.style.pointerEvents = 'none';
+      const isFav = isFavourite(productId);
+
+      try {
+        let res;
+        if (isFav) {
+          // DELETE – remove favourite
+          res = await fetch(`${API_BASE}/favourites/${productId}`, {
+            method: 'DELETE',
+            headers: {
+              'accept': 'application/json',
+              'Authorization': `Bearer ${token}`
+            }
+          });
+        } else {
+          // POST – add favourite
+          res = await fetch(`${API_BASE}/favourites`, {
+            method: 'POST',
+            headers: {
+              'accept': 'application/json',
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ product_id: productId })
+          });
+        }
+
+        if (!res.ok) {
+          const errData = await res.json().catch(() => ({}));
+          throw new Error(errData.detail || 'Failed to update favourite');
+        }
+
+        // Update local state & UI
+        if (isFav) {
+          favourites = favourites.filter(id => id !== productId);
+          heartEl.classList.remove('favourited');
+          heartEl.textContent = '♡';
+        } else {
+          favourites.push(productId);
+          heartEl.classList.add('favourited');
+          heartEl.textContent = '♥';
+        }
+      } catch (err) {
+        console.error(err);
+        alert('Could not update favourite. Please try again.');
+      } finally {
+        heartEl.style.pointerEvents = 'auto';
+      }
+    }
+
+    // ---------- RENDER PRODUCTS ----------
+    function renderProducts(products) {
+      const container = document.getElementById('products-container');
+      if (!products.length) {
+        container.innerHTML = '<div style="text-align:center; padding:2rem; color:var(--white-dim);">No products available yet.</div>';
+        return;
+      }
+
+      container.innerHTML = products.map(product => {
+        const favClass = isFavourite(product.id) ? ' favourited' : '';
+        const heartIcon = isFavourite(product.id) ? '♥' : '♡';
+        return `
+          <article class="card">
+            <div class="card-image">
+              <div class="card-heart${favClass}" data-product-id="${escapeHtml(product.id)}">${heartIcon}</div>
+            </div>
+            <div class="card-title">${escapeHtml(product.name)}</div>
+            <div class="card-price">$${product.price.toFixed(2)}</div>
+          </article>
+        `;
+      }).join('');
+
+      // Attach click handlers to hearts
+      container.querySelectorAll('.card-heart').forEach(heart => {
+        heart.addEventListener('click', function(e) {
+          e.stopPropagation();
+          toggleFavourite(this.dataset.productId, this);
+        });
+      });
+    }
+
+    function escapeHtml(text) {
+      const map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+      };
+      return text.replace(/[&<>"']/g, m => map[m]);
+    }
+
+    // ---------- INIT ----------
+    async function init() {
+      await fetchFavourites();
+
+      const container = document.getElementById('products-container');
+      try {
+        const res = await fetch(`${API_BASE}/products`, {
+          headers: { 'accept': 'application/json' }
+        });
+        if (!res.ok) throw new Error('Failed to load products');
+        const products = await res.json();
+        renderProducts(products);
+      } catch (err) {
+        console.error(err);
+        container.innerHTML = '<div style="text-align:center; padding:2rem; color:#e05c5c;">Could not load products. Please try again later.</div>';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
 
 </body>
 </html>

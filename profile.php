@@ -1,3 +1,4 @@
+<?php include 'config.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,6 +11,7 @@
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
   <style>
+    /* … (all your existing CSS, unchanged) … */
     :root {
       --black: #0a0a08;
       --dark: #111111;
@@ -102,7 +104,7 @@
       opacity: 0.5;
     }
 
-    /* ====== PAGE TOPBAR (Back Arrow + Title + Logo) ====== */
+    /* ====== PAGE TOPBAR ====== */
     .page-topbar {
       display: flex;
       align-items: center;
@@ -503,7 +505,7 @@
   <!-- MAIN CONTENT -->
   <main class="main">
 
-    <!-- PAGE TOPBAR (Back Arrow + Title + Logo) -->
+    <!-- PAGE TOPBAR -->
     <div class="page-topbar fade-1">
       <a href="javascript:history.back()" class="back-btn" aria-label="Go back">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -512,9 +514,6 @@
         </svg>
       </a>
       <div class="page-title-center">Profile</div>
-      <!-- <div class="page-logo">
-        <img src="assets/logo.png" alt="CG" />
-      </div> -->
     </div>
 
     <!-- PROFILE HEADER -->
@@ -562,7 +561,8 @@
       <button class="btn btn-secondary">Edit Brow Profile</button>
       <button class="btn btn-secondary" onclick="location.href='change-password.php'">Change Password</button>
       <button class="btn btn-secondary">Privacy Settings</button>
-      <button class="btn btn-danger">Sign Out</button>
+      <button class="btn btn-danger" id="delete-account-btn">Delete Account</button>
+      <button class="btn btn-danger" id="sign-out-btn">Sign Out</button>
     </div>
 
     <!-- MY LOOKS -->
@@ -613,6 +613,66 @@
     </div>
 
   </main>
+
+  <script>
+    const API_BASE = '<?php echo $API_URL; ?>';
+    const token = localStorage.getItem('archAccessToken');
+
+    // Sign Out
+    document.getElementById('sign-out-btn').addEventListener('click', function() {
+      if (confirm('Are you sure you want to sign out?')) {
+        localStorage.removeItem('archAccessToken');
+        localStorage.removeItem('archUserEmail');
+        localStorage.removeItem('archUserName');
+        window.location.href = 'login.php';
+      }
+    });
+
+    // Delete Account
+    document.getElementById('delete-account-btn').addEventListener('click', async function() {
+      if (!token) {
+        alert('You are not logged in.');
+        return;
+      }
+
+      const confirmDelete = confirm('Are you absolutely sure you want to delete your account? This action cannot be undone.');
+      if (!confirmDelete) return;
+
+      // Disable button to prevent double-click
+      const btn = document.getElementById('delete-account-btn');
+      btn.disabled = true;
+      btn.textContent = 'Deleting...';
+
+      try {
+        const response = await fetch(`${API_BASE}/auth/account`, {
+          method: 'DELETE',
+          headers: {
+            'accept': 'application/json',
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        if (response.ok) {
+          // Success – clear local storage and redirect
+          localStorage.removeItem('archAccessToken');
+          localStorage.removeItem('archUserEmail');
+          localStorage.removeItem('archUserName');
+          alert('Your account has been deleted.');
+          window.location.href = 'signup.php'; // or wherever you want
+        } else {
+          const data = await response.json().catch(() => ({}));
+          const errorMsg = data.detail || 'Failed to delete account. Please try again.';
+          alert(errorMsg);
+        }
+      } catch (err) {
+        console.error(err);
+        alert('Network error. Could not delete account. Please try again later.');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Delete Account';
+      }
+    });
+  </script>
 
 </body>
 </html>
