@@ -378,9 +378,6 @@
         </svg>
       </a>
       <div class="page-title-center">Direction</div>
-      <div class="page-logo">
-        <img src="assets/logo.png" alt="CG" />
-      </div>
     </div>
 
     <!-- CONTENT HEADER -->
@@ -388,7 +385,7 @@
       <div class="page-label">Style Direction</div>
       <div class="page-title">Refined & natural</div>
     </div>
-
+ 
     <!-- GRAPHIC -->
     <div class="graphic-wrap fade-3">
       <svg class="arch-svg" viewBox="0 0 160 80" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -429,7 +426,7 @@
 
     <!-- ACTIONS -->
     <div class="actions fade-5">
-      <a href="direction-confirmation.php" class="btn-primary">This is my direction →</a>
+      <a href="onboarding-complete.php" class="btn-primary">This is my direction →</a>
       <a href="tone-recommendation.php" class="btn-link">Choose a different direction</a>
     </div>
 

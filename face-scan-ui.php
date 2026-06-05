@@ -408,9 +408,6 @@
         </svg>
       </a>
       <div class="page-title-center">Face Scan</div>
-      <div class="page-logo">
-        <img src="assets/logo.png" alt="CG" />
-      </div>
     </div>
 
     <!-- CONTENT HEADER -->

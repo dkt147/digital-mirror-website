@@ -414,9 +414,6 @@
         </svg>
       </a>
       <div class="page-title-center">Style</div>
-      <div class="page-logo">
-        <img src="assets/logo.png" alt="CG" />
-      </div>
     </div>
 
     <!-- CONTENT HEADER -->
@@ -490,7 +487,7 @@
         alert('Please select a style direction.');
         return;
       }
-      window.location.href = 'onboarding-complete.php';
+      window.location.href = 'direction-confirmation.php';
     }
 
     document.addEventListener('DOMContentLoaded', function() {

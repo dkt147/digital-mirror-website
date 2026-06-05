@@ -303,6 +303,16 @@
       font-weight: 400;
     }
 
+    /* ====== SERVER MESSAGE ====== */
+    .server-message {
+      text-align: center;
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+      min-height: 1.2em;
+    }
+    .server-message.error { color: #e05c5c; }
+    .server-message.success { color: var(--gold-light); }
+
     /* ====== BUTTONS ====== */
     .actions {
       display: grid;
@@ -324,12 +334,15 @@
       letter-spacing: 0.08em;
       text-decoration: none;
       transition: all var(--transition);
+      cursor: pointer;
+      font-family: var(--font-body);
     }
 
     .btn-primary:hover {
       border-color: var(--gold);
       color: var(--gold);
     }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
     /* ====== ANIMATIONS ====== */
     @keyframes fadeUp {
@@ -377,9 +390,6 @@
         </svg>
       </a>
       <div class="page-title-center">Tone Recommendation</div>
-      <div class="page-logo">
-        <img src="assets/logo.png" alt="CG" />
-      </div>
     </div>
 
     <!-- CONTENT HEADER -->
@@ -391,15 +401,15 @@
     <!-- TONE CARD -->
     <div class="tone-card fade-3">
       <div class="circle-wrap">
-        <div class="tone-circle">
+        <div class="tone-circle" id="tone-circle-color">
           <div class="check-badge">
             <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
         </div>
       </div>
 
-      <div class="tone-name">Medium warm</div>
-      <div class="tone-desc">
+      <div class="tone-name" id="tone-name-display">Medium Warm</div>
+      <div class="tone-desc" id="tone-desc-display">
         Recommended brow colour update to match your tone —<br />
         Montserrat 300 — gold 75%
       </div>
@@ -407,30 +417,144 @@
       <div class="rec-title">Recommended</div>
       <div class="swatch-row">
         <div class="swatch-item">
-          <div class="swatch best"></div>
+          <div class="swatch best" id="swatch-best"></div>
           <span class="swatch-label">Best</span>
         </div>
         <div class="swatch-item">
-          <div class="swatch close1"></div>
+          <div class="swatch close1" id="swatch-close1"></div>
           <span class="swatch-label">Close</span>
         </div>
         <div class="swatch-item">
-          <div class="swatch close2"></div>
+          <div class="swatch close2" id="swatch-close2"></div>
           <span class="swatch-label">Close</span>
         </div>
         <div class="swatch-item">
-          <div class="swatch avoid"></div>
+          <div class="swatch avoid" id="swatch-avoid"></div>
           <span class="swatch-label">Avoid</span>
         </div>
       </div>
     </div>
 
+    <!-- Server Message -->
+    <div id="server-message" class="server-message" style="display:none;"></div>
+
     <!-- ACTIONS -->
     <div class="actions fade-4">
-      <a href="direction-confirmation.php" class="btn-primary">Confirm this tone →</a>
+      <button class="btn-primary" id="confirm-tone-btn" onclick="confirmTone()">
+        <span id="btn-text">Confirm this tone →</span>
+        <span id="btn-spinner" style="display:none;">⏳</span>
+      </button>
     </div>
 
   </main>
+
+  <script>
+    // Tone data mapping
+    const toneDataMap = {
+      'fair': {
+        label: 'Fair',
+        color: '#f5deb3',
+        desc: 'Soft, delicate undertones —<br />light taupe and beige recommended.',
+        best: '#d4b896',
+        close1: '#c9a882',
+        close2: '#b8956e',
+        avoid: '#3d1c0a'
+      },
+      'light': {
+        label: 'Light',
+        color: '#d4a574',
+        desc: 'Warm peach undertones —<br />golden brown shades work best.',
+        best: '#c07845',
+        close1: '#b0683a',
+        close2: '#a05830',
+        avoid: '#1a0a00'
+      },
+      'medium': {
+        label: 'Medium',
+        color: '#c07845',
+        desc: 'Balanced warm tone —<br />rich browns with golden hints.',
+        best: '#8b5a3c',
+        close1: '#7a4a2e',
+        close2: '#6b3a1f',
+        avoid: '#f5deb3'
+      },
+      'medium-warm': {
+        label: 'Medium Warm',
+        color: '#b67a3f',
+        desc: 'Recommended brow colour update to match your tone —<br />Montserrat 300 — gold 75%',
+        best: '#1a1206',
+        close1: '#3f2114',
+        close2: '#7a4a2e',
+        avoid: '#d9bca2'
+      },
+      'deep': {
+        label: 'Deep',
+        color: '#6b3a1f',
+        desc: 'Rich melanin tones —<br />deep espresso and dark chocolate.',
+        best: '#3d1c0a',
+        close1: '#2a1005',
+        close2: '#1a0800',
+        avoid: '#f5deb3'
+      },
+      'rich': {
+        label: 'Rich',
+        color: '#3d1c0a',
+        desc: 'Deepest warm tones —<br />bold, dark pigments recommended.',
+        best: '#1a0800',
+        close1: '#2a1005',
+        close2: '#3d1c0a',
+        avoid: '#f5deb3'
+      }
+    };
+
+    function getAuthToken() {
+      return localStorage.getItem('archAccessToken') || '';
+    }
+
+    function updateToneDisplay() {
+      const savedTone = localStorage.getItem('archSkinTone') || 'medium-warm';
+      const toneData = toneDataMap[savedTone] || toneDataMap['medium-warm'];
+
+      // Update tone name
+      const nameEl = document.getElementById('tone-name-display');
+      if (nameEl) nameEl.textContent = toneData.label;
+
+      // Update description
+      const descEl = document.getElementById('tone-desc-display');
+      if (descEl) descEl.innerHTML = toneData.desc;
+
+      // Update circle color
+      const circleEl = document.getElementById('tone-circle-color');
+      if (circleEl) circleEl.style.background = toneData.color;
+
+      // Update swatches
+      const bestEl = document.getElementById('swatch-best');
+      const close1El = document.getElementById('swatch-close1');
+      const close2El = document.getElementById('swatch-close2');
+      const avoidEl = document.getElementById('swatch-avoid');
+
+      if (bestEl) bestEl.style.background = toneData.best;
+      if (close1El) close1El.style.background = toneData.close1;
+      if (close2El) close2El.style.background = toneData.close2;
+      if (avoidEl) avoidEl.style.background = toneData.avoid;
+    }
+
+    async function confirmTone() {
+      const savedTone = localStorage.getItem('archSkinTone') || 'medium-warm';
+      const toneData = toneDataMap[savedTone] || toneDataMap['medium-warm'];
+      
+      // Save the confirmed tone label
+      localStorage.setItem('archConfirmedTone', toneData.label);
+
+      // Redirect to style page
+      window.location.href = 'onboarding-style.php';
+    }
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      updateToneDisplay();
+    });
+  </script>
 
 </body>
 </html>

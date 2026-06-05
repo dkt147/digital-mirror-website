@@ -199,24 +199,6 @@
       margin-bottom: 1rem;
     }
 
-    .line-with-gap {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-    }
-
-    .line-part {
-      height: 1px;
-      background-color: var(--gold);
-      flex-grow: 1;
-    }
-
-    .line-gap {
-      width: 10px; 
-      height: 1px;
-    }
-
     .text-below-gap {
       color: var(--gold);
       font-size: 0.7rem;
@@ -239,16 +221,6 @@
       width: 100%;
       max-width: 320px;
       position: relative;
-    }
-
-    .illustration-label {
-      text-align: center;
-      font-size: 0.6rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--white-dim);
-      margin-top: -2px;
-      margin-bottom: 12px;
     }
 
     /* ====== GOLD DIVIDER ====== */
@@ -325,6 +297,16 @@
       flex-shrink: 0;
     }
 
+    /* ====== SERVER MESSAGE ====== */
+    .server-message {
+      text-align: center;
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+      min-height: 1.2em;
+    }
+    .server-message.error { color: #e05c5c; }
+    .server-message.success { color: var(--gold-light); }
+
     /* ====== EDIT LINK ====== */
     .edit-link {
       display: block;
@@ -355,6 +337,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      gap: 0.5rem;
       width: 100%;
       padding: 0.85rem 1.2rem;
       border-radius: 999px;
@@ -379,6 +362,7 @@
       border-color: var(--gold);
       color: var(--gold);
     }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
     .footer-note {
       text-align: center;
@@ -433,9 +417,6 @@
         </svg>
       </a>
       <div class="page-title-center">Complete</div>
-      <div class="page-logo">
-        <img src="assets/logo.png" alt="CG" />
-      </div>
     </div>
 
     <!-- CONTENT HEADER -->
@@ -447,11 +428,6 @@
     <!-- COMPLETE CARD -->
     <div class="complete-card fade-3">
       <div class="split-line-wrapper">
-        <!-- <div class="line-with-gap">
-          <div class="line-part"></div>
-          <div class="line-gap"></div>
-          <div class="line-part"></div>
-        </div> -->
         <div class="text-below-gap">Complete</div>
       </div>
 
@@ -484,10 +460,16 @@
         </div>
       </div>
 
-      <a href="onboarding-style.php" class="edit-link">Edit Your Selections →</a>
+      <a href="onboarding-profile.php" class="edit-link">Edit Your Selections →</a>
+
+      <!-- Server Message -->
+      <div id="server-message" class="server-message" style="display:none;"></div>
 
       <div class="actions">
-        <button class="btn btn-primary" onclick="enterArch()">Enter Arch</button>
+        <button class="btn btn-primary" id="enter-arch-btn" onclick="enterArch()">
+          <span id="btn-text">Enter Arch</span>
+          <span id="btn-spinner" style="display:none;">⏳</span>
+        </button>
       </div>
 
       <div class="footer-note">Everything here can be updated as you go.</div>
@@ -496,36 +478,202 @@
   </main>
 
   <script>
-    function enterArch() {
-      window.location.href = 'dashboard.php';
+    // Tone data for color mapping
+    const toneColorMap = {
+      'fair': '#f5deb3',
+      'light': '#d4a574',
+      'medium': '#c07845',
+      'medium-warm': '#b67a3f',
+      'deep': '#6b3a1f',
+      'rich': '#3d1c0a'
+    };
+
+    function getAuthToken() {
+      return localStorage.getItem('archAccessToken') || '';
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
+    function loadProfileData() {
+      // Skin Tone
       const tone = localStorage.getItem('archSkinTone') || 'medium-warm';
       const toneMap = {
-        'fair': { label: 'Fair', color: '#f5deb3' },
-        'light': { label: 'Light', color: '#d4a574' },
-        'medium': { label: 'Medium', color: '#c07845' },
-        'medium-warm': { label: 'Medium Warm', color: '#b67a3f' },
-        'deep': { label: 'Deep', color: '#6b3a1f' },
-        'rich': { label: 'Rich', color: '#3d1c0a' }
+        'fair': 'Fair',
+        'light': 'Light',
+        'medium': 'Medium',
+        'medium-warm': 'Medium Warm',
+        'deep': 'Deep',
+        'rich': 'Rich'
       };
-      const toneData = toneMap[tone] || toneMap['medium-warm'];
       
       const toneEl = document.getElementById('complete-skin-tone');
       const indicator = document.getElementById('tone-indicator-color');
-      if (toneEl) toneEl.textContent = toneData.label;
-      if (indicator) indicator.style.background = toneData.color;
+      if (toneEl) toneEl.textContent = toneMap[tone] || 'Medium Warm';
+      if (indicator) indicator.style.background = toneColorMap[tone] || '#b67a3f';
 
+      // Brow Goal
       const goal = localStorage.getItem('archBrowGoal') || 'colour';
       const goalMap = { 'shape': 'Shape', 'colour': 'Colour', 'both': 'Both' };
       const goalEl = document.getElementById('complete-brow-goal');
       if (goalEl) goalEl.textContent = goalMap[goal] || 'Colour';
 
+      // Style Direction
       const style = localStorage.getItem('archStyle') || 'refined';
-      const styleMap = { 'refined': 'Refined & Natural', 'precise': 'Precise & Considered', 'discover': 'Show Me What Suits Me' };
+      const styleMap = { 
+        'refined': 'Refined & Natural', 
+        'precise': 'Precise & Considered', 
+        'discover': 'Show Me What Suits Me' 
+      };
       const styleEl = document.getElementById('complete-style');
       if (styleEl) styleEl.textContent = styleMap[style] || 'Refined & Natural';
+    }
+
+    function mapSkinToneToApi(tone) {
+      // Map local tone IDs to API expected values
+      const apiMap = {
+        'fair': 'FAIR',
+        'light': 'LIGHT',
+        'medium': 'MEDIUM',
+        'medium-warm': 'MEDIUM_WARM',
+        'deep': 'DEEP',
+        'rich': 'RICH'
+      };
+      return apiMap[tone] || null;
+    }
+
+    function mapBrowGoalToApi(goal) {
+      const apiMap = {
+        'shape': 'SHAPE',
+        'colour': 'COLOUR',
+        'both': 'BOTH'
+      };
+      return apiMap[goal] || null;
+    }
+
+    function mapStyleToApi(style) {
+      const apiMap = {
+        'refined': 'REFINED_NATURAL',
+        'precise': 'PRECISE_CONSIDERED',
+        'discover': 'DISCOVER'
+      };
+      return apiMap[style] || null;
+    }
+
+    async function enterArch() {
+      const serverMsg = document.getElementById('server-message');
+      serverMsg.style.display = 'none';
+      serverMsg.className = 'server-message';
+      serverMsg.textContent = '';
+
+      const authToken = getAuthToken();
+      
+      if (!authToken) {
+        serverMsg.textContent = 'Please sign in first.';
+        serverMsg.classList.add('error');
+        serverMsg.style.display = 'block';
+        setTimeout(() => { window.location.href = 'login.php'; }, 1500);
+        return;
+      }
+
+      // Show loading state
+      const submitBtn = document.getElementById('enter-arch-btn');
+      const btnText = document.getElementById('btn-text');
+      const btnSpinner = document.getElementById('btn-spinner');
+      submitBtn.disabled = true;
+      btnText.style.display = 'none';
+      btnSpinner.style.display = 'inline';
+
+      try {
+        // Get all saved selections
+        const skinTone = localStorage.getItem('archSkinTone');
+        const browGoal = localStorage.getItem('archBrowGoal');
+        const style = localStorage.getItem('archStyle');
+
+        // Build request body - all fields optional
+        const requestBody = {};
+        
+        if (skinTone) {
+          requestBody.skin_tone = mapSkinToneToApi(skinTone);
+        }
+        if (browGoal) {
+          requestBody.brow_goal = mapBrowGoalToApi(browGoal);
+        }
+        if (style) {
+          requestBody.style = mapStyleToApi(style);
+        }
+        
+        // brow_colour is optional - include if you have it stored
+        const browColour = localStorage.getItem('archBrowColour');
+        if (browColour) {
+          requestBody.brow_colour = browColour;
+        }
+
+        console.log('Onboarding API Request:', requestBody);
+
+        const response = await fetch('<?php echo $API_URL; ?>/onboarding/complete', {
+          method: 'POST',
+          headers: {
+            'accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + authToken
+          },
+          body: JSON.stringify(requestBody)
+        });
+
+        console.log('Response status:', response.status);
+
+        // Handle 401
+        if (response.status === 401) {
+          serverMsg.textContent = 'Session expired. Please sign in again.';
+          serverMsg.classList.add('error');
+          serverMsg.style.display = 'block';
+          localStorage.removeItem('archAccessToken');
+          setTimeout(() => { window.location.href = 'login.php'; }, 1500);
+          return;
+        }
+
+        const data = await response.json();
+        console.log('Response data:', data);
+
+        if (!response.ok) {
+          let errorMsg = 'Failed to complete onboarding. Please try again.';
+          if (data && data.detail) {
+            errorMsg = typeof data.detail === 'string' ? data.detail : JSON.stringify(data.detail);
+          } else if (data && data.message) {
+            errorMsg = data.message;
+          }
+          serverMsg.textContent = errorMsg;
+          serverMsg.classList.add('error');
+          serverMsg.style.display = 'block';
+          return;
+        }
+
+        // Success
+        serverMsg.textContent = data.message || 'Profile saved! Redirecting…';
+        serverMsg.classList.add('success');
+        serverMsg.style.display = 'block';
+
+        // Mark onboarding as complete
+        localStorage.setItem('archOnboardingComplete', 'true');
+
+        // Redirect to dashboard
+        setTimeout(() => {
+          window.location.href = 'dashboard.php';
+        }, 1000);
+
+      } catch (err) {
+        console.error('Onboarding error:', err);
+        serverMsg.textContent = 'Network error. Please check your connection.';
+        serverMsg.classList.add('error');
+        serverMsg.style.display = 'block';
+      } finally {
+        submitBtn.disabled = false;
+        btnText.style.display = 'inline';
+        btnSpinner.style.display = 'none';
+      }
+    }
+
+    // Load profile data on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      loadProfileData();
     });
   </script>
 

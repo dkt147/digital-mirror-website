@@ -394,9 +394,7 @@
         </svg>
       </a>
       <div class="page-title-center">Privacy</div>
-      <div class="page-logo">
-        <img src="assets/logo.png" alt="CG" />
-      </div>
+      
     </div>
 
     <!-- CONTENT HEADER -->
@@ -436,13 +434,13 @@
 
       <div class="actions">
         <button class="btn btn-primary" onclick="acceptPrivacy()">Understood. Continue.</button>
-        <a href="#" class="terms-link" onclick="showToast('Full privacy terms coming soon', 'info')">
+        <!-- <a href="#" class="terms-link" onclick="showToast('Full privacy terms coming soon', 'info')">
           Read our full privacy terms
           <svg viewBox="0 0 24 24">
             <line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" stroke-width="1.8" />
             <polyline points="12 5 19 12 12 19" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-        </a>
+        </a> -->
       </div>
 
       <div class="bottom-note">Your data. Yours alone.</div>

@@ -330,9 +330,6 @@
         </svg>
       </a>
       <div class="page-title-center">Between Connections</div>
-      <div class="page-logo">
-        <img src="assets/logo.png" alt="CG" />
-      </div>
     </div>
 
     <!-- CONTENT HEADER -->

@@ -335,9 +335,6 @@
         </svg>
       </a>
       <div class="page-title-center">Brow Editor</div>
-      <div class="page-logo">
-        <img src="assets/logo.png" alt="CG" />
-      </div>
     </div>
 
     <!-- SUB NAV -->

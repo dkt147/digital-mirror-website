@@ -344,9 +344,6 @@
         </svg>
       </a>
       <div class="page-title-center">Your Look</div>
-      <div class="page-logo">
-        <img src="assets/logo.png" alt="CG" />
-      </div>
     </div>
 
     <!-- CONTENT -->

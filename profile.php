@@ -512,9 +512,9 @@
         </svg>
       </a>
       <div class="page-title-center">Profile</div>
-      <div class="page-logo">
+      <!-- <div class="page-logo">
         <img src="assets/logo.png" alt="CG" />
-      </div>
+      </div> -->
     </div>
 
     <!-- PROFILE HEADER -->
@@ -560,6 +560,7 @@
     <!-- ACTIONS -->
     <div class="actions fade-4">
       <button class="btn btn-secondary">Edit Brow Profile</button>
+      <button class="btn btn-secondary" onclick="location.href='change-password.php'">Change Password</button>
       <button class="btn btn-secondary">Privacy Settings</button>
       <button class="btn btn-danger">Sign Out</button>
     </div>

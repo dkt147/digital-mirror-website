@@ -429,9 +429,9 @@
         </svg>
       </a>
       <div class="page-title-center">My Looks</div>
-      <div class="page-logo">
+      <!-- <div class="page-logo">
         <img src="assets/logo.png" alt="CG" />
-      </div>
+      </div> -->
     </div>
 
     <!-- FILTER TABS -->

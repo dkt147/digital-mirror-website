@@ -23,11 +23,6 @@ function navActive($name, $curr) {
   </ul>
 
   <div class="navbar-actions" style="display:flex;align-items:center;gap:1rem;">
-    <?php if ($curr === 'profile.php') : ?>
-      <button class="btn-nav btn-nav-outline" onclick="goBack('index.php')">Sign Out</button>
-    <?php else : ?>
-      <button class="btn-book" onclick="showToast('Booking coming soon')">Book Appointment</button>
-    <?php endif; ?>
 
     <!-- AVATAR right par -->
     <div class="nav-avatar">

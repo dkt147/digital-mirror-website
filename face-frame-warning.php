@@ -370,9 +370,6 @@
         </svg>
       </a>
       <div class="page-title-center">Frame Warning</div>
-      <div class="page-logo">
-        <img src="assets/logo.png" alt="CG" />
-      </div>
     </div>
 
     <!-- FRAME WARNING CARD -->

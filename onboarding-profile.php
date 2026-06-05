@@ -462,9 +462,6 @@
                 </svg>
             </a>
             <div class="page-title-center">Onboarding</div>
-            <div class="page-logo">
-                <img src="assets/logo.png" alt="CG" />
-            </div>
         </div>
 
         <!-- CONTENT HEADER -->
@@ -507,7 +504,7 @@
 
             <div class="actions">
                 <button class="btn btn-primary" onclick="nextOnboardingStep()">Next</button>
-                <a class="skip-link" onclick="goBack('onboarding-complete.php')">I'll add this later</a>
+                <a class="skip-link" onclick="goBack('onboarding-style.php')">I'll add this later</a>
             </div>
         </div>
 
@@ -543,7 +540,7 @@
                 alert('Please select your skin tone first.');
                 return;
             }
-            window.location.href = 'onboarding-style.php';
+            window.location.href = 'tone-recommendation.php';
         }
 
         document.addEventListener('DOMContentLoaded', function() {

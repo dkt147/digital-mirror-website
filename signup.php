@@ -748,7 +748,7 @@ include 'config.php';
           localStorage.setItem('archAccessToken', data.access_token);
           localStorage.setItem('archUserEmail', email);
           localStorage.setItem('archUserName', fullName);   // store full name if needed
-          window.location.href = 'login.php';
+          window.location.href = 'privacy.php';
         } else {
           serverError.textContent = 'Unexpected response from server.';
         }
