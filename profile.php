@@ -527,7 +527,7 @@
 
     <!-- BROW PROFILE -->
     <div class="fade-3">
-      <div class="section-label">Brow Profile</div>
+      <div class="section-label">GENERAL</div>
       <div class="profile-tags">
         <div class="profile-tag-row">
           <span class="profile-tag-key">Skin Tone</span>
@@ -619,12 +619,51 @@
     const token = localStorage.getItem('archAccessToken');
 
     // Sign Out
-    document.getElementById('sign-out-btn').addEventListener('click', function() {
-      if (confirm('Are you sure you want to sign out?')) {
+    document.getElementById('sign-out-btn').addEventListener('click', async function() {
+      if (!token) {
+        window.location.href = 'login.php';
+        return;
+      }
+
+      const confirmSignOut = confirm('Are you sure you want to sign out?');
+      if (!confirmSignOut) return;
+
+      // Disable button to prevent double-click
+      const btn = document.getElementById('sign-out-btn');
+      btn.disabled = true;
+      btn.textContent = 'Signing out...';
+
+      try {
+        const response = await fetch(`${API_BASE}/auth/logout`, {
+          method: 'POST',
+          headers: {
+            'accept': 'application/json',
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        // Clear local storage regardless of API response
+        localStorage.removeItem('archAccessToken');
+        localStorage.removeItem('archUserEmail');
+        localStorage.removeItem('archUserName');
+        
+        if (response.ok) {
+          window.location.href = 'login.php';
+        } else {
+          // Even if API fails, we still log out locally
+          console.warn('Logout API call failed, but local session cleared');
+          window.location.href = 'login.php';
+        }
+      } catch (err) {
+        console.error('Logout error:', err);
+        // Clear local storage even on network error
         localStorage.removeItem('archAccessToken');
         localStorage.removeItem('archUserEmail');
         localStorage.removeItem('archUserName');
         window.location.href = 'login.php';
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Sign Out';
       }
     });
 
@@ -658,7 +697,7 @@
           localStorage.removeItem('archUserEmail');
           localStorage.removeItem('archUserName');
           alert('Your account has been deleted.');
-          window.location.href = 'signup.php'; // or wherever you want
+          window.location.href = 'signup.php';
         } else {
           const data = await response.json().catch(() => ({}));
           const errorMsg = data.detail || 'Failed to delete account. Please try again.';
