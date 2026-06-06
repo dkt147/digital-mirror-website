@@ -616,7 +616,7 @@
       <div class="profile-info">
         <div class="profile-name" id="profile-name">—</div>
         <div class="profile-email" id="profile-email">—</div>
-        <span class="profile-badge">✦ Considered Member</span>
+        <button class="profile-badge" type="button" onclick="location.href='membership.php'">Considered Member</button>
       </div>
     </div>
 
@@ -645,7 +645,7 @@
     <!-- UPCOMING APPOINTMENT (unchanged) -->
     <div class="fade-4">
       <div class="section-header">
-        <div class="section-label">Upcoming Appointment</div>
+        <div class="section-label">Membersince</div>
       </div>
       <div class="appt-card">
         <div class="appt-left">
@@ -661,7 +661,7 @@
             </svg>
           </div>
           <div>
-            <div class="appt-label">Confirmed</div>
+            <!-- <div class="appt-label">Confirmed</div> -->
             <div class="appt-date">April 5, 2026 · 3:30 PM</div>
           </div>
         </div>
@@ -672,10 +672,13 @@
     <!-- ACTION BUTTONS -->
     <div class="fade-4">
       <div class="section-header">
-        <div class="section-label">ACCOUNT</div>
+        <div class="section-label">Preferences</div>
       </div>
       <div class="actions-grid">
-        <button class="btn">
+        <button class="btn" onclick="location.href='preferences.php'">
+          <span class="btn-icon">🔔</span> Notification
+        </button>
+        <button class="btn" onclick="location.href='brow-profile.php'">
           <span class="btn-icon">✎</span> Edit Brow Profile
         </button>
         <button class="btn" onclick="location.href='change-password.php'">
@@ -687,7 +690,7 @@
         <button class="btn btn-danger" id="delete-account-btn">
           <span class="btn-icon">✕</span> Delete Account
         </button>
-        <button class="btn btn-danger" id="sign-out-btn" style="grid-column: span 2;">
+        <button class="btn btn-danger" id="sign-out-btn"">
           <span class="btn-icon">↪</span> Sign Out
         </button>
       </div>

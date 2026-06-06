@@ -1,3 +1,4 @@
+<?php include 'config.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -312,6 +313,40 @@
       transform: translateY(-1px);
     }
 
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Loading state */
+    .loading-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(10, 10, 8, 0.8);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 3px solid var(--border);
+      border-top: 3px solid var(--gold);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
     /* ====== ANIMATIONS ====== */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(16px); }
@@ -337,6 +372,11 @@
   </style>
 </head>
 <body>
+
+  <!-- Loading Overlay -->
+  <div id="loading-overlay" class="loading-overlay">
+    <div class="loading-spinner"></div>
+  </div>
 
   <!-- NAVBAR -->
   <?php include 'includes/navbar.php'; ?>
@@ -374,7 +414,7 @@
             <div class="preference-description">Get alerts about new looks, offers, and progress updates.</div>
           </div>
           <label class="switch">
-            <input type="checkbox" checked />
+            <input type="checkbox" id="notifications" />
             <span class="slider"></span>
           </label>
         </div>
@@ -385,7 +425,7 @@
             <div class="preference-description">Save your favorite styles automatically as you browse.</div>
           </div>
           <label class="switch">
-            <input type="checkbox" checked />
+            <input type="checkbox" id="auto_save_looks" />
             <span class="slider"></span>
           </label>
         </div>
@@ -396,7 +436,7 @@
             <div class="preference-description">Allow the app to automatically detect your camera when scanning.</div>
           </div>
           <label class="switch">
-            <input type="checkbox" />
+            <input type="checkbox" id="camera_auto_detect" />
             <span class="slider"></span>
           </label>
         </div>
@@ -407,7 +447,7 @@
             <div class="preference-description">Use a low-light interface for a premium experience.</div>
           </div>
           <label class="switch">
-            <input type="checkbox" checked />
+            <input type="checkbox" id="dark_mode" />
             <span class="slider"></span>
           </label>
         </div>
@@ -417,22 +457,159 @@
             <div class="preference-title">Language</div>
             <div class="preference-description">App language used for labels and interface text.</div>
           </div>
-          <div class="preference-value">English</div>
+          <div class="preference-value" id="language-display">English</div>
         </div>
       </div>
       <br>
 
       <div class="actions">
-        <button class="btn btn-primary" onclick="savePreferences()">Save Changes</button>
+        <button class="btn btn-primary" id="save-btn" onclick="savePreferences()">Save Changes</button>
       </div>
     </div>
 
   </main>
 
   <script>
-    function savePreferences() {
-      alert('Your preferences have been saved.');
+    const API_BASE = '<?php echo $API_URL; ?>';
+    const token = localStorage.getItem('archAccessToken');
+
+    // Check if user is logged in
+    if (!token) {
+      window.location.href = 'login.php';
     }
+
+    // Show/hide loading overlay
+    function showLoading() {
+      document.getElementById('loading-overlay').style.display = 'flex';
+    }
+
+    function hideLoading() {
+      document.getElementById('loading-overlay').style.display = 'none';
+    }
+
+    // Load preferences from API
+    async function loadPreferences() {
+      showLoading();
+      try {
+        const response = await fetch(`${API_BASE}/auth/preferences`, {
+          method: 'GET',
+          headers: {
+            'accept': 'application/json',
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        if (response.ok) {
+          const preferences = await response.json();
+          
+          // Set checkbox states
+          document.getElementById('notifications').checked = preferences.notifications;
+          document.getElementById('auto_save_looks').checked = preferences.auto_save_looks;
+          document.getElementById('camera_auto_detect').checked = preferences.camera_auto_detect;
+          document.getElementById('dark_mode').checked = preferences.dark_mode;
+          
+          // Set language display
+          const languageMap = {
+            'ENGLISH': 'English',
+            'URDU': 'Urdu',
+            'ARABIC': 'Arabic',
+            'FRENCH': 'French',
+            'SPANISH': 'Spanish'
+          };
+          document.getElementById('language-display').textContent = 
+            languageMap[preferences.language] || preferences.language;
+          
+          // Store current language value
+          document.getElementById('language-display').dataset.language = preferences.language;
+        } else if (response.status === 401) {
+          // Unauthorized - redirect to login
+          localStorage.removeItem('archAccessToken');
+          window.location.href = 'login.php';
+        } else {
+          console.error('Failed to load preferences:', response.status);
+          // Set defaults if API fails
+          setDefaultPreferences();
+        }
+      } catch (err) {
+        console.error('Error loading preferences:', err);
+        // Set defaults on network error
+        setDefaultPreferences();
+      } finally {
+        hideLoading();
+      }
+    }
+
+    // Set default preferences if API fails
+    function setDefaultPreferences() {
+      document.getElementById('notifications').checked = true;
+      document.getElementById('auto_save_looks').checked = true;
+      document.getElementById('camera_auto_detect').checked = false;
+      document.getElementById('dark_mode').checked = true;
+      document.getElementById('language-display').textContent = 'English';
+      document.getElementById('language-display').dataset.language = 'ENGLISH';
+    }
+
+    // Save preferences to API
+    async function savePreferences() {
+      const saveBtn = document.getElementById('save-btn');
+      saveBtn.disabled = true;
+      saveBtn.textContent = 'Saving...';
+      
+      const preferences = {
+        notifications: document.getElementById('notifications').checked,
+        auto_save_looks: document.getElementById('auto_save_looks').checked,
+        camera_auto_detect: document.getElementById('camera_auto_detect').checked,
+        dark_mode: document.getElementById('dark_mode').checked,
+        language: document.getElementById('language-display').dataset.language || 'ENGLISH'
+      };
+
+      try {
+        const response = await fetch(`${API_BASE}/auth/preferences`, {
+          method: 'PUT',
+          headers: {
+            'accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify(preferences)
+        });
+
+        if (response.ok) {
+          alert('Your preferences have been saved successfully!');
+        } else if (response.status === 401) {
+          // Unauthorized - redirect to login
+          localStorage.removeItem('archAccessToken');
+          window.location.href = 'login.php';
+        } else {
+          const errorData = await response.json().catch(() => ({}));
+          alert(errorData.detail || 'Failed to save preferences. Please try again.');
+        }
+      } catch (err) {
+        console.error('Error saving preferences:', err);
+        alert('Network error. Could not save preferences. Please try again later.');
+      } finally {
+        saveBtn.disabled = false;
+        saveBtn.textContent = 'Save Changes';
+      }
+    }
+
+    // Add click handler for language to cycle through options
+    document.getElementById('language-display').addEventListener('click', function() {
+      const languages = ['ENGLISH', 'URDU', 'ARABIC', 'FRENCH', 'SPANISH'];
+      const languageNames = ['English', 'Urdu', 'Arabic', 'French', 'Spanish'];
+      const currentLang = this.dataset.language || 'ENGLISH';
+      const currentIndex = languages.indexOf(currentLang);
+      const nextIndex = (currentIndex + 1) % languages.length;
+      
+      this.dataset.language = languages[nextIndex];
+      this.textContent = languageNames[nextIndex];
+    });
+
+    // Style cursor for language display to show it's clickable
+    document.getElementById('language-display').style.cursor = 'pointer';
+
+    // Load preferences when page loads
+    loadPreferences();
   </script>
 
 </body>
