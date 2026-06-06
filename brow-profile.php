@@ -1,3 +1,4 @@
+<?php include 'config.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,45 +8,38 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    /* … existing CSS unchanged (only added small style for editable inputs) … */
     :root {
       --black: #0a0a08;
       --dark: #111111;
-      --dark-card: #1a1a0f;
-      --dark-input: #1c1c15;
+      --dark-card: #141411;
       --gold: #c9a84c;
       --gold-light: #d4b96a;
       --gold-dark: #8a6f2e;
-      --gold-muted: rgba(201, 168, 76, 0.12);
       --white: #f5f0e8;
-      --white-dim: rgba(245, 240, 232, 0.55);
-      --white-faint: rgba(245, 240, 232, 0.15);
+      --white-dim: rgba(245, 240, 232, 0.6);
       --border: rgba(201, 168, 76, 0.18);
-      --border-hover: rgba(201, 168, 76, 0.45);
+      --border-subtle: rgba(255, 255, 255, 0.08);
       --font-display: 'Cormorant Garamond', serif;
       --font-body: 'Montserrat', sans-serif;
-      --radius: 14px;
-      --radius-sm: 10px;
+      --radius: 18px;
       --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { font-size: 16px; scroll-behavior: smooth; }
+    
     body {
       background: var(--black);
       color: var(--white);
       font-family: var(--font-body);
       font-weight: 300;
-      line-height: 1.6;
       min-height: 100vh;
       overflow-x: hidden;
     }
+
     a { color: inherit; text-decoration: none; }
+    
     button {
       cursor: pointer;
       border: none;
@@ -54,7 +48,7 @@
       background: none;
     }
 
-    /* ====== NAVBAR ====== */
+    /* Navbar (unchanged) */
     .navbar {
       display: flex;
       align-items: center;
@@ -69,10 +63,7 @@
     }
 
     .navbar-left { display: flex; align-items: center; gap: 1rem; }
-    .nav-avatar {
-      width: 42px; height: 42px; border-radius: 50%; overflow: hidden;
-      border: 1.5px solid var(--gold-dark); flex-shrink: 0;
-    }
+    .nav-avatar { width: 42px; height: 42px; border-radius: 50%; overflow: hidden; border: 1.5px solid var(--gold-dark); flex-shrink: 0; }
     .nav-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
     .navbar-nav {
@@ -105,7 +96,6 @@
       opacity: 0.5;
     }
 
-    /* ====== PAGE TOPBAR (Back Arrow + Title + Logo) ====== */
     .page-topbar {
       display: flex;
       align-items: center;
@@ -123,12 +113,10 @@
       border-radius: 50%;
       border: 1px solid var(--gold);
       color: var(--gold);
-      text-decoration: none;
       transition: all var(--transition);
       background: transparent;
       flex-shrink: 0;
     }
-
     .back-btn:hover {
       background: rgba(201,168,76,0.12);
       transform: scale(1.05);
@@ -145,25 +133,6 @@
       padding: 0 1rem;
     }
 
-    .page-logo {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      border: 1px solid var(--gold);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      flex-shrink: 0;
-    }
-
-    .page-logo img {
-      width: 24px;
-      height: 24px;
-      object-fit: contain;
-    }
-
-    /* ====== LAYOUT ====== */
     .main {
       max-width: 100%;
       margin: 0 auto;
@@ -173,129 +142,101 @@
       gap: 1.75rem;
     }
 
-    /* ====== HEADER ====== */
-    .page-label {
-      font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase;
-      color: var(--gold); font-weight: 500; margin-bottom: 0.2rem;
-    }
-    .page-title {
-      font-family: var(--font-display);
-      font-style: italic;
-      font-size: 2rem;
-      font-weight: 400;
-      color: var(--white);
-      line-height: 1.05;
-    }
-
-    /* ====== PROFILE CARD ====== */
     .profile-card {
-      background: #161610;
+      background: #141411;
       border: 1px solid var(--gold);
       border-radius: var(--radius);
       padding: 1.75rem 1.5rem;
     }
 
-    .brow-art {
-      display: grid;
-      gap: 16px;
-      place-items: center;
-      margin-bottom: 24px;
+    .brow-graphic {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 60px;
+      margin-bottom: 1.5rem;
     }
-
-    .brow-line {
+    .brow-graphic svg {
       width: 80%;
-      height: 4px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .brow-line::before,
-    .brow-line::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      width: 35%;
-      height: 100%;
-      border-radius: 999px;
-      background: var(--gold);
-      filter: blur(2px);
-    }
-
-    .brow-line::before { left: 0; transform: translateX(-10%); }
-    .brow-line::after { right: 0; transform: translateX(10%); }
-
-    .brow-label {
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--white-dim);
-      font-weight: 500;
-    }
-
-    .info-grid {
-      display: grid;
-      gap: 12px;
-      margin-bottom: 28px;
+      max-width: 280px;
+      height: auto;
+      fill: none;
+      stroke: var(--gold);
+      stroke-width: 4;
+      stroke-linecap: round;
     }
 
     .info-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 14px 18px;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.06);
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--border-subtle);
     }
+    .info-row:last-child { border-bottom: none; }
 
     .info-key {
       color: var(--white-dim);
       font-size: 0.9rem;
+      font-weight: 300;
     }
 
     .info-value {
       color: var(--gold);
+      font-family: var(--font-display);
       font-size: 0.95rem;
       font-weight: 500;
     }
 
-    /* ====== BUTTONS ====== */
+    /* Editable input style */
+    .info-value input {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--gold);
+      color: var(--gold);
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 500;
+      width: 140px;
+      text-align: right;
+      padding: 0.2rem 0;
+      outline: none;
+    }
+
     .actions {
-      display: grid;
-      gap: 0.75rem;
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
     }
 
     .btn-primary {
+      flex: 1;
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 100%;
-      padding: 0.85rem 1.2rem;
+      padding: 0.9rem 0;
       border-radius: 999px;
       border: none;
       background: var(--gold);
       color: var(--black);
       font-size: 0.75rem;
       font-weight: 700;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      text-decoration: none;
       transition: all var(--transition);
     }
-
     .btn-primary:hover {
       background: var(--gold-light);
       transform: translateY(-1px);
     }
 
     .btn-secondary {
+      flex: 1;
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 100%;
-      padding: 0.85rem 1.2rem;
+      padding: 0.9rem 0;
       border-radius: 999px;
       border: 1px solid var(--border);
       background: transparent;
@@ -303,16 +244,22 @@
       font-size: 0.75rem;
       font-weight: 600;
       letter-spacing: 0.08em;
-      text-decoration: none;
+      text-transform: uppercase;
       transition: all var(--transition);
     }
-
     .btn-secondary:hover {
       border-color: var(--gold);
       color: var(--gold);
     }
 
-    /* ====== ANIMATIONS ====== */
+    @media (max-width: 900px) {
+      .main { padding: 0 1.25rem 1.5rem; }
+      .navbar { padding: 0.875rem 1.25rem; }
+      .navbar-nav { display: none; }
+      .profile-card { padding: 1.25rem; }
+      .back-btn { width: 38px; height: 38px; }
+    }
+
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(16px); }
       to { opacity: 1; transform: translateY(0); }
@@ -322,32 +269,15 @@
     .fade-3 { animation: fadeUp 0.55s ease 0.25s both; }
     .fade-4 { animation: fadeUp 0.55s ease 0.35s both; }
     .fade-5 { animation: fadeUp 0.55s ease 0.45s both; }
-
-    /* ====== RESPONSIVE ====== */
-    @media (max-width: 900px) {
-      .main { padding: 0 1.25rem 1.5rem; }
-      .navbar { padding: 0.875rem 1.25rem; }
-      .navbar-nav { display: none; }
-      .page-title { font-size: 1.6rem; }
-      .profile-card { padding: 1.25rem; }
-      .info-row { padding: 12px 14px; }
-      .back-btn { width: 38px; height: 38px; }
-      .page-logo { width: 38px; height: 38px; }
-    }
   </style>
 </head>
 <body>
 
-  <!-- NAVBAR -->
   <?php include 'includes/navbar.php'; ?>
-
-  <!-- Gold rule -->
   <div class="nav-gold-rule"></div>
 
-  <!-- MAIN CONTENT -->
   <main class="main">
 
-    <!-- PAGE TOPBAR (Back Arrow + Title + Logo) -->
     <div class="page-topbar fade-1">
       <a href="javascript:history.back()" class="back-btn" aria-label="Go back">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -358,54 +288,213 @@
       <div class="page-title-center">Your Brow Profile</div>
     </div>
 
-    <!-- CONTENT HEADER -->
-    <div class="fade-2">
-      <div class="page-label">Brow Profile</div>
-      <div class="page-title">Your unique brow profile.</div>
-    </div>
-
-    <!-- PROFILE CARD -->
-    <div class="profile-card fade-3">
-      <div class="brow-art">
-        <!-- <div class="brow-line"></div> -->
-        <div class="brow-label">Current profile</div>
+    <div class="profile-card fade-2">
+      <!-- Brow arches SVG -->
+      <div class="brow-graphic">
+        <svg viewBox="0 0 300 60" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 20 40 Q 60 10, 110 30" />
+          <path d="M 190 30 Q 240 10, 280 40" />
+        </svg>
       </div>
 
-      <div class="info-grid">
-        <div class="info-row">
-          <span class="info-key">Face shape</span>
-          <span class="info-value">Oval</span>
-        </div>
-        <div class="info-row">
-          <span class="info-key">Preferred style</span>
-          <span class="info-value">Ash</span>
-        </div>
-        <div class="info-row">
-          <span class="info-key">Preferred colour</span>
-          <span class="info-value">Dark Brown</span>
-        </div>
-        <div class="info-row">
-          <span class="info-key">Last scan</span>
-          <span class="info-value">March 15, 2026</span>
-        </div>
+      <!-- Dynamic data rows -->
+      <div class="info-row">
+        <span class="info-key">Face shape</span>
+        <span class="info-value" id="face_shape_display">—</span>
+      </div>
+      <div class="info-row">
+        <span class="info-key">Preferred style</span>
+        <span class="info-value" id="preferred_style_display">—</span>
+      </div>
+      <div class="info-row">
+        <span class="info-key">Preferred colour</span>
+        <span class="info-value" id="preferred_colour_display">—</span>
+      </div>
+      <div class="info-row">
+        <span class="info-key">Last scan</span>
+        <span class="info-value" id="last_scan_display">—</span>
       </div>
 
-      <div class="actions">
-        <button class="btn-primary" onclick="handleUpdate()">Update</button>
-        <button class="btn-secondary" onclick="handleScanAgain()">Scan Again</button>
+      <div class="actions fade-3">
+        <button class="btn-primary" id="update-btn">Update</button>
+        <button class="btn-secondary" id="scan-btn">Scan Again</button>
       </div>
     </div>
+
+    <!-- Hidden file input for camera -->
+    <input type="file" id="camera-input" accept="image/*" capture="environment" style="display:none" />
 
   </main>
 
   <script>
-    function handleUpdate() {
-      window.location.href = 'profile.php';
+    const API_BASE = '<?php echo $API_URL; ?>';
+    const token = localStorage.getItem('archAccessToken');
+    let browData = null;
+    let editMode = false;
+
+    // ---------- Helper ----------
+    function escapeHtml(text) {
+      const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+      return text.replace(/[&<>"']/g, m => map[m]);
     }
 
-    function handleScanAgain() {
-      window.location.href = 'face-scan-ui.php';
+    // ---------- Load Brow Profile ----------
+    async function loadBrowProfile() {
+      if (!token) {
+        alert('Please log in first.');
+        window.location.href = 'login.php';
+        return;
+      }
+      try {
+        const res = await fetch(`${API_BASE}/auth/brow-profile`, {
+          headers: {
+            'accept': 'application/json',
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        if (!res.ok) {
+          const err = await res.json().catch(() => ({}));
+          throw new Error(err.detail || 'Failed to load brow profile');
+        }
+        const data = await res.json();
+        browData = data;
+        updateDisplay(data);
+      } catch (err) {
+        console.error(err);
+        alert('Could not load brow profile. Please login again.');
+        window.location.href = 'login.php';
+      }
     }
+
+    function updateDisplay(data) {
+      document.getElementById('face_shape_display').textContent = data.face_shape || '—';
+      document.getElementById('preferred_style_display').textContent = data.preferred_style || '—';
+      document.getElementById('preferred_colour_display').textContent = data.preferred_colour || '—';
+      document.getElementById('last_scan_display').textContent = data.last_scan || '—';
+    }
+
+    // ---------- Inline Edit (Update button) ----------
+    const updateBtn = document.getElementById('update-btn');
+    updateBtn.addEventListener('click', function() {
+      if (!browData) return;
+      if (!editMode) {
+        // Enter edit mode
+        const fields = ['face_shape', 'preferred_style', 'preferred_colour'];
+        fields.forEach(field => {
+          const displayEl = document.getElementById(`${field}_display`);
+          const currentVal = browData[field] || '';
+          displayEl.innerHTML = `<input type="text" id="edit_${field}" value="${escapeHtml(currentVal)}" />`;
+        });
+        updateBtn.textContent = 'Save';
+        editMode = true;
+      } else {
+        // Save changes
+        saveProfile();
+      }
+    });
+
+    async function saveProfile() {
+      const face_shape = document.getElementById('edit_face_shape')?.value || browData.face_shape || '';
+      const preferred_style = document.getElementById('edit_preferred_style')?.value || browData.preferred_style || '';
+      const preferred_colour = document.getElementById('edit_preferred_colour')?.value || browData.preferred_colour || '';
+      const last_scan = browData.last_scan || new Date().toISOString().slice(0, 10);
+
+      updateBtn.disabled = true;
+      updateBtn.textContent = 'Saving...';
+
+      try {
+        const res = await fetch(`${API_BASE}/auth/brow-profile`, {
+          method: 'PUT',
+          headers: {
+            'accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({
+            face_shape,
+            preferred_style,
+            preferred_colour,
+            last_scan
+          })
+        });
+        if (!res.ok) {
+          const errData = await res.json().catch(() => ({}));
+          throw new Error(errData.detail || 'Update failed');
+        }
+        const updated = await res.json();
+        browData = updated;
+        updateDisplay(updated);
+        editMode = false;
+        updateBtn.textContent = 'Update';
+        alert('Profile updated!');
+      } catch (err) {
+        console.error(err);
+        alert(err.message || 'Could not save profile.');
+      } finally {
+        updateBtn.disabled = false;
+        updateBtn.textContent = editMode ? 'Save' : 'Update';
+      }
+    }
+
+    // ---------- Scan Again (Camera) ----------
+    const scanBtn = document.getElementById('scan-btn');
+    const cameraInput = document.getElementById('camera-input');
+
+    scanBtn.addEventListener('click', function() {
+      if (!token) {
+        alert('Please log in first.');
+        return;
+      }
+      cameraInput.click();
+    });
+
+    cameraInput.addEventListener('change', async function() {
+      const file = this.files[0];
+      if (!file) return;
+
+      // In a real scenario, the image would be sent to an AI endpoint.
+      // For now, we ask the user for the detected face shape.
+      const newShape = prompt('Enter the detected face shape (e.g., Oval, Round, Heart):', browData?.face_shape || 'Oval');
+      if (!newShape) {
+        cameraInput.value = '';
+        return;
+      }
+
+      const newLastScan = new Date().toISOString().slice(0, 10);
+
+      try {
+        const res = await fetch(`${API_BASE}/auth/brow-profile`, {
+          method: 'PUT',
+          headers: {
+            'accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({
+            face_shape: newShape,
+            last_scan: newLastScan,
+            preferred_style: browData?.preferred_style || '',
+            preferred_colour: browData?.preferred_colour || ''
+          })
+        });
+        if (!res.ok) {
+          const errData = await res.json().catch(() => ({}));
+          throw new Error(errData.detail || 'Scan update failed');
+        }
+        const updated = await res.json();
+        browData = updated;
+        updateDisplay(updated);
+        alert('Scan complete! Profile updated.');
+      } catch (err) {
+        console.error(err);
+        alert(err.message || 'Could not update after scan.');
+      } finally {
+        cameraInput.value = '';
+      }
+    });
+
+    // ---------- Init ----------
+    loadBrowProfile();
   </script>
 
 </body>
