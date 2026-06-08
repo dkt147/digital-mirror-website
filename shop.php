@@ -1,61 +1,60 @@
 <?php include 'config.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shop — Royals Arch Brow</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
   <style>
     :root {
-      --black: #0a0a08;
-      --dark: #111111;
-      --dark-card: #1a1a0f;
-      --dark-input: #1c1c15;
+      --bg-black: #0a0a08;
+      --bg-dark-card: #1c1c1c;
+      --bg-dark-card-hover: #282828;
       --gold: #c9a84c;
-      --gold-light: #d4b96a;
-      --gold-dark: #8a6f2e;
-      --gold-muted: rgba(201, 168, 76, 0.12);
+      --gold-subtle: #A58D3E;
+      --gold-border: #3a3520;
+      --gold-bg-header: #262212;
       --white: #f5f0e8;
-      --white-dim: rgba(245, 240, 232, 0.55);
-      --white-faint: rgba(245, 240, 232, 0.15);
-      --border: rgba(201, 168, 76, 0.18);
-      --border-hover: rgba(201, 168, 76, 0.45);
+      --white-dim: #b0b0b0;
+      --white-faint: rgba(255, 255, 255, 0.6);
       --font-display: 'Cormorant Garamond', serif;
       --font-body: 'Montserrat', sans-serif;
-      --radius: 14px;
-      --radius-sm: 10px;
-      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --radius: 18px;
+      --radius-sm: 12px;
+      --transition: 0.2s ease;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { font-size: 16px; scroll-behavior: smooth; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
-      background: var(--black);
+      background: var(--bg-black);
       color: var(--white);
       font-family: var(--font-body);
       font-weight: 300;
-      line-height: 1.6;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-    a { color: inherit; text-decoration: none; }
-    button {
-      cursor: pointer;
-      border: none;
-      outline: none;
-      font-family: var(--font-body);
-      background: none;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* Navbar */
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Navbar styles (kept as requested) */
     .navbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 1rem 2.5rem;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--gold-border);
       background: rgba(10, 10, 8, 0.97);
       backdrop-filter: blur(20px);
       position: sticky;
@@ -63,321 +62,447 @@
       z-index: 100;
     }
 
-    .navbar-left { display: flex; align-items: center; gap: 1rem; }
-    .nav-avatar {
-      width: 42px; height: 42px; border-radius: 50%; overflow: hidden;
-      border: 1.5px solid var(--gold-dark); flex-shrink: 0;
+    .navbar-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
     }
-    .nav-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .nav-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 1.5px solid var(--gold-subtle);
+      flex-shrink: 0;
+    }
+
+    .nav-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
 
     .navbar-nav {
-      display: flex; align-items: center; gap: 2.5rem; list-style: none;
-      position: absolute; left: 50%; transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
     }
+
     .navbar-nav a {
-      font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--white-dim); transition: color var(--transition); font-weight: 400;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--white-dim);
+      transition: color var(--transition);
+      font-weight: 400;
     }
-    .navbar-nav a:hover, .navbar-nav a.active { color: var(--gold); }
+
+    .navbar-nav a:hover,
+    .navbar-nav a.active {
+      color: var(--gold);
+    }
 
     .btn-book {
-      padding: 0.55rem 1.5rem; font-size: 0.65rem; letter-spacing: 0.12em;
-      text-transform: uppercase; border-radius: 50px; border: 1px solid var(--border);
-      color: var(--white-dim); transition: all var(--transition);
+      padding: 0.55rem 1.5rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 50px;
+      border: 1px solid var(--gold-border);
+      color: var(--white-dim);
+      transition: all var(--transition);
     }
-    .btn-book:hover { border-color: var(--gold); color: var(--gold); }
+
+    .btn-book:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
 
     .nav-emblem {
-      width: 44px; height: 44px; border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
       background: radial-gradient(circle at 35% 35%, #2a2010, #1a1408);
-      border: 1.5px solid var(--gold-dark); display: flex; align-items: center;
-      justify-content: center; flex-shrink: 0; overflow: hidden;
+      border: 1.5px solid var(--gold-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden;
     }
-    .nav-emblem img { width: 26px; height: 26px; object-fit: contain; }
+
+    .nav-emblem img {
+      width: 26px;
+      height: 26px;
+      object-fit: contain;
+    }
 
     .nav-gold-rule {
-      height: 1px; background: linear-gradient(to right, transparent 0%, var(--gold-dark) 30%, var(--gold-dark) 70%, transparent 100%);
+      height: 1px;
+      background: linear-gradient(to right, transparent 0%, var(--gold-subtle) 30%, var(--gold-subtle) 70%, transparent 100%);
       opacity: 0.5;
     }
 
-    /* Main layout */
-    .main {
+    /* ---- MAIN LAYOUT ---- */
+    .main-wrapper {
       max-width: 100%;
       margin: 0 auto;
-      padding: 2.5rem 3rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1.75rem;
+      padding: 2.5rem 2rem 4rem;
     }
 
-    .hero-card {
-      background: linear-gradient(135deg, #1c1a0d 0%, #221f0f 60%, #1a1808 100%);
-      border: 1px solid rgba(201, 168, 76, 0.22);
+    .page-title {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 3.2rem;
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    /* ---- COLLECTION HERO ---- */
+    .collection-card {
+      background: linear-gradient(135deg, #302a17 0%, #1f1b0e 100%);
       border-radius: var(--radius);
       padding: 2rem 2.5rem;
       display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #c9a84c;
+      margin-bottom: 1.5rem;
       position: relative;
       overflow: hidden;
     }
 
-    .hero-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 1px;
-      background: linear-gradient(to right, transparent, rgba(201, 168, 76, 0.5), transparent);
+    .collection-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      z-index: 2;
     }
 
-    .hero-label {
-      font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase;
-      color: var(--gold); font-weight: 500;
+    .collection-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
     }
 
-    .hero-title {
+    .collection-title {
       font-family: var(--font-display);
-      font-style: italic;
-      font-size: 2rem;
+      font-size: 2.1rem;
       font-weight: 400;
       color: var(--white);
-      line-height: 1.05;
+      line-height: 1.1;
     }
 
-    .hero-subtitle {
-      font-size: 0.95rem;
-      color: var(--white-dim);
-      line-height: 1.6;
+    .collection-title span {
+      font-style: italic;
     }
 
-    .tiles {
+    .collection-img {
+      z-index: 2;
+    }
+
+    .collection-img svg {
+      width: 80px;
+      height: 40px;
+      fill: var(--gold);
+    }
+
+    /* Placeholder for brow image */
+    /* ---- TILES ---- */
+    .tiles-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: 1fr 1fr;
       gap: 1rem;
+      margin-bottom: 1.5rem;
     }
 
     .tile {
-      padding: 1.75rem 1.5rem;
+      background: var(--bg-dark-card);
+      padding: 1.5rem 1.75rem;
       border-radius: var(--radius-sm);
-      border: 1px solid var(--border);
-      background: #161610;
-      cursor: pointer;
+      border: 1px solid #333;
       transition: all var(--transition);
       text-align: left;
+      cursor: pointer;
     }
 
     .tile:hover {
-      border-color: var(--gold-dark);
-      background: rgba(201, 168, 76, 0.06);
+      border-color: #c9a84c;
+      background: linear-gradient(135deg, #302a17 0%, #1f1b0e 100%);
       transform: translateY(-2px);
+    }
+
+    .tile-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+      margin-bottom: 0.25rem;
     }
 
     .tile-title {
       font-family: var(--font-display);
-      font-size: 1.2rem;
+      font-size: 1.5rem;
       font-weight: 400;
       color: var(--white);
-      margin-bottom: 0.5rem;
+      line-height: 1.2;
     }
 
-    .tile-copy {
-      font-size: 0.85rem;
-      color: var(--white-dim);
-      line-height: 1.6;
-    }
-
-    .featured {
-      padding: 1.5rem 2rem;
+    /* ---- FEATURED ---- */
+    .featured-card {
+      background: var(--bg-dark-card);
       border-radius: var(--radius-sm);
-      border: 1px solid var(--border);
-      background: #161610;
+      border: 1px solid #333;
+      padding: 1.5rem 1.75rem;
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       cursor: pointer;
       transition: all var(--transition);
+      margin-bottom: 2.5rem;
     }
 
-    .featured:hover {
-      border-color: var(--gold-dark);
-      background: rgba(201, 168, 76, 0.06);
+    .featured-card:hover {
+      border-color: #c9a84c;
+      background: linear-gradient(135deg, #302a17 0%, #1f1b0e 100%);
       transform: translateY(-2px);
     }
 
-    .featured-title {
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      color: var(--white);
-    }
-
-    .featured-copy {
-      color: var(--white-dim);
-      font-size: 0.9rem;
-      margin-top: 4px;
-    }
-
-    .featured-icon {
-      font-size: 1.3rem;
-      color: var(--gold);
-    }
-
-    .section-label {
-      font-size: 0.62rem;
-      letter-spacing: 0.18em;
+    .featured-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 0.875rem;
       font-weight: 500;
     }
 
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 1rem;
-    }
-
-    .card {
-      padding: 1.25rem;
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      background: #161610;
-      display: grid;
-      gap: 0.75rem;
-      transition: all var(--transition);
-    }
-
-    .card:hover {
-      border-color: var(--gold-dark);
-      transform: translateY(-2px);
-    }
-
-    .card-image {
-      width: 100%;
-      height: 160px;
-      border-radius: var(--radius-sm);
-      background: linear-gradient(180deg, #111, #0f0f0f);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card-image::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 50% 30%, rgba(201, 168, 76, 0.15), transparent 45%);
-    }
-
-    .card-heart {
-      position: absolute;
-      top: 12px; right: 12px;
-      width: 34px; height: 34px;
-      border-radius: 50%;
-      display: grid; place-items: center;
-      background: rgba(255,255,255,0.08);
+    .featured-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 400;
       color: var(--white);
-      font-size: 0.95rem;
-      border: 1px solid rgba(255,255,255,0.12);
+      line-height: 1.2;
+    }
+
+    .featured-icon {
+      font-size: 1.5rem;
+      color: var(--gold);
+    }
+
+    /* ---- NEW ARRIVALS ---- */
+    .section-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+
+    /* ---- PRODUCT CARD (MATCHES SCREENSHOT) ---- */
+    .product-card {
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform var(--transition);
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .product-image-wrapper {
+      background: white;
+      /* EXACT MATCH: White background like screenshot */
+      position: relative;
+      padding-top: 100%;
+      /* 1:1 Aspect Ratio */
+      overflow: hidden;
+      border-radius: var(--radius);
+    }
+
+    .product-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .product-heart {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 32px;
+      height: 32px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: #333;
       cursor: pointer;
-      transition: all var(--transition);
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       z-index: 2;
+      line-height: 1;
     }
 
-    .card-heart.favourited {
+    .product-heart.favourited {
       color: #e05c5c;
-      border-color: rgba(224, 92, 92, 0.5);
+      transform: scale(1.05);
     }
 
-    .card-title {
+    .product-heart:hover {
+      transform: scale(1.15);
+    }
+
+    .product-details {
+      padding: 1rem 0.25rem;
+    }
+
+    .product-name {
       font-family: var(--font-display);
       font-size: 1.05rem;
+      font-weight: 400;
       color: var(--white);
-      line-height: 1.3;
+      margin-bottom: 0.25rem;
     }
 
-    .card-price {
-      font-size: 0.95rem;
-      color: var(--gold);
-      font-weight: 600;
+    .product-sub {
+      font-size: 0.8rem;
+      color: var(--white-faint);
+      margin-bottom: 0.4rem;
     }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to { opacity: 1; transform: translateY(0); }
+    .product-price {
+      font-size: 0.9rem;
+      color: white;
+      font-weight: 500;
     }
-    .fade-1 { animation: fadeUp 0.55s ease 0.05s both; }
-    .fade-2 { animation: fadeUp 0.55s ease 0.15s both; }
-    .fade-3 { animation: fadeUp 0.55s ease 0.25s both; }
-    .fade-4 { animation: fadeUp 0.55s ease 0.35s both; }
-    .fade-5 { animation: fadeUp 0.55s ease 0.45s both; }
 
-    @media (max-width: 900px) {
-      .main { padding: 1.5rem 1.25rem; }
-      .navbar { padding: 0.875rem 1.25rem; }
-      .navbar-nav { display: none; }
-      .hero-card { padding: 1.5rem; }
-      .hero-title { font-size: 1.6rem; }
-      .tiles { gap: 0.75rem; }
-      .tile { padding: 1.25rem; }
+    /* Responsive */
+    @media (max-width: 768px) {
+      .navbar-nav {
+        display: none;
+      }
+
+      .main-wrapper {
+        padding: 1.5rem 1rem;
+      }
+
+      .page-title {
+        font-size: 2.5rem;
+      }
+
+      .collection-card {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1.5rem;
+        gap: 1rem;
+      }
+
+      .collection-title {
+        font-size: 1.8rem;
+      }
+
+      .tiles-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .product-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+
+      .product-heart {
+        width: 28px;
+        height: 28px;
+        font-size: 0.9rem;
+        top: 8px;
+        right: 8px;
+      }
     }
   </style>
 </head>
+
 <body>
 
   <?php include 'includes/navbar.php'; ?>
-
   <div class="nav-gold-rule"></div>
 
-  <main class="main">
+  <div class="main-wrapper">
 
-    <!-- Hero -->
-    <div class="fade-2">
-      <div class="hero-card fade-3">
-        <div class="hero-label">New collection</div>
-        <div class="hero-title">Explore the collection →</div>
-        <div class="hero-subtitle">Fresh styles, premium kits and curated brows in one place.</div>
+    <!-- SHOP TITLE -->
+    <h1 class="page-title">Shop</h1>
+
+    <!-- COLLECTION CARD -->
+    <div class="collection-card">
+      <div class="collection-text">
+        <span class="collection-label">NEW COLLECTION</span>
+        <div class="collection-title">Explore the <span>collection →</span></div>
+      </div>
+      <div class="collection-img">
+        <!-- Replace this SVG with your actual brows image -->
+        <svg viewBox="0 0 100 40" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10,20 Q30,5 50,15 Q70,25 90,12" stroke="#c9a84c" stroke-width="6" fill="none"
+            stroke-linecap="round" />
+          <path d="M20,22 Q30,15 40,20 Q55,28 80,16" stroke="#c9a84c" stroke-width="8" fill="none"
+            stroke-linecap="round" opacity="0.4" />
+        </svg>
       </div>
     </div>
 
-    <!-- Tiles -->
-    <div class="fade-4">
-      <div class="tiles">
-        <button class="tile" onclick="location.href='stencil-product.php'">
-          <div class="tile-title">Brow Stencils</div>
-          <div class="tile-copy">The precise shape, every time.</div>
-        </button>
-        <button class="tile" onclick="location.href='stencil-product.php'">
-          <div class="tile-title">Brow Products</div>
-          <div class="tile-copy">Colour, definition, hold.</div>
-        </button>
+    <!-- TWO TILES -->
+    <div class="tiles-grid">
+      <div class="tile" onclick="location.href='stencil-product.php'">
+        <div class="tile-label">BROW STENCILS</div>
+        <div class="tile-title">The precise shape, every time.</div>
+      </div>
+      <div class="tile" onclick="location.href='stencil-product.php'">
+        <div class="tile-label">BROW PRODUCTS</div>
+        <div class="tile-title">Colour, definition, hold.</div>
       </div>
     </div>
 
-    <!-- Featured -->
-    <div class="fade-5">
-      <button class="featured" onclick="location.href='stencil-product.php'">
-        <div>
-          <div class="featured-title">Featured</div>
-          <div class="featured-copy">Kits & Collections</div>
-        </div>
-        <span class="featured-icon">→</span>
-      </button>
-    </div>
-
-    <!-- New Arrivals (dynamic products) -->
-    <div class="fade-5">
-      <div class="section-label">New Arrivals</div>
-      <div class="gallery" id="products-container">
-        <div style="text-align:center; padding:2rem; color:var(--white-dim);">Loading products…</div>
+    <!-- FEATURED -->
+    <div class="featured-card" onclick="location.href='stencil-product.php'">
+      <div>
+        <div class="featured-label">FEATURED</div>
+        <div class="featured-title">Kits & Collections</div>
       </div>
+      <div class="featured-icon">→</div>
     </div>
 
-  </main>
+    <!-- NEW ARRIVALS -->
+    <div class="section-label">NEW ARRIVALS</div>
+    <div class="product-grid" id="products-container">
+      <div style="text-align:center; padding:2rem; width:100%; color:var(--white-dim);">Loading products…</div>
+    </div>
+
+  </div>
 
   <script>
     const API_BASE = '<?php echo $API_URL; ?>';
     const token = localStorage.getItem('archAccessToken');
     let favourites = [];
-
     // ---------- FETCH FAVOURITES ----------
     async function fetchFavourites() {
       if (!token) return;
@@ -399,21 +524,17 @@
     function isFavourite(productId) {
       return favourites.includes(productId);
     }
-
     // ---------- TOGGLE FAVOURITE ----------
     async function toggleFavourite(productId, heartEl) {
       if (!token) {
         alert('Please log in to save favourites.');
         return;
       }
-
       heartEl.style.pointerEvents = 'none';
       const isFav = isFavourite(productId);
-
       try {
         let res;
         if (isFav) {
-          // DELETE – remove favourite
           res = await fetch(`${API_BASE}/favourites/${productId}`, {
             method: 'DELETE',
             headers: {
@@ -422,7 +543,6 @@
             }
           });
         } else {
-          // POST – add favourite
           res = await fetch(`${API_BASE}/favourites`, {
             method: 'POST',
             headers: {
@@ -430,16 +550,15 @@
               'Content-Type': 'application/json',
               'Authorization': `Bearer ${token}`
             },
-            body: JSON.stringify({ product_id: productId })
+            body: JSON.stringify({
+              product_id: productId
+            })
           });
         }
-
         if (!res.ok) {
           const errData = await res.json().catch(() => ({}));
           throw new Error(errData.detail || 'Failed to update favourite');
         }
-
-        // Update local state & UI
         if (isFav) {
           favourites = favourites.filter(id => id !== productId);
           heartEl.classList.remove('favourited');
@@ -456,31 +575,37 @@
         heartEl.style.pointerEvents = 'auto';
       }
     }
-
-    // ---------- RENDER PRODUCTS ----------
+    // ---------- RENDER PRODUCTS (MATCHING SCREENSHOT UI) ----------
     function renderProducts(products) {
       const container = document.getElementById('products-container');
       if (!products.length) {
-        container.innerHTML = '<div style="text-align:center; padding:2rem; color:var(--white-dim);">No products available yet.</div>';
+        container.innerHTML =
+          '<div style="text-align:center; padding:2rem; width:100%; color:var(--white-dim);">No products available yet.</div>';
         return;
       }
-
       container.innerHTML = products.map(product => {
         const favClass = isFavourite(product.id) ? ' favourited' : '';
         const heartIcon = isFavourite(product.id) ? '♥' : '♡';
+        // Important: User will replace `product.image` with their actual image URL later.
+        const imageUrl = product.image ? product.image :
+          'assets/beauty-2.png';
         return `
-          <article class="card">
-            <div class="card-image">
-              <div class="card-heart${favClass}" data-product-id="${escapeHtml(product.id)}">${heartIcon}</div>
+          <div class="product-card">
+            <div class="product-image-wrapper">
+              <!-- DISPLAY YOUR IMAGES HERE -->
+              <img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(product.name)}" class="product-img">
+              <div class="product-heart${favClass}" data-product-id="${escapeHtml(product.id)}">${heartIcon}</div>
             </div>
-            <div class="card-title">${escapeHtml(product.name)}</div>
-            <div class="card-price">$${product.price.toFixed(2)}</div>
-          </article>
+            <div class="product-details">
+              <div class="product-name">${escapeHtml(product.name)}</div>
+              <div class="product-sub">${escapeHtml(product.name)} Kit</div>
+              <div class="product-price">$${product.price.toFixed(2)}</div>
+            </div>
+          </div>
         `;
       }).join('');
-
       // Attach click handlers to hearts
-      container.querySelectorAll('.card-heart').forEach(heart => {
+      container.querySelectorAll('.product-heart').forEach(heart => {
         heart.addEventListener('click', function(e) {
           e.stopPropagation();
           toggleFavourite(this.dataset.productId, this);
@@ -496,29 +621,30 @@
         '"': '&quot;',
         "'": '&#039;'
       };
-      return text.replace(/[&<>"']/g, m => map[m]);
+      return String(text).replace(/[&<>"']/g, m => map[m]);
     }
-
     // ---------- INIT ----------
     async function init() {
       await fetchFavourites();
-
       const container = document.getElementById('products-container');
       try {
         const res = await fetch(`${API_BASE}/products`, {
-          headers: { 'accept': 'application/json' }
+          headers: {
+            'accept': 'application/json'
+          }
         });
         if (!res.ok) throw new Error('Failed to load products');
         const products = await res.json();
         renderProducts(products);
       } catch (err) {
         console.error(err);
-        container.innerHTML = '<div style="text-align:center; padding:2rem; color:#e05c5c;">Could not load products. Please try again later.</div>';
+        container.innerHTML =
+          '<div style="text-align:center; padding:2rem; width:100%; color:#e05c5c;">Could not load products. Please try again later.</div>';
       }
     }
-
     document.addEventListener('DOMContentLoaded', init);
   </script>
 
 </body>
+
 </html>

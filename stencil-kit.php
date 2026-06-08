@@ -28,7 +28,7 @@
       --border-hover: rgba(201, 168, 76, 0.45);
       --font-display: 'Cormorant Garamond', serif;
       --font-body: 'Montserrat', sans-serif;
-      --radius: 14px;
+      --radius: 18px;
       --radius-sm: 10px;
       --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
@@ -197,7 +197,7 @@
       border-radius: var(--radius);
       padding: 20px 24px;
       background: #161610;
-      border: 1px solid var(--border);
+      border: 1px solid #333;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -217,13 +217,13 @@
     }
 
     .option:hover {
-      border-color: var(--gold-dark);
-      background: rgba(201,168,76,0.06);
+      border-color: #c9a84c;
+      background: rgba(201,168,76,0.12);
       transform: translateY(-2px);
     }
 
     .option.gold {
-      border: 1px solid var(--gold);
+      border: 1px solid #c9a84c;
       background: rgba(201,168,76,0.08);
       box-shadow: 0 0 0 1px rgba(201,168,76,0.1);
     }
@@ -289,7 +289,7 @@
       padding: 0.85rem 1.2rem;
       border-radius: 999px;
       border: 1px solid var(--border);
-      background: transparent;
+      background: #c9a84c;
       color: var(--white);
       font-size: 0.75rem;
       font-weight: 600;
@@ -299,24 +299,32 @@
     }
 
     .btn-secondary:hover {
-      border-color: var(--gold);
-      color: var(--gold);
+      color: var(--black);
+      box-shadow: 0 0 0 1px rgba(201,168,76,0.2);
+      transform: translateY(-2px);
     }
 
     .link-gold {
-      text-align: center;
-      color: var(--gold);
-      font-size: 0.9rem;
-      letter-spacing: 0.04em;
-      padding: 6px 0 4px;
-      cursor: pointer;
-      transition: color var(--transition);
-      font-weight: 400;
+     display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 0.85rem 1.2rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--white);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      transition: all var(--transition);
     }
 
     .link-gold:hover {
       color: var(--gold-light);
-      text-decoration: underline;
+      box-shadow: 0 0 0 1px rgba(201,168,76,0.2);
+      transform: translateY(-2px); 
     }
 
     /* ====== ANIMATIONS ====== */

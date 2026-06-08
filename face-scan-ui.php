@@ -191,7 +191,7 @@
     .icon-card {
       border-radius: var(--radius);
       background: #161610;
-      border: 1px solid var(--gold);
+      border: 1px solid #c9a84c;
       min-height: 200px;
       display: grid;
       place-items: center;
@@ -319,23 +319,24 @@
     }
 
     .btn-primary {
-      background: var(--gold);
-      color: var(--black);
+      background: #c9a84c;
+      color: var(--white);
     }
 
     .btn-primary:hover {
-      background: var(--gold-light);
-      transform: translateY(-1px);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 15px rgba(201,168,76,0.3);
+      color: var(--black);
     }
 
     .btn-secondary {
       background: transparent;
-      border: 1px solid var(--border);
+      border: 1px solid #333;
       color: var(--white);
     }
 
     .btn-secondary:hover {
-      border-color: var(--gold);
+      border-color: #c9a84c;
       color: var(--gold);
     }
 
@@ -448,7 +449,7 @@
     <!-- ACTIONS -->
     <div class="actions fade-5">
       <label for="cameraInput">
-        <button class="btn btn-secondary">Open camera</button>
+        <button class="btn btn-primary">Open camera</button>
       </label>
       <input id="cameraInput" type="file" accept="image/*" capture="environment" onchange="handlePhoto(event)" />
 

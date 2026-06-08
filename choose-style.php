@@ -195,7 +195,7 @@
 
     .style-card {
       background: #161610;
-      border: 1px solid var(--border);
+      border: 1px solid #333;
       border-radius: var(--radius-sm);
       padding: 12px 6px;
       text-align: center;
@@ -208,7 +208,8 @@
     }
 
     .style-card:hover {
-      border-color: var(--gold-dark);
+      border-color: #c9a84c;
+      background: rgba(201,168,76,0.06);
     }
 
     .style-card.selected {
@@ -287,7 +288,7 @@
       position: relative;
       border-radius: var(--radius);
       overflow: hidden;
-      border: 1px solid var(--gold);
+      border: 1px solid #c9a84c;
       background: #000;
       min-height: 260px;
       aspect-ratio: 1/1;
@@ -355,7 +356,7 @@
       padding: 0.85rem 1.2rem;
       border-radius: 999px;
       border: 1px solid var(--border);
-      background: transparent;
+      background: #c9a84c;
       color: var(--white);
       font-size: 0.75rem;
       font-weight: 600;
@@ -365,8 +366,9 @@
     }
 
     .btn-primary:hover {
-      border-color: var(--gold);
-      color: var(--gold);
+      color: var(--black);
+      box-shadow: 0 0 0 1px rgba(201,168,76,0.4);
+      transform: translateY(-2px); 
     }
 
     /* ====== ANIMATIONS ====== */

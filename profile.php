@@ -163,8 +163,8 @@
     }
 
     .profile-card {
-      background: var(--dark-card);
-      border: 1px solid var(--border);
+      background: #121212;
+      border: 1px solid #333;
       border-radius: var(--radius);
       padding: 2rem 2rem 1.75rem;
       display: flex;
@@ -181,17 +181,17 @@
       left: 0;
       right: 0;
       height: 2px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
       opacity: 0.6;
     }
     .profile-card:hover {
-      border-color: var(--border-hover);
+      background: linear-gradient(135deg, #302a17 0%, #1f1b0e 100%);
+      border-color: #c9a84c;
     }
     .profile-avatar-large {
       width: 84px;
       height: 84px;
       border-radius: 50%;
-      background: #1c1c12;
+      background: #121212;
       border: 2px solid var(--gold);
       display: flex;
       align-items: center;
@@ -263,15 +263,16 @@
       gap: 0.6rem;
     }
     .brow-tag {
-      background: var(--dark-card);
-      border: 1px solid var(--border);
+      background: #121212;
+      border: 1px solid #333;
       border-radius: var(--radius-sm);
       padding: 0.9rem 1rem;
       text-align: center;
       transition: all var(--transition);
     }
     .brow-tag:hover {
-      border-color: var(--border-hover);
+      border-color:#c9a84c;
+      background: linear-gradient(135deg, #302a17 0%, #1f1b0e 100%);
       transform: translateY(-1px);
     }
     .brow-tag-key {
@@ -289,8 +290,8 @@
     }
 
     .appt-card {
-      background: var(--dark-card);
-      border: 1px solid var(--border);
+      background: #121212;
+      border: 1px solid #333;
       border-radius: var(--radius);
       padding: 1.25rem 1.75rem;
       display: flex;
@@ -312,7 +313,8 @@
       border-radius: 0 2px 2px 0;
     }
     .appt-card:hover {
-      border-color: var(--border-hover);
+      border-color: #c9a84c;
+      background: linear-gradient(135deg, #302a17 0%, #1f1b0e 100%);
       transform: translateY(-2px);
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
     }
@@ -380,15 +382,15 @@
       letter-spacing: 0.08em;
       font-weight: 500;
       transition: all var(--transition);
-      border: 1px solid var(--border);
-      background: var(--dark-card);
+      border: 1px solid #333;
+      background: #121212;
       color: var(--white);
       font-family: var(--font-body);
     }
     .btn:hover {
-      border-color: var(--gold);
+      border-color: #c9a84c;
       color: var(--gold);
-      background: rgba(201, 168, 76, 0.04);
+      background: linear-gradient(135deg, #302a17 0%, #1f1b0e 100%);
       transform: translateY(-1px);
     }
     .btn-icon {
@@ -624,7 +626,6 @@
     <div class="fade-3">
       <div class="section-header">
         <div class="section-label">GENERAL</div>
-        <span class="section-edit">Edit →</span>
       </div>
       <div class="brow-grid">
         <div class="brow-tag">
@@ -690,67 +691,11 @@
         <button class="btn btn-danger" id="delete-account-btn">
           <span class="btn-icon">✕</span> Delete Account
         </button>
-        <button class="btn btn-danger" id="sign-out-btn"">
+        <button class="btn btn-danger" id="sign-out-btn">
           <span class="btn-icon">↪</span> Sign Out
         </button>
       </div>
     </div>
-
-    <!-- MY LOOKS (unchanged) -->
-    <div class="fade-5">
-      <div class="looks-header">
-        <h2 class="looks-title">My Looks</h2>
-        <div class="looks-actions">
-          <button class="share-btn">Share →</button>
-        </div>
-      </div>
-
-      <div class="look-nav">
-        <a href="#" class="active">All</a>
-        <a href="#">Style</a>
-        <a href="#">Guides</a>
-        <a href="#">Kits</a>
-        <a href="#">Saved</a>
-      </div>
-
-      <div class="looks-grid">
-        <div class="look-card">
-          <div class="look-card-left">
-            <div class="look-thumb">📸</div>
-            <div>
-              <div class="look-name">My everyday arch</div>
-              <div class="look-meta">15 May · Arch · Dark Brown</div>
-            </div>
-          </div>
-          <div class="look-arrow">→</div>
-        </div>
-
-        <div class="look-card">
-          <div class="look-card-left">
-            <div class="look-thumb">📸</div>
-            <div>
-              <div class="look-name">My everyday arch</div>
-              <div class="look-meta">15 May · Arch · Dark Brown</div>
-            </div>
-          </div>
-          <div class="look-arrow">→</div>
-        </div>
-
-        <div class="look-card">
-          <div class="look-card-left">
-            <div class="look-thumb">📸</div>
-            <div>
-              <div class="look-name">My everyday arch</div>
-              <div class="look-meta">15 May · Arch · Dark Brown</div>
-            </div>
-          </div>
-          <div class="look-arrow">→</div>
-        </div>
-      </div>
-
-      <button class="create-btn">+ Create a new look</button>
-    </div>
-
   </main>
 
   <script>

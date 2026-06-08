@@ -26,7 +26,7 @@
       --border-hover: rgba(201, 168, 76, 0.45);
       --font-display: 'Cormorant Garamond', serif;
       --font-body: 'Montserrat', sans-serif;
-      --radius: 14px;
+      --radius: 18px;
       --radius-sm: 10px;
       --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
@@ -233,8 +233,8 @@
     }
 
     .look-card {
-      background: linear-gradient(135deg, #1c1a0d 0%, #221f0f 60%, #1a1808 100%);
-      border: 1px solid var(--border);
+      background: #121212;
+      border: 1px solid #383838;
       border-radius: var(--radius);
       padding: 1.2rem 1.5rem;
       display: flex;
@@ -308,8 +308,8 @@
       padding: 1rem;
       border-radius: 50px;
       border: 1px solid var(--border);
-      background: rgba(255,255,255,0.02);
-      color: var(--white);
+      background: #c9a84c;
+      color: var(--black);
       font-size: 0.8rem;
       font-weight: 600;
       letter-spacing: 0.12em;
@@ -320,8 +320,7 @@
 
     .create-new-btn:hover {
       border-color: var(--gold);
-      color: var(--gold);
-      background: var(--gold-muted);
+      box-shadow: 0 8px 30px rgba(201, 168, 76, 0.4);
       transform: translateY(-1px);
     }
 

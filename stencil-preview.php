@@ -210,7 +210,7 @@
     .preview-card {
       border-radius: var(--radius);
       background: #161610;
-      border: 1px solid var(--gold);
+      border: 1px solid #c9a84c;
       min-height: 200px;
       display: grid;
       place-items: center;
@@ -270,6 +270,17 @@
       font-family: var(--font-body);
     }
 
+    .btn-primary {
+      background: #c9a84c;
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      color: var(--black);
+      box-shadow: 0 8px 30px rgba(201, 168, 76, 0.4);
+      transform: translateY(-2px);
+    }
+
     .btn-secondary {
       background: transparent;
       border: 1px solid var(--border);
@@ -277,7 +288,7 @@
     }
 
     .btn-secondary:hover {
-      border-color: var(--gold);
+      border-color: #c9a84c;
       color: var(--gold);
     }
 
@@ -286,30 +297,6 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 0.75rem;
     }
-
-    .footer-links {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 18px;
-      padding: 0 8px;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .footer-links a {
-      color: var(--white-dim);
-      text-decoration: none;
-      font-size: 0.85rem;
-      transition: color var(--transition);
-      border-bottom: 1px solid transparent;
-    }
-
-    .footer-links a:hover {
-      color: var(--gold);
-      border-bottom: 1px solid var(--gold);
-    }
-
     /* ====== ANIMATIONS ====== */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(16px); }
@@ -379,19 +366,12 @@
 
     <!-- ACTIONS -->
     <div class="actions fade-4">
-      <button class="btn btn-secondary" onclick="applyThis()">Apply this stencil</button>
+      <button class="btn btn-primary" onclick="applyThis()">Apply this stencil</button>
       <div class="row">
         <button class="btn btn-secondary" onclick="location.href='choose-stencil.php'">Browse all</button>
         <button class="btn btn-secondary" onclick="shop()">Shop this kit</button>
       </div>
     </div>
-
-    <!-- FOOTER LINKS -->
-    <div class="footer-links fade-5">
-      <a href="#" onclick="shareMatch()">Share</a>
-      <a href="#" onclick="location.href='index.php'">Return home</a>
-    </div>
-
   </main>
 
   <script>

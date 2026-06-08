@@ -318,7 +318,7 @@
       gap: 0.65rem;
       padding: 1.25rem 0.75rem;
       background: #161610;
-      border: 1px solid rgba(201, 168, 76, 0.14);
+      border: 1px solid #333;
       border-radius: var(--radius-sm);
       cursor: pointer;
       transition: all var(--transition);
@@ -327,7 +327,7 @@
     }
 
     .quick-action:hover {
-      border-color: var(--gold-dark);
+      border-color: #C9A84C;
       background: rgba(201, 168, 76, 0.06);
       transform: translateY(-2px);
     }
@@ -347,7 +347,7 @@
     /* ====== NEXT APPOINTMENT ====== */
     .next-appt-card {
       background: #161610;
-      border: 1px solid rgba(201, 168, 76, 0.14);
+      border: 1px solid #333;
       border-radius: var(--radius);
       padding: 1.25rem 1.75rem;
       display: flex;
@@ -358,7 +358,8 @@
     }
 
     .next-appt-card:hover {
-      border-color: var(--gold-dark);
+      border-color: #C9A84C;
+      background: rgba(201, 168, 76, 0.06);
       transform: translateY(-1px);
     }
 
