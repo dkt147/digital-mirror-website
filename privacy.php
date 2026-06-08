@@ -17,9 +17,9 @@
       --dark: #111111;
       --dark-card: #1a1a0f;
       --dark-input: #1c1c15;
-      --gold: #c9a84c;
-      --gold-light: #d4b96a;
-      --gold-dark: #8a6f2e;
+      --gold: #C9A84C;
+      --gold-light: #C9A84C;
+      --gold-dark: #C9A84C;
       --gold-muted: rgba(201, 168, 76, 0.12);
       --white: #f5f0e8;
       --white-dim: rgba(245, 240, 232, 0.55);
@@ -28,7 +28,7 @@
       --border-hover: rgba(201, 168, 76, 0.45);
       --font-display: 'Cormorant Garamond', serif;
       --font-body: 'Montserrat', sans-serif;
-      --radius: 14px;
+      --radius: 18px;
       --radius-sm: 10px;
       --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
@@ -39,7 +39,7 @@
       background: var(--black);
       color: var(--white);
       font-family: var(--font-body);
-      font-weight: 300;
+      font-weight: 600;
       line-height: 1.6;
       min-height: 100vh;
       overflow-x: hidden;
@@ -433,7 +433,9 @@
       <div class="gold-note">This is the only place we will say it.</div>
 
       <div class="actions">
-        <button class="btn btn-primary" onclick="acceptPrivacy()">Understood. Continue.</button>
+        <button class="btn btn-primary" onclick="acceptPrivacy()" style="background-color: var(--gold); border-radius: 999px;">
+          <span style="color: var(--black);">Understood. Continue.</span>
+        </button>
         <!-- <a href="#" class="terms-link" onclick="showToast('Full privacy terms coming soon', 'info')">
           Read our full privacy terms
           <svg viewBox="0 0 24 24">

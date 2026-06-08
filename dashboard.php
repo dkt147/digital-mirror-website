@@ -15,9 +15,9 @@
       --dark: #111111;
       --dark-card: #1a1a0f;
       --dark-input: #1c1c15;
-      --gold: #c9a84c;
-      --gold-light: #d4b96a;
-      --gold-dark: #8a6f2e;
+      --gold: #C9A84C;
+      --gold-light: #C9A84C;
+      --gold-dark: #C9A84C;
       --gold-muted: rgba(201, 168, 76, 0.12);
       --white: #f5f0e8;
       --white-dim: rgba(245, 240, 232, 0.55);
@@ -26,7 +26,7 @@
       --border-hover: rgba(201, 168, 76, 0.45);
       --font-display: 'Cormorant Garamond', serif;
       --font-body: 'Montserrat', sans-serif;
-      --radius: 14px;
+      --radius: 18px;
       --radius-sm: 10px;
       --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
@@ -48,7 +48,7 @@
       background: var(--black);
       color: var(--white);
       font-family: var(--font-body);
-      font-weight: 300;
+      font-weight: 600;
       line-height: 1.6;
       min-height: 100vh;
       overflow-x: hidden;
@@ -226,7 +226,7 @@
     /* ====== LAST LOOK CARD ====== */
     .last-look-card {
       background: linear-gradient(135deg, #1c1a0d 0%, #221f0f 60%, #1a1808 100%);
-      border: 1px solid rgba(201, 168, 76, 0.22);
+      border: 1px solid #C9A84C;
       border-radius: var(--radius);
       padding: 1.4rem 1.75rem;
       display: flex;
@@ -272,13 +272,13 @@
 
     .re-apply-btn {
       padding: 0.55rem 1.25rem;
-      background: rgba(201, 168, 76, 0.12);
-      border: 1px solid rgba(201, 168, 76, 0.4);
+      background: var(--gold);
+      border: 1px solid var(--gold-dark);
       border-radius: 50px;
       font-size: 0.6rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--gold);
+      color: var(--black);
       cursor: pointer;
       transition: all var(--transition);
       font-family: var(--font-body);
@@ -288,8 +288,8 @@
     }
 
     .re-apply-btn:hover {
-      background: var(--gold);
-      color: var(--black);
+      background: rgba(201, 168, 76, 0.12);
+      color: var(--gold);
       box-shadow: 0 4px 20px rgba(201, 168, 76, 0.25);
     }
 

@@ -18,9 +18,9 @@
       --dark: #111111;
       --dark-card: #1a1a0f;
       --dark-input: #1c1c15;
-      --gold: #c9a84c;
-      --gold-light: #d4b96a;
-      --gold-dark: #8a6f2e;
+      --gold: #C9A84C;
+      --gold-light: #C9A84C;
+      --gold-dark: #C9A84C;
       --gold-muted: rgba(201, 168, 76, 0.12);
       --white: #f5f0e8;
       --white-dim: rgba(245, 240, 232, 0.55);
@@ -29,7 +29,7 @@
       --border-hover: rgba(201, 168, 76, 0.45);
       --font-display: 'Cormorant Garamond', serif;
       --font-body: 'Montserrat', sans-serif;
-      --radius: 14px;
+      --radius: 18px;
       --radius-sm: 10px;
       --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
@@ -40,7 +40,7 @@
       background: var(--black);
       color: var(--white);
       font-family: var(--font-body);
-      font-weight: 300;
+      font-weight: 600;
       line-height: 1.6;
       min-height: 100vh;
       overflow-x: hidden;
@@ -260,7 +260,7 @@
       display: grid;
       gap: 0.75rem;
       width: 100%;
-      max-width: 460px;
+      max-width: 100%;
       margin-left: auto;
       margin-right: auto;
     }
@@ -388,7 +388,7 @@
 
     <!-- ACTIONS -->
     <div class="actions fade-5">
-      <button class="btn btn-secondary" onclick="chooseThis()">This is the one</button>
+      <button class="btn btn-secondary" onclick="chooseThis()" style="background-color: var(--gold); border-color: var(--gold); color: var(--white);">This is the one</button>
       <div class="link-gold" onclick="tryAnother()">Try another style</div>
     </div>
 

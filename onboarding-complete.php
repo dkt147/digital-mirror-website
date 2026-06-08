@@ -13,9 +13,9 @@
       --dark: #111111;
       --dark-card: #1a1a0f;
       --dark-input: #1c1c15;
-      --gold: #c9a84c;
-      --gold-light: #d4b96a;
-      --gold-dark: #8a6f2e;
+      --gold: #C9A84C;
+      --gold-light: #C9A84C;
+      --gold-dark: #C9A84C;
       --gold-muted: rgba(201, 168, 76, 0.12);
       --white: #f5f0e8;
       --white-dim: rgba(245, 240, 232, 0.55);
@@ -24,7 +24,7 @@
       --border-hover: rgba(201, 168, 76, 0.45);
       --font-display: 'Cormorant Garamond', serif;
       --font-body: 'Montserrat', sans-serif;
-      --radius: 14px;
+      --radius: 18px;
       --radius-sm: 10px;
       --radius-pill: 50px;
       --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -36,7 +36,7 @@
       background: var(--black);
       color: var(--white);
       font-family: var(--font-body);
-      font-weight: 300;
+      font-weight: 600;
       line-height: 1.6;
       min-height: 100vh;
       overflow-x: hidden;
@@ -328,7 +328,7 @@
       display: grid;
       gap: 0.75rem;
       width: 100%;
-      max-width: 460px;
+      max-width: 100%;
       margin-left: auto;
       margin-right: auto;
     }
@@ -466,8 +466,8 @@
       <div id="server-message" class="server-message" style="display:none;"></div>
 
       <div class="actions">
-        <button class="btn btn-primary" id="enter-arch-btn" onclick="enterArch()">
-          <span id="btn-text">Enter Arch</span>
+        <button class="btn btn-primary" id="enter-arch-btn" onclick="enterArch()" style="background-color: var(--gold); border-radius: 999px;">
+          <span id="btn-text" style="color: var(--black);">Enter Arch</span>
           <span id="btn-spinner" style="display:none;">⏳</span>
         </button>
       </div>

@@ -18,9 +18,9 @@
       --dark: #111111;
       --dark-card: #1a1a0f;
       --dark-input: #1c1c15;
-      --gold: #c9a84c;
-      --gold-light: #d4b96a;
-      --gold-dark: #8a6f2e;
+      --gold: #C9A84C;
+      --gold-light: #C9A84C;
+      --gold-dark: #C9A84C;
       --gold-muted: rgba(201, 168, 76, 0.12);
       --white: #f5f0e8;
       --white-dim: rgba(245, 240, 232, 0.55);
@@ -29,18 +29,17 @@
       --border-hover: rgba(201, 168, 76, 0.45);
       --font-display: 'Cormorant Garamond', serif;
       --font-body: 'Montserrat', sans-serif;
-      --radius: 14px;
+      --radius: 18px;
       --radius-sm: 10px;
       --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
     html { font-size: 16px; scroll-behavior: smooth; }
     body {
       background: var(--black);
       color: var(--white);
       font-family: var(--font-body);
-      font-weight: 300;
+      font-weight: 600;
       line-height: 1.6;
       min-height: 100vh;
       overflow-x: hidden;
@@ -105,7 +104,7 @@
       opacity: 0.5;
     }
 
-    /* ====== PAGE TOPBAR (Back Arrow + Title + Logo) ====== */
+    /* ====== PAGE TOPBAR ====== */
     .page-topbar {
       display: flex;
       align-items: center;
@@ -163,7 +162,7 @@
       object-fit: contain;
     }
 
-    /* ====== LAYOUT ====== */
+    /* ====== LAYOUT — matches your-look exactly ====== */
     .main {
       max-width: 100%;
       margin: 0 auto;
@@ -171,22 +170,33 @@
       display: flex;
       flex-direction: column;
       gap: 1.75rem;
-      align-items: center;
     }
 
-    /* ====== HEADER ====== */
-    .page-label {
-      font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase;
-      color: var(--gold); font-weight: 500; margin-bottom: 0.2rem;
-      text-align: center;
-    }
-    .page-title {
+    /* ====== HERO ====== */
+    .hero-title {
       font-family: var(--font-display);
       font-style: italic;
-      font-size: clamp(1.6rem, 4vw, 2.2rem);
-      line-height: 1.05;
-      color: var(--white);
+      font-size: 2.6rem;
       text-align: center;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 auto 18px;
+      opacity: 0.5;
+    }
+
+    .hero-sub {
+      text-align: center;
+      color: var(--gold);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      margin-bottom: 24px;
     }
 
     /* ====== IMAGE CARD ====== */
@@ -200,6 +210,7 @@
       box-shadow: 0 0 40px rgba(201, 168, 76, 0.12);
       display: grid;
       place-items: center;
+      margin: 0 auto;
       flex-shrink: 0;
     }
 
@@ -230,15 +241,43 @@
       border-radius: 32px;
     }
 
+    /* ====== PLACEHOLDER CARD ====== */
+    .placeholder-card {
+      background: #161610;
+      border-radius: var(--radius);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      color: var(--white);
+      font-size: 0.9rem;
+      border: 1px solid var(--border);
+    }
+
+    /* ====== INFO NOTE ====== */
+    .info-note {
+      text-align: center;
+      color: var(--white-dim);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
     /* ====== CONTENT TEXT ====== */
     .content-text {
       text-align: center;
-      max-width: 600px;
+    }
+
+    .content-text .section-title {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 0.5rem;
     }
 
     .content-text p {
       color: var(--white-dim);
-      font-size: 0.95rem;
+      font-size: 0.9rem;
+      font-weight: 400;
       line-height: 1.7;
     }
 
@@ -255,40 +294,57 @@
       font-size: 0.8rem;
       font-style: italic;
       letter-spacing: 0.04em;
+      font-weight: 400;
     }
 
     /* ====== BUTTONS ====== */
     .actions {
       display: grid;
       gap: 0.75rem;
-      width: 100%;
-      max-width: 460px;
-      margin-left: auto;
-      margin-right: auto;
     }
 
-    .btn {
-      display: inline-flex;
-      align-items: center;
+    .btn-primary {
+      display: flex;
       justify-content: center;
+      align-items: center;
       width: 100%;
       padding: 0.85rem 1.2rem;
       border-radius: 999px;
+      border: none;
+      background: var(--gold);
+      color: var(--black);
       font-size: 0.75rem;
-      letter-spacing: 0.08em;
+      font-weight: 700;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      font-weight: 600;
       text-decoration: none;
       transition: all var(--transition);
       cursor: pointer;
-      border: none;
       font-family: var(--font-body);
     }
 
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-1px);
+    }
+
     .btn-secondary {
-      background: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding: 0.85rem 1.2rem;
+      border-radius: 999px;
       border: 1px solid var(--border);
+      background: transparent;
       color: var(--white);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      transition: all var(--transition);
+      cursor: pointer;
+      font-family: var(--font-body);
     }
 
     .btn-secondary:hover {
@@ -296,20 +352,23 @@
       color: var(--gold);
     }
 
-    .link-gold {
-      text-align: center;
+    .bottom-links {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 6px;
+      font-size: 0.8rem;
       color: var(--gold);
-      font-size: 0.9rem;
-      letter-spacing: 0.04em;
-      padding: 6px 0 4px;
-      cursor: pointer;
-      transition: color var(--transition);
       font-weight: 400;
     }
 
-    .link-gold:hover {
-      color: var(--gold-light);
-      text-decoration: underline;
+    .bottom-links a {
+      color: inherit;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .bottom-links a:hover {
+      opacity: 0.7;
     }
 
     /* ====== ANIMATIONS ====== */
@@ -328,8 +387,9 @@
       .main { padding: 0 1.25rem 1.5rem; }
       .navbar { padding: 0.875rem 1.25rem; }
       .navbar-nav { display: none; }
-      .page-title { font-size: 1.6rem; }
+      .hero-title { font-size: 2rem; }
       .image-card-wrapper { width: 160px; height: 160px; }
+      .placeholder-card { padding: 1.5rem; }
       .back-btn { width: 38px; height: 38px; }
       .page-logo { width: 38px; height: 38px; }
     }
@@ -346,7 +406,7 @@
   <!-- MAIN CONTENT -->
   <main class="main">
 
-    <!-- PAGE TOPBAR (Back Arrow + Title + Logo) -->
+    <!-- PAGE TOPBAR -->
     <div class="page-topbar fade-1">
       <a href="javascript:history.back()" class="back-btn" aria-label="Go back">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -354,13 +414,14 @@
           <polyline points="12 19 5 12 12 5"></polyline>
         </svg>
       </a>
-      <div class="page-title-center">Soft arch</div>
+      <div class="page-title-center">Soft Arch</div>
     </div>
 
-    <!-- CONTENT HEADER -->
+    <!-- HERO -->
     <div class="fade-2">
-      <div class="page-label">Style Detail</div>
-      <div class="page-title">Soft arch</div>
+      <div class="hero-title">Soft arch.</div>
+      <div class="divider"></div>
+      <div class="hero-sub">Style Detail · Considered · Effortless</div>
     </div>
 
     <!-- IMAGE CARD -->
@@ -380,8 +441,8 @@
     </div>
 
     <!-- CONTENT TEXT -->
-    <div class="content-text fade-4">
-      <h1 class="page-title">Your face carries most of its width at the cheekbones, tapering at the jaw.</h1>
+    <div class="content-text fade-3">
+      <div class="section-title">Your face carries most of its width at the cheekbones, tapering at the jaw.</div>
       <p style="margin-top:0.5rem;">Why this shape suits your face.</p>
       <p>A soft arch placed fractionally above the brow bone's peak draws the eye upward — creating lift without effort.</p>
     </div>
@@ -391,25 +452,31 @@
       <span class="badge-label">Structured. Effortless</span>
     </div>
 
+    <!-- PLACEHOLDER CARD -->
+    <div class="placeholder-card fade-4">Leave As Placeholder.</div>
+
+    <div class="info-note fade-4">Saved looks can be shared with your artist anytime.</div>
+
     <!-- ACTIONS -->
     <div class="actions fade-5">
-      <button class="btn btn-secondary" onclick="tryThisOn()">Try this on</button>
-      <div class="link-gold" onclick="tryDifferent()">Try a different recommendation</div>
+      <button class="btn-primary" onclick="tryThisOn()">Try this on</button>
+      <button class="btn-secondary" onclick="tryDifferent()">Try a different recommendation</button>
+    </div>
+
+    <!-- BOTTOM LINKS -->
+    <div class="bottom-links fade-5">
+      <a href="tracing-guide.php">Shop matching products</a>
+      <a href="index.php">Return to home</a>
     </div>
 
   </main>
 
   <script>
-    function goBack() { history.back(); }
-
     function tryThisOn() {
       alert('Try this on — opening preview');
-      // window.location.href = 'stencil-preview.php?kit=soft-arch';
     }
-
     function tryDifferent() {
       alert('Loading different recommendation');
-      // window.location.href = 'recommendations.php';
     }
   </script>
 

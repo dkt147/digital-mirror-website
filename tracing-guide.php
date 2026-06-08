@@ -17,9 +17,9 @@
       --dark: #111111;
       --dark-card: #1a1a0f;
       --dark-input: #1c1c15;
-      --gold: #c9a84c;
-      --gold-light: #d4b96a;
-      --gold-dark: #8a6f2e;
+      --gold: #C9A84C;
+      --gold-light: #C9A84C;
+      --gold-dark: #C9A84C;
       --gold-muted: rgba(201, 168, 76, 0.12);
       --white: #f5f0e8;
       --white-dim: rgba(245, 240, 232, 0.55);
@@ -28,7 +28,7 @@
       --border-hover: rgba(201, 168, 76, 0.45);
       --font-display: 'Cormorant Garamond', serif;
       --font-body: 'Montserrat', sans-serif;
-      --radius: 14px;
+      --radius: 18px;
       --radius-sm: 10px;
       --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
@@ -39,7 +39,7 @@
       background: var(--black);
       color: var(--white);
       font-family: var(--font-body);
-      font-weight: 300;
+      font-weight: 600;
       line-height: 1.6;
       min-height: 100vh;
       overflow-x: hidden;
@@ -428,7 +428,7 @@
 
     <!-- ACTIONS -->
     <div class="actions fade-4">
-      <a class="btn-primary" href="guide-complete.php">Begin drawing</a>
+      <a class="btn-primary" href="guide-complete.php" style="background: var(--gold); border-color: var(--gold-dark); color: var(--black);">Begin drawing</a>
       <a class="watch-link" href="watch-guide.php">Watch how it works</a>
     </div>
 

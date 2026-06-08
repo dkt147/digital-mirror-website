@@ -12,12 +12,12 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --gold: #c9a84c;
-      --gold-light: #d4b96a;
-      --gold-dark: #8a6f2e;
+      --gold: #C9A84C;
+      --gold-light: #C9A84C;
+      --gold-dark: #C9A84C;
       --gold-muted: rgba(201, 168, 76, 0.12);
       --gold-bg-hover: rgba(201, 168, 76, 0.08);
-      --black: #0a0a0a;
+      --black: #000000;
       --white: #f5f0e8;
       --white-dim: rgba(245, 240, 232, 0.6);
       --white-faint: rgba(245, 240, 232, 0.15);
@@ -26,7 +26,7 @@
       --red-bg: rgba(139, 32, 32, 0.2);
       --red-border: #8b2020;
       --btn-dark: #232323;
-      --radius: 24px;
+      --radius: 18px;
       --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       --font-display: 'Cormorant Garamond', serif;
       --font-body: 'Montserrat', sans-serif;
@@ -36,7 +36,7 @@
       background: var(--black);
       color: var(--white);
       font-family: var(--font-body);
-      font-weight: 300;
+      font-weight: 600;
       min-height: 100vh;
       display: flex;
       align-items: center;
@@ -380,8 +380,8 @@
       <div id="server-message" class="server-message" style="display:none;"></div>
 
       <!-- Submit Button -->
-      <button type="submit" class="btn btn-primary" id="submit-btn">
-        <span id="btn-text">Verify Code</span>
+      <button type="submit" class="btn btn-primary" id="submit-btn" style="background-color: var(--gold); border-radius: 999px;">
+        <span id="btn-text" style="color: var(--black);">Verify Code</span>
         <span id="btn-spinner" style="display:none;">⏳</span>
       </button>
     </form>

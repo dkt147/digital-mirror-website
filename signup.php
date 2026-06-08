@@ -20,12 +20,12 @@ include 'config.php';
     }
 
     :root {
-      --gold: #c9a84c;
-      --gold-light: #d4b96a;
-      --gold-dark: #8a6f2e;
+      --gold: #C9A84C;
+      --gold-light: #C9A84C;
+      --gold-dark: #C9A84C;
       --gold-muted: rgba(201, 168, 76, 0.12);
       --gold-bg-hover: rgba(201, 168, 76, 0.08);
-      --black: #0a0a0a;
+      --black: #000000;
       --dark-card: #1a1a14;
       --white: #f5f0e8;
       --white-dim: rgba(245, 240, 232, 0.6);
@@ -35,17 +35,17 @@ include 'config.php';
       --red-bg: rgba(139, 32, 32, 0.2);
       --red-border: #8b2020;
       --btn-dark: #232323;
-      --radius: 24px;
+      --radius: 18px;
       --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       --font-display: 'Cormorant Garamond', serif;
-      --font-body: 'Montserrat', sans-serif;
+      --font-body: 'Montserrat';
     }
 
     body {
       background: var(--black);
       color: var(--white);
       font-family: var(--font-body);
-      font-weight: 300;
+      font-weight: 600;
       min-height: 100vh;
       display: flex;
       align-items: center;
@@ -272,14 +272,14 @@ include 'config.php';
       justify-content: center;
       gap: 0.5rem;
       padding: 1rem 1.75rem;
-      border-radius: var(--radius);
+      border-radius: 999px;
       font-size: 0.7rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
       font-weight: 600;
       transition: all var(--transition);
       width: 100%;
-      min-height: 60px;
+      min-height: 65px;
       margin-top: 0.25rem;
     }
 
@@ -556,8 +556,8 @@ include 'config.php';
       <div id="server-error" class="form-error" style="text-align:center; margin-top:-0.5rem;"></div>
 
       <!-- Create Account Button (#232323) -->
-      <button type="submit" class="btn btn-primary" id="submit-btn">
-        <span id="btn-text">Create Account</span>
+      <button type="submit" class="btn btn-primary" id="submit-btn" style="background-color: var(--gold);">
+        <span id="btn-text" style="color: var(--black);">Create Account</span>
         <span id="btn-spinner" style="display:none;">⏳</span>
       </button>
     </form>
