@@ -28,7 +28,7 @@
       --border-hover: rgba(201, 168, 76, 0.45);
       --font-display: 'Cormorant Garamond', serif;
       --font-body: 'Montserrat', sans-serif;
-      --radius: 14px;
+      --radius: 18px;
       --radius-sm: 10px;
       --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
@@ -120,8 +120,8 @@
       width: 44px;
       height: 44px;
       border-radius: 50%;
-      border: 1px solid var(--gold);
-      color: var(--gold);
+      border: 1px solid #c9a84c;
+      color: #c9a84c;
       text-decoration: none;
       transition: all var(--transition);
       background: transparent;
@@ -256,7 +256,7 @@
       display: grid;
       gap: 0.75rem;
       width: 100%;
-      max-width: 460px;
+      max-width: 100%;
       margin-left: auto;
       margin-right: auto;
     }
@@ -376,7 +376,7 @@
 
     <!-- ACTIONS -->
     <div class="actions fade-5">
-      <a class="btn btn-primary" href="#">Analyse my face</a>
+      <a class="btn btn-primary" href="face-preportions.php" style="background: #c9a84c; color: var(--white);">Analyse my face</a>
       <a class="btn-link" href="#">Browse all styles instead</a>
     </div>
 

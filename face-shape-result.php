@@ -16,33 +16,24 @@
     :root {
       --black: #0a0a08;
       --dark: #111111;
-      --dark-card: #1a1a0f;
-      --dark-input: #1c1c15;
       --gold: #c9a84c;
       --gold-light: #d4b96a;
       --gold-dark: #8a6f2e;
-      --gold-muted: rgba(201, 168, 76, 0.12);
       --white: #f5f0e8;
       --white-dim: rgba(245, 240, 232, 0.55);
-      --white-faint: rgba(245, 240, 232, 0.15);
       --border: rgba(201, 168, 76, 0.18);
-      --border-hover: rgba(201, 168, 76, 0.45);
       --font-display: 'Cormorant Garamond', serif;
       --font-body: 'Montserrat', sans-serif;
-      --radius: 14px;
-      --radius-sm: 10px;
       --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { font-size: 16px; scroll-behavior: smooth; }
     body {
       background: var(--black);
       color: var(--white);
       font-family: var(--font-body);
       font-weight: 300;
-      line-height: 1.6;
       min-height: 100vh;
+      line-height: 1.6;
       overflow-x: hidden;
     }
     a { color: inherit; text-decoration: none; }
@@ -54,7 +45,7 @@
       background: none;
     }
 
-    /* ====== NAVBAR ====== */
+    /* ====== NAVBAR (CSS for PHP Include) ====== */
     .navbar {
       display: flex;
       align-items: center;
@@ -105,388 +96,306 @@
       opacity: 0.5;
     }
 
-    /* ====== PAGE TOPBAR (Back Arrow + Title + Logo) ====== */
-    .page-topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.5rem 0;
-      margin-bottom: 1.5rem;
-    }
-
-    .back-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      border: 1px solid var(--gold);
-      color: var(--gold);
-      text-decoration: none;
-      transition: all var(--transition);
-      background: transparent;
-      flex-shrink: 0;
-    }
-
-    .back-btn:hover {
-      background: rgba(201,168,76,0.12);
-      transform: scale(1.05);
-    }
-
-    .page-title-center {
-      flex: 1;
-      text-align: center;
-      font-family: var(--font-display);
-      font-size: 0.9rem;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--gold);
-      padding: 0 1rem;
-    }
-
-    .page-logo {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      border: 1px solid var(--gold);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      flex-shrink: 0;
-    }
-
-    .page-logo img {
-      width: 24px;
-      height: 24px;
-      object-fit: contain;
-    }
-
-    /* ====== LAYOUT ====== */
+    /* ====== MAIN LAYOUT ====== */
     .main {
       max-width: 100%;
       margin: 0 auto;
-      padding: 0 3rem 2.5rem;
+      padding: 0 1.5rem 2.5rem;
       display: flex;
       flex-direction: column;
-      gap: 1.75rem;
-    }
-
-    /* ====== HEADER ====== */
-    .page-label {
-      font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase;
-      color: var(--gold); font-weight: 500; margin-bottom: 0.2rem;
-    }
-    .page-title {
-      font-family: var(--font-display);
-      font-style: italic;
-      font-size: 2rem;
-      font-weight: 400;
-      color: var(--white);
-      line-height: 1.05;
+      align-items: center;
+      gap: 1rem;
     }
 
     /* ====== RESULT CARD ====== */
+    .result-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+      margin-top: 0.5rem;
+      margin-bottom: 0.25rem;
+    }
+
     .result-card-wrapper {
       position: relative;
-      width: 200px;
-      height: 200px;
-      border-radius: 40px;
-      padding: 4px;
+      width: 180px;
+      height: 180px;
+      border-radius: 34px;
+      padding: 3px;
       background: linear-gradient(135deg, var(--gold-dark), var(--gold-light));
       box-shadow: 0 0 40px rgba(201, 168, 76, 0.12);
-      display: grid;
-      place-items: center;
-      margin: 0 auto 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 6px;
     }
 
     .result-card {
       width: 100%;
       height: 100%;
       border-radius: 32px;
-      background: rgba(10,10,10,0.7);
-      backdrop-filter: blur(4px);
-      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(10, 10, 10, 0.9);
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 1.5rem;
       text-align: center;
     }
 
     .result-card-text {
       color: var(--white-dim);
       font-size: 0.95rem;
-      line-height: 1.4;
-      letter-spacing: 0.01em;
       font-weight: 300;
+      padding: 1.5rem;
     }
 
-    /* ====== CONTENT ====== */
-    .shape-label {
-      font-size: 0.7rem;
-      color: var(--white-dim);
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      margin-top: 0.25rem;
+    .gold-check {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1.5px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--black);
+      margin-top: -12px;
+      position: relative;
+      z-index: 5;
+    }
+
+    .gold-check svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--gold);
+      stroke-width: 2.5;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ====== FACE SHAPE TEXT ====== */
+    .shape-title-italic {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--white);
+      margin-top: 0.5rem;
+      margin-bottom: 0.1rem;
     }
 
     .shape-value {
       font-family: var(--font-display);
-      font-size: 2.2rem;
+      font-size: 2.6rem;
       font-weight: 400;
       color: var(--white);
-      margin-top: 0.1rem;
-      line-height: 1.05;
+      line-height: 1;
     }
 
-    .shape-sub {
-      font-size: 0.7rem;
-      color: var(--white-dim);
-      margin-bottom: 1.2rem;
-    }
-
-    /* ====== RECOMMENDATION BUTTONS ====== */
-    .rec-section {
-      width: 100%;
-      max-width: 460px;
-      text-align: center;
-      margin-bottom: 10px;
-    }
-
-    .rec-label {
-      font-size: 0.6rem;
+    .shape-sub-label {
+      font-size: 0.65rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--gold);
-      font-weight: 500;
-      margin-bottom: 14px;
+      margin-bottom: 1.25rem;
     }
 
-    .rec-buttons-row {
+    /* ====== STYLE OPTIONS (EXACT MATCH) ====== */
+    .options-box {
+      width: 100%;
+      max-width: 100%;
       display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .rec-btn {
-      padding: 0.7rem 1.6rem;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: #161610;
-      color: var(--white-dim);
-      font-size: 0.7rem;
-      letter-spacing: 0.05em;
-      transition: all var(--transition);
-      font-weight: 400;
-      min-width: 100px;
-      text-transform: uppercase;
-    }
-
-    .rec-btn:hover {
-      border-color: var(--gold-dark);
-      color: var(--white);
-    }
-
-    .rec-btn.active {
-      border-color: var(--gold);
-      background: rgba(201,168,76,0.06);
-      color: var(--gold);
-      font-weight: 500;
-    }
-
-    .info-note {
-      font-size: 0.85rem;
-      color: var(--white-dim);
-      line-height: 1.6;
-      text-align: center;
-      margin: 10px 0 16px;
-      padding: 0 12px;
-    }
-
-    /* ====== BUTTONS ====== */
-    .actions {
-      display: grid;
+      flex-direction: column;
       gap: 0.75rem;
-      width: 100%;
-      max-width: 460px;
-      margin-left: auto;
-      margin-right: auto;
+      margin-bottom: 0.5rem;
     }
 
-    .btn {
-      display: inline-flex;
+    .option-btn {
+      display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
+      padding: 1rem 1.25rem;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: #11110e;
+      color: var(--white);
+      transition: all var(--transition);
+      cursor: pointer;
       width: 100%;
-      padding: 0.85rem 1.2rem;
+      text-align: left;
+    }
+
+    .option-btn.active {
+      border: 1.5px solid var(--gold);
+      background: #211d11;
+    }
+
+    .option-btn .text-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+
+    .option-btn .main-title {
+       font-family: var(--font-display);  
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .option-btn .sub-title {
+      font-size: 0.7rem;
+      font-weight: 400;
+      color: var(--gold);
+      font-style: italic;
+      letter-spacing: 0.02em;
+    }
+
+    .option-btn svg {
+      stroke: var(--white);
+      fill: none;
+      stroke-linecap: round;
+      stroke-width: 2;
+      width: 28px;
+      height: 16px;
+    }
+
+    .option-btn.active svg {
+      stroke: var(--gold);
+    }
+
+    /* ====== FOOTNOTE & BUTTONS ====== */
+    .footnote {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.4);
+      margin: 0.5rem 0 0.75rem;
+      line-height: 1.4;
+      font-weight: 300;
+      text-align: center;
+    }
+
+    .btn-gold {
+      width: 100%;
+      max-width: 100%;
+      padding: 1rem;
       border-radius: 999px;
+      background: var(--gold);
+      color: var(--black);
       font-size: 0.75rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all var(--transition);
-      cursor: pointer;
+      font-weight: 700;
       border: none;
+      cursor: pointer;
+      transition: background var(--transition);
       font-family: var(--font-body);
     }
 
-    .btn-secondary {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--white);
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--gold);
-      color: var(--gold);
-    }
-
-    .row {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.75rem;
+    .btn-gold:hover {
+      background: var(--gold-light);
     }
 
     .link-gold {
-      text-align: center;
       color: var(--gold);
-      font-size: 0.9rem;
-      letter-spacing: 0.04em;
-      padding: 6px 0 4px;
-      cursor: pointer;
-      transition: color var(--transition);
+      font-size: 0.85rem;
       font-weight: 400;
+      cursor: pointer;
+      margin-top: 0.25rem;
+      transition: color var(--transition);
     }
 
     .link-gold:hover {
-      color: var(--gold-light);
       text-decoration: underline;
+      color: var(--gold-light);
     }
 
-    /* ====== ANIMATIONS ====== */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .fade-1 { animation: fadeUp 0.55s ease 0.05s both; }
-    .fade-2 { animation: fadeUp 0.55s ease 0.15s both; }
-    .fade-3 { animation: fadeUp 0.55s ease 0.25s both; }
-    .fade-4 { animation: fadeUp 0.55s ease 0.35s both; }
-    .fade-5 { animation: fadeUp 0.55s ease 0.45s both; }
-
-    /* ====== RESPONSIVE ====== */
     @media (max-width: 900px) {
-      .main { padding: 0 1.25rem 1.5rem; }
       .navbar { padding: 0.875rem 1.25rem; }
       .navbar-nav { display: none; }
-      .page-title { font-size: 1.6rem; }
-      .result-card-wrapper { width: 170px; height: 170px; }
-      .shape-value { font-size: 1.9rem; }
-      .rec-btn { padding: 0.55rem 1rem; font-size: 0.65rem; min-width: 85px; }
-      .back-btn { width: 38px; height: 38px; }
-      .page-logo { width: 38px; height: 38px; }
-      .row { grid-template-columns: 1fr; }
+      .result-card-wrapper { width: 150px; height: 150px; }
+      .shape-value { font-size: 2rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAVBAR -->
+  <!-- ===== NAVBAR (PHP INCLUDE - wahi rakha hy) ===== -->
   <?php include 'includes/navbar.php'; ?>
 
   <!-- Gold rule -->
   <div class="nav-gold-rule"></div>
 
-  <!-- MAIN CONTENT -->
+  <!-- ===== MAIN CONTENT (Screenshot ke mutabiq) ===== -->
   <main class="main">
+    <!-- Result Label -->
+    <div class="result-label">Your Result</div>
 
-    <!-- PAGE TOPBAR (Back Arrow + Title + Logo) -->
-    <div class="page-topbar fade-1">
-      <a href="javascript:history.back()" class="back-btn" aria-label="Go back">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="19" y1="12" x2="5" y2="12"></line>
-          <polyline points="12 19 5 12 12 5"></polyline>
-        </svg>
-      </a>
-      <div class="page-title-center">Your Result</div>
-    </div>
-
-    <!-- CONTENT HEADER -->
-    <div class="fade-2">
-      <div class="page-label">Face Shape Result</div>
-      <div class="page-title">Your face shape</div>
-    </div>
-
-    <!-- RESULT CARD -->
-    <div class="result-card-wrapper fade-3">
+    <!-- Result Card -->
+    <div class="result-card-wrapper">
       <div class="result-card">
-        <div class="result-card-text">Your face shape</div>
+        <div class="result-card-text">Leave As Placeholder.</div>
       </div>
     </div>
 
-    <!-- CONTENT -->
-    <div class="fade-4">
-      <div class="shape-label">Your face shape:</div>
-      <div class="shape-value">Oval</div>
-      <div class="shape-sub">balanced & harmonious</div>
+    <!-- Gold Checkmark -->
+    <div class="gold-check">
+      <svg viewBox="0 0 24 24">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
     </div>
 
-    <!-- RECOMMENDATION -->
-    <div class="rec-section fade-4">
-      <div class="rec-label">Top Recommendation</div>
-      <div class="rec-buttons-row">
-        <button class="rec-btn active">Considered</button>
-        <button class="rec-btn">Arch</button>
-        <button class="rec-btn">Understated</button>
+    <!-- Face Shape Text -->
+    <div class="shape-title-italic">Your face shape:</div>
+    <div class="shape-value">Oval</div>
+    <div class="shape-sub-label">Your Shape</div>
+
+    <!-- 3 Style Options -->
+    <div class="options-box">
+      <!-- Considered (Active) -->
+      <div class="option-btn active">
+        <div class="text-group">
+          <span class="main-title">Considered</span>
+          <span class="sub-title">Top Recommendation</span>
+        </div>
+        <svg viewBox="0 0 40 20">
+          <path d="M2 10 Q 10 2 20 8 Q 30 14 38 10" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <!-- Arch -->
+      <div class="option-btn">
+        <div class="text-group">
+          <span class="main-title">Arch</span>
+        </div>
+        <svg viewBox="0 0 40 20">
+          <path d="M2 12 Q 10 4 20 8 Q 30 12 38 12" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <!-- Understated -->
+      <div class="option-btn">
+        <div class="text-group">
+          <span class="main-title">Understated</span>
+        </div>
+        <svg viewBox="0 0 40 20">
+          <path d="M2 10 Q 20 2 38 10" stroke-linecap="round"/>
+        </svg>
       </div>
     </div>
 
-    <div class="info-note">Tailored to your features. You lead from here.</div>
-
-    <!-- ACTIONS -->
-    <div class="actions fade-5">
-      <button class="btn btn-secondary" onclick="tryRecommendation()">Try top recommendation</button>
-      <div class="row">
-        <button class="btn btn-secondary" onclick="seeAllStyles()">See all styles</button>
-        <button class="btn btn-secondary" onclick="location.href='index.php'">Return home</button>
-      </div>
-      <div class="link-gold" onclick="shareResult()">Share this result</div>
+    <!-- Footnote -->
+    <div class="footnote">
+      Tailored to your features. You lead from here.
     </div>
 
+    <!-- CTA Button -->
+    <button class="btn-gold">Try Top Recommendation</button>
+
+    <!-- Bottom Link -->
+    <div class="link-gold">See all styles</div>
   </main>
-
-  <script>
-    document.querySelectorAll('.rec-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        document.querySelectorAll('.rec-btn').forEach(el => el.classList.remove('active'));
-        this.classList.add('active');
-      });
-    });
-
-    function tryRecommendation() {
-      alert('Try top recommendation: navigating to preview');
-    }
-
-    function seeAllStyles() {
-      alert('See all styles');
-    }
-
-    function shareResult() {
-      if (navigator.share) {
-        navigator.share({
-          title: 'My Face Shape — Royals Arch Brow',
-          text: 'I just discovered my face shape: Oval ✨',
-          url: window.location.href
-        }).catch(() => {});
-      } else {
-        alert('Share your result with your artist!');
-      }
-    }
-  </script>
 
 </body>
 </html>

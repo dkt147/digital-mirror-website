@@ -428,7 +428,7 @@
 
     <!-- ACTIONS -->
     <div class="actions fade-4">
-      <a class="btn-primary" href="guide-complete.php" style="background: var(--gold); border-color: var(--gold-dark); color: var(--black);">Begin drawing</a>
+      <a class="btn-primary" href="camera-scan.php" style="background: var(--gold); border-color: var(--gold-dark); color: var(--black);">Begin drawing</a>
       <a class="watch-link" href="watch-guide.php">Watch how it works</a>
     </div>
 

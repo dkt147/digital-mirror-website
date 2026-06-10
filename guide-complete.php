@@ -224,7 +224,7 @@
       font-size: 1rem;
       color: var(--gold);
       font-weight: 700;
-      border: 2px solid var(--black);
+      border: 2px solid #c9a84c;
       box-shadow: 0 4px 15px rgba(0,0,0,0.6);
       z-index: 10;
     }
@@ -252,7 +252,7 @@
       display: grid;
       gap: 0.75rem;
       width: 100%;
-      max-width: 460px;
+      max-width: 100%;
       margin-left: auto;
       margin-right: auto;
     }
@@ -357,7 +357,7 @@
 
     <!-- PORTRAIT WRAPPER -->
     <div class="portrait-wrapper fade-3">
-      <img src="assets/profile.png" alt="Face preview" />
+      <img id="guidePreviewImg" src="assets/profile.png" alt="Face preview" />
       <div class="check-badge">✓</div>
     </div>
 
@@ -372,7 +372,7 @@
 
     <!-- ACTIONS -->
     <div class="actions fade-5">
-      <a class="btn btn-primary" href="saved-guide.php">Save my guide</a>
+      <a class="btn btn-primary" style="background: #c9a84c; color: var(--white);" href="saved-guide.php">Save my guide</a>
       <a class="btn btn-primary" href="#">Share with my artist</a>
     </div>
 
@@ -384,4 +384,20 @@
   </main>
 
 </body>
+<script>
+  // ====== LOAD SAVED IMAGE FROM LOCALSTORAGE ======
+  document.addEventListener('DOMContentLoaded', function() {
+    const savedImage = localStorage.getItem('myBrowGuideImage');
+    const imgElement = document.getElementById('guidePreviewImg');
+    
+    if (savedImage) {
+      // Agar image saved hai to woh dikhayein
+      imgElement.src = savedImage;
+      imgElement.style.opacity = '1';
+    } else {
+      // Agar koi image nahi hai to fallback image use karein
+      imgElement.src = 'assets/profile.png';
+    }
+  });
+</script>
 </html>

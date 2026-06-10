@@ -374,7 +374,7 @@
       localStorage.setItem('archSessionMode', mode);
       showToast('Loading your ' + mode + ' session...');
       setTimeout(() => {
-        window.location.href = 'session-active.php?mode=' + encodeURIComponent(mode);
+        window.location.href = 'face-scan.php?mode=' + encodeURIComponent(mode);
       }, 600);
     }
   </script>

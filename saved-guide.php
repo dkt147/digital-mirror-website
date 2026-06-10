@@ -28,7 +28,7 @@
       --border-hover: rgba(201, 168, 76, 0.45);
       --font-display: 'Cormorant Garamond', serif;
       --font-body: 'Montserrat', sans-serif;
-      --radius: 14px;
+      --radius: 18px;
       --radius-sm: 10px;
       --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
@@ -120,7 +120,7 @@
       width: 44px;
       height: 44px;
       border-radius: 50%;
-      border: 1px solid var(--gold);
+      border: 1px solid #c9a84c;
       color: var(--gold);
       text-decoration: none;
       transition: all var(--transition);
@@ -140,7 +140,7 @@
       font-size: 0.9rem;
       letter-spacing: 0.28em;
       text-transform: uppercase;
-      color: var(--gold);
+      color: #c9a84c;
       padding: 0 1rem;
     }
 
@@ -175,7 +175,7 @@
     /* ====== HEADER ====== */
     .page-label {
       font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase;
-      color: var(--gold); font-weight: 500; margin-bottom: 0.2rem;
+      color:#c9a84c; font-weight: 500; margin-bottom: 0.2rem;
     }
     .page-title {
       font-family: var(--font-display);
@@ -189,7 +189,7 @@
     /* ====== SAVED CARD ====== */
     .saved-card {
       background: #161610;
-      border: 1px solid var(--gold);
+      border: 1px solid #c9a84c;
       border-radius: var(--radius);
       padding: 1.5rem 1.25rem;
     }
@@ -245,7 +245,7 @@
       display: grid;
       gap: 0.75rem;
       width: 100%;
-      max-width: 460px;
+      max-width: 100%;
       margin-left: auto;
       margin-right: auto;
     }
@@ -270,7 +270,7 @@
 
     .btn-primary {
       background: transparent;
-      border: 1px solid var(--border);
+      border: 1px solid #c9a84c;
       color: var(--white);
     }
 
@@ -363,10 +363,10 @@
       <p class="subtext-alt">Every detail of your ideal shape, preserved.</p>
 
       <div class="actions">
-        <a href="appointment-brief.php" class="btn btn-primary">View in my looks</a>
+        <a href="my-looks.php" class="btn btn-primary" style="background: #c9a84c; color: var(--white);">View in my looks</a>
         <div class="row-actions">
-          <a href="#" class="btn btn-secondary">Share now</a>
-          <a href="index.php" class="btn btn-secondary">Return home</a>
+          <a href="appointment-brief.php" class="btn btn-secondary">Share now</a>
+          <a href="dashboard.php" class="btn btn-secondary">Return home</a>
         </div>
       </div>
     </div>
