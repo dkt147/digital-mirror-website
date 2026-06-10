@@ -184,11 +184,52 @@
       background: #1a1810;
     }
 
-    .scan-view-wrapper img {
+    .scan-view-wrapper video {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
+    }
+
+    /* Camera error fallback */
+    .camera-error {
+      display: none;
+      position: absolute;
+      inset: 0;
+      background: #1a1810;
+      color: var(--white-dim);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 1.5rem;
+      line-height: 1.8;
+    }
+
+    .camera-error svg {
+      display: block;
+      margin: 0 auto 0.75rem;
+      opacity: 0.4;
+    }
+
+    /* Scan line animation */
+    .scan-line {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      opacity: 0;
+      animation: scanLine 2.5s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes scanLine {
+      0%   { top: 10%; opacity: 0; }
+      10%  { opacity: 0.7; }
+      90%  { opacity: 0.7; }
+      100% { top: 90%; opacity: 0; }
     }
 
     .scan-corner {
@@ -285,17 +326,32 @@
     .dot:nth-child(3) { animation-delay: 0s; }
 
     @keyframes pulseDot {
-      0%, 80%, 100% { 
-        transform: scale(0.5); 
-        opacity: 0.2; 
-        background: #2a2a22; 
+      0%, 80%, 100% {
+        transform: scale(0.5);
+        opacity: 0.2;
+        background: #2a2a22;
       }
-      40% { 
-        transform: scale(1); 
-        opacity: 1; 
-        background: var(--gold); 
+      40% {
+        transform: scale(1);
+        opacity: 1;
+        background: var(--gold);
       }
     }
+
+    /* ====== SCAN PROGRESS BAR ====== */
+    .scan-progress-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(to right, var(--gold-dark), var(--gold), var(--gold-light));
+      border-radius: 0 0 var(--radius) var(--radius);
+      transition: width 0.1s linear;
+    }
+
+    /* Hidden canvas for capture */
+    #captureCanvas { display: none; }
 
     /* ====== CANCEL BUTTON ====== */
     .cancel-link {
@@ -364,8 +420,28 @@
 
     <!-- CAMERA VIEW -->
     <div class="scan-view-wrapper fade-3">
-      <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Face Scan Feed" />
-      
+
+      <!-- Live camera feed -->
+      <video id="cameraFeed" autoplay playsinline muted></video>
+
+      <!-- Scan line sweep -->
+      <div class="scan-line"></div>
+
+      <!-- Progress bar -->
+      <div class="scan-progress-bar" id="scanProgress"></div>
+
+      <!-- Hidden canvas for frame capture -->
+      <canvas id="captureCanvas"></canvas>
+
+      <!-- Error fallback -->
+      <div class="camera-error" id="cameraError">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+          <line x1="1" y1="1" x2="23" y2="23"/>
+        </svg>
+        Camera access denied.<br>Please allow camera permissions<br>and reload the page.
+      </div>
+
       <div class="scan-corner scan-corner-tl"></div>
       <div class="scan-corner scan-corner-tr"></div>
       <div class="scan-corner scan-corner-bl"></div>
@@ -389,11 +465,116 @@
 
   </main>
 
-  <script>
-    function cancelScan() {
-      window.history.back();
+  <script type="module">
+  import { FaceMeshDetector } from './js/detector.js';
+
+  const STABLE_FRAMES_NEEDED = 36;
+  let detector = null;
+  let stream = null;
+  let stableFrames = 0;
+  let animFrameId = null;
+  let done = false;
+
+  const video      = document.getElementById('cameraFeed');
+  const canvas     = document.getElementById('captureCanvas');
+  const progressBar = document.getElementById('scanProgress');
+  const errorDiv   = document.getElementById('cameraError');
+
+  async function startCamera() {
+    try {
+      stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: 'user', width: { ideal: 720 }, height: { ideal: 960 } },
+        audio: false
+      });
+      video.srcObject = stream;
+      await video.play();
+
+      // Load MediaPipe detector
+      detector = new FaceMeshDetector();
+      await detector.init();
+
+      loop();
+    } catch (err) {
+      console.error('Camera error:', err);
+      video.style.display = 'none';
+      errorDiv.style.display = 'flex';
     }
-  </script>
+  }
+
+  function loop() {
+    if (done) return;
+    animFrameId = requestAnimationFrame(loop);
+
+    if (video.readyState < 2) return;
+
+    const faces = detector.detect(video);
+    const hasFace = faces && faces.length > 0;
+
+    if (hasFace) {
+      stableFrames = Math.min(stableFrames + 1, STABLE_FRAMES_NEEDED + 5);
+    } else {
+      stableFrames = Math.max(0, stableFrames - 2);
+    }
+
+    // Progress bar based on stable frames
+    const pct = Math.min((stableFrames / STABLE_FRAMES_NEEDED) * 100, 100);
+    progressBar.style.width = pct + '%';
+
+    if (stableFrames >= STABLE_FRAMES_NEEDED && !done) {
+      done = true;
+      captureAndRedirect(faces);
+    }
+  }
+
+  function captureAndRedirect(faces) {
+    cancelAnimationFrame(animFrameId);
+
+    const vw = video.videoWidth  || 720;
+    const vh = video.videoHeight || 960;
+    canvas.width  = vw;
+    canvas.height = vh;
+
+    const ctx = canvas.getContext('2d');
+    // Mirror horizontally — selfie feel
+    ctx.translate(vw, 0);
+    ctx.scale(-1, 1);
+    ctx.drawImage(video, 0, 0, vw, vh);
+
+    const dataUrl = canvas.toDataURL('image/jpeg', 0.85);
+
+    try {
+      localStorage.setItem('scanCapturedImage', dataUrl);
+      // Also store raw landmarks for scan-complete.php to use
+      // faces[0] landmarks are normalized (0-1), store them
+      if (faces && faces[0]) {
+        const lm = faces[0].map(p => ({ x: p.x, y: p.y, z: p.z }));
+        localStorage.setItem('scanLandmarks', JSON.stringify(lm));
+      }
+    } catch (e) {
+      console.warn('localStorage error:', e);
+    }
+
+    stopCamera();
+    window.location.href = 'scan-complete.php';
+  }
+
+  function stopCamera() {
+    cancelAnimationFrame(animFrameId);
+    if (video && video.srcObject) {
+      video.srcObject.getTracks().forEach(t => t.stop());
+      video.srcObject = null;
+    }
+  }
+
+  window.cancelScan = function() {
+    stopCamera();
+    window.history.back();
+  };
+
+  window.addEventListener('DOMContentLoaded', startCamera);
+  window.addEventListener('beforeunload', stopCamera);
+  window.addEventListener('pagehide', stopCamera);
+</script>
 
 </body>
 </html>

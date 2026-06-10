@@ -284,15 +284,18 @@
     }
 
     /* ====== PREVIEW CARD ====== */
-    .preview-card {
-      position: relative;
-      border-radius: var(--radius);
-      overflow: hidden;
-      border: 1px solid #c9a84c;
-      background: #000;
-      min-height: 260px;
-      aspect-ratio: 1/1;
-    }
+   /* ====== PREVIEW CARD ====== */
+.preview-card {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid #c9a84c;
+  background: #000;
+  width: 100%;
+  max-width: 360px;      /* scanning.php jaisa */
+  aspect-ratio: 3/4;     /* scanning.php jaisa */
+  margin: 0 auto;        /* center */
+}
 
     .preview-image {
       width: 100%;
@@ -389,7 +392,7 @@
       .navbar-nav { display: none; }
       .page-title { font-size: 1.6rem; }
       .style-grid { grid-template-columns: repeat(2, 1fr); }
-      .preview-card { min-height: 200px; }
+      .preview-card { max-height: 300px; }
       .back-btn { width: 38px; height: 38px; }
       .page-logo { width: 38px; height: 38px; }
     }
@@ -492,51 +495,330 @@
 
   </main>
 
-  <script>
-    const styleCards = document.querySelectorAll('.style-card');
-    const swatches = document.querySelectorAll('.color-swatch');
-    const previewCopy = document.querySelector('.preview-copy');
-    const previewNote = document.querySelector('.preview-note');
+  <script type="module">
+  import { FaceMeshDetector } from './js/detector.js';
 
-    const colorMap = {
-      '#efd8bb': 'Blonde',
-      '#b27f50': 'Light Brown',
-      '#89603f': 'Black',
-      '#4f2a18': 'Darkest Brown',
-      '#6e3d24': 'Espresso',
-      '#caa87d': 'Warm Ash'
-    };
+  // ── State ─────────────────────────────────────────────────
+  const colorMap = {
+    '#efd8bb': 'Blonde',
+    '#b27f50': 'Light Brown',
+    '#89603f': 'Medium Brown',
+    '#4f2a18': 'Darkest Brown',
+    '#6e3d24': 'Espresso',
+    '#caa87d': 'Warm Ash'
+  };
 
-    function updatePreview() {
-      const activeStyle = document.querySelector('.style-card.selected')?.dataset.style || 'Considered';
-      const activeSwatch = document.querySelector('.color-swatch.selected');
-      const activeColor = activeSwatch?.dataset.color || '#89603f';
-      const colorLabel = colorMap[activeColor] || 'Black';
+  let currentStyle = 'Considered';
+  let currentColor = '#89603f';
+  let detector     = null;
+  let stream       = null;
+  let lastFaces    = [];
+  let animId       = null;
 
-      previewCopy.innerHTML = `<strong>${activeStyle}</strong> <span>.</span> ${colorLabel}`;
-      previewNote.textContent = `${colorLabel} - selected`;
+  // ── DOM refs ──────────────────────────────────────────────
+  const styleCards  = document.querySelectorAll('.style-card');
+  const swatches    = document.querySelectorAll('.color-swatch');
+  const previewCopy = document.querySelector('.preview-copy');
+  const previewNote = document.querySelector('.preview-note');
+
+  // ── Replace static preview-card with canvas + video ──────
+  const previewCard = document.querySelector('.preview-card');
+  previewCard.innerHTML = `
+    <div class="preview-label">LIVE PREVIEW</div>
+    <video id="liveVideo" autoplay playsinline muted
+      style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;pointer-events:none;"></video>
+    <canvas id="liveCanvas"
+      style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;"></canvas>
+    <div class="preview-copy" id="previewCopyEl"><strong>Considered</strong> <span>·</span> Medium Brown</div>
+    <div id="liveStatus" style="
+      position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+      font-size:0.7rem;color:rgba(201,168,76,0.8);letter-spacing:0.1em;
+      text-transform:uppercase;text-align:center;line-height:1.8;
+      pointer-events:none;">Starting camera…</div>
+  `;
+
+  const video       = document.getElementById('liveVideo');
+  const canvas      = document.getElementById('liveCanvas');
+  const ctx         = canvas.getContext('2d');
+  const liveStatus  = document.getElementById('liveStatus');
+  const previewCopyEl = document.getElementById('previewCopyEl');
+
+  // ── Brow shape paths (SVG-style, normalized 0-1 on brow span) ──
+  // Each shape defines how to modify the detected landmarks
+  const SHAPES = {
+    Considered: { archLift: 6,  thickMult: 1.0 },
+    Arch:       { archLift: 18, thickMult: 1.0 },
+    Straight:   { archLift: 0,  thickMult: 1.0, flatten: true },
+    Sharp:      { archLift: 14, thickMult: 1.0, sharp: true },
+    Feathered:  { archLift: 6,  thickMult: 0.8, feather: true },
+    Bold:       { archLift: 4,  thickMult: 1.6 },
+    Natural:    { archLift: 4,  thickMult: 0.9 },
+    Sculpted:   { archLift: 16, thickMult: 1.2 },
+  };
+
+  // MediaPipe landmark indices
+  const LEFT_UPPER  = [70, 63, 105, 66, 107];
+  const LEFT_LOWER  = [46, 53, 52, 65, 55];
+  const RIGHT_UPPER = [300, 293, 334, 296, 336];
+  const RIGHT_LOWER = [276, 283, 282, 295, 285];
+
+  // ── Init camera + detector ────────────────────────────────
+  async function init() {
+    // Pre-select from scan recommendation
+    const recommended = localStorage.getItem('selectedStyle') || 'Considered';
+    currentStyle = recommended;
+    styleCards.forEach(c => {
+      c.classList.toggle('selected', c.dataset.style.toLowerCase() === recommended.toLowerCase());
+    });
+    updateLabel();
+
+    try {
+      setStatus('Starting camera…');
+      stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: 'user', width: { ideal: 640 }, height: { ideal: 480 } },
+        audio: false
+      });
+      video.srcObject = stream;
+      await video.play();
+
+      setStatus('Loading detector…');
+      detector = new FaceMeshDetector();
+      await detector.init();
+
+      setStatus('');
+      loop();
+    } catch (err) {
+      console.error(err);
+      setStatus('Camera unavailable.\n' + err.message);
+    }
+  }
+
+  // ── Render loop ───────────────────────────────────────────
+  function loop() {
+    animId = requestAnimationFrame(loop);
+    if (video.readyState < 2) return;
+
+    // Resize canvas to match video
+    if (canvas.width !== video.videoWidth) {
+      canvas.width  = video.videoWidth;
+      canvas.height = video.videoHeight;
     }
 
-    styleCards.forEach(card => {
-      card.addEventListener('click', () => {
-        styleCards.forEach(item => {
-          item.classList.remove('selected');
-        });
-        card.classList.add('selected');
-        updatePreview();
-      });
-    });
+    const cw = canvas.width, ch = canvas.height;
 
-    swatches.forEach(swatch => {
-      swatch.addEventListener('click', () => {
-        swatches.forEach(item => item.classList.remove('selected'));
-        swatch.classList.add('selected');
-        updatePreview();
-      });
-    });
+    // Draw mirrored video
+    ctx.save();
+    ctx.translate(cw, 0);
+    ctx.scale(-1, 1);
+    ctx.drawImage(video, 0, 0, cw, ch);
+    ctx.restore();
 
-    updatePreview();
-  </script>
+    // Detect faces
+    try { lastFaces = detector.detect(video) || []; } catch(e) { lastFaces = []; }
+
+    if (lastFaces.length === 0) {
+      setStatus('Centre your face\nin the frame.');
+      return;
+    }
+    setStatus('');
+
+    // Draw brows for each face
+    for (const lm of lastFaces) {
+      // Mirror X to match flipped video
+      const kps = lm.map(p => ({ x: (1 - p.x) * cw, y: p.y * ch }));
+      drawBrow(kps, LEFT_UPPER,  LEFT_LOWER);
+      drawBrow(kps, RIGHT_UPPER, RIGHT_LOWER);
+    }
+  }
+
+  // ── Draw one brow ─────────────────────────────────────────
+  function drawBrow(kps, upperIdx, lowerIdx) {
+    let top = upperIdx.map(i => kps[i]).filter(Boolean);
+    let bot = lowerIdx.map(i => kps[i]).filter(Boolean);
+    if (top.length < 2 || bot.length < 2) return;
+
+    top.sort((a,b) => a.x - b.x);
+    bot.sort((a,b) => a.x - b.x);
+
+    const shape = SHAPES[currentStyle] || SHAPES.Considered;
+    const color = currentColor;
+
+    // Apply arch lift
+    if (shape.archLift) {
+      top = applyArch(top, shape.archLift);
+    }
+
+    // Flatten for straight
+    if (shape.flatten) {
+      const avgY = top.reduce((s,p) => s+p.y, 0) / top.length;
+      top = top.map(p => ({ x: p.x, y: avgY }));
+      const avgBotY = bot.reduce((s,p) => s+p.y, 0) / bot.length;
+      bot = bot.map(p => ({ x: p.x, y: avgBotY }));
+    }
+
+    // Expand bottom for thickness
+    const thick = 5 * shape.thickMult;
+    bot = bot.map((p, i) => ({
+      x: p.x,
+      y: p.y + thick * Math.sin((i / (bot.length-1)) * Math.PI)
+    }));
+
+    const alpha = 0.82;
+
+    // 1. Shadow
+    ctx.save();
+    ctx.filter = 'blur(6px)';
+    ctx.fillStyle = hexRgba(color, alpha * 0.4);
+    ctx.fill(buildPath(top, bot));
+    ctx.restore();
+
+    // 2. Gradient fill — multiply blend for realism
+    ctx.save();
+    ctx.globalCompositeOperation = 'multiply';
+    const minX = Math.min(...top.map(p=>p.x));
+    const maxX = Math.max(...top.map(p=>p.x));
+    const grad = ctx.createLinearGradient(minX, 0, maxX, 0);
+    grad.addColorStop(0,   hexRgba(color, alpha * 0.7));
+    grad.addColorStop(0.5, hexRgba(color, alpha));
+    grad.addColorStop(1,   hexRgba(color, alpha * 0.75));
+    ctx.fillStyle = grad;
+    ctx.fill(buildPath(top, bot));
+    ctx.restore();
+
+    // 3. Feather strokes if needed
+    if (shape.feather) {
+      ctx.save();
+      ctx.strokeStyle = hexRgba(color, 0.45);
+      ctx.lineWidth   = 0.9;
+      ctx.lineCap     = 'round';
+      for (let i = 0; i < top.length; i++) {
+        const t = i / (top.length - 1);
+        const bi = Math.round(t * (bot.length-1));
+        ctx.beginPath();
+        ctx.moveTo(bot[bi].x, bot[bi].y);
+        ctx.lineTo(top[i].x, top[i].y - 4);
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
+
+    // 4. Hair strokes
+    ctx.save();
+    ctx.strokeStyle = hexRgba(color, 0.25);
+    ctx.lineWidth   = 0.6;
+    ctx.lineCap     = 'round';
+    for (let i = 0; i < top.length; i++) {
+      const t  = i / (top.length - 1);
+      const bi = Math.round(t * (bot.length-1));
+      const angle = (i < top.length/2) ? -1.2 : 1.2;
+      ctx.beginPath();
+      ctx.moveTo(top[i].x + angle, top[i].y);
+      ctx.lineTo((top[i].x + bot[bi].x)/2, bot[bi].y);
+      ctx.stroke();
+    }
+    ctx.restore();
+
+    // 5. Top highlight
+    ctx.save();
+    ctx.filter = 'blur(2px)';
+    ctx.fillStyle = 'rgba(255,255,255,0.06)';
+    ctx.fill(buildPath(top, top.map((p,i) => {
+      const t = i/(top.length-1);
+      const bi = Math.round(t*(bot.length-1));
+      return { x: p.x + (bot[bi].x-p.x)*0.25, y: p.y + (bot[bi].y-p.y)*0.25 };
+    })));
+    ctx.restore();
+  }
+
+  // ── Path helpers ──────────────────────────────────────────
+  function buildPath(topPts, botPts) {
+    const path = new Path2D();
+    path.moveTo(topPts[0].x, topPts[0].y);
+    smoothCurve(path, topPts);
+    smoothCurve(path, [...botPts].reverse());
+    path.closePath();
+    return path;
+  }
+
+  function smoothCurve(path, pts) {
+    for (let i = 0; i < pts.length - 1; i++) {
+      const cx = (pts[i].x + pts[i+1].x) / 2;
+      const cy = (pts[i].y + pts[i+1].y) / 2;
+      path.quadraticCurveTo(pts[i].x, pts[i].y, cx, cy);
+    }
+    path.lineTo(pts[pts.length-1].x, pts[pts.length-1].y);
+  }
+
+  function applyArch(pts, lift) {
+    return pts.map((p, i) => ({
+      x: p.x,
+      y: p.y - Math.sin(i / (pts.length - 1) * Math.PI) * lift
+    }));
+  }
+
+  function hexRgba(hex, a) {
+    const r = parseInt(hex.slice(1,3),16);
+    const g = parseInt(hex.slice(3,5),16);
+    const b = parseInt(hex.slice(5,7),16);
+    return `rgba(${r},${g},${b},${Math.min(1,Math.max(0,a))})`;
+  }
+
+  function setStatus(msg) {
+    liveStatus.textContent = msg;
+    liveStatus.style.display = msg ? 'block' : 'none';
+  }
+
+  // ── UI interactions ───────────────────────────────────────
+  function updateLabel() {
+    const colorLabel = colorMap[currentColor] || 'Medium Brown';
+    if (previewCopyEl) {
+      previewCopyEl.innerHTML = `<strong>${currentStyle}</strong> <span>·</span> ${colorLabel}`;
+    }
+    if (previewNote) previewNote.textContent = `${colorLabel} — selected`;
+  }
+
+  styleCards.forEach(card => {
+    card.addEventListener('click', () => {
+      styleCards.forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      currentStyle = card.dataset.style;
+      updateLabel();
+    });
+  });
+
+  swatches.forEach(swatch => {
+    swatch.addEventListener('click', () => {
+      swatches.forEach(s => s.classList.remove('selected'));
+      swatch.classList.add('selected');
+      currentColor = swatch.dataset.color;
+      updateLabel();
+    });
+  });
+
+  // ── Save + navigate ───────────────────────────────────────
+  document.querySelector('.btn-primary')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    const colorLabel = colorMap[currentColor] || 'Medium Brown';
+    localStorage.setItem('selectedStyle',     currentStyle);
+    localStorage.setItem('selectedColor',     currentColor);
+    localStorage.setItem('selectedColorName', colorLabel);
+
+    // Stop camera before leaving
+    cancelAnimationFrame(animId);
+    if (stream) stream.getTracks().forEach(t => t.stop());
+
+    window.location.href = 'saved-look.php';
+  });
+
+  // Stop camera on page leave
+  window.addEventListener('beforeunload', () => {
+    cancelAnimationFrame(animId);
+    if (stream) stream.getTracks().forEach(t => t.stop());
+  });
+
+  // ── Start ─────────────────────────────────────────────────
+  init();
+</script>
 
 </body>
 </html>

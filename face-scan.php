@@ -468,24 +468,10 @@
   <div class="toast" id="toast"></div>
 
   <script>
-    function startScan() {
-      showToast('Scanning your face...');
-      setTimeout(() => {
-        showToast('Scan complete!');
-        setTimeout(() => {
-          window.location.href = 'scan-results.php';
-        }, 1000);
-      }, 2000);
-    }
-
-    function showToast(msg) {
-      const toast = document.getElementById('toast');
-      if (!toast) return;
-      toast.textContent = msg;
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 2800);
-    }
-  </script>
+  function startScan() {
+    window.location.href = 'scan-results.php';
+  }
+</script>
 
 </body>
 </html>

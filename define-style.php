@@ -427,6 +427,12 @@
         this.classList.add('selected');
       });
     });
+    document.querySelector('.btn-primary')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    const selected = document.querySelector('.option-card.selected')?.dataset.value || 'considered';
+    localStorage.setItem('selectedDefinition', selected);
+    window.location.href = 'preview-look.php'; // ya jo bhi aapka next page hai
+  });
   </script>
 
 </body>

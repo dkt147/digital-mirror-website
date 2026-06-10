@@ -516,6 +516,43 @@
             <a class="btn-primary" href="choose-style.php">See what suits your features</a>
             <a class="link-secondary" href="browse-styles.php">Browse all styles instead</a>
         </div>
+        <script>
+window.addEventListener('DOMContentLoaded', () => {
+  let analysis = {};
+  try {
+    analysis = JSON.parse(localStorage.getItem('scanAnalysis') || '{}');
+  } catch(e) {}
+
+  const browShape = analysis.browShape || 'High Arch';
+  const faceShape = analysis.faceShape || 'Oval';
+
+  // ── Arch line ─────────────────────────────────────────────
+  const archLines = {
+    'High Arch':       'A naturally elevated arch.',
+    'Soft Arch':       'A soft, easy arch.',
+    'Rounded':         'A rounded, open brow.',
+    'Flat / Straight': 'A clean, straight brow.',
+  };
+  const symLine = 'Strong symmetry.'; // future: store symmetry score
+
+  // Update feature copy lines
+  const copies = document.querySelectorAll('.feature-copy:not(.faint)');
+  if (copies[0]) copies[0].textContent = archLines[browShape] || archLines['High Arch'];
+  if (copies[1]) copies[1].textContent = symLine;
+  if (copies[2]) copies[2].textContent =
+    `The kind of face that carries a ${(analysis.recos?.[0] || 'considered').toLowerCase()} shape with ease.`;
+
+  // Update tags
+  const tags = document.querySelectorAll('.tag');
+  const tagData = [`${faceShape} face`, browShape, 'Strong brow bone'];
+  tags.forEach((t, i) => { if (tagData[i]) t.textContent = tagData[i]; });
+
+  // Save selected style for choose-style.php
+  if (analysis.recos?.[0]) {
+    localStorage.setItem('selectedStyle', analysis.recos[0]);
+  }
+});
+</script>
 
     </main>
 
