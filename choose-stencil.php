@@ -245,12 +245,12 @@
       display: grid;
       place-items: center;
       border: 1px solid rgba(255,255,255,0.04);
-    }
-
-    .kit .image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      color: rgba(245, 240, 232, 0.4);
+      font-size: 0.75rem;
+      font-weight: 400;
+      padding: 10px;
+      text-align: center;
+      line-height: 1.3;
     }
 
     .kit .name {
@@ -260,6 +260,10 @@
       color: var(--white);
       font-weight: 400;
       letter-spacing: 0.02em;
+    }
+
+    .kit.selected .name {
+      color: var(--gold);
     }
 
     /* ====== BUTTONS ====== */
@@ -284,6 +288,16 @@
       cursor: pointer;
       border: none;
       font-family: var(--font-body);
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--black);
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
     }
 
     .btn-secondary {
@@ -363,7 +377,7 @@
           <polyline points="12 19 5 12 12 5"></polyline>
         </svg>
       </a>
-      <div class="page-title-center">Choose your stencil</div>
+      <div class="page-title-center">CHOOSE YOUR STENCIL</div>
     </div>
 
     <!-- CONTENT HEADER -->
@@ -377,35 +391,35 @@
       <!-- kit 01 -->
       <div class="kit" data-id="kit01" tabindex="0">
         <div class="meta">KIT 01</div>
-        <div class="image"><img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=400&q=80" alt="kit 01"/></div>
+        <div class="image">Brow Image<br />Placeholder.</div>
         <div class="name">Understated</div>
       </div>
 
       <!-- kit 02 -->
       <div class="kit" data-id="kit02" tabindex="0">
         <div class="meta">KIT 02</div>
-        <div class="image"><img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=400&q=80" alt="kit 02"/></div>
-        <div class="name">Soft arch</div>
+        <div class="image">Brow Image<br />Placeholder.</div>
+        <div class="name">Understated</div>
       </div>
 
-      <!-- kit 03 -->
-      <div class="kit" data-id="kit03" tabindex="0">
+      <!-- kit 03 (pre-selected to match screenshot) -->
+      <div class="kit selected" data-id="kit03" tabindex="0">
         <div class="meta">KIT 03</div>
-        <div class="image"><img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=400&q=80" alt="kit 03"/></div>
+        <div class="image">Brow Image<br />Placeholder.</div>
         <div class="name">Bold arch</div>
       </div>
 
-      <!-- kit 04 (pre-selected) -->
-      <div class="kit selected" data-id="kit04" tabindex="0">
+      <!-- kit 04 -->
+      <div class="kit" data-id="kit04" tabindex="0">
         <div class="meta">KIT 04</div>
-        <div class="image"><img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=400&q=80" alt="kit 04"/></div>
-        <div class="name">Sculpted</div>
+        <div class="image">Brow Image<br />Placeholder.</div>
+        <div class="name">Bold arch</div>
       </div>
     </div>
 
     <!-- ACTIONS -->
     <div class="actions fade-4">
-      <button class="btn btn-secondary" id="applyBtn">Apply to my face</button>
+      <button class="btn btn-primary" id="applyBtn">Apply to my face</button>
       <div class="row">
         <button class="btn btn-secondary" onclick="location.href='index.php'">Return home</button>
         <button class="btn btn-secondary" onclick="shareNow()">Share now</button>
@@ -419,11 +433,7 @@
     (function() {
       const grid = document.getElementById('grid');
       const applyBtn = document.getElementById('applyBtn');
-      let selectedId = document.querySelector('.kit.selected')?.dataset?.id || 'kit04';
-
-      function updateApplyButton() {
-        applyBtn.disabled = !selectedId;
-      }
+      let selectedId = 'kit03'; // Default to match screenshot
 
       function selectKit(id) {
         document.querySelectorAll('.kit').forEach(k => k.classList.remove('selected'));
@@ -431,10 +441,7 @@
         if (el) {
           el.classList.add('selected');
           selectedId = id;
-        } else {
-          selectedId = null;
         }
-        updateApplyButton();
       }
 
       grid.addEventListener('click', (e) => {
@@ -455,24 +462,12 @@
         }
       });
 
-      const preselected = document.querySelector('.kit.selected');
-      if (preselected) {
-        selectedId = preselected.dataset.id;
-      } else {
-        const first = document.querySelector('.kit');
-        if (first) {
-          first.classList.add('selected');
-          selectedId = first.dataset.id;
-        }
-      }
-      updateApplyButton();
-
       window.applyKit = function() {
         if (!selectedId) {
           alert('Please choose a kit first.');
           return;
         }
-        window.location.href = 'preview-look.php?kit=' + encodeURIComponent(selectedId);
+        window.location.href = 'stencil-preview.php?kit=' + encodeURIComponent(selectedId);
       };
 
       window.shareNow = function() {
@@ -492,15 +487,6 @@
       };
 
       applyBtn.addEventListener('click', window.applyKit);
-
-      if (!document.querySelector('.kit.selected')) {
-        const kit04 = document.querySelector('.kit[data-id="kit04"]');
-        if (kit04) {
-          kit04.classList.add('selected');
-          selectedId = 'kit04';
-          updateApplyButton();
-        }
-      }
     })();
   </script>
 

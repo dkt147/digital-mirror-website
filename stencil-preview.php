@@ -247,7 +247,7 @@
       display: grid;
       gap: 0.75rem;
       width: 100%;
-      max-width: 460px;
+      max-width: 100%;
       margin-left: auto;
       margin-right: auto;
     }
@@ -378,8 +378,7 @@
     function goBack() { history.back(); }
 
     function applyThis() {
-      alert('Applying stencil ...');
-      // window.location.href = 'stencil-placed.php';
+      window.location.href = 'stencil-placed.php';
     }
 
     function shop() {

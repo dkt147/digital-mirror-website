@@ -412,7 +412,7 @@
     }
 
     function chooseStyle() {
-      window.location.href = 'choose-style.php';
+      window.location.href = 'choose-stencil.php';
     }
 
     function matchStencil() {
