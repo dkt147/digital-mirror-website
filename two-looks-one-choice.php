@@ -221,18 +221,18 @@
       flex-direction: column;
       align-items: center;
       gap: 12px;
-      border: 1px solid var(--border);
+      border: 1px solid #333;
       background: #161610;
       cursor: pointer;
       transition: all var(--transition);
     }
 
     .card:hover {
-      border-color: var(--gold-dark);
+      border-color: #c9a84c;
     }
 
     .card.selected {
-      border-color: var(--gold);
+      border-color: #c9a84c;
       background: rgba(201,168,76,0.06);
       box-shadow: 0 0 0 1px rgba(201,168,76,0.1);
     }
@@ -303,7 +303,7 @@
       padding: 0.85rem 1.2rem;
       border-radius: 999px;
       border: 1px solid var(--border);
-      background: transparent;
+      background: #c9a84c;
       color: var(--white);
       font-size: 0.75rem;
       font-weight: 600;
@@ -314,7 +314,8 @@
 
     .btn-primary:hover {
       border-color: var(--gold);
-      color: var(--gold);
+      color: var(--black);
+      transform: translateY(-2px);
     }
 
     .bottom-link {
@@ -398,7 +399,7 @@
 
     <!-- ACTIONS -->
     <div class="actions fade-4">
-      <a class="btn-primary" href="understated.php" style="background: var(--gold); border-color: var(--gold-dark); color: var(--black);">I choose considered</a>
+      <a class="btn-primary" href="understated.php">I choose considered</a>
       <a class="bottom-link" href="two-looks-one-choice.php">Go back to all styles</a>
     </div>
 

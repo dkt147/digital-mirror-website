@@ -555,8 +555,8 @@
 
     .shape-opt:hover,
     .shape-opt.active {
-      border-color: var(--gold);
-      color: var(--gold);
+      border-color:  #c9a84c ;
+      color: var(--white);
       background: var(--gold-muted);
     }
 
@@ -862,7 +862,7 @@
       padding: 0.9rem;
       border-radius: 999px;
       background: var(--gold);
-      color: var(--black);
+      color: var(--white);
       font-size: 0.7rem;
       font-weight: 700;
       letter-spacing: 0.12em;
@@ -875,7 +875,9 @@
     }
 
     .modal-btn-gold:hover {
-      background: var(--gold-light);
+      border-color: var(--gold);
+      color: var(--black);
+      transform: translateY(-2px);
     }
 
     .modal-btn-keep {
@@ -898,6 +900,8 @@
 
     .modal-btn-keep:hover {
       border-color: var(--gold);
+      color: var(--black);
+      transform: translateY(-2px);
     }
 
     .modal-btn-discard {
@@ -914,7 +918,9 @@
     }
 
     .modal-btn-discard:hover {
-      opacity: 0.7;
+      border-color: var(--gold);
+      color: var(--black);
+      transform: translateY(-2px);
     }
   </style>
 </head>

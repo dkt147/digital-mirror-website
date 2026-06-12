@@ -226,6 +226,11 @@
       text-align: left;
     }
 
+    .option-btn:hover{
+      background: #211d11;
+      border: 1px solid  #c9a84c;
+    }
+
     .option-btn.active {
       border: 1.5px solid var(--gold);
       background: #211d11;
@@ -281,8 +286,8 @@
       max-width: 100%;
       padding: 1rem;
       border-radius: 999px;
-      background: var(--gold);
-      color: var(--black);
+      background: #c9a84c;
+      color: var(--white);
       font-size: 0.75rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -291,10 +296,14 @@
       cursor: pointer;
       transition: background var(--transition);
       font-family: var(--font-body);
+      display: block;
+      text-align: center;
     }
 
     .btn-gold:hover {
-      background: var(--gold-light);
+      border-color: var(--gold);
+      color: var(--black);
+      transform: translateY(-2px);
     }
 
     .link-gold {
@@ -391,7 +400,7 @@
     </div>
 
     <!-- CTA Button -->
-    <button class="btn-gold">Try Top Recommendation</button>
+    <a href="style-detail.php" class="btn-gold">Try Top Recommendation</a>
 
     <!-- Bottom Link -->
     <div class="link-gold">See all styles</div>

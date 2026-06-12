@@ -221,7 +221,6 @@
       text-align: center;
       color: var(--white);
       font-size: 0.9rem;
-      border: 1px solid var(--border);
     }
 
     .info-note {
@@ -246,7 +245,7 @@
       border-radius: 999px;
       border: none;
       background: var(--gold);
-      color: var(--black);
+      color: var(--white);
       font-size: 0.75rem;
       font-weight: 700;
       letter-spacing: 0.12em;
@@ -256,8 +255,8 @@
     }
 
     .btn-primary:hover {
-      background: var(--gold-light);
-      transform: translateY(-1px);
+      color: var(--black);
+      transform: translateY(-2px);
     }
 
     .btn-secondary {

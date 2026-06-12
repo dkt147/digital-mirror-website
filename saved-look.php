@@ -28,7 +28,7 @@
       --border-hover: rgba(201, 168, 76, 0.45);
       --font-display: 'Cormorant Garamond', serif;
       --font-body: 'Montserrat', sans-serif;
-      --radius: 14px;
+      --radius: 18px;
       --radius-sm: 10px;
       --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
@@ -190,7 +190,6 @@
     .hero-card {
       border-radius: var(--radius);
       background: #161610;
-      border: 1px solid var(--gold);
       min-height: 200px;
       display: flex;
       align-items: center;
@@ -219,7 +218,7 @@
     .style-meta {
       font-family: var(--font-body);
       font-size: 0.9rem;
-      color: var(--gold);
+      color: #c9a84c;
       font-weight: 400;
       margin-bottom: 12px;
     }
@@ -246,7 +245,7 @@
       display: grid;
       gap: 0.75rem;
       width: 100%;
-      max-width: 460px;
+      max-width: 100%;
       margin-left: auto;
       margin-right: auto;
     }
@@ -255,7 +254,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 100%;
+      max-width: 100%;
       padding: 0.85rem 1.2rem;
       border-radius: 999px;
       font-size: 0.75rem;
@@ -270,14 +269,15 @@
     }
 
     .btn-primary {
-      background: transparent;
+      background: #c9a84c;
       border: 1px solid var(--border);
       color: var(--white);
     }
 
     .btn-primary:hover {
       border-color: var(--gold);
-      color: var(--gold);
+      color: var(--black);
+      transform: translateY(-2px);
     }
 
     .row {

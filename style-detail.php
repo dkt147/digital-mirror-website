@@ -279,19 +279,22 @@
     }
 
     .btn-secondary {
-      background: transparent;
+      background: #c9a84c;
       border: 1px solid var(--border);
       color: var(--white);
+      border-radius: 27px;
+      text-align: center;
     }
 
     .btn-secondary:hover {
       border-color: var(--gold);
-      color: var(--gold);
+      color: var(--black);
+      transform: translateY(-2px);
     }
 
     .link-gold {
       text-align: center;
-      color: var(--gold);
+      color: var(--white);
       font-size: 0.9rem;
       letter-spacing: 0.04em;
       padding: 6px 0 4px;
@@ -301,7 +304,7 @@
     }
 
     .link-gold:hover {
-      color: var(--gold-light);
+      color: var(--gold);
       text-decoration: underline;
     }
 
@@ -384,7 +387,7 @@
 
     <!-- ACTIONS -->
     <div class="actions fade-5">
-      <button class="btn btn-secondary" onclick="tryThisOn()" style="background: var(--gold); border-color: var(--gold-dark); color: var(--black);">Try this on</button>
+      <a href= "style-detail-illustration.php" class="btn btn-secondary">Try this on</a>
       <div class="link-gold" onclick="saveRec()">Save recommendation</div>
       <div class="link-gold" onclick="tryAnother()">Try another style</div>
     </div>

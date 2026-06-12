@@ -244,7 +244,7 @@
     }
 
     .subtext {
-      color: var(--gold);
+      color: #c9a84c;
       font-family: var(--font-display);
       font-size: 1.1rem;
       margin-bottom: 14px;
@@ -255,7 +255,7 @@
       font-size: 0.95rem;
       line-height: 1.7;
       margin-bottom: 28px;
-      max-width: 80%;
+      max-width: 100%;
       margin-left: auto;
       margin-right: auto;
     }
@@ -265,7 +265,7 @@
       display: grid;
       gap: 0.75rem;
       width: 100%;
-      max-width: 460px;
+      max-width: 100%;
       margin-left: auto;
       margin-right: auto;
     }
@@ -289,14 +289,15 @@
     }
 
     .btn-primary {
-      background: transparent;
+      background: #c9a84c;
       border: 1px solid var(--border);
       color: var(--white);
     }
 
     .btn-primary:hover {
       border-color: var(--gold);
-      color: var(--gold);
+      color: var(--black);
+      transform: translateY(-2px);
     }
 
     /* ====== ANIMATIONS ====== */

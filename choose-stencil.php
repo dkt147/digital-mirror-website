@@ -292,11 +292,12 @@
 
     .btn-primary {
       background: var(--gold);
-      color: var(--black);
+      color: var(--white);
     }
 
     .btn-primary:hover {
-      background: var(--gold-light);
+      border-color: var(--gold);
+      color: var(--black);
       transform: translateY(-2px);
     }
 

@@ -299,8 +299,8 @@
     }
 
     .btn-secondary:hover {
+      border-color: var(--gold);
       color: var(--black);
-      box-shadow: 0 0 0 1px rgba(201,168,76,0.2);
       transform: translateY(-2px);
     }
 

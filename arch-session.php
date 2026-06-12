@@ -135,7 +135,7 @@
 
     .session-card {
       background: linear-gradient(135deg, #1c1a0d 0%, #221f0f 60%, #1a1808 100%);
-      border: 1px solid rgba(201, 168, 76, 0.22);
+      border: 1px solid #333;
       border-radius: var(--radius);
       padding: 1.5rem 2rem;
       display: flex;

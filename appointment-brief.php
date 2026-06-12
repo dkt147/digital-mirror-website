@@ -287,8 +287,8 @@
       padding: 0.85rem 1.2rem;
       border-radius: 999px;
       border: none;
-      background: var(--gold);
-      color: var(--black);
+      background: #c9a84c;
+      color: var(--white);
       font-size: 0.75rem;
       font-weight: 700;
       letter-spacing: 0.12em;
@@ -298,8 +298,9 @@
     }
 
     .btn-primary:hover {
-      background: var(--gold-light);
-      transform: translateY(-1px);
+        border-color: var(--gold);
+        color: var(--black);
+        transform: translateY(-2px);
     }
 
     .btn-secondary {

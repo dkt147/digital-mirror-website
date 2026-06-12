@@ -249,7 +249,6 @@
       text-align: center;
       color: var(--white);
       font-size: 0.9rem;
-      border: 1px solid var(--border);
     }
 
     /* ====== INFO NOTE ====== */
@@ -311,8 +310,8 @@
       padding: 0.85rem 1.2rem;
       border-radius: 999px;
       border: none;
-      background: var(--gold);
-      color: var(--black);
+      background: #c9a84c;
+      color: var(--white);
       font-size: 0.75rem;
       font-weight: 700;
       letter-spacing: 0.12em;
@@ -324,8 +323,9 @@
     }
 
     .btn-primary:hover {
-      background: var(--gold-light);
-      transform: translateY(-1px);
+      border-color: var(--gold);
+      color: var(--black);
+      transform: translateY(-2px);
     }
 
     .btn-secondary {
@@ -459,8 +459,8 @@
 
     <!-- ACTIONS -->
     <div class="actions fade-5">
-      <button class="btn-primary" onclick="tryThisOn()">Try this on</button>
-      <button class="btn-secondary" onclick="tryDifferent()">Try a different recommendation</button>
+      <button class="btn-primary">Try this on</button>
+      <a href="comparison.php" class="btn-secondary">Try a different recommendation</a>
     </div>
 
     <!-- BOTTOM LINKS -->

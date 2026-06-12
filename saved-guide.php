@@ -189,7 +189,6 @@
     /* ====== SAVED CARD ====== */
     .saved-card {
       background: #161610;
-      border: 1px solid #c9a84c;
       border-radius: var(--radius);
       padding: 1.5rem 1.25rem;
     }
@@ -269,14 +268,17 @@
     }
 
     .btn-primary {
-      background: transparent;
-      border: 1px solid #c9a84c;
-      color: var(--white);
+        background: #c9a84c;
+        border: 1px solid var(--border);
+        color: var(--white);
+        border-radius: 27px;
+        text-align: center;
     }
 
     .btn-primary:hover {
-      border-color: var(--gold);
-      color: var(--gold);
+        border-color: var(--gold);
+        color: var(--black);
+        transform: translateY(-2px);
     }
 
     .row-actions {
@@ -363,7 +365,7 @@
       <p class="subtext-alt">Every detail of your ideal shape, preserved.</p>
 
       <div class="actions">
-        <a href="my-looks.php" class="btn btn-primary" style="background: #c9a84c; color: var(--white);">View in my looks</a>
+        <a href="my-looks.php" class="btn btn-primary">View in my looks</a>
         <div class="row-actions">
           <a href="appointment-brief.php" class="btn btn-secondary">Share now</a>
           <a href="dashboard.php" class="btn btn-secondary">Return home</a>

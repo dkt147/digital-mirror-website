@@ -309,7 +309,7 @@
       padding: 1rem;
       border-radius: 999px;
       background: var(--gold);
-      color: var(--black);
+      color: var(--white);
       font-size: 0.75rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -321,11 +321,13 @@
     }
 
     .btn-scan-gold:hover {
-      background: var(--gold-light);
+      border-color: var(--gold);
+      color: var(--black);
+      transform: translateY(-2px);
     }
 
     .scan-link-gold {
-      color: var(--gold);
+      color: var(--white);
       font-size: 0.85rem;
       font-weight: 400;
       cursor: pointer;

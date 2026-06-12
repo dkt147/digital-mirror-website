@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Understated — Royals Arch Brow</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Comparison — Royals Arch Brow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
@@ -17,9 +18,9 @@
       --dark: #111111;
       --dark-card: #1a1a0f;
       --dark-input: #1c1c15;
-      --gold: #C9A84C;
-      --gold-light: #C9A84C;
-      --gold-dark: #C9A84C;
+      --gold: #c9a84c;
+      --gold-light: #d4b96a;
+      --gold-dark: #8a6f2e;
       --gold-muted: rgba(201, 168, 76, 0.12);
       --white: #f5f0e8;
       --white-dim: rgba(245, 240, 232, 0.55);
@@ -28,7 +29,7 @@
       --border-hover: rgba(201, 168, 76, 0.45);
       --font-display: 'Cormorant Garamond', serif;
       --font-body: 'Montserrat', sans-serif;
-      --radius: 18px;
+      --radius: 14px;
       --radius-sm: 10px;
       --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
@@ -39,7 +40,7 @@
       background: var(--black);
       color: var(--white);
       font-family: var(--font-body);
-      font-weight: 600;
+      font-weight: 300;
       line-height: 1.6;
       min-height: 100vh;
       overflow-x: hidden;
@@ -180,126 +181,132 @@
     .page-title {
       font-family: var(--font-display);
       font-style: italic;
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: 400;
       color: var(--white);
-      line-height: 1.05;
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
     }
 
-    /* ====== STYLE CARD ====== */
-    .style-card {
-      background: #161610;
-      border-radius: var(--radius);
-      padding: 2rem 1.5rem;
-      text-align: center;
-    }
-
-    .face-illustration {
-      width: 140px;
-      height: 180px;
-      border: 1px solid rgba(201,168,76,0.3);
-      border-radius: 50% 50% 40% 40%;
-      margin: 0 auto 1.5rem;
-      position: relative;
-    }
-
-    .face-illustration::before {
-      content: '';
-      position: absolute;
-      top: 22%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 50px;
-      height: 18px;
-      border: 1px solid var(--gold);
-      border-radius: 999px 999px 40px 40px;
-      border-bottom: none;
-    }
-
-    .style-name {
-      font-family: var(--font-display);
-      font-style: italic;
-      font-size: 2.2rem;
-      color: var(--white);
-      margin-bottom: 0.25rem;
-    }
-
-    .style-tagline {
-      font-family: var(--font-display);
-      font-style: italic;
-      color: var(--gold);
-      font-size: 1rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .style-desc {
-      font-family: var(--font-display);
-      font-style: italic;
-      color: var(--white-dim);
-      font-size: 0.95rem;
-      line-height: 1.6;
-      max-width: 85%;
-      margin: 0 auto 1.5rem;
-    }
-
-    .divider {
-      width: 60px;
-      height: 1px;
-      background: var(--gold);
-      margin: 0 auto 1.5rem;
-      opacity: 0.6;
-    }
-
-    /* ====== BUTTONS ====== */
-    .actions {
+    /* ====== COMPARISON CARDS ====== */
+    .comparison-container {
       display: grid;
-      gap: 0.75rem;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 0.5rem;
     }
 
-    .btn-primary {
+    .comp-card {
+      border-radius: 20px;
+      padding: 1.5rem;
       display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      padding: 0.85rem 1.2rem;
-      border-radius: 999px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
       border: 1px solid var(--border);
-      background: #c9a84c;
-      color: var(--white);
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: all var(--transition);
     }
 
-    .btn-primary:hover {
-      background: #c9a84c;
-      transform: translateY(-2px);
-      color: var(--black);
+    .comp-card.before {
+      background: #181816;
+      border-color: #3a3a35;
     }
 
-    .btn-secondary {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      padding: 0.85rem 1.2rem;
-      border-radius: 999px;
-      border: none;
-      background: transparent;
-      color: #c9a84c;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-decoration: none;
-      transition: all var(--transition);
-    }
-
-    .btn-secondary:hover {
+    .comp-card.after {
+      background: #28260e;
       border-color: var(--gold);
+      border-width: 1.5px;
+    }
+
+    .comp-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: var(--white-dim);
+    }
+
+    .comp-card.after .comp-label {
+      color: var(--gold);
+    }
+
+    .comp-img-wrapper {
+      width: 100%;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(201, 168, 76, 0.3);
+      aspect-ratio: 1/1;
+      max-width: 250px;
+    }
+
+    .comp-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .comp-text {
+      font-family: var(--font-body);
+      font-size: 1.1rem;
+      line-height: 1.4;
+      font-weight: 400;
       color: var(--white);
+    }
+
+    .comp-card.after .comp-text {
+      color: var(--gold-light);
+    }
+
+    /* ====== BOTTOM CONTENT ====== */
+    .save-notice {
+      text-align: center;
+      color: var(--white-dim);
+      font-size: 1rem;
+      margin: 1rem 0 1.5rem;
+      font-weight: 300;
+      line-height: 1.5;
+    }
+
+    .cta-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .btn-gold-large {
+      background: var(--gold);
+      color: var(--white);
+      padding: 1.2rem 2rem;
+      border-radius: 50px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      width: 100%;
+      max-width: 100%;
+      transition: all var(--transition);
+      border: none;
+      text-transform: none;
+      letter-spacing: 0.02em;
+    }
+
+    .btn-gold-large:hover {
+        border-color: var(--gold);
+        color: var(--black);
+        transform: translateY(-2px);
+    }
+
+    .footer-link-gold {
+      color: var(--gold-dark);
+      font-size: 0.95rem;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      transition: color var(--transition);
+      font-weight: 400;
+      cursor: pointer;
+    }
+
+    .footer-link-gold:hover {
+      color: var(--gold-light);
     }
 
     /* ====== ANIMATIONS ====== */
@@ -311,18 +318,33 @@
     .fade-2 { animation: fadeUp 0.55s ease 0.15s both; }
     .fade-3 { animation: fadeUp 0.55s ease 0.25s both; }
     .fade-4 { animation: fadeUp 0.55s ease 0.35s both; }
-    .fade-5 { animation: fadeUp 0.55s ease 0.45s both; }
 
     /* ====== RESPONSIVE ====== */
     @media (max-width: 900px) {
       .main { padding: 0 1.25rem 1.5rem; }
       .navbar { padding: 0.875rem 1.25rem; }
       .navbar-nav { display: none; }
-      .style-name { font-size: 1.8rem; }
-      .style-card { padding: 1.5rem; }
-      .face-illustration { width: 120px; height: 150px; }
+      .page-title { font-size: 1.8rem; }
       .back-btn { width: 38px; height: 38px; }
       .page-logo { width: 38px; height: 38px; }
+
+      .comparison-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .comp-card {
+        padding: 1.25rem;
+      }
+
+      .comp-img-wrapper {
+        max-width: 100%;
+      }
+
+      .btn-gold-large {
+        max-width: 100%;
+        padding: 1rem;
+      }
     }
   </style>
 </head>
@@ -345,29 +367,61 @@
           <polyline points="12 19 5 12 12 5"></polyline>
         </svg>
       </a>
-      <div class="page-title-center">Understated</div>
+      <div class="page-title-center">Comparison</div>
+      <div class="page-logo">
+        <img src="assets/logo.png" alt="Logo">
+      </div>
     </div>
 
     <!-- CONTENT HEADER -->
     <div class="fade-2">
-      <div class="page-label">Style</div>
-      <div class="page-title">Understated elegance.</div>
+      <div class="page-title">The difference,<br>clearly shown.</div>
     </div>
 
-    <!-- STYLE CARD -->
-    <div class="style-card fade-3">
-      <div class="face-illustration"></div>
-      <div class="style-name">Understated</div>
-      <div class="style-tagline">Present, not pronounced.</div>
-      <div class="style-desc">The brow your face was wearing all along — simply made cleaner.</div>
-      <div class="divider"></div>
-      <div class="actions">
-        <a class="btn-primary" href="deliberate.php">This is the one</a>
-        <a class="btn-secondary" href="two-looks-one-choice.php">Try Considered instead</a>
+    <!-- COMPARISON CARDS -->
+    <div class="comparison-container fade-3">
+      
+      <!-- BEFORE CARD -->
+      <div class="comp-card before">
+        <div class="comp-label">Before</div>
+        <div class="comp-img-wrapper">
+          <img src="https://placehold.co/400x400/3a3a35/f5f0e8?text=Model+Face" alt="Before">
+        </div>
+        <div class="comp-text">
+          Where you're<br>beginning,<br>Already beautiful.
+        </div>
+      </div>
+
+      <!-- AFTER CARD -->
+      <div class="comp-card after">
+        <div class="comp-label">After</div>
+        <div class="comp-img-wrapper">
+          <img src="https://placehold.co/400x400/28260e/c9a84c?text=Model+Face" alt="After">
+        </div>
+        <div class="comp-text">
+          After: Soft<br>arch
+        </div>
+      </div>
+
+    </div>
+
+    <!-- NOTICE & CTA -->
+    <div class="fade-4">
+      <p class="save-notice">Your before — and — after is saved<br>automatically to my looks.</p>
+
+      <div class="cta-container">
+        <button class="btn-gold-large" onclick="confirmLook()">This is the one</button>
+        <a class="footer-link-gold" href="face-scan-ui.php" >Try another style</a>
       </div>
     </div>
 
   </main>
+
+  <script>
+    function confirmLook() {
+      alert('Look confirmed! This has been saved to your profile.');
+    }
+  </script>
 
 </body>
 </html>

@@ -336,6 +336,7 @@
       display: grid;
       gap: 0.75rem;
       margin-top: 8px;
+      max-width: 100%;
     }
 
     .btn-primary {
@@ -343,8 +344,8 @@
       border: none;
       border-radius: 999px;
       padding: 0.85rem 1.2rem;
-      background: var(--gold);
-      color: var(--black);
+      background:  #c9a84c;
+      color: var(--white);
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.12em;
@@ -355,8 +356,9 @@
     }
 
     .btn-primary:hover {
-      background: var(--gold-light);
-      transform: translateY(-1px);
+      border-color: var(--gold);
+      color: var(--black);
+      transform: translateY(-2px);
     }
 
     .note {

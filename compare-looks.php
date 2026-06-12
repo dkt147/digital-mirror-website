@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Compare Looks — Royals Arch Brow</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
     <style>
         * {
             box-sizing: border-box;
@@ -18,8 +21,8 @@
             --dark-card: #1a1a0f;
             --dark-input: #1c1c15;
             --gold: #c9a84c;
-            --gold-light: #d4b96a;
-            --gold-dark: #8a6f2e;
+            --gold-light: #c9a84c;
+            --gold-dark: #c9a84c;
             --gold-muted: rgba(201, 168, 76, 0.12);
             --white: #f5f0e8;
             --white-dim: rgba(245, 240, 232, 0.55);
@@ -28,13 +31,22 @@
             --border-hover: rgba(201, 168, 76, 0.45);
             --font-display: 'Cormorant Garamond', serif;
             --font-body: 'Montserrat', sans-serif;
-            --radius: 14px;
+            --radius: 18px;
             --radius-sm: 10px;
             --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        html { font-size: 16px; scroll-behavior: smooth; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
         body {
             background: var(--black);
             color: var(--white);
@@ -44,7 +56,12 @@
             min-height: 100vh;
             overflow-x: hidden;
         }
-        a { color: inherit; text-decoration: none; }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
         button {
             cursor: pointer;
             border: none;
@@ -67,40 +84,90 @@
             z-index: 100;
         }
 
-        .navbar-left { display: flex; align-items: center; gap: 1rem; }
-        .nav-avatar {
-            width: 42px; height: 42px; border-radius: 50%; overflow: hidden;
-            border: 1.5px solid var(--gold-dark); flex-shrink: 0;
+        .navbar-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
-        .nav-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+        .nav-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 1.5px solid var(--gold-dark);
+            flex-shrink: 0;
+        }
+
+        .nav-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
 
         .navbar-nav {
-            display: flex; align-items: center; gap: 2.5rem; list-style: none;
-            position: absolute; left: 50%; transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            list-style: none;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
         }
+
         .navbar-nav a {
-            font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
-            color: var(--white-dim); transition: color var(--transition); font-weight: 400;
+            font-size: 0.65rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--white-dim);
+            transition: color var(--transition);
+            font-weight: 400;
         }
-        .navbar-nav a:hover, .navbar-nav a.active { color: var(--gold); }
+
+        .navbar-nav a:hover,
+        .navbar-nav a.active {
+            color: var(--gold);
+        }
 
         .btn-book {
-            padding: 0.55rem 1.5rem; font-size: 0.65rem; letter-spacing: 0.12em;
-            text-transform: uppercase; border-radius: 50px; border: 1px solid var(--border);
-            color: var(--white-dim); transition: all var(--transition);
+            padding: 0.55rem 1.5rem;
+            font-size: 0.65rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            border-radius: 50px;
+            border: 1px solid var(--border);
+            color: var(--white-dim);
+            transition: all var(--transition);
         }
-        .btn-book:hover { border-color: var(--gold); color: var(--gold); }
+
+        .btn-book:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
 
         .nav-emblem {
-            width: 44px; height: 44px; border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
             background: radial-gradient(circle at 35% 35%, #2a2010, #1a1408);
-            border: 1.5px solid var(--gold-dark); display: flex; align-items: center;
-            justify-content: center; flex-shrink: 0; overflow: hidden;
+            border: 1.5px solid var(--gold-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            overflow: hidden;
         }
-        .nav-emblem img { width: 26px; height: 26px; object-fit: contain; }
+
+        .nav-emblem img {
+            width: 26px;
+            height: 26px;
+            object-fit: contain;
+        }
 
         .nav-gold-rule {
-            height: 1px; background: linear-gradient(to right, transparent 0%, var(--gold-dark) 30%, var(--gold-dark) 70%, transparent 100%);
+            height: 1px;
+            background: linear-gradient(to right, transparent 0%, var(--gold-dark) 30%, var(--gold-dark) 70%, transparent 100%);
             opacity: 0.5;
         }
 
@@ -129,7 +196,7 @@
         }
 
         .back-btn:hover {
-            background: rgba(201,168,76,0.12);
+            background: rgba(201, 168, 76, 0.12);
             transform: scale(1.05);
         }
 
@@ -174,9 +241,14 @@
 
         /* ====== HEADER ====== */
         .page-label {
-            font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase;
-            color: var(--gold); font-weight: 500; margin-bottom: 0.2rem;
+            font-size: 0.6rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--gold);
+            font-weight: 500;
+            margin-bottom: 0.2rem;
         }
+
         .page-title {
             font-family: var(--font-display);
             font-style: italic;
@@ -200,7 +272,7 @@
             padding: 16px 18px;
             border-radius: var(--radius-sm);
             background: #161610;
-            border: 1px solid var(--border);
+            border: 1px solid #333;
             transition: all var(--transition);
             cursor: pointer;
         }
@@ -210,7 +282,7 @@
         }
 
         .option.selected {
-            background: rgba(201,168,76,0.06);
+            background: rgba(201, 168, 76, 0.06);
             border-color: var(--gold);
             box-shadow: 0 0 0 1px var(--gold);
         }
@@ -306,14 +378,15 @@
         }
 
         .btn-primary {
-            background: transparent;
+            background: #c9a84c;
             border: 1px solid var(--border);
             color: var(--white);
         }
 
         .btn-primary:hover:not(.disabled) {
             border-color: var(--gold);
-            color: var(--gold);
+            color: var(--black);
+            transform: translateY(-2px);
         }
 
         .btn-primary.disabled {
@@ -324,29 +397,81 @@
 
         /* ====== ANIMATIONS ====== */
         @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(16px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        .fade-1 { animation: fadeUp 0.55s ease 0.05s both; }
-        .fade-2 { animation: fadeUp 0.55s ease 0.15s both; }
-        .fade-3 { animation: fadeUp 0.55s ease 0.25s both; }
-        .fade-4 { animation: fadeUp 0.55s ease 0.35s both; }
-        .fade-5 { animation: fadeUp 0.55s ease 0.45s both; }
+
+        .fade-1 {
+            animation: fadeUp 0.55s ease 0.05s both;
+        }
+
+        .fade-2 {
+            animation: fadeUp 0.55s ease 0.15s both;
+        }
+
+        .fade-3 {
+            animation: fadeUp 0.55s ease 0.25s both;
+        }
+
+        .fade-4 {
+            animation: fadeUp 0.55s ease 0.35s both;
+        }
+
+        .fade-5 {
+            animation: fadeUp 0.55s ease 0.45s both;
+        }
 
         /* ====== RESPONSIVE ====== */
         @media (max-width: 900px) {
-            .main { padding: 0 1.25rem 1.5rem; }
-            .navbar { padding: 0.875rem 1.25rem; }
-            .navbar-nav { display: none; }
-            .page-title { font-size: 1.6rem; }
-            .option { padding: 14px 16px; }
-            .brow-icon { width: 44px; height: 22px; }
-            .option-title { font-size: 1rem; }
-            .back-btn { width: 38px; height: 38px; }
-            .page-logo { width: 38px; height: 38px; }
+            .main {
+                padding: 0 1.25rem 1.5rem;
+            }
+
+            .navbar {
+                padding: 0.875rem 1.25rem;
+            }
+
+            .navbar-nav {
+                display: none;
+            }
+
+            .page-title {
+                font-size: 1.6rem;
+            }
+
+            .option {
+                padding: 14px 16px;
+            }
+
+            .brow-icon {
+                width: 44px;
+                height: 22px;
+            }
+
+            .option-title {
+                font-size: 1rem;
+            }
+
+            .back-btn {
+                width: 38px;
+                height: 38px;
+            }
+
+            .page-logo {
+                width: 38px;
+                height: 38px;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <!-- NAVBAR -->
@@ -361,7 +486,8 @@
         <!-- PAGE TOPBAR (Back Arrow + Title + Logo) -->
         <div class="page-topbar fade-1">
             <a href="javascript:history.back()" class="back-btn" aria-label="Go back">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
                     <line x1="19" y1="12" x2="5" y2="12"></line>
                     <polyline points="12 19 5 12 12 5"></polyline>
                 </svg>
@@ -373,7 +499,8 @@
         <div class="fade-2">
             <div class="page-label">Comparison</div>
             <div class="page-title">Two looks worth comparing.</div>
-            <p style="color:var(--white-dim); font-size:0.9rem; margin-top:0.25rem;">Select the two you'd like side by side.</p>
+            <p style="color:var(--white-dim); font-size:0.9rem; margin-top:0.25rem;">Select the two you'd like side by
+                side.</p>
         </div>
 
         <!-- OPTIONS -->
@@ -427,42 +554,38 @@
         </div>
 
     </main>
-
-    <script>
-        const options = document.querySelectorAll('.option');
-        const statusText = document.querySelector('.status-text');
-        const btnAction = document.querySelector('.btn');
-        const maxSelected = 2;
-
-        function updateUI() {
-            const selected = document.querySelectorAll('.option.selected');
-            const count = selected.length;
-            statusText.textContent = `${count} of ${maxSelected} Chosen`;
-
-            if (count < maxSelected) {
-                btnAction.classList.add('disabled');
-                btnAction.textContent = `Select ${maxSelected - count} more to compare`;
-                btnAction.href = '#';
-            } else {
-                btnAction.classList.remove('disabled');
-                btnAction.textContent = 'Compare these looks';
-                btnAction.href = 'your-look.php';
-            }
-        }
-
-        options.forEach(opt => {
-            opt.addEventListener('click', function() {
-                if (this.classList.contains('selected')) {
-                    this.classList.remove('selected');
-                } else if (document.querySelectorAll('.option.selected').length < maxSelected) {
-                    this.classList.add('selected');
-                }
-                updateUI();
-            });
-        });
-
-        updateUI();
-    </script>
-
 </body>
+<script>
+    const options = document.querySelectorAll('.option');
+    const statusText = document.querySelector('.status-text');
+    const btnAction = document.querySelector('.btn');
+    const maxSelected = 2;
+
+    function updateUI() {
+        const selected = document.querySelectorAll('.option.selected');
+        const count = selected.length;
+        statusText.textContent = `${count} of ${maxSelected} Chosen`;
+        if (count < maxSelected) {
+            btnAction.classList.add('disabled');
+            btnAction.textContent = `Select ${maxSelected - count} more to compare`;
+            btnAction.href = '#';
+        } else {
+            btnAction.classList.remove('disabled');
+            btnAction.textContent = 'Compare these looks';
+            btnAction.href = 'your-look.php';
+        }
+    }
+    options.forEach(opt => {
+        opt.addEventListener('click', function() {
+            if (this.classList.contains('selected')) {
+                this.classList.remove('selected');
+            } else if (document.querySelectorAll('.option.selected').length < maxSelected) {
+                this.classList.add('selected');
+            }
+            updateUI();
+        });
+    });
+    updateUI();
+</script>
+
 </html>

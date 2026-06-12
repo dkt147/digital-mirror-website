@@ -315,7 +315,7 @@
       padding: 0.85rem 1.2rem;
       border-radius: 999px;
       border: 1px solid var(--border);
-      background: transparent;
+      background: #c9a84c;
       color: var(--white);
       font-size: 0.75rem;
       font-weight: 600;
@@ -326,7 +326,8 @@
 
     .btn-primary:hover {
       border-color: var(--gold);
-      color: var(--gold);
+      color: var(--black);
+      transform: translateY(-2px);
     }
 
     .watch-link {
@@ -428,7 +429,7 @@
 
     <!-- ACTIONS -->
     <div class="actions fade-4">
-      <a class="btn-primary" href="camera-scan.php" style="background: var(--gold); border-color: var(--gold-dark); color: var(--black);">Begin drawing</a>
+      <a class="btn-primary" href="camera-scan.php">Begin drawing</a>
       <a class="watch-link" href="watch-guide.php">Watch how it works</a>
     </div>
 
