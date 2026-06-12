@@ -17,7 +17,7 @@ function navActive($name, $curr) {
 
   <ul class="navbar-nav">
     <li><a href="dashboard.php" <?php echo navActive('dashboard.php', $curr); ?>>Home</a></li>
-    <li><a href="arch-session.php" <?php echo navActive('arch-session.php', $curr); ?>>Try-On</a></li>
+    <li><a href="my-looks.php" <?php echo navActive('my-looks.php', $curr); ?>>Try-On</a></li>
     <li><a href="shop.php" <?php echo navActive('shop.php', $curr); ?>>Shop</a></li>
     <li><a href="profile.php" <?php echo navActive('profile.php', $curr); ?>>Profile</a></li>
   </ul>

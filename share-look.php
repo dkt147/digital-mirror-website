@@ -1,3 +1,4 @@
+<?php include 'config.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -181,7 +182,7 @@
     .page-title {
       font-family: var(--font-display);
       font-style: italic;
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: 400;
       color: var(--white);
       line-height: 1.05;
@@ -189,30 +190,30 @@
 
     /* ====== SHARE CARD ====== */
     .share-card {
-      background: #161610;
-      border: 1px solid var(--gold);
-      border-radius: var(--radius);
-      padding: 1.5rem 1.25rem;
+      background: transparent;
+      border: none;
+      padding: 0;
     }
 
     .preview-card {
       border-radius: var(--radius);
-      background: rgba(255,255,255,0.03);
+      background: #161610;
       border: 1px solid var(--border);
       min-height: 140px;
-      display: grid;
-      place-items: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       position: relative;
       overflow: hidden;
       margin-bottom: 1.5rem;
-      padding: 24px 16px;
+      padding: 30px 16px;
     }
 
     .preview-card::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at center, rgba(201,168,76,0.08), transparent 50%);
+      background: radial-gradient(circle at center, rgba(201,168,76,0.03), transparent 70%);
       pointer-events: none;
     }
 
@@ -220,44 +221,41 @@
       position: relative;
       z-index: 1;
       display: grid;
-      gap: 12px;
+      gap: 8px;
       text-align: center;
       width: 100%;
     }
 
     .preview-content .label {
       color: var(--gold);
-      font-size: 0.7rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-    }
-
-    .preview-content .value {
-      color: var(--white);
-      font-size: 0.95rem;
-      line-height: 1.6;
+      font-size: 0.9rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      font-family: var(--font-body);
+      line-height: 1.4;
     }
 
     .preview-graphic {
       display: flex;
       justify-content: center;
       gap: 4px;
-      margin: 6px 0;
+      margin: 4px 0;
     }
 
     .arc {
       width: 72px;
       height: 20px;
-      border: 1px solid rgba(201,168,76,0.5);
+      border: 1.5px solid var(--gold);
       border-bottom-color: transparent;
       border-left-color: transparent;
       border-right-color: transparent;
       border-radius: 999px 999px 0 0;
+      opacity: 0.8;
     }
 
     .arc:nth-child(2) {
       transform: translateY(10px) scaleX(0.9);
-      opacity: 0.6;
+      opacity: 0.4;
     }
 
     /* ====== BUTTONS ====== */
@@ -265,7 +263,7 @@
       display: grid;
       gap: 0.75rem;
       width: 100%;
-      max-width: 460px;
+      max-width: 480px;
       margin-left: auto;
       margin-right: auto;
     }
@@ -273,17 +271,18 @@
     .btn {
       display: inline-flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-start;
       width: 100%;
-      padding: 0.85rem 1.2rem;
+      padding: 1rem 1.5rem;
       border-radius: var(--radius-sm);
       border: 1px solid var(--border);
-      background: rgba(255,255,255,0.03);
+      background: rgba(255,255,255,0.02);
       color: var(--white);
       text-decoration: none;
       transition: all var(--transition);
       cursor: pointer;
       font-family: var(--font-body);
+      text-align: left;
     }
 
     .btn:hover {
@@ -295,51 +294,121 @@
       background: rgba(201,168,76,0.06);
       border-color: var(--gold);
       color: var(--gold);
+      box-shadow: 0 0 20px rgba(201,168,76,0.05);
     }
 
     .btn .text {
       display: grid;
-      gap: 2px;
+      gap: 3px;
       text-align: left;
     }
 
     .btn .text .title {
-      font-family: var(--font-display);
-      font-size: 1rem;
+      font-family: var(--font-body);
+      font-size: 1.1rem;
       font-weight: 400;
     }
 
     .btn .text .subtitle {
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       color: var(--white-dim);
-    }
-
-    .btn .chevron {
-      font-size: 1.2rem;
-      opacity: 0.7;
+      font-weight: 300;
     }
 
     .notice {
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       color: var(--white-dim);
       text-align: center;
-      margin-top: 12px;
+      margin-top: 16px;
       line-height: 1.6;
+      font-weight: 300;
     }
 
     .footer-link {
       text-align: center;
       color: var(--gold);
-      font-size: 0.9rem;
-      padding: 12px 0 4px;
+      font-size: 1rem;
+      padding: 18px 0 4px;
       cursor: pointer;
       transition: color var(--transition);
       font-weight: 400;
+      background: transparent;
+      font-family: var(--font-body);
     }
 
     .footer-link:hover {
       color: var(--gold-light);
       text-decoration: underline;
+    }
+
+    /* ====== MODAL (for email input) ====== */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(6px);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-overlay.active {
+      display: flex;
+    }
+    .modal-box {
+      background: var(--dark);
+      border: 1px solid var(--gold);
+      border-radius: var(--radius);
+      padding: 2rem;
+      width: 90%;
+      max-width: 360px;
+      text-align: center;
+    }
+    .modal-box h3 {
+      font-family: var(--font-display);
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .modal-box input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--dark-card);
+      color: var(--white);
+      margin-bottom: 1.5rem;
+      font-family: var(--font-body);
+      outline: none;
+    }
+    .modal-box input:focus {
+      border-color: var(--gold);
+    }
+    .modal-actions {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+    }
+    .modal-btn {
+      padding: 0.6rem 1.5rem;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 500;
+      transition: all var(--transition);
+    }
+    .modal-btn.cancel {
+      border: 1px solid var(--white-dim);
+      color: var(--white-dim);
+      background: transparent;
+    }
+    .modal-btn.confirm {
+      background: var(--gold);
+      color: var(--black);
+      border: none;
+    }
+    .modal-btn:hover {
+      opacity: 0.85;
     }
 
     /* ====== ANIMATIONS ====== */
@@ -358,12 +427,15 @@
       .main { padding: 0 1.25rem 1.5rem; }
       .navbar { padding: 0.875rem 1.25rem; }
       .navbar-nav { display: none; }
-      .page-title { font-size: 1.6rem; }
-      .share-card { padding: 1.25rem 1rem; }
-      .preview-card { min-height: 120px; padding: 18px 14px; }
+      .page-title { font-size: 1.8rem; }
+      .share-card { padding: 0; }
+      .preview-card { min-height: 120px; padding: 24px 14px; }
+      .preview-content .label { font-size: 0.8rem; }
       .arc { width: 56px; }
       .back-btn { width: 38px; height: 38px; }
       .page-logo { width: 38px; height: 38px; }
+      .btn .text .title { font-size: 1rem; }
+      .btn .text .subtitle { font-size: 0.75rem; }
     }
   </style>
 </head>
@@ -399,38 +471,34 @@
     <div class="share-card fade-3">
       <div class="preview-card">
         <div class="preview-content">
-          <div class="label">My Everyday Arch · Arch · Dark Brown</div>
+          <div class="label" id="preview-look-info">My Everyday Arch · Arch · Dark Brown</div>
           <div class="preview-graphic">
             <span class="arc"></span>
             <span class="arc"></span>
           </div>
-          <div class="value">Your stencil guide, ready for your artist.</div>
         </div>
       </div>
 
       <div class="actions">
-        <button class="btn primary" onclick="sendToArtist()">
+        <button class="btn primary" id="send-to-artist-btn">
           <div class="text">
-            <div class="title">Send to artist</div>
-            <div class="subtitle">Your artist receives your details and this look</div>
+            <div class="title">Send to your artist</div>
+            <div class="subtitle">Your artist receives the brief and this look</div>
           </div>
-          <span class="chevron">→</span>
         </button>
 
-        <button class="btn" onclick="saveAsImage()">
+        <button class="btn" id="share-as-link-btn">
+          <div class="text">
+            <div class="title">Share as link</div>
+            <div class="subtitle">Copy a shareable link to this look</div>
+          </div>
+        </button>
+
+        <button class="btn" id="save-as-image-btn">
           <div class="text">
             <div class="title">Save as image</div>
             <div class="subtitle">Saved to your camera roll</div>
           </div>
-          <span class="chevron">→</span>
-        </button>
-
-        <button class="btn" onclick="shareViaMessage()">
-          <div class="text">
-            <div class="title">Share via message</div>
-            <div class="subtitle">Opens in your messages app</div>
-          </div>
-          <span class="chevron">→</span>
         </button>
       </div>
 
@@ -440,26 +508,162 @@
 
   </main>
 
+  <!-- MODAL for artist email input -->
+  <div class="modal-overlay" id="email-modal">
+    <div class="modal-box">
+      <h3>Enter artist's email</h3>
+      <input type="email" id="artist-email-input" placeholder="artist@example.com" />
+      <div class="modal-actions">
+        <button class="modal-btn cancel" id="modal-cancel">Cancel</button>
+        <button class="modal-btn confirm" id="modal-confirm">Send</button>
+      </div>
+    </div>
+  </div>
+
   <script>
-    function sendToArtist() {
-      alert('Your artist will receive this look now.');
+    // ---------- CONFIG & AUTH ----------
+    const API_BASE = '<?php echo $API_URL; ?>';
+    const token = localStorage.getItem('archAccessToken');
+
+    if (!token) {
+      window.location.href = 'login.php';
     }
 
-    function saveAsImage() {
-      alert('Saved to your camera roll.');
+    // Get look ID from URL (e.g., share-look.php?id=3)
+    const urlParams = new URLSearchParams(window.location.search);
+    const lookId = urlParams.get('id');
+
+    if (!lookId) {
+      document.getElementById('preview-look-info').textContent = 'No look selected.';
     }
 
-    function shareViaMessage() {
-      if (navigator.share) {
-        navigator.share({
-          title: 'My look — Royals Arch Brow',
-          text: 'Sharing my look with you.',
-          url: window.location.href
-        }).catch(() => {});
-      } else {
-        alert('Open your messages app to share this look.');
+    // ---------- MODAL HANDLING ----------
+    const modal = document.getElementById('email-modal');
+    const emailInput = document.getElementById('artist-email-input');
+    const cancelBtn = document.getElementById('modal-cancel');
+    const confirmBtn = document.getElementById('modal-confirm');
+
+    function openEmailModal() {
+      if (!lookId) {
+        alert('Please select a look first.');
+        return;
+      }
+      modal.classList.add('active');
+      emailInput.value = '';
+      emailInput.focus();
+    }
+
+    function closeEmailModal() {
+      modal.classList.remove('active');
+    }
+
+    cancelBtn.addEventListener('click', closeEmailModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeEmailModal();
+    });
+
+    // ---------- API CALLS ----------
+    async function shareLook(channel, artistEmail = null) {
+      if (!lookId) {
+        alert('No look ID found in URL.');
+        return;
+      }
+
+      const body = { channel: channel };
+      if (artistEmail) body.artistEmail = artistEmail;
+
+      try {
+        const res = await fetch(`${API_BASE}/looks/${lookId}/share`, {
+          method: 'POST',
+          headers: {
+            'accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify(body)
+        });
+
+        if (!res.ok) {
+          const err = await res.json().catch(() => ({}));
+          throw new Error(err.detail || 'Share request failed');
+        }
+
+        const data = await res.json();
+        return data; // Could contain share link, success message, etc.
+      } catch (error) {
+        console.error(error);
+        throw error;
       }
     }
+
+    // ---------- BUTTON ACTIONS ----------
+    // 1. Send to artist (email channel)
+    document.getElementById('send-to-artist-btn').addEventListener('click', openEmailModal);
+
+    confirmBtn.addEventListener('click', async () => {
+      const email = emailInput.value.trim();
+      if (!email || !email.includes('@')) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+      closeEmailModal();
+
+      try {
+        const result = await shareLook('email', email);
+        alert('Look shared successfully with ' + email);
+        // Optionally redirect or update UI
+      } catch (err) {
+        alert('Failed to share: ' + err.message);
+      }
+    });
+
+    // 2. Share as link (link channel)
+    document.getElementById('share-as-link-btn').addEventListener('click', async () => {
+      try {
+        const result = await shareLook('link');
+        // API might return a share_url field
+        const shareUrl = result?.share_url || result?.url || '';
+        if (shareUrl) {
+          // Copy to clipboard
+          await navigator.clipboard.writeText(shareUrl);
+          alert('Share link copied to clipboard!');
+        } else if (result?.detail) {
+          alert(result.detail);
+        } else {
+          alert('Link generated but unable to copy. Check console.');
+          console.log('Share result:', result);
+        }
+      } catch (err) {
+        alert('Failed to create share link: ' + err.message);
+      }
+    });
+
+    // 3. Save as image (placeholder)
+    document.getElementById('save-as-image-btn').addEventListener('click', () => {
+      alert('Save as image feature coming soon.');
+    });
+
+    // ---------- OPTIONAL: PREVIEW LOOK DETAILS ----------
+    async function fetchLookDetails() {
+      if (!lookId) return;
+      try {
+        const res = await fetch(`${API_BASE}/looks/${lookId}`, {
+          headers: {
+            'accept': 'application/json',
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        if (res.ok) {
+          const look = await res.json();
+          const meta = [look.title, look.style, look.colour].filter(Boolean).join(' · ');
+          document.getElementById('preview-look-info').textContent = meta || 'Untitled Look';
+        }
+      } catch (e) {
+        console.log('Could not fetch look details for preview', e);
+      }
+    }
+
+    fetchLookDetails();
   </script>
 
 </body>
