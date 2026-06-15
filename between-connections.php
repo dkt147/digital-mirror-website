@@ -188,8 +188,6 @@
 
     /* ====== STATUS CARD ====== */
     .status-card {
-      background: #161610;
-      border: 1px solid var(--gold);
       border-radius: var(--radius);
       padding: 1.75rem 1.5rem;
     }
@@ -271,7 +269,7 @@
       padding: 0.85rem 1.2rem;
       border-radius: 999px;
       border: 1px solid var(--border);
-      background: transparent;
+      background:  #C9A84C;
       color: var(--white);
       font-size: 0.75rem;
       font-weight: 600;
@@ -282,7 +280,8 @@
 
     .btn-primary:hover {
       border-color: var(--gold);
-      color: var(--gold);
+      color: var(--black);
+      transform: translateY(-2px);
     }
 
     /* ====== ANIMATIONS ====== */
@@ -365,7 +364,7 @@
       <p class="note">Your saved looks are always with you.</p>
 
       <div class="actions">
-        <a class="btn-primary" href="saved.php">Open my looks</a>
+        <a class="btn-primary" href="error-state.php">Open my looks</a>
       </div>
     </div>
 

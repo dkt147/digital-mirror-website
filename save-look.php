@@ -104,7 +104,7 @@
       opacity: 0.5;
     }
 
-    /* ====== PAGE TOPBAR (Back Arrow + Title + Logo) ====== */
+    /* ====== PAGE TOPBAR ====== */
     .page-topbar {
       display: flex;
       align-items: center;
@@ -186,48 +186,36 @@
       line-height: 1.05;
     }
 
-    /* ====== SAVE LOOK CARD ====== */
+    /* ====== SAVE LOOK CARD (UPDATED) ====== */
     .save-look-card {
-      background: #161610;
-      border: 1px solid var(--gold);
       border-radius: var(--radius);
-      padding: 1.5rem 1.25rem;
+      padding: 0;
+      max-width: 600px;
+      margin: 0 auto;
+      width: 100%;
     }
 
     .preview-card {
       border-radius: var(--radius);
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--border);
+      background: #151513;
       min-height: 140px;
-      display: grid;
-      place-items: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       position: relative;
       overflow: hidden;
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
       padding: 24px 16px;
-    }
-
-    .preview-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at center, rgba(201,168,76,0.08), transparent 50%);
-      pointer-events: none;
+      width: 100%;
     }
 
     .preview-placeholder {
-      color: var(--white-dim);
-      font-size: 1rem;
+      color: #9e9e9e;
+      font-size: 0.95rem;
       letter-spacing: 0.04em;
       text-align: center;
       z-index: 1;
-    }
-
-    .preview-placeholder strong {
-      color: var(--gold);
-      font-weight: 400;
-      font-family: var(--font-display);
-      font-style: italic;
+      font-family: var(--font-body);
     }
 
     .section-title {
@@ -250,11 +238,8 @@
 
     .form {
       display: grid;
-      gap: 18px;
+      gap: 24px;
       width: 100%;
-      max-width: 460px;
-      margin-left: auto;
-      margin-right: auto;
     }
 
     .field {
@@ -264,24 +249,26 @@
 
     label {
       color: var(--gold);
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       text-transform: uppercase;
       letter-spacing: 0.18em;
       font-weight: 500;
+      font-family: var(--font-body);
     }
 
     .input,
     .textarea {
       width: 100%;
-      border: 1px solid var(--border);
+      border: 1px solid #c9a84c;
       border-radius: 999px;
-      background: rgba(255,255,255,0.03);
+      background: var(--dark-input);
       color: var(--white);
       padding: 14px 18px;
       font-family: var(--font-body);
       font-size: 0.95rem;
       outline: none;
       transition: all var(--transition);
+      line-height: 1.4;
     }
 
     .textarea {
@@ -293,13 +280,18 @@
 
     .input:focus,
     .textarea:focus {
-      border-color: var(--gold);
+      border-color: var(--gold-light);
       box-shadow: 0 0 0 3px rgba(201,168,76,0.12);
+    }
+
+    .input::placeholder,
+    .textarea::placeholder {
+      color: rgba(245, 240, 232, 0.4);
     }
 
     .tag-row {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 12px;
     }
 
@@ -309,34 +301,35 @@
       justify-content: center;
       min-height: 52px;
       border-radius: 999px;
-      border: 1px solid var(--border);
+      border: 1px solid #333;
       background: rgba(255,255,255,0.02);
       color: var(--white-dim);
       text-transform: uppercase;
-      letter-spacing: 0.12em;
-      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      font-size: 0.6rem;
+      font-weight: 600;
       cursor: pointer;
       transition: all var(--transition);
-      font-weight: 500;
       font-family: var(--font-body);
     }
 
     .tag:hover {
-      border-color: var(--border-hover);
+      border-color: #c9a84c;
       color: var(--white);
+      background: rgba(201, 168, 76, 0.10);
     }
 
     .tag.active {
-      background: rgba(201,168,76,0.06);
-      border-color: var(--gold);
+      border: 1px solid var(--gold);
+      background: rgba(201, 168, 76, 0.10);
       color: var(--gold);
     }
 
     .actions {
       display: grid;
       gap: 0.75rem;
-      margin-top: 8px;
-      max-width: 100%;
+      margin-top: 4px;
+      width: 100%;
     }
 
     .btn-primary {
@@ -344,8 +337,8 @@
       border: none;
       border-radius: 999px;
       padding: 0.85rem 1.2rem;
-      background:  #c9a84c;
-      color: var(--white);
+      background: #c9a84c;
+      color:  var(--white);
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.12em;
@@ -356,7 +349,6 @@
     }
 
     .btn-primary:hover {
-      border-color: var(--gold);
       color: var(--black);
       transform: translateY(-2px);
     }
@@ -365,7 +357,7 @@
       color: var(--white-dim);
       font-size: 0.85rem;
       text-align: center;
-      margin-top: 8px;
+      margin-top: 4px;
     }
 
     /* ====== ANIMATIONS ====== */
@@ -385,10 +377,10 @@
       .navbar { padding: 0.875rem 1.25rem; }
       .navbar-nav { display: none; }
       .page-title { font-size: 1.6rem; }
-      .save-look-card { padding: 1.25rem 1rem; }
+      .save-look-card { padding: 0; }
       .preview-card { min-height: 120px; padding: 18px 14px; }
       .section-title { font-size: 1.8rem; }
-      .tag-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .tag-row { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .back-btn { width: 38px; height: 38px; }
       .page-logo { width: 38px; height: 38px; }
     }
@@ -423,32 +415,31 @@
       <p style="color:var(--white-dim); font-size:0.9rem; margin-top:0.25rem;">Something you'll recognise at a glance.</p>
     </div>
 
-    <!-- SAVE LOOK CARD -->
+    <!-- SAVE LOOK CARD (UPDATED) -->
     <div class="save-look-card fade-3">
       <div class="preview-card">
         <div class="preview-placeholder">
-          <strong>Your look preview</strong><br />
-          <span style="font-size:0.85rem; color:var(--white-dim);">Stencil overlay appears here</span>
+          Leave As Placeholder.
         </div>
       </div>
 
       <form id="saveLookForm" class="form">
         <div class="field">
-          <label for="lookName">Look Name</label>
+          <label for="lookName">LOOK NAME</label>
           <input id="lookName" name="lookName" class="input" type="text" placeholder="My Everyday Arch" />
         </div>
 
         <div class="field">
-          <label for="notes">Notes for your artist</label>
+          <label for="notes">NOTES FOR YOUR ARTIST</label>
           <textarea id="notes" name="notes" class="textarea" placeholder="Tap to add notes"></textarea>
         </div>
 
         <div class="field">
-          <label>Tag</label>
+          <label>TAG</label>
           <div class="tag-row">
-            <button type="button" class="tag active" onclick="selectTag(event)">Everyday</button>
-            <button type="button" class="tag" onclick="selectTag(event)">Occasion</button>
-            <button type="button" class="tag" onclick="selectTag(event)">Reference</button>
+            <button type="button" class="tag active" onclick="selectTag(event)">EVERYDAY</button>
+            <button type="button" class="tag" onclick="selectTag(event)">OCCASION</button>
+            <button type="button" class="tag" onclick="selectTag(event)">REFERENCE</button>
           </div>
         </div>
 

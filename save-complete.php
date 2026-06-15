@@ -31,7 +31,7 @@
       --border-hover: rgba(201, 168, 76, 0.45);
       --font-display: 'Cormorant Garamond', serif;
       --font-body: 'Montserrat', sans-serif;
-      --radius: 14px;
+      --radius: 18px;
       --radius-sm: 10px;
       --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
@@ -258,61 +258,55 @@
       line-height: 1.05;
     }
 
-    /* ====== SAVED CARD ====== */
+    /* ========================================================== */
+    /* ====== UPDATED SAVED CARD (Center Content) ====== */
+    /* ========================================================== */
+
     .saved-card {
-      background: #161610;
-      border: 1px solid var(--gold);
-      border-radius: var(--radius);
+      background: transparent;
+      border: none;
       padding: 1.5rem 1.25rem;
+      text-align: center;
     }
 
-    .icon-card {
-      border-radius: var(--radius);
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--border);
-      min-height: 180px;
-      display: grid;
-      place-items: center;
-      position: relative;
-      overflow: hidden;
-      padding: 24px 0;
+    /* Top subtle divider matching Figma */
+    .gold-divider {
+      width: 250px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 0 auto 1.5rem auto;
+      opacity: 0.6;
     }
 
-    .icon-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at center, rgba(201, 168, 76, 0.08), transparent 50%);
-      pointer-events: none;
-    }
-
+    /* Icon container */
     .checkmark {
-      width: 72px;
-      height: 72px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
-      background: rgba(201, 168, 76, 0.15);
-      border: 1px solid rgba(201, 168, 76, 0.35);
-      display: grid;
-      place-items: center;
+      border: 1px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem auto;
+      background: rgba(201, 168, 76, 0.05);
       position: relative;
-      z-index: 1;
     }
 
     .checkmark::after {
       content: '\2713';
       color: var(--gold);
-      font-size: 2rem;
+      font-size: 1.5rem;
       font-weight: 700;
     }
 
     .headline {
       font-family: var(--font-display);
       font-style: italic;
-      font-size: clamp(2rem, 4vw, 2.6rem);
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
       line-height: 1.05;
       color: var(--white);
       text-align: center;
-      margin-bottom: 10px;
+      margin-bottom: 0.75rem;
     }
 
     .subtitle {
@@ -320,18 +314,20 @@
       font-size: 0.95rem;
       text-align: center;
       line-height: 1.7;
-      margin-bottom: 28px;
+      max-width: 500px;
+      margin: 0 auto 2rem auto;
       padding: 0 16px;
     }
 
-    /* ====== BUTTONS ====== */
+    /* Actions container - stacked vertically */
     .actions {
-      display: grid;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       gap: 0.75rem;
       width: 100%;
-      max-width: 100%;
-      margin-left: auto;
-      margin-right: auto;
+      max-width: 400px;
+      margin: 0 auto;
     }
 
     .btn {
@@ -339,9 +335,9 @@
       align-items: center;
       justify-content: center;
       width: 100%;
-      padding: 0.85rem 1.2rem;
+      padding: 1rem 1.5rem;
       border-radius: 999px;
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       font-weight: 600;
@@ -358,8 +354,8 @@
     }
 
     .btn-primary:hover {
-      background: #d4b35c;
-      transform: translateY(-1px);
+      color: var(--black);
+      transform: translateY(-2px);
     }
 
     .btn-secondary {
@@ -373,11 +369,22 @@
       color: var(--gold);
     }
 
-    .row {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.75rem;
+    /* Figma-styled "Return to home" link */
+    .return-link {
+      color: var(--gold);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      margin-top: 0.5rem;
+      transition: color var(--transition);
     }
+
+    .return-link:hover {
+      text-decoration: underline;
+      color: var(--gold-light);
+    }
+
+    /* ========================================================== */
 
     /* ====== ANIMATIONS ====== */
     @keyframes fadeUp {
@@ -434,16 +441,6 @@
         padding: 1.25rem 1rem;
       }
 
-      .icon-card {
-        min-height: 160px;
-        padding: 18px 0;
-      }
-
-      .checkmark {
-        width: 64px;
-        height: 64px;
-      }
-
       .back-btn {
         width: 38px;
         height: 38px;
@@ -454,8 +451,8 @@
         height: 38px;
       }
 
-      .row {
-        grid-template-columns: 1fr;
+      .subtitle {
+        padding: 0;
       }
     }
   </style>
@@ -490,23 +487,32 @@
       <div class="page-title">Your look has been saved.</div>
     </div>
 
-    <!-- SAVED CARD -->
+    <!-- ================================================================= -->
+    <!-- ====== UPDATED SAVED CARD SECTION (Matches Figma UI) ====== -->
+    <!-- ================================================================= -->
     <div class="saved-card fade-3">
-      <div class="icon-card">
-        <div class="checkmark"></div>
-      </div>
+      
+      <!-- Top subtle divider line -->
+      <div class="gold-divider"></div>
 
+      <!-- Checkmark Icon -->
+      <div class="checkmark"></div>
+
+      <!-- Headline -->
       <h1 class="headline">Saved.</h1>
+
+      <!-- Subtitle -->
       <p class="subtitle">This look is in My Looks — ready whenever you need it.</p>
 
+      <!-- Action Buttons (Stacked) -->
       <div class="actions">
-        <a href="saved-look.php" class="btn btn-primary">View my looks</a>
-        <div class="row">
-          <a href="share-look.php" class="btn btn-secondary">Share with artist</a>
-          <a href="index.php" class="btn btn-secondary">Return home</a>
-        </div>
+        <a href="my-looks.php" class="btn btn-primary">View my looks</a>
+        <a href="share-look.php" class="btn btn-secondary">SHARE WITH ARTIST NOW</a>
+        <a href="index.php" class="return-link">Return to home</a>
       </div>
+
     </div>
+    <!-- ================================================================= -->
 
   </main>
 

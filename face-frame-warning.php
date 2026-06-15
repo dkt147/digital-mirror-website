@@ -104,7 +104,7 @@
       opacity: 0.5;
     }
 
-    /* ====== PAGE TOPBAR (Back Arrow + Title + Logo) ====== */
+    /* ====== PAGE TOPBAR ====== */
     .page-topbar {
       display: flex;
       align-items: center;
@@ -189,7 +189,6 @@
     /* ====== FRAME WARNING CARD ====== */
     .frame-card {
       background: #161610;
-      border: 1px solid var(--gold);
       border-radius: var(--radius);
       overflow: hidden;
       position: relative;
@@ -216,6 +215,29 @@
         rgba(0,0,0,0.2) 25%, 
         rgba(0,0,0,0.7) 55%, 
         rgba(0,0,0,0.95) 100%);
+    }
+
+    /* NEW ICON ADDED HERE */
+    .frame-guidance-icon {
+      position: absolute;
+      top: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.3);
+      border-radius: 50%;
+      backdrop-filter: blur(4px);
+    }
+
+    .frame-guidance-icon svg {
+      width: 36px;
+      height: 36px;
+      color: var(--gold);
     }
 
     .frame-content {
@@ -299,8 +321,8 @@
       width: 100%;
       padding: 0.85rem 1.2rem;
       border-radius: 999px;
-      border: 1px solid var(--border);
-      background: transparent;
+      border: 1px solid #333;
+      background: #C9A84C;
       color: var(--white);
       font-size: 0.75rem;
       font-weight: 600;
@@ -311,7 +333,8 @@
 
     .btn-primary:hover {
       border-color: var(--gold);
-      color: var(--gold);
+      color: var(--black);
+      transform: translateY(-2px);
     }
 
     .btn-link {
@@ -347,6 +370,15 @@
       .headline { font-size: 1.6rem; }
       .back-btn { width: 38px; height: 38px; }
       .page-logo { width: 38px; height: 38px; }
+      .frame-guidance-icon {
+        top: 1.5rem;
+        width: 40px;
+        height: 40px;
+      }
+      .frame-guidance-icon svg {
+        width: 30px;
+        height: 30px;
+      }
     }
   </style>
 </head>
@@ -376,6 +408,14 @@
     <div class="frame-card fade-3">
       <img class="bg-image" src="assets/face-placeholder.png" alt="Face background" />
       <div class="gradient-overlay"></div>
+
+      <!-- NEW ICON ADDED HERE -->
+      <div class="frame-guidance-icon">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="20" r="16" stroke="currentColor" stroke-width="2" stroke-dasharray="8 6" />
+          <text x="20" y="28" text-anchor="middle" fill="currentColor" font-size="22" font-family="sans-serif" font-weight="bold">?</text>
+        </svg>
+      </div>
       
       <div class="frame-content">
         <h1 class="headline">Let's try that again.</h1>

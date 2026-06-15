@@ -188,9 +188,6 @@
 
     /* ====== FEATURE LOCKED CARD ====== */
     .locked-card {
-      background: #161610;
-      border: 1px solid var(--gold);
-      border-radius: var(--radius);
       padding: 2rem 1.5rem;
       text-align: center;
     }
@@ -248,7 +245,7 @@
       padding: 0.85rem 1.2rem;
       border-radius: 999px;
       border: 1px solid var(--border);
-      background: transparent;
+      background:  #C9A84C;
       color: var(--white);
       font-size: 0.75rem;
       font-weight: 600;
@@ -259,7 +256,8 @@
 
     .btn-primary:hover {
       border-color: var(--gold);
-      color: var(--gold);
+      color: var(--black);
+      transform: translateY(-2px);
     }
 
     .btn-link {

@@ -104,7 +104,7 @@
       opacity: 0.5;
     }
 
-    /* ====== PAGE TOPBAR (Back Arrow + Title + Logo) ====== */
+    /* ====== PAGE TOPBAR ====== */
     .page-topbar {
       display: flex;
       align-items: center;
@@ -189,7 +189,6 @@
     /* ====== LIGHT WARNING CARD ====== */
     .light-card {
       background: #161610;
-      border: 1px solid var(--gold);
       border-radius: var(--radius);
       overflow: hidden;
       position: relative;
@@ -256,6 +255,31 @@
       opacity: 0.6;
     }
 
+    /* ====== SCAN ICON (NEW) ====== */
+    .scan-icon-container {
+      position: absolute;
+      top: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 1.5px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(10, 10, 8, 0.4);
+      backdrop-filter: blur(4px);
+      box-shadow: 0 0 20px rgba(201, 168, 76, 0.15);
+    }
+
+    .scan-icon-container svg {
+      width: 28px;
+      height: 28px;
+      color: var(--gold);
+    }
+
     /* ====== BUTTONS ====== */
     .actions {
       display: grid;
@@ -270,7 +294,7 @@
       padding: 0.85rem 1.2rem;
       border-radius: 999px;
       border: 1px solid var(--border);
-      background: transparent;
+      background: var(--gold);
       color: var(--white);
       font-size: 0.75rem;
       font-weight: 600;
@@ -280,8 +304,8 @@
     }
 
     .btn-primary:hover {
-      border-color: var(--gold);
-      color: var(--gold);
+      color: var(--black);
+      transform: translateY(-2px);
     }
 
     .btn-link {
@@ -317,6 +341,15 @@
       .headline { font-size: 1.6rem; }
       .back-btn { width: 38px; height: 38px; }
       .page-logo { width: 38px; height: 38px; }
+      .scan-icon-container {
+        width: 48px;
+        height: 48px;
+        top: 1.75rem;
+      }
+      .scan-icon-container svg {
+        width: 24px;
+        height: 24px;
+      }
     }
   </style>
 </head>
@@ -350,6 +383,18 @@
 
     <!-- LIGHT WARNING CARD -->
     <div class="light-card fade-3">
+      <!-- Scan Icon (Added) -->
+      <div class="scan-icon-container">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="2" x2="12" y2="8"></line>
+          <line x1="12" y1="16" x2="12" y2="22"></line>
+          <line x1="2" y1="12" x2="8" y2="12"></line>
+          <line x1="16" y1="12" x2="22" y2="12"></line>
+          <circle cx="12" cy="12" r="2" fill="currentColor" stroke="none"></circle>
+        </svg>
+      </div>
+
       <img class="bg-image" src="assets/face-placeholder.png" alt="Face background" />
       <div class="gradient-overlay"></div>
       

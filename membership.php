@@ -189,8 +189,8 @@
 
     /* ====== TIER CARD ====== */
     .tier-card {
-      background: #161610;
-      border: 1px solid var(--gold);
+      background: #1B1400;
+      border: 1px solid #c9a84c;
       border-radius: var(--radius);
       padding: 1.5rem 1.25rem;
       text-align: center;
@@ -199,7 +199,7 @@
 
     .tier-top {
       font-size: 0.7rem;
-      color: var(--white-dim);
+      color: #c9a84c;
       text-transform: uppercase;
       letter-spacing: 0.1em;
     }
@@ -208,13 +208,21 @@
       font-family: var(--font-display);
       font-size: 2rem;
       font-style: italic;
-      color: var(--white);
+      color: #c9a84c;
       margin: 4px 0;
     }
 
     .tier-sub {
       font-size: 0.85rem;
-      color: var(--white-dim);
+      color: #c9a84c;
+    }
+
+    .section-label {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-style: italic;
+      color: #c9a84c;
+      margin: 4px 0;
     }
 
     /* ====== FEATURE LIST ====== */
@@ -306,14 +314,15 @@
     }
 
     .btn-secondary {
-      background: transparent;
+      background: #c9a84c;
       border: 1px solid var(--border);
       color: var(--white);
     }
 
     .btn-secondary:hover {
       border-color: var(--gold);
-      color: var(--gold);
+      color: var(--black);
+      transform: translateY(-2px);
     }
 
     /* ====== ANIMATIONS ====== */

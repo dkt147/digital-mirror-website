@@ -372,7 +372,7 @@
       border-radius: 999px;
       border: none;
       background: var(--gold);
-      color: var(--black);
+      color: var(--white);
       font-size: 0.75rem;
       font-weight: 700;
       letter-spacing: 0.12em;
@@ -382,7 +382,7 @@
     }
 
     .btn-primary:hover {
-      background: var(--gold-light);
+      color: var(--black);
       transform: translateY(-1px);
     }
 

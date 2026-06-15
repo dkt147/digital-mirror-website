@@ -1,12 +1,15 @@
 <?php include 'config.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Your Brow Profile — Royals Arch Brow</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
   <style>
     /* … existing CSS unchanged (only added small style for editable inputs) … */
     :root {
@@ -26,9 +29,17 @@
       --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { font-size: 16px; scroll-behavior: smooth; }
-    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
     body {
       background: var(--black);
       color: var(--white);
@@ -38,8 +49,11 @@
       overflow-x: hidden;
     }
 
-    a { color: inherit; text-decoration: none; }
-    
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
     button {
       cursor: pointer;
       border: none;
@@ -62,37 +76,90 @@
       z-index: 100;
     }
 
-    .navbar-left { display: flex; align-items: center; gap: 1rem; }
-    .nav-avatar { width: 42px; height: 42px; border-radius: 50%; overflow: hidden; border: 1.5px solid var(--gold-dark); flex-shrink: 0; }
-    .nav-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .navbar-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .nav-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 1.5px solid var(--gold-dark);
+      flex-shrink: 0;
+    }
+
+    .nav-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
 
     .navbar-nav {
-      display: flex; align-items: center; gap: 2.5rem; list-style: none;
-      position: absolute; left: 50%; transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
     }
+
     .navbar-nav a {
-      font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--white-dim); transition: color var(--transition); font-weight: 400;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--white-dim);
+      transition: color var(--transition);
+      font-weight: 400;
     }
-    .navbar-nav a:hover, .navbar-nav a.active { color: var(--gold); }
+
+    .navbar-nav a:hover,
+    .navbar-nav a.active {
+      color: var(--gold);
+    }
 
     .btn-book {
-      padding: 0.55rem 1.5rem; font-size: 0.65rem; letter-spacing: 0.12em;
-      text-transform: uppercase; border-radius: 50px; border: 1px solid var(--border);
-      color: var(--white-dim); transition: all var(--transition);
+      padding: 0.55rem 1.5rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 50px;
+      border: 1px solid var(--border);
+      color: var(--white-dim);
+      transition: all var(--transition);
     }
-    .btn-book:hover { border-color: var(--gold); color: var(--gold); }
+
+    .btn-book:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
 
     .nav-emblem {
-      width: 44px; height: 44px; border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
       background: radial-gradient(circle at 35% 35%, #2a2010, #1a1408);
-      border: 1.5px solid var(--gold-dark); display: flex; align-items: center;
-      justify-content: center; flex-shrink: 0; overflow: hidden;
+      border: 1.5px solid var(--gold-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden;
     }
-    .nav-emblem img { width: 26px; height: 26px; object-fit: contain; }
+
+    .nav-emblem img {
+      width: 26px;
+      height: 26px;
+      object-fit: contain;
+    }
 
     .nav-gold-rule {
-      height: 1px; background: linear-gradient(to right, transparent 0%, var(--gold-dark) 30%, var(--gold-dark) 70%, transparent 100%);
+      height: 1px;
+      background: linear-gradient(to right, transparent 0%, var(--gold-dark) 30%, var(--gold-dark) 70%, transparent 100%);
       opacity: 0.5;
     }
 
@@ -117,8 +184,9 @@
       background: transparent;
       flex-shrink: 0;
     }
+
     .back-btn:hover {
-      background: rgba(201,168,76,0.12);
+      background: rgba(201, 168, 76, 0.12);
       transform: scale(1.05);
     }
 
@@ -157,6 +225,7 @@
       height: 60px;
       margin-bottom: 1.5rem;
     }
+
     .brow-graphic svg {
       width: 80%;
       max-width: 280px;
@@ -174,7 +243,10 @@
       padding: 0.9rem 0;
       border-bottom: 1px solid var(--border-subtle);
     }
-    .info-row:last-child { border-bottom: none; }
+
+    .info-row:last-child {
+      border-bottom: none;
+    }
 
     .info-key {
       color: var(--white-dim);
@@ -218,17 +290,18 @@
       padding: 0.9rem 0;
       border-radius: 999px;
       border: none;
-      background: var(--gold);
-      color: var(--black);
+      background: #c9a84c;
+      color: var(--white);
       font-size: 0.75rem;
       font-weight: 700;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       transition: all var(--transition);
     }
+
     .btn-primary:hover {
-      background: var(--gold-light);
-      transform: translateY(-1px);
+       color: var(--black);
+      transform: translateY(-2px);
     }
 
     .btn-secondary {
@@ -247,30 +320,70 @@
       text-transform: uppercase;
       transition: all var(--transition);
     }
+
     .btn-secondary:hover {
       border-color: var(--gold);
       color: var(--gold);
+       transform: translateY(-2px);
     }
 
     @media (max-width: 900px) {
-      .main { padding: 0 1.25rem 1.5rem; }
-      .navbar { padding: 0.875rem 1.25rem; }
-      .navbar-nav { display: none; }
-      .profile-card { padding: 1.25rem; }
-      .back-btn { width: 38px; height: 38px; }
+      .main {
+        padding: 0 1.25rem 1.5rem;
+      }
+
+      .navbar {
+        padding: 0.875rem 1.25rem;
+      }
+
+      .navbar-nav {
+        display: none;
+      }
+
+      .profile-card {
+        padding: 1.25rem;
+      }
+
+      .back-btn {
+        width: 38px;
+        height: 38px;
+      }
     }
 
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
-    .fade-1 { animation: fadeUp 0.55s ease 0.05s both; }
-    .fade-2 { animation: fadeUp 0.55s ease 0.15s both; }
-    .fade-3 { animation: fadeUp 0.55s ease 0.25s both; }
-    .fade-4 { animation: fadeUp 0.55s ease 0.35s both; }
-    .fade-5 { animation: fadeUp 0.55s ease 0.45s both; }
+
+    .fade-1 {
+      animation: fadeUp 0.55s ease 0.05s both;
+    }
+
+    .fade-2 {
+      animation: fadeUp 0.55s ease 0.15s both;
+    }
+
+    .fade-3 {
+      animation: fadeUp 0.55s ease 0.25s both;
+    }
+
+    .fade-4 {
+      animation: fadeUp 0.55s ease 0.35s both;
+    }
+
+    .fade-5 {
+      animation: fadeUp 0.55s ease 0.45s both;
+    }
   </style>
 </head>
+
 <body>
 
   <?php include 'includes/navbar.php'; ?>
@@ -280,7 +393,8 @@
 
     <div class="page-topbar fade-1">
       <a href="javascript:history.back()" class="back-btn" aria-label="Go back">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
           <line x1="19" y1="12" x2="5" y2="12"></line>
           <polyline points="12 19 5 12 12 5"></polyline>
         </svg>
@@ -331,13 +445,17 @@
     const token = localStorage.getItem('archAccessToken');
     let browData = null;
     let editMode = false;
-
     // ---------- Helper ----------
     function escapeHtml(text) {
-      const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+      const map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+      };
       return text.replace(/[&<>"']/g, m => map[m]);
     }
-
     // ---------- Load Brow Profile ----------
     async function loadBrowProfile() {
       if (!token) {
@@ -372,7 +490,6 @@
       document.getElementById('preferred_colour_display').textContent = data.preferred_colour || '—';
       document.getElementById('last_scan_display').textContent = data.last_scan || '—';
     }
-
     // ---------- Inline Edit (Update button) ----------
     const updateBtn = document.getElementById('update-btn');
     updateBtn.addEventListener('click', function() {
@@ -392,16 +509,15 @@
         saveProfile();
       }
     });
-
     async function saveProfile() {
-      const face_shape = document.getElementById('edit_face_shape')?.value || browData.face_shape || '';
-      const preferred_style = document.getElementById('edit_preferred_style')?.value || browData.preferred_style || '';
-      const preferred_colour = document.getElementById('edit_preferred_colour')?.value || browData.preferred_colour || '';
+      const face_shape = document.getElementById('edit_face_shape') ? .value || browData.face_shape || '';
+      const preferred_style = document.getElementById('edit_preferred_style') ? .value || browData.preferred_style ||
+        '';
+      const preferred_colour = document.getElementById('edit_preferred_colour') ? .value || browData
+        .preferred_colour || '';
       const last_scan = browData.last_scan || new Date().toISOString().slice(0, 10);
-
       updateBtn.disabled = true;
       updateBtn.textContent = 'Saving...';
-
       try {
         const res = await fetch(`${API_BASE}/auth/brow-profile`, {
           method: 'PUT',
@@ -435,11 +551,9 @@
         updateBtn.textContent = editMode ? 'Save' : 'Update';
       }
     }
-
     // ---------- Scan Again (Camera) ----------
     const scanBtn = document.getElementById('scan-btn');
     const cameraInput = document.getElementById('camera-input');
-
     scanBtn.addEventListener('click', function() {
       if (!token) {
         alert('Please log in first.');
@@ -447,21 +561,18 @@
       }
       cameraInput.click();
     });
-
     cameraInput.addEventListener('change', async function() {
       const file = this.files[0];
       if (!file) return;
-
       // In a real scenario, the image would be sent to an AI endpoint.
       // For now, we ask the user for the detected face shape.
-      const newShape = prompt('Enter the detected face shape (e.g., Oval, Round, Heart):', browData?.face_shape || 'Oval');
+      const newShape = prompt('Enter the detected face shape (e.g., Oval, Round, Heart):', browData ?
+        .face_shape || 'Oval');
       if (!newShape) {
         cameraInput.value = '';
         return;
       }
-
       const newLastScan = new Date().toISOString().slice(0, 10);
-
       try {
         const res = await fetch(`${API_BASE}/auth/brow-profile`, {
           method: 'PUT',
@@ -473,8 +584,8 @@
           body: JSON.stringify({
             face_shape: newShape,
             last_scan: newLastScan,
-            preferred_style: browData?.preferred_style || '',
-            preferred_colour: browData?.preferred_colour || ''
+            preferred_style: browData ? .preferred_style || '',
+            preferred_colour: browData ? .preferred_colour || ''
           })
         });
         if (!res.ok) {
@@ -492,10 +603,10 @@
         cameraInput.value = '';
       }
     });
-
     // ---------- Init ----------
     loadBrowProfile();
   </script>
 
 </body>
+
 </html>

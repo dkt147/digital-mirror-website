@@ -104,7 +104,7 @@
       opacity: 0.5;
     }
 
-    /* ====== PAGE TOPBAR (Back Arrow + Title + Logo) ====== */
+    /* ====== PAGE TOPBAR ====== */
     .page-topbar {
       display: flex;
       align-items: center;
@@ -189,7 +189,6 @@
     /* ====== SCAN TIMEOUT CARD ====== */
     .scan-card {
       background: #161610;
-      border: 1px solid var(--gold);
       border-radius: var(--radius);
       overflow: hidden;
       position: relative;
@@ -216,6 +215,30 @@
         rgba(0,0,0,0.2) 35%, 
         rgba(0,0,0,0.7) 65%, 
         rgba(0,0,0,0.95) 100%);
+    }
+
+    /* NEW CLOCK ICON ADDED HERE */
+    .scan-timeout-icon {
+      position: absolute;
+      top: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      backdrop-filter: blur(4px);
+    }
+
+    .scan-timeout-icon svg {
+      width: 26px;
+      height: 26px;
+      color: var(--gold);
     }
 
     .scan-content {
@@ -270,7 +293,7 @@
       padding: 0.85rem 1.2rem;
       border-radius: 999px;
       border: 1px solid var(--border);
-      background: transparent;
+      background: #C9A84C;
       color: var(--white);
       font-size: 0.75rem;
       font-weight: 600;
@@ -281,7 +304,8 @@
 
     .btn-primary:hover {
       border-color: var(--gold);
-      color: var(--gold);
+      color: var(--black);
+      transform: translateY(-2px);
     }
 
     .btn-link {
@@ -317,6 +341,15 @@
       .headline { font-size: 1.6rem; }
       .back-btn { width: 38px; height: 38px; }
       .page-logo { width: 38px; height: 38px; }
+      .scan-timeout-icon {
+        top: 1.5rem;
+        width: 40px;
+        height: 40px;
+      }
+      .scan-timeout-icon svg {
+        width: 22px;
+        height: 22px;
+      }
     }
   </style>
 </head>
@@ -344,6 +377,14 @@
 
     <!-- SCAN TIMEOUT CARD -->
     <div class="scan-card fade-3">
+      <!-- NEW CLOCK ICON ADDED HERE -->
+      <div class="scan-timeout-icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" />
+          <polyline points="12 6 12 12 16 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </div>
+
       <img class="bg-image" src="assets/face-placeholder.png" alt="Face background" />
       <div class="gradient-overlay"></div>
       

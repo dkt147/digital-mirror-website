@@ -104,7 +104,7 @@
       opacity: 0.5;
     }
 
-    /* ====== PAGE TOPBAR (Back Arrow + Title + Logo) ====== */
+    /* ====== PAGE TOPBAR ====== */
     .page-topbar {
       display: flex;
       align-items: center;
@@ -162,7 +162,7 @@
       object-fit: contain;
     }
 
-    /* ====== LAYOUT ====== */
+    /* ====== MAIN LAYOUT ====== */
     .main {
       max-width: 100%;
       margin: 0 auto;
@@ -188,11 +188,10 @@
 
     /* ====== CAMERA PERMISSION CARD ====== */
     .permission-card {
-      background: #161610;
-      border: 1px solid var(--gold);
       border-radius: var(--radius);
       padding: 2rem 1.5rem;
       text-align: center;
+      background: transparent;
     }
 
     .camera-icon {
@@ -231,7 +230,7 @@
 
     .instruction-box {
       background: rgba(255,255,255,0.03);
-      border: 1px solid var(--border);
+      border: 1px solid #333;
       border-radius: var(--radius-sm);
       padding: 16px 20px;
       margin-bottom: 28px;
@@ -267,8 +266,8 @@
       padding: 0.85rem 1.2rem;
       border-radius: 999px;
       border: 1px solid var(--border);
-      background: transparent;
-      color: var(--white);
+      background: var(--gold);
+      color: var(--black);
       font-size: 0.75rem;
       font-weight: 600;
       letter-spacing: 0.08em;
@@ -277,8 +276,8 @@
     }
 
     .btn-primary:hover {
-      border-color: var(--gold);
-      color: var(--gold);
+      transform: translateY(-2px);
+      background: var(--gold-light);
     }
 
     .btn-link {
@@ -339,12 +338,6 @@
       <div class="page-title-center">Camera Permission</div>
     </div>
 
-    <!-- CONTENT HEADER -->
-    <div class="fade-2">
-      <div class="page-label">Camera Access</div>
-      <div class="page-title">Camera access is needed.</div>
-    </div>
-
     <!-- PERMISSION CARD -->
     <div class="permission-card fade-3">
       <div class="camera-icon">
@@ -358,7 +351,7 @@
       <p class="description">To scan your features and try on styles, ARCH needs access to your camera.</p>
 
       <div class="instruction-box">
-        <div class="label">To enable</div>
+        <div class="label">To enable:</div>
         <div class="path">Settings &gt; Privacy &gt; Camera &gt; ARCH &gt; Allow</div>
       </div>
 

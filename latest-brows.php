@@ -34,6 +34,7 @@
       --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
+    /* ====== RESET & BASE ====== */
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { font-size: 16px; scroll-behavior: smooth; }
     body {
@@ -54,7 +55,7 @@
       background: none;
     }
 
-    /* ====== NAVBAR ====== */
+    /* ====== NAVBAR (UNTOUCHED) ====== */
     .navbar {
       display: flex;
       align-items: center;
@@ -105,7 +106,7 @@
       opacity: 0.5;
     }
 
-    /* ====== PAGE TOPBAR (Back Arrow + Title + Logo) ====== */
+    /* ====== PAGE TOPBAR ====== */
     .page-topbar {
       display: flex;
       align-items: center;
@@ -163,7 +164,7 @@
       object-fit: contain;
     }
 
-    /* ====== LAYOUT ====== */
+    /* ====== CENTER MAIN CONTENT (UPDATED) ====== */
     .main {
       max-width: 100%;
       margin: 0 auto;
@@ -187,7 +188,7 @@
       line-height: 1.05;
     }
 
-    /* ====== ARTICLES ====== */
+    /* ====== ARTICLE CARDS (Figma style) ====== */
     .article-card {
       display: flex;
       gap: 16px;
@@ -195,14 +196,14 @@
       padding: 16px 18px;
       border-radius: var(--radius-sm);
       background: #161610;
-      border: 1px solid var(--border);
+      border: 1px solid #333; /* Solid gold border */
       cursor: pointer;
       transition: all var(--transition);
       margin-bottom: 12px;
     }
 
     .article-card:hover {
-      border-color: var(--gold-dark);
+      border-color: var(--gold);
       transform: translateY(-1px);
     }
 
@@ -210,12 +211,11 @@
       width: 56px;
       height: 56px;
       border-radius: var(--radius-sm);
-      border: 1px solid var(--border);
+      border: 1.5px solid var(--gold);
       display: grid;
       place-items: center;
-      background: rgba(201,168,76,0.06);
+      background: #1B1400;
       color: var(--gold);
-      font-size: 1.4rem;
       flex-shrink: 0;
     }
 
@@ -225,56 +225,63 @@
 
     .article-title {
       font-family: var(--font-display);
-      font-size: 1.05rem;
+      font-size: 1.15rem;
       margin-bottom: 4px;
       color: var(--white);
+      line-height: 1.2;
     }
 
     .article-meta {
       font-size: 0.8rem;
       color: var(--white-dim);
+      font-weight: 500;
     }
 
-    /* ====== UPCOMING ====== */
+    /* ====== UPCOMING SESSIONS (Figma style) ====== */
     .upcoming-card {
       border-radius: var(--radius-sm);
-      padding: 20px 18px;
-      background: rgba(201,168,76,0.06);
-      border: 1px solid rgba(201,168,76,0.2);
+      padding: 24px 22px;
+      background: #1B1400;
+      border: 1px solid var(--gold-dark);
       margin-top: 8px;
     }
 
     .up-title {
       font-family: var(--font-display);
-      font-size: 1.2rem;
-      color: var(--white);
+      font-size: 1.4rem;
+      color: var(--gold);
       margin-bottom: 4px;
+      line-height: 1.1;
     }
 
     .up-sub {
-      color: var(--white-dim);
-      font-size: 0.85rem;
-      margin-bottom: 14px;
+      color: #c9a84c;
+      font-size: 0.9rem;
+      margin-bottom: 20px;
     }
 
+    /* Updated button to match Figma: dark pill, gold text */
     .btn-reserve {
       display: inline-block;
-      padding: 0.7rem 1.4rem;
+      padding: 0.8rem 1.8rem;
       border-radius: 999px;
-      background: var(--gold);
-      color: var(--black);
-      border: none;
-      font-weight: 600;
-      font-size: 0.8rem;
+      background: rgba(201, 168, 76, 0.15);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-weight: 500;
+      font-size: 0.75rem;
       letter-spacing: 0.08em;
       cursor: pointer;
       transition: all var(--transition);
       font-family: var(--font-body);
+      backdrop-filter: blur(4px);
     }
 
     .btn-reserve:hover {
-      background: var(--gold-light);
-      transform: translateY(-1px);
+      background: rgba(201, 168, 76, 0.15);
+      border-color: var(--gold-light);
+      color: var(--gold-light);
+      transform: translateY(-2px);
     }
 
     /* ====== ANIMATIONS ====== */
@@ -297,18 +304,18 @@
       .article-icon { width: 48px; height: 48px; }
       .back-btn { width: 38px; height: 38px; }
       .page-logo { width: 38px; height: 38px; }
+      .up-title { font-size: 1.2rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAVBAR -->
+  <!-- NAVBAR (UNTOUCHED) -->
   <?php include 'includes/navbar.php'; ?>
 
-  <!-- Gold rule -->
+  <!-- Gold rule (UNTOUCHED) -->
   <div class="nav-gold-rule"></div>
 
-  <!-- MAIN CONTENT -->
   <main class="main">
 
     <!-- PAGE TOPBAR (Back Arrow + Title + Logo) -->
@@ -322,36 +329,46 @@
       <div class="page-title-center">Latest on brows</div>
     </div>
 
-    <!-- CONTENT HEADER -->
+    <!-- HEADER -->
     <div class="fade-2">
-      <div class="page-label">Articles & Updates</div>
-      <div class="page-title">Expertise, technique, and what's worth knowing.</div>
-      <p style="color:var(--white-dim); font-size:0.9rem; margin-top:0.25rem;">Stay informed with the latest in brow artistry and design.</p>
+      <div class="page-title" style="font-size: 2.1rem;">Latest on brows</div>
+      <div style="color:var(--white-dim); font-size:1rem; margin-top:0.1rem; font-weight:400;">Expertise, technique, and what's worth knowing</div>
     </div>
 
     <!-- ARTICLES -->
     <div class="fade-3">
-      <div class="section-label">Articles</div>
-      <article class="article-card" onclick="openArticle(1)">
-        <div class="article-icon">—</div>
+      <div class="article-card" onclick="openArticle(1)">
+        <div class="article-icon">
+          <!-- Brow arch SVG -->
+          <svg width="28" height="16" viewBox="0 0 28 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 12 Q14 0 26 12" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
         <div class="article-body">
           <div class="article-title">The art of the considered brow</div>
           <div class="article-meta">3 min read</div>
         </div>
-      </article>
+      </div>
 
-      <article class="article-card" onclick="openArticle(2)">
-        <div class="article-icon">◉</div>
+      <div class="article-card" onclick="openArticle(2)">
+        <div class="article-icon">
+          <!-- Target SVG -->
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="14" cy="14" r="12" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="14" cy="14" r="6" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="14" cy="14" r="1.5" fill="currentColor"/>
+          </svg>
+        </div>
         <div class="article-body">
           <div class="article-title">Colour theory for every skin tone</div>
           <div class="article-meta">4 min read</div>
         </div>
-      </article>
+      </div>
     </div>
 
-    <!-- UPCOMING -->
+    <!-- UPCOMING SESSIONS -->
     <div class="fade-4">
-      <div class="section-label">Upcoming sessions</div>
+      <div class="page-label" style="margin-bottom:0.5rem; display:block;">UPCOMING SESSIONS</div>
       <div class="upcoming-card">
         <div class="up-title">Brow mapping masterclass</div>
         <div class="up-sub">5 April 2026 · Virtual</div>

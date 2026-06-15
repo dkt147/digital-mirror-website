@@ -400,7 +400,7 @@
         }
 
         .create-new-btn:hover {
-            color: var(--white);
+            color: var(--black);
             transform: translateY(-2px);
             box-shadow: 0 8px 30px rgba(201, 168, 76, 0.5);
         }

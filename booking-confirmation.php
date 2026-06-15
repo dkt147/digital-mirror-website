@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Confirmed — Royals Arch Brow</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
@@ -34,8 +37,17 @@
       --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { font-size: 16px; scroll-behavior: smooth; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
     body {
       background: var(--black);
       color: var(--white);
@@ -45,7 +57,12 @@
       min-height: 100vh;
       overflow-x: hidden;
     }
-    a { color: inherit; text-decoration: none; }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
     button {
       cursor: pointer;
       border: none;
@@ -68,40 +85,90 @@
       z-index: 100;
     }
 
-    .navbar-left { display: flex; align-items: center; gap: 1rem; }
-    .nav-avatar {
-      width: 42px; height: 42px; border-radius: 50%; overflow: hidden;
-      border: 1.5px solid var(--gold-dark); flex-shrink: 0;
+    .navbar-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
     }
-    .nav-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .nav-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 1.5px solid var(--gold-dark);
+      flex-shrink: 0;
+    }
+
+    .nav-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
 
     .navbar-nav {
-      display: flex; align-items: center; gap: 2.5rem; list-style: none;
-      position: absolute; left: 50%; transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
     }
+
     .navbar-nav a {
-      font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--white-dim); transition: color var(--transition); font-weight: 400;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--white-dim);
+      transition: color var(--transition);
+      font-weight: 400;
     }
-    .navbar-nav a:hover, .navbar-nav a.active { color: var(--gold); }
+
+    .navbar-nav a:hover,
+    .navbar-nav a.active {
+      color: var(--gold);
+    }
 
     .btn-book {
-      padding: 0.55rem 1.5rem; font-size: 0.65rem; letter-spacing: 0.12em;
-      text-transform: uppercase; border-radius: 50px; border: 1px solid var(--border);
-      color: var(--white-dim); transition: all var(--transition);
+      padding: 0.55rem 1.5rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 50px;
+      border: 1px solid var(--border);
+      color: var(--white-dim);
+      transition: all var(--transition);
     }
-    .btn-book:hover { border-color: var(--gold); color: var(--gold); }
+
+    .btn-book:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
 
     .nav-emblem {
-      width: 44px; height: 44px; border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
       background: radial-gradient(circle at 35% 35%, #2a2010, #1a1408);
-      border: 1.5px solid var(--gold-dark); display: flex; align-items: center;
-      justify-content: center; flex-shrink: 0; overflow: hidden;
+      border: 1.5px solid var(--gold-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden;
     }
-    .nav-emblem img { width: 26px; height: 26px; object-fit: contain; }
+
+    .nav-emblem img {
+      width: 26px;
+      height: 26px;
+      object-fit: contain;
+    }
 
     .nav-gold-rule {
-      height: 1px; background: linear-gradient(to right, transparent 0%, var(--gold-dark) 30%, var(--gold-dark) 70%, transparent 100%);
+      height: 1px;
+      background: linear-gradient(to right, transparent 0%, var(--gold-dark) 30%, var(--gold-dark) 70%, transparent 100%);
       opacity: 0.5;
     }
 
@@ -130,7 +197,7 @@
     }
 
     .back-btn:hover {
-      background: rgba(201,168,76,0.12);
+      background: rgba(201, 168, 76, 0.12);
       transform: scale(1.05);
     }
 
@@ -175,9 +242,14 @@
 
     /* ====== HEADER ====== */
     .page-label {
-      font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase;
-      color: var(--gold); font-weight: 500; margin-bottom: 0.2rem;
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+      margin-bottom: 0.2rem;
     }
+
     .page-title {
       font-family: var(--font-display);
       font-style: italic;
@@ -189,9 +261,6 @@
 
     /* ====== CONFIRMATION CARD ====== */
     .confirmation-card {
-      background: #161610;
-      border: 1px solid var(--gold);
-      border-radius: var(--radius);
       padding: 2rem 1.5rem;
       text-align: center;
       position: relative;
@@ -201,8 +270,8 @@
       width: 72px;
       height: 72px;
       border-radius: 50%;
-      background: rgba(201,168,76,0.12);
-      border: 1px solid rgba(201,168,76,0.3);
+      background: rgba(201, 168, 76, 0.12);
+      border: 1px solid rgba(201, 168, 76, 0.3);
       display: grid;
       place-items: center;
       margin: 0 auto 16px;
@@ -223,11 +292,11 @@
     }
 
     .divider {
-      height: 1px;
+      height: 3px;
       background: linear-gradient(to right, transparent, var(--gold), transparent);
       opacity: 0.3;
       margin: 16px auto;
-      max-width: 120px;
+      max-width: 250px;
     }
 
     .note {
@@ -263,7 +332,7 @@
       border-radius: 999px;
       border: none;
       background: var(--gold);
-      color: var(--black);
+      color: var(--white);
       font-size: 0.75rem;
       font-weight: 700;
       letter-spacing: 0.12em;
@@ -273,7 +342,7 @@
     }
 
     .btn-primary:hover {
-      background: var(--gold-light);
+       color: var(--black);
       transform: translateY(-1px);
     }
 
@@ -295,28 +364,77 @@
 
     /* ====== ANIMATIONS ====== */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
-    .fade-1 { animation: fadeUp 0.55s ease 0.05s both; }
-    .fade-2 { animation: fadeUp 0.55s ease 0.15s both; }
-    .fade-3 { animation: fadeUp 0.55s ease 0.25s both; }
-    .fade-4 { animation: fadeUp 0.55s ease 0.35s both; }
-    .fade-5 { animation: fadeUp 0.55s ease 0.45s both; }
+
+    .fade-1 {
+      animation: fadeUp 0.55s ease 0.05s both;
+    }
+
+    .fade-2 {
+      animation: fadeUp 0.55s ease 0.15s both;
+    }
+
+    .fade-3 {
+      animation: fadeUp 0.55s ease 0.25s both;
+    }
+
+    .fade-4 {
+      animation: fadeUp 0.55s ease 0.35s both;
+    }
+
+    .fade-5 {
+      animation: fadeUp 0.55s ease 0.45s both;
+    }
 
     /* ====== RESPONSIVE ====== */
     @media (max-width: 900px) {
-      .main { padding: 0 1.25rem 1.5rem; }
-      .navbar { padding: 0.875rem 1.25rem; }
-      .navbar-nav { display: none; }
-      .page-title { font-size: 1.6rem; }
-      .confirmation-card { padding: 1.5rem; }
-      .checkmark { width: 64px; height: 64px; }
-      .back-btn { width: 38px; height: 38px; }
-      .page-logo { width: 38px; height: 38px; }
+      .main {
+        padding: 0 1.25rem 1.5rem;
+      }
+
+      .navbar {
+        padding: 0.875rem 1.25rem;
+      }
+
+      .navbar-nav {
+        display: none;
+      }
+
+      .page-title {
+        font-size: 1.6rem;
+      }
+
+      .confirmation-card {
+        padding: 1.5rem;
+      }
+
+      .checkmark {
+        width: 64px;
+        height: 64px;
+      }
+
+      .back-btn {
+        width: 38px;
+        height: 38px;
+      }
+
+      .page-logo {
+        width: 38px;
+        height: 38px;
+      }
     }
   </style>
 </head>
+
 <body>
 
   <!-- NAVBAR -->
@@ -331,7 +449,8 @@
     <!-- PAGE TOPBAR (Back Arrow + Title + Logo) -->
     <div class="page-topbar fade-1">
       <a href="javascript:history.back()" class="back-btn" aria-label="Go back">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
           <line x1="19" y1="12" x2="5" y2="12"></line>
           <polyline points="12 19 5 12 12 5"></polyline>
         </svg>
@@ -370,4 +489,5 @@
   </script>
 
 </body>
+
 </html>

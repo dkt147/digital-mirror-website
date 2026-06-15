@@ -271,7 +271,7 @@
       padding: 0.85rem 1.2rem;
       border-radius: 999px;
       border: 1px solid var(--border);
-      background: transparent;
+      background:  #C9A84C;
       color: var(--white);
       font-size: 0.75rem;
       font-weight: 600;
@@ -282,7 +282,8 @@
 
     .btn-primary:hover {
       border-color: var(--gold);
-      color: var(--gold);
+      color: var(--black);
+      transform: translateY(-2px);
     }
 
     .btn-link {
@@ -380,7 +381,7 @@
 
     <!-- ACTIONS -->
     <div class="actions fade-5">
-      <a class="btn-primary" href="#">Yes, keep me informed</a>
+      <a class="btn-primary" href="order-placed.php">Yes, keep me informed</a>
       <a class="btn-link" href="#">Not right now</a>
     </div>
 

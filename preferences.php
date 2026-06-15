@@ -190,9 +190,6 @@
 
     /* ====== PREFERENCES CARD ====== */
     .preferences-card {
-      background: #161610;
-      border: 1px solid var(--gold);
-      border-radius: var(--radius);
       padding: 1.5rem 1.25rem;
     }
 
@@ -304,13 +301,13 @@
     }
 
     .btn-primary {
-      background: var(--gold);
-      color: var(--black);
+      background: #c9a84c;
+      color: var(--white);
     }
 
     .btn-primary:hover {
-      background: var(--gold-light);
-      transform: translateY(-1px);
+      color: var(--black);
+      transform: translateY(-2px);
     }
 
     .btn-primary:disabled {
@@ -511,7 +508,6 @@
           // Set language display
           const languageMap = {
             'ENGLISH': 'English',
-            'URDU': 'Urdu',
             'ARABIC': 'Arabic',
             'FRENCH': 'French',
             'SPANISH': 'Spanish'
@@ -595,8 +591,8 @@
 
     // Add click handler for language to cycle through options
     document.getElementById('language-display').addEventListener('click', function() {
-      const languages = ['ENGLISH', 'URDU', 'ARABIC', 'FRENCH', 'SPANISH'];
-      const languageNames = ['English', 'Urdu', 'Arabic', 'French', 'Spanish'];
+      const languages = ['ENGLISH', 'ARABIC', 'FRENCH', 'SPANISH'];
+      const languageNames = ['English', 'Arabic', 'French', 'Spanish'];
       const currentLang = this.dataset.language || 'ENGLISH';
       const currentIndex = languages.indexOf(currentLang);
       const nextIndex = (currentIndex + 1) % languages.length;

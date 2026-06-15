@@ -1,14 +1,13 @@
+<?php include 'config.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Edit Complete — Royals Arch Brow</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Looks — Royals Arch Brow</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet">
+    rel="stylesheet" />
   <style>
     * {
       box-sizing: border-box;
@@ -32,15 +31,9 @@
       --border-hover: rgba(201, 168, 76, 0.45);
       --font-display: 'Cormorant Garamond', serif;
       --font-body: 'Montserrat', sans-serif;
-      --radius: 18px;
+      --radius: 14px;
       --radius-sm: 10px;
       --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
     }
 
     html {
@@ -56,6 +49,8 @@
       line-height: 1.6;
       min-height: 100vh;
       overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
     a {
@@ -99,7 +94,6 @@
       border: 1.5px solid var(--gold-dark);
       flex-shrink: 0;
     }
-
     .nav-avatar img {
       width: 100%;
       height: 100%;
@@ -116,7 +110,6 @@
       left: 50%;
       transform: translateX(-50%);
     }
-
     .navbar-nav a {
       font-size: 0.65rem;
       letter-spacing: 0.18em;
@@ -125,7 +118,6 @@
       transition: color var(--transition);
       font-weight: 400;
     }
-
     .navbar-nav a:hover,
     .navbar-nav a.active {
       color: var(--gold);
@@ -141,7 +133,6 @@
       color: var(--white-dim);
       transition: all var(--transition);
     }
-
     .btn-book:hover {
       border-color: var(--gold);
       color: var(--gold);
@@ -152,14 +143,13 @@
       height: 44px;
       border-radius: 50%;
       background: radial-gradient(circle at 35% 35%, #2a2010, #1a1408);
-      border: 1.5px solid #8a6f2e;
+      border: 1.5px solid var(--gold-dark);
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
       overflow: hidden;
     }
-
     .nav-emblem img {
       width: 26px;
       height: 26px;
@@ -172,7 +162,7 @@
       opacity: 0.5;
     }
 
-    /* ====== PAGE TOPBAR (Back Arrow + Title + Logo) ====== */
+    /* ====== PAGE TOPBAR ====== */
     .page-topbar {
       display: flex;
       align-items: center;
@@ -188,8 +178,8 @@
       width: 44px;
       height: 44px;
       border-radius: 50%;
-      border: 1px solid #c9a84c;
-      color: #c9a84c;
+      border: 1px solid var(--gold);
+      color: var(--gold);
       text-decoration: none;
       transition: all var(--transition);
       background: transparent;
@@ -216,7 +206,7 @@
       width: 44px;
       height: 44px;
       border-radius: 50%;
-      border: 1px solid #c9a84c;
+      border: 1px solid var(--gold);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -230,132 +220,105 @@
       object-fit: contain;
     }
 
-    /* ====== LAYOUT ====== */
+    /* ====== MAIN LAYOUT ====== */
     .main {
       max-width: 100%;
       margin: 0 auto;
-      padding: 0 3rem 2.5rem;
+      padding: 0 1.5rem 3rem;
       display: flex;
       flex-direction: column;
-      gap: 1.75rem;
+      justify-content: center;
+      flex: 1;
+      width: 100%;
     }
 
-    /* ====== HEADER ====== */
-    .page-label {
-      font-size: 0.6rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-weight: 500;
-      margin-bottom: 0.2rem;
+    /* ========================================================== */
+    /* ====== MY LOOKS CONTENT ====== */
+    /* ========================================================== */
+    .looks-container {
+      max-width: 480px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0.5rem 0 2rem;
     }
 
-    .page-title {
+    .page-headline {
       font-family: var(--font-display);
       font-style: italic;
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: 400;
       color: var(--white);
-      line-height: 1.05;
+      width: 100%;
+      text-align: left;
+      margin-bottom: 2rem;
+      align-self: flex-start;
     }
 
-    /* ====== CHECKMARK CARD ====== */
-    .icon-card {
-      min-height: 200px;
-      display: grid;
-      place-items: center;
-      position: relative;
-      overflow: hidden;
-      padding: 24px 0;
+    /* Divider */
+    .gold-divider {
+      width: 100%;
+      max-width: 260px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 0 auto 2.5rem auto;
+      opacity: 0.5;
     }
 
-    .icon-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-    }
-
-    .checkmark {
-      width: 72px;
-      height: 72px;
+    /* Empty State Icon */
+    .empty-icon {
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
-      background: rgba(201, 168, 76, 0.15);
-      border: 1px solid #c9a84c;;
-      display: grid;
-      place-items: center;
-      position: relative;
-      z-index: 1;
+      border: 1px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem auto;
+      background: rgba(201, 168, 76, 0.05);
     }
-
-    .checkmark::after {
+    .empty-icon::after {
       content: '\2713';
-      color: #c9a84c;
-      font-size: 2rem;
+      color: var(--gold);
+      font-size: 1.5rem;
       font-weight: 700;
     }
 
-    /* ====== PREVIEW CARD ====== */
-    .preview-card {
-      border-radius: var(--radius);
-      background: #161610;
-      min-height: 160px;
-      display: grid;
-      place-items: center;
-      position: relative;
-      overflow: hidden;
-      padding: 24px 16px;
-    }
-
-    .preview-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-    }
-
-    .preview-placeholder {
-      color: var(--white);
-      font-size: 1rem;
-      letter-spacing: 0.04em;
-      text-align: center;
-      z-index: 1;
-    }
-
-    .preview-placeholder strong {
-      color: var(--gold);
-      font-weight: 400;
+    /* Empty Text */
+    .empty-headline {
       font-family: var(--font-display);
       font-style: italic;
-    }
-
-    .hint {
-      color: var(--gold);
-      font-size: 0.9rem;
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      line-height: 1.05;
+      color: var(--white);
       text-align: center;
-      margin-bottom: 24px;
+      margin-bottom: 1rem;
     }
 
-    /* ====== BUTTONS ====== */
-    .actions {
-      display: grid;
-      gap: 0.75rem;
-      width: 100%;
-      max-width: 100%;
-      margin-left: auto;
-      margin-right: auto;
+    .empty-subtitle {
+      color: var(--white-dim);
+      font-size: 0.95rem;
+      text-align: center;
+      line-height: 1.6;
+      max-width: 400px;
+      margin: 0 auto 3rem auto;
+      padding: 0 10px;
     }
 
-    .btn {
-      display: inline-flex;
+    /* Call to Action Button */
+    .btn-primary {
+      display: flex;
       align-items: center;
       justify-content: center;
       width: 100%;
-      padding: 0.85rem 1.2rem;
-      border-radius: 999px;
-      font-size: 0.75rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+      padding: 1rem 1.5rem;
+      border-radius: 50px;
+      background: #c9a84c;
+      color: var(--white);
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
       font-weight: 600;
       text-decoration: none;
       transition: all var(--transition);
@@ -364,117 +327,38 @@
       font-family: var(--font-body);
     }
 
-    .btn-primary {
-      background: #c9a84c;
-      color: var(--white);
-    }
-
     .btn-primary:hover {
       color: var(--black);
-      background: #c9a84c;
       transform: translateY(-2px);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      border: 1px solid #333;
-      color: var(--white);
-    }
-
-    .btn-secondary:hover {
-      border-color: #c9a84c;
-      color: #c9a84c;
-    }
-
-    .row {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.75rem;
-    }
-
-    /* ====== ANIMATIONS ====== */
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(16px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .fade-1 {
-      animation: fadeUp 0.55s ease 0.05s both;
-    }
-
-    .fade-2 {
-      animation: fadeUp 0.55s ease 0.15s both;
-    }
-
-    .fade-3 {
-      animation: fadeUp 0.55s ease 0.25s both;
-    }
-
-    .fade-4 {
-      animation: fadeUp 0.55s ease 0.35s both;
-    }
-
-    .fade-5 {
-      animation: fadeUp 0.55s ease 0.45s both;
     }
 
     /* ====== RESPONSIVE ====== */
     @media (max-width: 900px) {
-      .main {
-        padding: 0 1.25rem 1.5rem;
-      }
-
       .navbar {
         padding: 0.875rem 1.25rem;
       }
-
       .navbar-nav {
         display: none;
       }
-
-      .page-title {
+      .main {
+        padding: 0 1.25rem 2rem;
+      }
+      .page-headline {
+        font-size: 1.8rem;
+      }
+      .gold-divider {
+        max-width: 200px;
+      }
+      .empty-headline {
         font-size: 1.6rem;
       }
-
-      .icon-card {
-        min-height: 160px;
-        padding: 18px 0;
-      }
-
-      .preview-card {
-        min-height: 140px;
-        padding: 18px 14px;
-      }
-
-      .checkmark {
-        width: 64px;
-        height: 64px;
-      }
-
-      .back-btn {
-        width: 38px;
-        height: 38px;
-      }
-
-      .page-logo {
-        width: 38px;
-        height: 38px;
-      }
-
-      .row {
-        grid-template-columns: 1fr;
+      .btn-primary {
+        font-size: 0.8rem;
+        padding: 0.9rem 1.5rem;
       }
     }
   </style>
 </head>
-
 <body>
 
   <!-- NAVBAR -->
@@ -495,43 +379,33 @@
           <polyline points="12 19 5 12 12 5"></polyline>
         </svg>
       </a>
-      <div class="page-title-center">Edit Complete</div>
+      <div class="page-title-center">My Looks</div>
     </div>
 
-    <!-- CONTENT HEADER -->
-    <div class="fade-2">
-      <div class="page-label">Edit Complete</div>
-      <div class="page-title">Edited to your exact specification.</div>
-      <p style="color:var(--white-dim); font-size:0.9rem; margin-top:0.25rem;">This is the brow you had in mind.</p>
-    </div>
+    <!-- CONTENT -->
+    <div class="looks-container">
+      
+      <!-- Headline -->
+      <h1 class="page-headline">My looks</h1>
 
-    <!-- CHECKMARK CARD -->
-    <div class="icon-card fade-3">
-      <div class="checkmark"></div>
-    </div>
+      <!-- Divider line -->
+      <div class="gold-divider"></div>
 
-    <!-- PREVIEW CARD -->
-    <div class="preview-card fade-4">
-      <div class="preview-placeholder">
-        <strong>Your edited look</strong><br />
-        <span style="font-size:0.85rem; color:var(--white-dim);">Preview appears here</span>
-      </div>
-    </div>
+      <!-- Icon -->
+      <div class="empty-icon"></div>
 
-    <div class="hint">Share this with your brow artist before your next appointment.</div>
+      <!-- Empty State Text -->
+      <h2 class="empty-headline">Nothing saved yet.</h2>
+      <p class="empty-subtitle">Every look you save will live here, ready for your next appointment.</p>
 
-    <!-- ACTIONS -->
-    <div class="actions fade-5">
-      <a href="save-look.php" class="btn btn-primary">Save to my looks</a>
-      <a href="share-look.php" class="btn btn-secondary">Share with my artist</a>
-      <div class="row">
-        <a href="brow-editor-tool.php" class="btn btn-secondary">New edit</a>
-        <a href="index.php" class="btn btn-secondary">Home</a>
-      </div>
+      <!-- Call to Action -->
+      <button class="btn-primary" onclick="window.location.href='appointments.php'">
+        Begin a session
+      </button>
+
     </div>
 
   </main>
 
 </body>
-
 </html>
