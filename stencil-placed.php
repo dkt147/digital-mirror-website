@@ -504,8 +504,8 @@
     }
 
     function adjust() {
-      alert('Open placement adjuster...');
-      // window.location.href = 'adjust-placement.php';
+      // alert('Open placement adjuster...');
+      window.location.href = 'brow-editor.php';
     }
 
     function shop() {

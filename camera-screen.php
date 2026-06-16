@@ -148,13 +148,17 @@
 
         /* ————— CAMERA UI ————— */
         .cam-container {
-            flex: 1;
+            width: 200px;
+            height: 260px;
+            margin: 0 auto;
             position: relative;
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
             background: #000;
+            border-radius: 14px;
+            border: 1px solid var(--border);
         }
 
         #video {
@@ -178,11 +182,8 @@
         }
 
         .cam-guide {
-            position: relative;
-            width: 75%;
-            max-width: 340px;
+            width: 85%;
             height: 85%;
-            max-height: 460px;
             border: 1.5px dashed var(--gold);
             border-radius: 50%;
             opacity: 0.8;
@@ -374,6 +375,10 @@
             .navbar-nav {
                 display: none;
             }
+            .cam-container {
+                width: 160px;
+                height: 210px;
+             }
         }
 
         @media (max-width: 480px) {
