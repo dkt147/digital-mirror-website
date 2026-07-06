@@ -389,7 +389,7 @@
       <h1 class="page-headline">My looks</h1>
 
       <!-- Divider line -->
-      <div class="gold-divider"></div>
+      <div class="gold-divider"></div> 
 
       <!-- Icon -->
       <div class="empty-icon"></div>
@@ -403,7 +403,7 @@
         Begin a session
       </button>
 
-    </div>
+    </div>  
 
   </main>
 

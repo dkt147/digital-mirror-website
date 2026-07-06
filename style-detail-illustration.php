@@ -453,14 +453,14 @@
     </div>
 
     <!-- PLACEHOLDER CARD -->
-    <div class="placeholder-card fade-4">Leave As Placeholder.</div>
+    <!-- <div class="placeholder-card fade-4">Leave As Placeholder.</div> -->
 
     <div class="info-note fade-4">Saved looks can be shared with your artist anytime.</div>
 
     <!-- ACTIONS -->
     <div class="actions fade-5">
-      <button class="btn-primary">Try this on</button>
-      <a href="comparison.php" class="btn-secondary">Try a different recommendation</a>
+      <button href="comparison.php"  class="btn-primary">Try this on</button>
+      <a class="btn-secondary">Try a different recommendation</a>
     </div>
 
     <!-- BOTTOM LINKS -->

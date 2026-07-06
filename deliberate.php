@@ -474,7 +474,7 @@
 
       <!-- CONTENT -->
       <div class="content fade-4">
-        <h1 class="headline">Deliberate</h1>
+        <h1 class="headline">Deliberate</h1> 
         <p class="subtext">This is a brow with a point of view.</p>
         <p class="description">Strong. Structured. Makes a statement without asking for permission.</p>
         <div class="divider"></div>
@@ -486,7 +486,7 @@
         <a class="bottom-link" href="understated.php">Back to Considered</a>
       </div>
     </div>
-  </main>
+  </main> 
 
 </body>
 

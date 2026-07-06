@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Define Your Look — Royals Arch Brow</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
   <style>
     * {
       box-sizing: border-box;
@@ -33,8 +36,17 @@
       --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { font-size: 16px; scroll-behavior: smooth; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
     body {
       background: var(--black);
       color: var(--white);
@@ -44,7 +56,12 @@
       min-height: 100vh;
       overflow-x: hidden;
     }
-    a { color: inherit; text-decoration: none; }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
     button {
       cursor: pointer;
       border: none;
@@ -67,40 +84,90 @@
       z-index: 100;
     }
 
-    .navbar-left { display: flex; align-items: center; gap: 1rem; }
-    .nav-avatar {
-      width: 42px; height: 42px; border-radius: 50%; overflow: hidden;
-      border: 1.5px solid var(--gold-dark); flex-shrink: 0;
+    .navbar-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
     }
-    .nav-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .nav-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 1.5px solid var(--gold-dark);
+      flex-shrink: 0;
+    }
+
+    .nav-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
 
     .navbar-nav {
-      display: flex; align-items: center; gap: 2.5rem; list-style: none;
-      position: absolute; left: 50%; transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
     }
+
     .navbar-nav a {
-      font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--white-dim); transition: color var(--transition); font-weight: 400;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--white-dim);
+      transition: color var(--transition);
+      font-weight: 400;
     }
-    .navbar-nav a:hover, .navbar-nav a.active { color: var(--gold); }
+
+    .navbar-nav a:hover,
+    .navbar-nav a.active {
+      color: var(--gold);
+    }
 
     .btn-book {
-      padding: 0.55rem 1.5rem; font-size: 0.65rem; letter-spacing: 0.12em;
-      text-transform: uppercase; border-radius: 50px; border: 1px solid var(--border);
-      color: var(--white-dim); transition: all var(--transition);
+      padding: 0.55rem 1.5rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 50px;
+      border: 1px solid var(--border);
+      color: var(--white-dim);
+      transition: all var(--transition);
     }
-    .btn-book:hover { border-color: var(--gold); color: var(--gold); }
+
+    .btn-book:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
 
     .nav-emblem {
-      width: 44px; height: 44px; border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
       background: radial-gradient(circle at 35% 35%, #2a2010, #1a1408);
-      border: 1.5px solid var(--gold-dark); display: flex; align-items: center;
-      justify-content: center; flex-shrink: 0; overflow: hidden;
+      border: 1.5px solid var(--gold-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden;
     }
-    .nav-emblem img { width: 26px; height: 26px; object-fit: contain; }
+
+    .nav-emblem img {
+      width: 26px;
+      height: 26px;
+      object-fit: contain;
+    }
 
     .nav-gold-rule {
-      height: 1px; background: linear-gradient(to right, transparent 0%, var(--gold-dark) 30%, var(--gold-dark) 70%, transparent 100%);
+      height: 1px;
+      background: linear-gradient(to right, transparent 0%, var(--gold-dark) 30%, var(--gold-dark) 70%, transparent 100%);
       opacity: 0.5;
     }
 
@@ -129,7 +196,7 @@
     }
 
     .back-btn:hover {
-      background: rgba(201,168,76,0.12);
+      background: rgba(201, 168, 76, 0.12);
       transform: scale(1.05);
     }
 
@@ -174,9 +241,14 @@
 
     /* ====== HEADER ====== */
     .page-label {
-      font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase;
-      color: var(--gold); font-weight: 500; margin-bottom: 0.2rem;
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+      margin-bottom: 0.2rem;
     }
+
     .page-title {
       font-family: var(--font-display);
       font-style: italic;
@@ -207,9 +279,9 @@
 
     .option-card:hover {
       border-color: #c9a84c;
-      background: rgba(201,168,76,0.06);
+      background: rgba(201, 168, 76, 0.06);
     }
-    
+
     .option-content {
       display: flex;
       flex-direction: column;
@@ -309,29 +381,81 @@
 
     /* ====== ANIMATIONS ====== */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
-    .fade-1 { animation: fadeUp 0.55s ease 0.05s both; }
-    .fade-2 { animation: fadeUp 0.55s ease 0.15s both; }
-    .fade-3 { animation: fadeUp 0.55s ease 0.25s both; }
-    .fade-4 { animation: fadeUp 0.55s ease 0.35s both; }
-    .fade-5 { animation: fadeUp 0.55s ease 0.45s both; }
+
+    .fade-1 {
+      animation: fadeUp 0.55s ease 0.05s both;
+    }
+
+    .fade-2 {
+      animation: fadeUp 0.55s ease 0.15s both;
+    }
+
+    .fade-3 {
+      animation: fadeUp 0.55s ease 0.25s both;
+    }
+
+    .fade-4 {
+      animation: fadeUp 0.55s ease 0.35s both;
+    }
+
+    .fade-5 {
+      animation: fadeUp 0.55s ease 0.45s both;
+    }
 
     /* ====== RESPONSIVE ====== */
     @media (max-width: 900px) {
-      .main { padding: 0 1.25rem 1.5rem; }
-      .navbar { padding: 0.875rem 1.25rem; }
-      .navbar-nav { display: none; }
-      .page-title { font-size: 1.6rem; }
-      .option-card { padding: 14px 16px; }
-      .option-title { font-size: 1.1rem; }
-      .brow-icon svg { width: 50px; height: 22px; }
-      .back-btn { width: 38px; height: 38px; }
-      .page-logo { width: 38px; height: 38px; }
+      .main {
+        padding: 0 1.25rem 1.5rem;
+      }
+
+      .navbar {
+        padding: 0.875rem 1.25rem;
+      }
+
+      .navbar-nav {
+        display: none;
+      }
+
+      .page-title {
+        font-size: 1.6rem;
+      }
+
+      .option-card {
+        padding: 14px 16px;
+      }
+
+      .option-title {
+        font-size: 1.1rem;
+      }
+
+      .brow-icon svg {
+        width: 50px;
+        height: 22px;
+      }
+
+      .back-btn {
+        width: 38px;
+        height: 38px;
+      }
+
+      .page-logo {
+        width: 38px;
+        height: 38px;
+      }
     }
   </style>
 </head>
+
 <body>
 
   <!-- NAVBAR -->
@@ -346,7 +470,8 @@
     <!-- PAGE TOPBAR (Back Arrow + Title + Logo) -->
     <div class="page-topbar fade-1">
       <a href="javascript:history.back()" class="back-btn" aria-label="Go back">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
           <line x1="19" y1="12" x2="5" y2="12"></line>
           <polyline points="12 19 5 12 12 5"></polyline>
         </svg>
@@ -367,11 +492,12 @@
       <div class="option-card selected" data-value="understated">
         <div class="option-content">
           <div class="option-title">Understated</div>
-          <div class="option-desc">It should be Soft, barely-there. Natural confidence.</div>
+          <div class="option-desc">Soft, barely-there. Natural confidence.</div>
         </div>
         <div class="option-right">
           <div class="brow-icon">
-            <svg viewBox="0 0 120 30"><path d="M20,22 Q40,10 60,22 Q80,34 100,22" /></svg>
+            <svg viewBox="0 0 120 30">
+              <path d="M20,22 Q40,10 60,22 Q80,34 100,22" /></svg>
           </div>
           <div class="radio-circle"></div>
         </div>
@@ -385,7 +511,8 @@
         </div>
         <div class="option-right">
           <div class="brow-icon">
-            <svg viewBox="0 0 120 30"><path d="M10,18 Q40,10 60,18 Q80,26 110,18" /></svg>
+            <svg viewBox="0 0 120 30">
+              <path d="M10,18 Q40,10 60,18 Q80,26 110,18" /></svg>
           </div>
           <div class="radio-circle"></div>
         </div>
@@ -399,7 +526,8 @@
         </div>
         <div class="option-right">
           <div class="brow-icon">
-            <svg viewBox="0 0 120 30"><path d="M10,15 L40,4 L60,15 L80,26 L110,15" /></svg>
+            <svg viewBox="0 0 120 30">
+              <path d="M10,15 L40,4 L60,15 L80,26 L110,15" /></svg>
           </div>
           <div class="radio-circle"></div>
         </div>
@@ -408,7 +536,7 @@
 
     <!-- ACTIONS -->
     <div class="actions fade-4">
-      <a class="btn-primary" href="preview-look.php">See this look</a>
+      <button class="btn-primary" id="seeThisLookBtn">See this look</button>
     </div>
 
   </main>
@@ -416,20 +544,28 @@
   <script>
     const cards = document.querySelectorAll('.option-card');
     const container = document.getElementById('optionsContainer');
-
+    const seeBtn = document.getElementById('seeThisLookBtn');
+    // Card selection toggle
     cards.forEach(card => {
       card.addEventListener('click', function() {
         cards.forEach(c => c.classList.remove('selected'));
         this.classList.add('selected');
       });
     });
-    document.querySelector('.btn-primary')?.addEventListener('click', (e) => {
-    e.preventDefault();
-    const selected = document.querySelector('.option-card.selected')?.dataset.value || 'considered';
-    localStorage.setItem('selectedDefinition', selected);
-    window.location.href = 'preview-look.php'; // ya jo bhi aapka next page hai
-  });
+    // 🔥 DYNAMIC REDIRECT based on selected option
+    seeBtn.addEventListener('click', function() {
+      const selectedCard = document.querySelector('.option-card.selected');
+      if (!selectedCard) return;
+      const selectedValue = selectedCard.dataset.value; // understated | considered | deliberate
+      // Build the target URL dynamically
+      const targetPage = selectedValue + '.php'; // understated.php, considered.php, deliberate.php
+      // Optional: store selection for later use
+      localStorage.setItem('selectedDefinition', selectedValue);
+      // Navigate to the correct page
+      window.location.href = targetPage;
+    });
   </script>
 
 </body>
+
 </html>

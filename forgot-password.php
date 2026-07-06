@@ -486,7 +486,7 @@
         serverMsg.style.display = 'block';
 
         setTimeout(() => {
-          window.location.href = 'verify-otp.php';
+          window.location.href = 'check-inbox.php';
         }, 1000);
 
       } catch (err) {

@@ -366,10 +366,10 @@
 
     <!-- ACTIONS -->
     <div class="actions fade-5">
-      <a href="define-style.php" class="btn btn-primary">Save this look</a>
+      <a href="save-look.php" class="btn btn-primary">Save this look</a>
       <div class="row">
-        <a href="face-scan.php" class="btn btn-secondary">Try another</a>
-        <a href="tracing-guide.php" class="btn btn-secondary">Edit manually</a>
+        <a href="choose-style.php" class="btn btn-secondary">Try another</a>
+        <a href="brow-editor.php" class="btn btn-secondary">Edit manually</a>
       </div>
     </div>
 

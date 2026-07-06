@@ -349,7 +349,7 @@
     <div class="fade-2">
       <div class="hero-title">This is your look.</div>
       <div class="divider"></div>
-      <div class="hero-sub">Arch brow · Considered · Black</div>
+      <div class="hero-sub">Arch brow · Considered · Black</div> 
 
       <div class="placeholder-card">Leave As Placeholder.</div>
 
@@ -358,7 +358,7 @@
 
     <!-- ACTIONS -->
     <div class="actions fade-3">
-      <a class="btn-primary" href="saved-look.php">Save to my looks</a>
+      <a class="btn-primary" href="save-look.php">Save to my looks</a>
       <a class="btn-secondary" href="tracing-guide.php">Shop matching products</a>
     </div>
 

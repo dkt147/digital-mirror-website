@@ -335,7 +335,7 @@
   <div class="nav-gold-rule"></div>
 
   <!-- MAIN CONTENT -->
-  <main class="main">
+  <main class="main"> 
 
     <!-- PAGE TOPBAR (Back Arrow + Title + Logo) -->
     <div class="page-topbar fade-1">
@@ -346,7 +346,7 @@
         </svg>
       </a>
       <div class="page-title-center">Understated</div>
-    </div>
+    </div> 
 
     <!-- CONTENT HEADER -->
     <div class="fade-2">
@@ -362,7 +362,7 @@
       <div class="style-desc">The brow your face was wearing all along — simply made cleaner.</div>
       <div class="divider"></div>
       <div class="actions">
-        <a class="btn-primary" href="deliberate.php">This is the one</a>
+        <a class="btn-primary" href="compare-looks.php">This is the one</a>
         <a class="btn-secondary" href="two-looks-one-choice.php">Try Considered instead</a>
       </div>
     </div>

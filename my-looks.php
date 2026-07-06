@@ -492,7 +492,7 @@
             <span class="filter-tab">Style</span>
             <span class="filter-tab">Guides</span>
             <span class="filter-tab">Kits</span>
-            <span class="filter-tab">Saved</span>
+            <span class="filter-tab">Saved</span> 
         </div>
 
         <!-- LOOKS LIST (Dynamic via API) -->

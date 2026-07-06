@@ -465,7 +465,7 @@
             }
 
             .page-logo {
-                width: 38px;
+                width: 38px; 
                 height: 38px;
             }
         }
@@ -550,7 +550,7 @@
 
         <!-- ACTIONS -->
         <div class="actions fade-5">
-            <a class="btn btn-primary disabled" href="your-look.php">Select one more to compare</a>
+            <a class="btn btn-primary disabled" href="two-looks-one-choice.php">Select one more to compare</a>
         </div>
 
     </main>
@@ -572,7 +572,7 @@
         } else {
             btnAction.classList.remove('disabled');
             btnAction.textContent = 'Compare these looks';
-            btnAction.href = 'your-look.php';
+            btnAction.href = 'two-looks-one-choice.php';
         }
     }
     options.forEach(opt => {

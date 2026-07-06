@@ -385,7 +385,7 @@
     <div class="cards-wrapper fade-3">
       <div class="card selected">
         <div class="face-mini"></div>
-        <div class="card-title">Considered</div>
+        <div class="card-title">Considered</div> 
         <div class="card-sub">Ash Brown</div>
         <div class="check-circle">&#10003;</div>
       </div>
@@ -399,7 +399,7 @@
 
     <!-- ACTIONS -->
     <div class="actions fade-4">
-      <a class="btn-primary" href="understated.php">I choose considered</a>
+      <a class="btn-primary" href="your-look.php">I choose considered</a>
       <a class="bottom-link" href="two-looks-one-choice.php">Go back to all styles</a>
     </div>
 

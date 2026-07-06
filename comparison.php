@@ -287,6 +287,7 @@
       border: none;
       text-transform: none;
       letter-spacing: 0.02em;
+      text-align: center;
     }
 
     .btn-gold-large:hover {
@@ -410,18 +411,11 @@
       <p class="save-notice">Your before — and — after is saved<br>automatically to my looks.</p>
 
       <div class="cta-container">
-        <button class="btn-gold-large" onclick="confirmLook()">This is the one</button>
+        <a class="btn-gold-large" href="your-look.php">This is the one</a>
         <a class="footer-link-gold" href="face-scan-ui.php" >Try another style</a>
       </div>
     </div>
 
   </main>
-
-  <script>
-    function confirmLook() {
-      alert('Look confirmed! This has been saved to your profile.');
-    }
-  </script>
-
 </body>
 </html>

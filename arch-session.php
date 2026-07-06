@@ -274,10 +274,11 @@
       <div class="page-title">What would you like to do?</div>
     </div>
 
-    <!-- SESSION OPTIONS CARDS -->
+    <!-- SESSION OPTIONS CARDS --> 
     <div class="session-options">
 
-      <button class="session-card fade-3" onclick="startSession('try')">
+      <!-- FIX 1: Try a brow style → face-scan.php -->
+      <button class="session-card fade-3" onclick="window.location.href='face-scan.php'">
         <div class="session-icon">
           <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
             <circle cx="12" cy="12" r="3" />
@@ -296,7 +297,8 @@
         </div>
       </button>
 
-      <button class="session-card fade-3" onclick="startSession('trace')">
+      <!-- FIX 2: Draw your tracing guide → tracing-guide.php -->
+      <button class="session-card fade-3" onclick="window.location.href='tracing-guide.php'">
         <div class="session-icon">
           <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
             <path d="M12 20h9" />
@@ -315,7 +317,8 @@
         </div>
       </button>
 
-      <button class="session-card fade-4" onclick="startSession('recommend')" style="position:relative;">
+      <!-- FIX 3: Get a recommendation → recommendation.php -->
+      <button class="session-card fade-4" onclick="window.location.href='recommendation.php'" style="position:relative;">
         <div class="session-new-badge">New</div>
         <div class="session-icon">
           <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
@@ -336,6 +339,7 @@
         </div>
       </button>
 
+      <!-- Photograph your brows remains unchanged (keeps original behaviour) -->
       <button class="session-card fade-5" onclick="startSession('photo')">
         <div class="session-icon">
           <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
@@ -362,6 +366,7 @@
   <div class="toast" id="toast"></div>
 
   <script>
+    // Original startSession remains for the Photograph button (if needed) or any future use.
     function showToast(msg) {
       const toast = document.getElementById('toast');
       if (!toast) return;
@@ -374,7 +379,7 @@
       localStorage.setItem('archSessionMode', mode);
       showToast('Loading your ' + mode + ' session...');
       setTimeout(() => {
-        window.location.href = 'face-scan.php?mode=' + encodeURIComponent(mode);
+        window.location.href = 'recommendation.php?mode=' + encodeURIComponent(mode);
       }, 600);
     }
   </script>

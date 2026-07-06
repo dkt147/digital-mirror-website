@@ -367,10 +367,10 @@
 
     <!-- ACTIONS -->
     <div class="actions fade-5">
-      <a class="btn btn-primary" href="two-looks-one-choice.php">This is the one</a>
+      <a class="btn btn-primary" href="compare-looks.php">This is the one</a>
     </div>
 
   </main>
 
-</body>
+</body> 
 </html>

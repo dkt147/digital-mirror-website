@@ -506,9 +506,9 @@
 
       <!-- Action Buttons (Stacked) -->
       <div class="actions">
-        <a href="my-looks.php" class="btn btn-primary">View my looks</a>
-        <a href="share-look.php" class="btn btn-secondary">SHARE WITH ARTIST NOW</a>
-        <a href="index.php" class="return-link">Return to home</a>
+        <a href="looks-not-saved.php" class="btn btn-primary">View my looks</a>
+        <a href="my-looks.php" class="btn btn-secondary">SHARE WITH ARTIST NOW</a>
+        <a href="arch-session.php" class="return-link">Return to home</a>
       </div>
 
     </div>

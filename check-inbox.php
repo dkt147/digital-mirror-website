@@ -367,7 +367,7 @@
       <div class="gold-divider"></div>
 
       <div class="actions">
-        <button class="btn-primary" onclick="goBack('login.html')">Back to Sign In</button>
+        <button class="btn-primary" onclick="goBack('verify-otp.php')">Back to Verify OTP</button>
         <a href="#" class="send-again" onclick="handleSendAgain(event)">Send again</a>
       </div>
 
