@@ -409,9 +409,21 @@
       <div class="desc">Deliberate membership: private workshops, personalised artist matching, full consultation archive.</div>
     </div>
 
+    <div class="fade-4">
+      <div class="section-label">Billing details</div>
+      <div class="feature-list">
+        <div class="feature-item">Considered plan · $14.99 / month</div>
+        <div class="feature-item">Next payment: May 6, 2026</div>
+        <div class="feature-item">Trial ends: May 5, 2026</div>
+        <div class="feature-item">Payment method: Visa •••• 4242</div>
+      </div>
+    </div>
+
     <!-- ACTIONS -->
     <div class="actions fade-5">
-      <a href="session-active.php" class="btn btn-secondary">View your session history</a>
+      <a href="membership-payment.php" class="btn btn-secondary">Update payment & plan</a>
+      <a href="cancel-membership.php" class="btn btn-secondary">Cancel membership</a>
+      <a href="my-account.php" class="btn">Back to account</a>
     </div>
 
   </main>
