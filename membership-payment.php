@@ -43,8 +43,8 @@
     <p class="copy">Enter your payment information for membership. Apple Pay and Google Pay will be offered once the backend integration is complete.</p>
 
     <div class="toggle-panel">
-      <div class="toggle-option active" id="monthly-option" onclick="selectPlan('monthly')"><h2>Monthly</h2><p>$14.99 / month · 7-day free trial · Auto-renews</p></div>
-      <div class="toggle-option" id="annual-option" onclick="selectPlan('annual')"><h2>Annual</h2><p>$149.99 / year · 14-day free trial · Auto-renews</p></div>
+      <div class="toggle-option active" id="monthly-option" onclick="selectPlan('monthly')"><h2>Monthly</h2><p id="monthly-plan-copy">$14.99 / month · 7-day free trial · Auto-renews</p></div>
+      <div class="toggle-option" id="annual-option" onclick="selectPlan('annual')"><h2>Annual</h2><p id="annual-plan-copy">$149.99 / year · 14-day free trial · Auto-renews</p></div>
     </div>
 
     <div class="payment-grid">
@@ -56,7 +56,8 @@
           <input class="input" type="text" placeholder="MM/YY" autocomplete="cc-exp" />
           <input class="input" type="text" placeholder="CVC" autocomplete="cc-csc" />
         </div>
-        <button class="btn">Save payment</button>
+        <div id="payment-status" class="note">Select a plan to begin your membership.</div>
+        <button class="btn" id="save-payment-button">Save payment</button>
       </section>
 
       <section class="card">
@@ -68,8 +69,106 @@
     </div>
   </main>
   <script>
-    function selectPlan(plan){document.getElementById('monthly-option').classList.toggle('active', plan==='monthly');document.getElementById('annual-option').classList.toggle('active', plan==='annual');}
-    function selectMethod(method){document.getElementById('apple-pay-btn').classList.toggle('active', method==='apple');document.getElementById('google-pay-btn').classList.toggle('active', method==='google');}
+    const API_BASE = '<?php echo $API_URL; ?>';
+    let selectedPlan = 'monthly';
+
+    function selectPlan(plan) {
+      selectedPlan = plan;
+      document.getElementById('monthly-option').classList.toggle('active', plan === 'monthly');
+      document.getElementById('annual-option').classList.toggle('active', plan === 'annual');
+    }
+
+    function selectMethod(method) {
+      document.getElementById('apple-pay-btn').classList.toggle('active', method === 'apple');
+      document.getElementById('google-pay-btn').classList.toggle('active', method === 'google');
+    }
+
+    async function loadPlans() {
+      try {
+        const response = await fetch(`${API_BASE}/membership/plans`, {
+          method: 'GET',
+          headers: { accept: 'application/json' }
+        });
+        const plans = await response.json().catch(() => []);
+        if (!response.ok || !Array.isArray(plans)) return;
+
+        const monthly = plans.find((plan) => plan.code === 'monthly');
+        const annual = plans.find((plan) => plan.code === 'annual');
+
+        if (monthly) {
+          document.getElementById('monthly-plan-copy').textContent = `${monthly.price} · ${monthly.trial_days}-day free trial · ${monthly.auto_renews ? 'Auto-renews' : 'One-time'}`;
+        }
+        if (annual) {
+          document.getElementById('annual-plan-copy').textContent = `${annual.price} · ${annual.trial_days}-day free trial · ${annual.auto_renews ? 'Auto-renews' : 'One-time'}`;
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    async function startMembership() {
+      const button = document.getElementById('save-payment-button');
+      const statusEl = document.getElementById('payment-status');
+      const token = localStorage.getItem('archAccessToken');
+
+      if (!token) {
+        window.location.href = 'login.php';
+        return;
+      }
+
+      button.disabled = true;
+      button.textContent = 'Processing…';
+      statusEl.textContent = 'Starting your membership plan…';
+
+      try {
+        const payload = JSON.stringify({ plan: selectedPlan, plan_id: selectedPlan });
+        let response = await fetch(`${API_BASE}/membership/start-trial`, {
+          method: 'POST',
+          headers: {
+            accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          },
+          body: payload
+        });
+
+        let data = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          response = await fetch(`${API_BASE}/membership/subscribe`, {
+            method: 'POST',
+            headers: {
+              accept: 'application/json',
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`
+            },
+            body: payload
+          });
+          data = await response.json().catch(() => ({}));
+        }
+
+        if (!response.ok) {
+          throw new Error(data.detail || data.message || 'Unable to start your membership right now.');
+        }
+
+        const params = new URLSearchParams({
+          plan: selectedPlan,
+          trial_end: data.trial_end || data.trial_ends || '',
+          next_payment: data.next_payment || data.next_charge || ''
+        });
+
+        window.location.href = `trial-confirmed.php?${params.toString()}`;
+      } catch (err) {
+        console.error(err);
+        statusEl.textContent = err.message || 'Unable to start your membership right now.';
+        button.disabled = false;
+        button.textContent = 'Save payment';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadPlans();
+      document.getElementById('save-payment-button').addEventListener('click', startMembership);
+    });
   </script>
 </body>
 </html>

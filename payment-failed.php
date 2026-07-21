@@ -36,10 +36,36 @@
       <p class="message">We couldn’t process your payment. This may happen if the card details are incorrect, the card has expired, or the payment method was declined by your bank.</p>
       <p class="error-detail">Please update your payment method or try again. If the issue persists, contact support for help with your membership billing.</p>
       <div class="actions">
-        <button class="btn" onclick="window.location.href='membership-payment.php'">Update payment</button>
+        <button class="btn" id="update-payment-button">Update payment</button>
         <button class="btn btn-secondary" onclick="window.location.href='help-support.php'">Contact support</button>
       </div>
     </div>
   </main>
+  <script>
+    const API_BASE = '<?php echo $API_URL; ?>';
+    const updatePaymentButton = document.getElementById('update-payment-button');
+
+    updatePaymentButton.addEventListener('click', async () => {
+      const token = localStorage.getItem('archAccessToken');
+      if (!token) {
+        window.location.href = 'login.php';
+        return;
+      }
+
+      try {
+        await fetch(`${API_BASE}/membership/payment-failed`, {
+          method: 'POST',
+          headers: {
+            accept: 'application/json',
+            Authorization: `Bearer ${token}`
+          }
+        });
+      } catch (err) {
+        console.error(err);
+      }
+
+      window.location.href = 'membership-payment.php';
+    });
+  </script>
 </body>
 </html>

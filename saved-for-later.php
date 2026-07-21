@@ -37,11 +37,80 @@
     <span class="page-label">Saved for later</span>
     <h1 class="page-title">Saved items</h1>
     <div class="tabs"><button class="tab active">Saved items</button><button class="tab">Saved looks</button></div>
-    <div class="empty-state">
-      <h2>Nothing saved yet.</h2>
-      <p>Save products, tools, or looks now and return to them later. Your saved items stay here even if your membership changes.</p>
-      <button class="btn" onclick="window.location.href='shop.php'">Save something</button>
+    <div id="saved-items-container">
+      <div class="empty-state">
+        <h2>Nothing saved yet.</h2>
+        <p>Save products, tools, or looks now and return to them later. Your saved items stay here even if your membership changes.</p>
+        <button class="btn" onclick="window.location.href='shop.php'">Save something</button>
+      </div>
     </div>
   </main>
+
+  <script>
+    const API_BASE = '<?php echo $API_URL; ?>';
+    const token = localStorage.getItem('archAccessToken');
+
+    async function loadFavourites() {
+      if (!token) {
+        window.location.href = 'login.php';
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_BASE}/favourites`, {
+          method: 'GET',
+          headers: {
+            accept: 'application/json',
+            Authorization: `Bearer ${token}`
+          }
+        });
+
+        const items = await response.json().catch(() => []);
+        if (!response.ok || !Array.isArray(items)) {
+          throw new Error('Unable to load favourites');
+        }
+
+        const container = document.getElementById('saved-items-container');
+        if (items.length === 0) {
+          container.innerHTML = '<div class="empty-state"><h2>Nothing saved yet.</h2><p>Save products, tools, or looks now and return to them later. Your saved items stay here even if your membership changes.</p><button class="btn" onclick="window.location.href=\'shop.php\'">Save something</button></div>';
+          return;
+        }
+
+        container.innerHTML = items.map((item) => `
+          <div class="card">
+            <h2>${item.name || 'Untitled'}</h2>
+            <p>${item.description || ''}</p>
+            ${item.price ? `<p><strong>$${item.price}</strong></p>` : ''}
+            ${item.delivery_info ? `<p style="color:var(--white-dim);font-size:0.9rem;">${item.delivery_info}</p>` : ''}
+            <div class="card-actions">
+              <a href="shop.php" class="btn">View product</a>
+              <button class="btn btn-secondary" onclick="removeFavourite('${item.id}')">Remove</button>
+            </div>
+          </div>
+        `).join('');
+      } catch (err) {
+        console.error(err);
+        const container = document.getElementById('saved-items-container');
+        container.innerHTML = '<div class="empty-state"><h2>Unable to load saved items</h2><p>Please try again later.</p></div>';
+      }
+    }
+
+    async function removeFavourite(id) {
+      try {
+        const response = await fetch(`${API_BASE}/favourites/${id}`, {
+          method: 'DELETE',
+          headers: {
+            accept: 'application/json',
+            Authorization: `Bearer ${token}`
+          }
+        });
+        if (response.ok) loadFavourites();
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadFavourites);
+  </script>
 </body>
 </html>

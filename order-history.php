@@ -41,7 +41,7 @@
       <button class="filter-btn">Refunded</button>
       <button class="filter-btn">Pending</button>
     </div>
-    <div class="history-list">
+    <div class="history-list" id="orders-list">
       <div class="order-card">
         <div class="order-meta"><strong>Order #A-2389</strong><span>March 21, 2026</span><span>$59.99</span></div>
         <div class="order-items">1x Precision Arch Stencil Kit, 2x Brow Serum</div>
@@ -52,5 +52,55 @@
       </div>
     </div>
   </main>
+
+  <script>
+    const API_BASE = '<?php echo $API_URL; ?>';
+    const token = localStorage.getItem('archAccessToken');
+
+    async function loadOrders() {
+      if (!token) {
+        window.location.href = 'login.php';
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_BASE}/orders`, {
+          method: 'GET',
+          headers: {
+            accept: 'application/json',
+            Authorization: `Bearer ${token}`
+          }
+        });
+
+        const orders = await response.json().catch(() => []);
+        if (!response.ok || !Array.isArray(orders)) {
+          throw new Error('Unable to load orders');
+        }
+
+        const ordersList = document.getElementById('orders-list');
+        if (orders.length === 0) {
+          ordersList.innerHTML = '<div style="padding:2.5rem;border-radius:24px;background:rgba(255,255,255,0.03);border:1px solid rgba(201,168,76,0.2);text-align:center;"><h2 style="font-size:1.6rem;margin-bottom:1rem;">No orders yet</h2><p style="color:rgba(245,240,232,0.65);line-height:1.7;">Start shopping to see your order history here.</p></div>';
+          return;
+        }
+
+        ordersList.innerHTML = orders.map((order) => `
+          <div class="order-card">
+            <div class="order-meta">
+              <strong>Order #${order.id?.slice(-5).toUpperCase() || 'N/A'}</strong>
+              <span>${order.created_at ? new Date(order.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : 'N/A'}</span>
+              <span>$${order.total || order.amount || '0.00'}</span>
+            </div>
+            <div class="order-items">${order.items?.map((item) => `${item.quantity}x ${item.name}`).join(', ') || 'Items'}</div>
+          </div>
+        `).join('');
+      } catch (err) {
+        console.error(err);
+        const ordersList = document.getElementById('orders-list');
+        ordersList.innerHTML = '<div style="padding:2.5rem;border-radius:24px;background:rgba(255,255,255,0.03);border:1px solid rgba(201,168,76,0.2);text-align:center;"><h2 style="font-size:1.6rem;margin-bottom:1rem;">Unable to load orders</h2><p style="color:rgba(245,240,232,0.65);line-height:1.7;">Please try again later.</p></div>';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadOrders);
+  </script>
 </body>
 </html>

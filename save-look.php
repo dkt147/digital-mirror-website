@@ -454,14 +454,62 @@
   </main>
 
   <script>
+    const API_BASE = '<?php echo $API_URL; ?>';
+    const token = localStorage.getItem('archAccessToken');
+
     function selectTag(event) {
       document.querySelectorAll('.tag').forEach(el => el.classList.remove('active'));
       event.currentTarget.classList.add('active');
     }
 
-    document.getElementById('saveLookForm').addEventListener('submit', function(event) {
+    document.getElementById('saveLookForm').addEventListener('submit', async function(event) {
       event.preventDefault();
-      window.location.href = 'save-complete.php';
+
+      if (!token) {
+        window.location.href = 'login.php';
+        return;
+      }
+
+      const lookName = document.getElementById('lookName').value.trim();
+      const notes = document.getElementById('notes').value.trim();
+      const activeTag = document.querySelector('.tag.active')?.textContent.trim() || 'EVERYDAY';
+
+      if (!lookName) {
+        alert('Please enter a look name.');
+        return;
+      }
+
+      try {
+        const payload = {
+          title: lookName,
+          notes: notes,
+          tag: activeTag,
+          style: localStorage.getItem('archBrowStyle') || '',
+          colour: localStorage.getItem('archBrowColour') || '',
+          image_url: localStorage.getItem('scanCapturedImage') || null
+        };
+
+        const response = await fetch(`${API_BASE}/looks`, {
+          method: 'POST',
+          headers: {
+            accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          throw new Error(result.detail || result.message || 'Unable to save look.');
+        }
+
+        localStorage.setItem('lastSavedLookId', result.id || '');
+        window.location.href = 'save-complete.php';
+      } catch (err) {
+        console.error(err);
+        alert(err.message || 'Error saving look. Please try again.');
+      }
     });
   </script>
 

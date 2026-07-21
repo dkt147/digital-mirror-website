@@ -548,15 +548,50 @@
   <div class="toast" id="toast"></div>
 
   <script>
-    function getSavedUser() {
-      return {
-        name: localStorage.getItem('archUserName') || 'Mary Johnson',
-        email: localStorage.getItem('archUserEmail') || 'mary@gmail.com'
-      };
+    const API_BASE = '<?php echo $API_URL; ?>';
+    const token = localStorage.getItem('archAccessToken');
+
+    async function getSavedUser() {
+      if (!token) {
+        return {
+          name: localStorage.getItem('archUserName') || 'Guest',
+          email: localStorage.getItem('archUserEmail') || ''
+        };
+      }
+
+      try {
+        const response = await fetch(`${API_BASE}/auth/me`, {
+          method: 'GET',
+          headers: {
+            accept: 'application/json',
+            Authorization: `Bearer ${token}`
+          }
+        });
+
+        const user = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          throw new Error('Unable to load user');
+        }
+
+        const name = user.full_name || (user.first_name + ' ' + user.last_name).trim() || 'Guest';
+        localStorage.setItem('archUserName', name);
+        localStorage.setItem('archUserEmail', user.email || '');
+
+        return {
+          name: name,
+          email: user.email || ''
+        };
+      } catch (err) {
+        console.error(err);
+        return {
+          name: localStorage.getItem('archUserName') || 'Guest',
+          email: localStorage.getItem('archUserEmail') || ''
+        };
+      }
     }
 
-    function updateDashboard() {
-      const user = getSavedUser();
+    async function updateDashboard() {
+      const user = await getSavedUser();
       const el = document.getElementById('dash-name');
       if (el) el.textContent = user.name.split(' ')[0] + '.';
     }

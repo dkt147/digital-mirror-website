@@ -387,7 +387,7 @@
     <!-- FEATURES -->
     <div class="fade-4">
       <div class="section-label">What this unlocks</div>
-      <div class="feature-list">
+      <div class="feature-list" id="features-list">
         <div class="feature-item">Priority artist appointments</div>
         <div class="feature-item">Consultation PDF export</div>
         <div class="feature-item">Early access to new styles</div>
@@ -398,20 +398,20 @@
     <div class="fade-4">
       <div class="section-label">Next tier: Deliberate</div>
       <div class="progress-section">
-        <div class="progress-meta">
+        <div class="progress-meta" id="progress-meta">
           <span>2 of 3 sessions</span>
           <span>66%</span>
         </div>
         <div class="progress-bar">
-          <span style="width:66%"></span>
+          <span id="progress-bar-fill" style="width:66%"></span>
         </div>
       </div>
-      <div class="desc">Deliberate membership: private workshops, personalised artist matching, full consultation archive.</div>
+      <div class="desc" id="next-tier-description">Deliberate membership: private workshops, personalised artist matching, full consultation archive.</div>
     </div>
 
     <div class="fade-4">
       <div class="section-label">Billing details</div>
-      <div class="feature-list">
+      <div class="feature-list" id="billing-list">
         <div class="feature-item">Considered plan · $14.99 / month</div>
         <div class="feature-item">Next payment: May 6, 2026</div>
         <div class="feature-item">Trial ends: May 5, 2026</div>
@@ -427,6 +427,83 @@
     </div>
 
   </main>
+
+  <script>
+    const API_BASE = '<?php echo $API_URL; ?>';
+    const token = localStorage.getItem('archAccessToken');
+
+    function formatDate(value) {
+      if (!value) return 'Not available yet';
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return value;
+      return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    }
+
+    function renderMembership(data) {
+      const tier = data?.tier || {};
+      const nextTier = data?.next_tier || {};
+      const billing = data?.billing || {};
+
+      document.querySelector('.tier-name').textContent = tier.name || 'Considered';
+      document.querySelector('.tier-sub').textContent = tier.label || 'Member';
+
+      const featuresList = document.getElementById('features-list');
+      const features = Array.isArray(data?.features) && data.features.length ? data.features : [
+        'Priority artist appointments',
+        'Consultation PDF export',
+        'Early access to new styles'
+      ];
+      featuresList.innerHTML = features.map((item) => `<div class="feature-item">${item}</div>`).join('');
+
+      const progressMeta = document.getElementById('progress-meta');
+      const progressFill = document.getElementById('progress-bar-fill');
+      const progressPercent = Number(nextTier.progress_percent || 0);
+      progressMeta.innerHTML = `<span>${nextTier.sessions_completed || 0} of ${nextTier.sessions_required || 3} sessions</span><span>${progressPercent}%</span>`;
+      progressFill.style.width = `${Math.max(0, Math.min(progressPercent, 100))}%`;
+
+      const description = document.getElementById('next-tier-description');
+      description.textContent = nextTier.description || 'Continue your sessions to unlock the next tier.';
+
+      const billingList = document.getElementById('billing-list');
+      const billingItems = [
+        `${billing.plan || 'No active plan'} · ${billing.price || 'Not available'}`,
+        `Next payment: ${billing.next_payment ? formatDate(billing.next_payment) : 'Not scheduled'}`,
+        `Trial ends: ${billing.trial_ends ? formatDate(billing.trial_ends) : 'Not active'}`,
+        `Payment method: ${billing.payment_method || 'Not on file'}`
+      ];
+      billingList.innerHTML = billingItems.map((item) => `<div class="feature-item">${item}</div>`).join('');
+    }
+
+    async function loadMembershipStatus() {
+      if (!token) {
+        window.location.href = 'login.php';
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_BASE}/membership`, {
+          method: 'GET',
+          headers: {
+            accept: 'application/json',
+            Authorization: `Bearer ${token}`
+          }
+        });
+
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          throw new Error(data.detail || data.message || 'Unable to load membership status.');
+        }
+
+        renderMembership(data);
+      } catch (err) {
+        console.error(err);
+        document.querySelector('.tier-name').textContent = 'Unavailable';
+        document.querySelector('.tier-sub').textContent = 'Please try again';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadMembershipStatus);
+  </script>
 
 </body>
 </html>

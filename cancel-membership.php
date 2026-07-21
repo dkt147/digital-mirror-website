@@ -41,10 +41,50 @@
         <p>Your access remains through the current period. You can resume anytime with your existing account and payment details.</p>
       </div>
       <div class="actions">
-        <button class="btn btn-danger" onclick="window.location.href='membership-cancelled.php'">Yes, cancel membership</button>
+        <button class="btn btn-danger" id="cancel-membership-button">Yes, cancel membership</button>
         <button class="btn btn-secondary" onclick="window.location.href='membership.php'">Keep membership</button>
       </div>
+      <p id="cancel-status" class="message" style="margin-top: 1rem;"></p>
     </div>
   </main>
+  <script>
+    const API_BASE = '<?php echo $API_URL; ?>';
+    const cancelButton = document.getElementById('cancel-membership-button');
+    const statusEl = document.getElementById('cancel-status');
+
+    cancelButton.addEventListener('click', async () => {
+      const token = localStorage.getItem('archAccessToken');
+      if (!token) {
+        window.location.href = 'login.php';
+        return;
+      }
+
+      cancelButton.disabled = true;
+      cancelButton.textContent = 'Cancelling…';
+      statusEl.textContent = 'Cancelling your membership…';
+
+      try {
+        const response = await fetch(`${API_BASE}/membership/cancel`, {
+          method: 'POST',
+          headers: {
+            accept: 'application/json',
+            Authorization: `Bearer ${token}`
+          }
+        });
+
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          throw new Error(data.detail || data.message || 'Unable to cancel your membership right now.');
+        }
+
+        window.location.href = 'membership-cancelled.php';
+      } catch (err) {
+        console.error(err);
+        statusEl.textContent = err.message || 'Unable to cancel your membership right now.';
+        cancelButton.disabled = false;
+        cancelButton.textContent = 'Yes, cancel membership';
+      }
+    });
+  </script>
 </body>
 </html>

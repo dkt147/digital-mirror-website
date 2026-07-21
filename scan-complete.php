@@ -761,6 +761,43 @@
         faceShape,
         recos
       }));
+      // ── 7. Send to recommendations API ─────────────────────────
+      sendRecommendationsRequest(browShape, faceShape);
+    }
+
+    async function sendRecommendationsRequest(browShape, faceShape) {
+      const API_BASE = '<?php echo $API_URL; ?>';
+      const token = localStorage.getItem('archAccessToken');
+      if (!token) {
+        console.log('No token, skipping recommendations API call.');
+        return;
+      }
+
+      try {
+        const payload = {
+          face_shape: faceShape || '',
+          brow_shape: browShape || '',
+          features: (localStorage.getItem('archFeatures') || '').split(',').filter(f => f.trim()),
+          colour: localStorage.getItem('archBrowColour') || ''
+        };
+
+        const response = await fetch(`${API_BASE}/recommendations`, {
+          method: 'POST',
+          headers: {
+            accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const recommendations = await response.json().catch(() => []);
+        if (response.ok && Array.isArray(recommendations)) {
+          localStorage.setItem('apiRecommendations', JSON.stringify(recommendations));
+        }
+      } catch (err) {
+        console.error('Error sending recommendations request:', err);
+      }
     }
     // ── Draw filled brow shape (upper + lower edge) ──────────
     function drawBrowFill(ctx, kps, upperIdx, lowerIdx) {

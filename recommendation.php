@@ -517,6 +517,59 @@
 
   </main>
 
+  <script>
+    const API_BASE = '<?php echo $API_URL; ?>';
+    const token = localStorage.getItem('archAccessToken');
+
+    async function loadRecommendations() {
+      if (!token) {
+        console.log('No token available, showing default recommendations.');
+        return;
+      }
+
+      try {
+        const payload = {
+          face_shape: localStorage.getItem('archFaceShape') || '',
+          brow_shape: localStorage.getItem('archBrowShape') || '',
+          features: (localStorage.getItem('archFeatures') || '').split(',').filter(f => f.trim()),
+          colour: localStorage.getItem('archBrowColour') || ''
+        };
+
+        const response = await fetch(`${API_BASE}/recommendations`, {
+          method: 'POST',
+          headers: {
+            accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const recommendations = await response.json().catch(() => []);
+        if (!response.ok) {
+          console.warn('Could not load personalized recommendations:', recommendations.detail || response.statusText);
+          return;
+        }
+
+        if (Array.isArray(recommendations) && recommendations.length > 0) {
+          const heroTitle = document.querySelector('.hero-title');
+          if (heroTitle) {
+            heroTitle.textContent = recommendations[0].title || 'Let your features guide the choice.';
+          }
+
+          const heroDesc = document.querySelector('.hero-desc');
+          if (heroDesc) {
+            heroDesc.textContent = recommendations[0].description || 'We\'ll read your face shape and identify the styles built for it.';
+          }
+        }
+      } catch (err) {
+        console.error('Error loading recommendations:', err);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadRecommendations);
+  </script>
+
 </body>
 
 </html>

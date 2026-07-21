@@ -36,9 +36,9 @@
       <span class="status">Trial active</span>
       <p class="message">Welcome to Royals Arch Brow. You now have access to your membership benefits for the next 7 days before the first payment is processed.</p>
       <div class="details">
-        <div class="detail-item"><strong>Plan</strong><span>Monthly membership</span></div>
-        <div class="detail-item"><strong>Trial ends</strong><span>May 5, 2026</span></div>
-        <div class="detail-item"><strong>Next payment</strong><span>$14.99 on May 6, 2026</span></div>
+        <div class="detail-item"><strong>Plan</strong><span id="plan-name">Monthly membership</span></div>
+        <div class="detail-item"><strong>Trial ends</strong><span id="trial-end">May 5, 2026</span></div>
+        <div class="detail-item"><strong>Next payment</strong><span id="next-payment">$14.99 on May 6, 2026</span></div>
       </div>
       <div class="actions">
         <button class="btn" onclick="window.location.href='membership.php'">View membership</button>
@@ -46,5 +46,24 @@
       </div>
     </div>
   </main>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const plan = params.get('plan') === 'annual' ? 'Annual membership' : 'Monthly membership';
+    const trialEnd = params.get('trial_end');
+    const nextPayment = params.get('next_payment');
+
+    function formatValue(value) {
+      if (!value) return 'Pending';
+      const date = new Date(value);
+      if (!Number.isNaN(date.getTime())) {
+        return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+      }
+      return value;
+    }
+
+    document.getElementById('plan-name').textContent = plan;
+    document.getElementById('trial-end').textContent = formatValue(trialEnd);
+    document.getElementById('next-payment').textContent = nextPayment ? `$${nextPayment}` : 'Pending';
+  </script>
 </body>
 </html>
