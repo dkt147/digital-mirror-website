@@ -472,18 +472,18 @@
 
     <!-- TWO TILES -->
     <div class="tiles-grid">
-      <div class="tile" onclick="location.href='stencil-product.php'">
+      <div class="tile" onclick="location.href='shop.php?category=stencils'">
         <div class="tile-label">BROW STENCILS</div>
         <div class="tile-title">The precise shape, every time.</div>
       </div>
-      <div class="tile" onclick="location.href='stencil-product.php'">
+      <div class="tile" onclick="location.href='shop.php?category=products'">
         <div class="tile-label">BROW PRODUCTS</div>
         <div class="tile-title">Colour, definition, hold.</div>
       </div>
     </div>
 
     <!-- FEATURED -->
-    <div class="featured-card" onclick="location.href='stencil-product.php'">
+    <div class="featured-card" onclick="location.href='shop.php?tag=featured'">
       <div>
         <div class="featured-label">FEATURED</div>
         <div class="featured-title">Kits & Collections</div>
@@ -590,7 +590,7 @@
         const imageUrl = product.image ? product.image :
           'assets/beauty-2.png';
         return `
-          <div class="product-card">
+          <div class="product-card" onclick="window.location.href='stencil-product.php?id=${encodeURIComponent(product.id)}'">
             <div class="product-image-wrapper">
               <!-- DISPLAY YOUR IMAGES HERE -->
               <img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(product.name)}" class="product-img">
@@ -598,7 +598,7 @@
             </div>
             <div class="product-details">
               <div class="product-name">${escapeHtml(product.name)}</div>
-              <div class="product-sub">${escapeHtml(product.name)} Kit</div>
+              <div class="product-sub">${escapeHtml(product.brand || product.category || 'Brow product')}</div>
               <div class="product-price">$${product.price.toFixed(2)}</div>
             </div>
           </div>
@@ -627,8 +627,28 @@
     async function init() {
       await fetchFavourites();
       const container = document.getElementById('products-container');
+      const params = new URLSearchParams(window.location.search);
+      const category = params.get('category');
+      const tag = params.get('tag');
+      const colour = params.get('colour');
+      if (colour) {
+        document.querySelector('.section-label').textContent = `MATCHING ${colour.toUpperCase()} BROW PRODUCTS`;
+      } else if (category) {
+        document.querySelector('.section-label').textContent = `${category.toUpperCase()} COLLECTION`;
+      } else if (tag) {
+        document.querySelector('.section-label').textContent = `${tag.toUpperCase()} COLLECTION`;
+      }
       try {
-        const res = await fetch(`${API_BASE}/products`, {
+        let url;
+        if (colour) {
+          url = `${API_BASE}/products/match?colour=${encodeURIComponent(colour)}&limit=20`;
+        } else {
+          const query = new URLSearchParams();
+          if (category) query.set('category', category);
+          if (tag) query.set('tag', tag);
+          url = `${API_BASE}/products${query.toString() ? `?${query.toString()}` : ''}`;
+        }
+        const res = await fetch(url, {
           headers: {
             'accept': 'application/json'
           }

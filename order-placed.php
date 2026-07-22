@@ -1,3 +1,4 @@
+<?php include 'config.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -378,12 +379,56 @@
 
     <!-- FOOTER LINKS -->
     <div class="footer-links fade-4">
-      <a href="#">View order</a>
+      <a id="view-order-link" href="order-history.php">View order</a>
       <span class="divider">|</span>
-      <a href="#">Return to shop</a>
+      <a id="return-shop-link" href="shop.php">Return to shop</a>
     </div>
 
   </main>
+
+  <script>
+    const API_BASE = '<?php echo $API_URL; ?>';
+    const token = localStorage.getItem('archAccessToken');
+
+    function formatMoney(value) {
+      return `$${Number(value || 0).toFixed(2)}`;
+    }
+
+    async function loadOrderDetails(orderId) {
+      if (!orderId) return;
+      try {
+        const res = await fetch(`${API_BASE}/orders/${encodeURIComponent(orderId)}`, {
+          headers: {
+            accept: 'application/json',
+            ...(token ? { Authorization: `Bearer ${token}` } : {})
+          }
+        });
+        if (!res.ok) {
+          const err = await res.json().catch(() => ({}));
+          throw new Error(err.detail || 'Order not found');
+        }
+        const order = await res.json();
+        const productBox = document.querySelector('.product-box');
+        const headline = document.querySelector('.headline');
+        const viewLink = document.getElementById('view-order-link');
+        headline.textContent = `Order #${order.id || ''} placed`;
+        productBox.innerHTML = `
+          <div class="product-name">${order.items?.map(i => `${i.quantity}× ${i.name || i.product_name}`).join(', ') || 'Items'}</div>
+          <div style="margin-top:8px;color:var(--white-dim);">Total: ${formatMoney(order.total || order.amount || 0)}</div>
+        `;
+        if (order.id) viewLink.href = `order-history.php?order_id=${encodeURIComponent(order.id)}`;
+      } catch (err) {
+        console.error(err);
+        // leave default UI; optionally show error
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const orderId = params.get('order_id');
+      if (orderId) loadOrderDetails(orderId);
+    });
+  </script>
 
 </body>
 </html>

@@ -1,3 +1,4 @@
+<?php include 'config.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -475,26 +476,23 @@
         </div>
 
         <!-- PRODUCT TITLE – serif italic -->
-        <div class="product-title fade-3">Precision Arch Stencil Kit</div>
+        <div class="product-title fade-3" id="product-title">Loading product…</div>
 
         <!-- PRODUCT PRICE – gold -->
-        <div class="product-price fade-3">$48.00</div>
+        <div class="product-price fade-3" id="product-price"></div>
 
         <!-- PRODUCT DESCRIPTION -->
-        <div class="product-desc fade-4">
-            A professional-grade stencil designed for exacting results at home. The arch that editorial artists trust — now yours.
-        </div>
+        <div class="product-desc fade-4" id="product-desc"></div>
 
         <!-- SHIPPING INFO – gold -->
-        <div class="product-shipping fade-4">
-            Arrives in 2–3 days. Complimentary delivery over $50.
-        </div>
+        <div class="product-shipping fade-4" id="product-shipping"></div>
 
         <!-- ACTIONS – two distinct buttons per Figma -->
         <div class="actions fade-5">
-            <button class="btn btn-primary" onclick="addToBag()">Add to bag</button>
+            <button class="btn btn-primary" id="add-to-bag-button" onclick="addToBag()" disabled>Add to bag</button>
             <button class="btn btn-outline" onclick="tryOn()">TRY IT ON FIRST</button>
         </div>
+        <div id="product-error" style="margin-top:1rem;color:#e05c5c;font-size:0.95rem;display:none;"></div>
 
     </main>
 
@@ -502,14 +500,93 @@
     <!-- JAVASCRIPT – unchanged, all functionality preserved           -->
     <!-- ============================================================ -->
     <script>
-        function addToBag() {
-            alert('Added to bag.');
+        const API_BASE = '<?php echo $API_URL; ?>';
+        const token = localStorage.getItem('archAccessToken');
+
+        function getProductId() {
+            return new URLSearchParams(window.location.search).get('id');
+        }
+
+        function showError(message) {
+            const errorEl = document.getElementById('product-error');
+            errorEl.textContent = message;
+            errorEl.style.display = 'block';
+        }
+
+        async function loadProduct() {
+            const productId = getProductId();
+            if (!productId) {
+                showError('Product ID is missing from the page URL.');
+                return;
+            }
+
+            try {
+                let product;
+                let res = await fetch(`${API_BASE}/products/${encodeURIComponent(productId)}`, {
+                    headers: { accept: 'application/json' }
+                });
+
+                if (res.ok) {
+                    product = await res.json();
+                } else {
+                    const fallbackRes = await fetch(`${API_BASE}/products?` + new URLSearchParams({ category: 'products' }), {
+                        headers: { accept: 'application/json' }
+                    });
+                    if (!fallbackRes.ok) throw new Error('Unable to load product.');
+                    const allProducts = await fallbackRes.json();
+                    product = Array.isArray(allProducts) ? allProducts.find(item => item.id === productId) : null;
+                    if (!product) {
+                        const errorData = await res.json().catch(() => ({}));
+                        throw new Error(errorData.detail || 'Product not found.');
+                    }
+                }
+
+                document.getElementById('product-title').textContent = product.name || 'Product';
+                document.getElementById('product-price').textContent = product.price ? `$${Number(product.price).toFixed(2)}` : '';
+                document.getElementById('product-desc').textContent = product.description || '';
+                document.getElementById('product-shipping').textContent = product.delivery_info || '';
+                document.getElementById('add-to-bag-button').disabled = false;
+            } catch (err) {
+                console.error(err);
+                showError(err.message || 'Unable to load product. Please try again later.');
+                document.getElementById('add-to-bag-button').disabled = true;
+            }
+        }
+
+        async function addToBag() {
+            if (!token) {
+                window.location.href = 'login.php';
+                return;
+            }
+            const productId = getProductId();
+            if (!productId) return;
+            try {
+                const res = await fetch(`${API_BASE}/cart/items`, {
+                    method: 'POST',
+                    headers: {
+                        accept: 'application/json',
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ product_id: productId, quantity: 1 })
+                });
+                const payload = await res.json().catch(() => ({}));
+                if (!res.ok) {
+                    throw new Error(payload.detail || 'Unable to add item to cart.');
+                }
+                alert('Added to bag.');
+                window.location.href = 'cart.php';
+            } catch (err) {
+                console.error(err);
+                showError(err.message || 'Could not add product to bag. Please try again.');
+            }
         }
 
         function tryOn() {
-            alert('Opening try-on flow...');
-            // window.location.href = 'face-scan-ui.php';
+            window.location.href = 'face-scan-ui.php';
         }
+
+        document.addEventListener('DOMContentLoaded', loadProduct);
     </script>
 
 </body>

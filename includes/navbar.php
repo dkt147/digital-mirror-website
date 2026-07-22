@@ -105,6 +105,7 @@ function navActive($name, $curr) {
     background: linear-gradient(to right, transparent 0%, #8a6f2e 30%, #8a6f2e 70%, transparent 100%);
     opacity: 0.5;
   }
+  
   @media (max-width: 900px) {
     .navbar {
       padding: 0.875rem 1.25rem;
@@ -122,6 +123,7 @@ function navActive($name, $curr) {
       <img src="assets/logo.png" alt="Arch"
         onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'font-family:var(--font-display);font-style:italic;font-size:1.3rem;color:var(--gold);\'>G</span>'" />
     </div>
+    
   </div>
 
   <ul class="navbar-nav">
@@ -141,3 +143,50 @@ function navActive($name, $curr) {
   </div>
 </nav>
 <div class="nav-gold-rule"></div>
+<script>
+  // Inject per-page Back/Next controls into the page content when missing.
+  (function(){
+    try{
+      var container = document.querySelector('.container');
+      if(!container) return;
+      // add back link if page doesn't already have one
+      var hasBack = document.querySelector('a.back-btn, a[href^="javascript:history.back"]').nodeType === undefined ? false : true;
+    }catch(e){ /* ignore nodeType checks */ }
+    try{
+      hasBack = !!document.querySelector('a.back-btn, a[href^="javascript:history.back"]');
+      if(!hasBack){
+        var a = document.createElement('a');
+        a.href = 'javascript:history.back()';
+        a.className = 'back-btn';
+        a.setAttribute('aria-label','Go back');
+        a.style.display = 'inline-block';
+        a.style.marginBottom = '0.8rem';
+        a.textContent = '‹ Back';
+        container.insertBefore(a, container.firstChild);
+      }
+      // next target: body[data-next] or element with [data-next]
+      var nextTarget = document.body && document.body.getAttribute && document.body.getAttribute('data-next');
+      if(!nextTarget){
+        var el = document.querySelector('[data-next]');
+        if(el) nextTarget = el.getAttribute('data-next');
+      }
+      if(nextTarget && !document.querySelector('.next-btn')){
+        var n = document.createElement('a');
+        n.href = nextTarget;
+        n.className = 'next-btn';
+        n.style.display = 'inline-block';
+        n.style.marginLeft = '0.6rem';
+        n.style.padding = '0.5rem 0.9rem';
+        n.style.borderRadius = '999px';
+        n.style.background = '#c9a84c';
+        n.style.color = '#0a0a08';
+        n.style.textDecoration = 'none';
+        n.textContent = 'Continue →';
+        // append after page title if exists, otherwise at end of container
+        var title = container.querySelector('.page-title') || container.firstChild;
+        if(title && title.parentNode) title.parentNode.insertBefore(n, title.nextSibling);
+        else container.appendChild(n);
+      }
+    }catch(e){/* ignore runtime errors */}
+  })();
+</script>
